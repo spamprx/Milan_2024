@@ -15,8 +15,73 @@ ChartJS.register(
   BarElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
+
+const blocknames = ["ARYABHATTA","BHASKARA","BRAHMAGUPTA","CHARAKA","GARGI","KAPILA","KAUTILYA","MAITREYI","RAMANUJA","SUSRUTA","VARAHAMIHIRA","VYASA","RAMAN","RAMANUJAN ","Kalam","Sarabhai","Bhabha","Visvesvaraya","Anandi"];
+const games = ["Cricket","Football","Hockey","Volleyball","Basketball","Badminton","Tennis","Table Tennis","Carrom","Chess","Squash","Weightlifting","Esports","Aquatics","Athletics",]
+const points = {
+  "1": [
+    76, 65, 78, 62, 74, 67, 79, 68, 63, 75, 73, 72, 64, 71, 69, 66, 80, 77, 70,
+  ],
+  "2": [
+    80, 63, 65, 79, 64, 67, 81, 68, 75, 71, 76, 73, 74, 72, 69, 77, 66, 70, 78,
+  ],
+  "3": [
+    64, 68, 82, 79, 81, 65, 67, 75, 76, 71, 69, 73, 66, 80, 74, 72, 77, 78, 70,
+  ],
+  "4": [
+    83, 79, 69, 76, 66, 81, 75, 68, 78, 71, 73, 65, 82, 67, 77, 70, 72, 74, 80,
+  ],
+  "5": [
+    84, 68, 81, 80, 78, 75, 71, 82, 66, 83, 76, 67, 73, 69, 79, 72, 70, 77, 74,
+  ],
+  "6": [
+    69, 85, 68, 70, 71, 79, 76, 83, 72, 67, 78, 81, 84, 75, 74, 73, 82, 80, 77,
+  ],
+  "7": [
+    68, 79, 86, 85, 72, 76, 75, 71, 84, 80, 70, 83, 82, 69, 81, 78, 73, 74, 77,
+  ],
+  "8": [
+    69, 75, 83, 87, 76, 86, 70, 78, 81, 80, 71, 84, 72, 85, 73, 82, 74, 77, 79,
+  ],
+  "9": [
+    78, 88, 70, 87, 76, 77, 71, 86, 72, 75, 84, 83, 85, 73, 81, 80, 82, 74, 79,
+  ],
+  "10": [
+    79, 88, 85, 71, 89, 76, 83, 72, 78, 84, 80, 81, 86, 77, 73, 75, 87, 82, 74,
+  ],
+  "11": [
+    78, 72, 90, 85, 89, 86, 76, 81, 84, 79, 80, 83, 75, 87, 73, 82, 88, 74, 77,
+  ],
+  "12": [
+    91, 79, 89, 73, 75, 87, 90, 85, 76, 83, 88, 84, 81, 86, 78, 80, 77, 82, 74,
+  ],
+  "13": [
+    78, 92, 75, 91, 89, 76, 90, 77, 87, 79, 85, 88, 86, 84, 83, 81, 80, 82, 74,
+  ],
+  "14": [
+    93, 83, 92, 91, 76, 89, 78, 90, 87, 79, 77, 88, 85, 86, 84, 75, 81, 80, 82,
+  ],
+  "15": [
+    94, 84, 93, 92, 91, 90, 89, 88, 87, 86, 85, 83, 82, 81, 80, 79, 78, 77, 76,
+  ],
+};
+const colorOptions = [
+  "#700035",
+  "#390035",
+  "#A40035",
+  "#CE0035",
+  "#6DD3CE",
+  "#AF7AC5",
+  "#FF6B6B",
+];
+let lastUsedColorIndex = -1;
+
+const getRandomColor = () => {
+  lastUsedColorIndex = (lastUsedColorIndex + 1) % colorOptions.length;
+  return colorOptions[lastUsedColorIndex];
+};
 
 function App() {
   const options = {
@@ -25,27 +90,28 @@ function App() {
       scales: {
         x: {
           stacked: true,
+          ticks: {
+            color: "black",
+          }
         },
         y: {
           stacked: true,
-        }
+          ticks: {
+            color: "black",
+          }
+        },
       },
     },
   };
   const data = {
-    labels: ["A", "B"],
-    datasets: [
-      {
-        label: "Points",
-        data: [30, 20],
-        backgroundColor: ["#f44336"],
-      },
-      {
-        label: "Points",
-        data: [40, 10],
-        backgroundColor: ["#2196f3"],
-      },
-    ]
+    labels: blocknames,
+    datasets: games.map((block, index) => {
+      return {
+        label: block,
+        data: points[index + 1],
+        backgroundColor: getRandomColor(),
+      };
+    }),
   };
 
   return (
