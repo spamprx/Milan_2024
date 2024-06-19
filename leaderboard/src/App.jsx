@@ -7,6 +7,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import "./index.css"
 import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
@@ -86,19 +87,35 @@ const getRandomColor = () => {
 function App() {
   const options = {
     options: {
+      animation:{
+        easing: "easeIn",
+      },
       indexAxis: "y",
+      plugins: {
+        legend: {
+          display: true,
+          position: "bottom",
+          align: "center",
+          labels: {
+            color: "#000",
+            boxWidth: 15,
+            padding: 10,
+            borderRadius: 100,
+          },
+        },
+      },
       scales: {
         x: {
           stacked: true,
           ticks: {
             color: "black",
-          }
+          },
         },
         y: {
           stacked: true,
           ticks: {
             color: "black",
-          }
+          },
         },
       },
     },
@@ -113,12 +130,11 @@ function App() {
       };
     }),
   };
-
   return (
     <div className="FirstTab">
-        <div className="canvas-container">
-          <Bar options={options.options} data={data} />
-        </div>
+      <div className="canvas-container">
+        <Bar options={options.options} data={data} />
+      </div>
     </div>
   );
 }
