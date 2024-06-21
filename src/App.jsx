@@ -2,7 +2,6 @@ import SportsBoys from "./components/sportsBoys";
 import SportsGirls from "./components/sportsGirls";
 import Culti from "./components/culti";
 import Techy from "./components/techy";
-import DivBar from "./components/DivBar";
 import {useState} from "react";
 
 function App() {

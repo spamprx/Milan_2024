@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React  from "react";
 import DataTable from "react-data-table-component";
 
 function Table({ games, blocknames, points }) {
+
   const headers = [
     {
       name: "S.No",

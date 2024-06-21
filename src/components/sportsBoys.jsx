@@ -1,4 +1,7 @@
-import DivBar from "./DivBar";
+import { useState } from "react";
+import DivBar, { Filter } from "./DivBar";
+import Table from "./Table";
+
 const blocknames = [
   "BRAHMAGUPTA",
   "CHARAKA",
@@ -9,6 +12,7 @@ const blocknames = [
   "VARAHAMIHIRA",
   "VYASA",
 ];
+
 const games = [
   "Cricket",
   "Football",
@@ -26,6 +30,7 @@ const games = [
   "Aquatics",
   "Athletics",
 ];
+
 const points = {
   1: [
     76, 65, 78, 62, 74, 67, 79, 68, 63, 75, 73, 72, 64, 71, 69, 66, 80, 77, 70,
@@ -73,9 +78,64 @@ const points = {
     94, 84, 93, 92, 91, 90, 89, 88, 87, 86, 85, 83, 82, 81, 80, 79, 78, 77, 76,
   ],
 };
+
 function SportsBoys() {
-    return (
-        <DivBar blocknames={blocknames} games={games} points={points} title={"Sports Boys"}/>
-    )
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [filteredBlocks, setFilteredBlocks] = useState(blocknames);
+  const [filteredGames, setFilteredGames] = useState(games);
+
+  const handleFilter = () => {
+    setIsFiltered(!isFiltered);
+  };
+
+  const handleFilteredBlocks = (selectedBlocks) => {
+    setFilteredBlocks(selectedBlocks);
+  };
+
+  const handleFilteredGames = (selectedGames) => {
+    setFilteredGames(selectedGames);
+  };
+
+  const filteredPoints = {};
+  filteredGames.forEach((game, index) => {
+    const gameIndex = games.indexOf(game) + 1;
+    filteredPoints[index + 1] = points[gameIndex].filter((_, i) =>
+      filteredBlocks.includes(blocknames[i])
+    );
+  });
+
+  return (
+    <>
+      <DivBar
+        blocknames={isFiltered ? filteredBlocks : blocknames}
+        games={isFiltered ? filteredGames : games}
+        points={isFiltered ? filteredPoints : points}
+        title={"Sports Boys"}
+      />
+      <div className="table mx-auto py-8">
+        <button
+          type="button"
+          className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-center px-10"
+          onClick={handleFilter}
+        >
+          {isFiltered ? "Show All" : "Filter"}
+        </button>
+        {isFiltered && (
+          <Filter
+            blocks={blocknames}
+            games={games}
+            filteredBlocks={handleFilteredBlocks}
+            filteredGames={handleFilteredGames}
+          />
+        )}
+        <Table
+          blocknames={isFiltered ? filteredBlocks : blocknames}
+          games={isFiltered ? filteredGames : games}
+          points={isFiltered ? filteredPoints : points}
+        />
+      </div>
+    </>
+  );
 }
+
 export default SportsBoys;
