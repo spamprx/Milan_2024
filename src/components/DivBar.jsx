@@ -9,7 +9,7 @@ import {
 } from "chart.js";
 import "../index.css";
 import { Bar } from "react-chartjs-2";
-import React , {useState} from "react";
+import React , {useState , useEffect} from "react";
 
 ChartJS.register(
   CategoryScale,
@@ -44,13 +44,13 @@ const colorOptions = [
   "rgb(255, 107, 107, 0.9)",
 ];
 
-function ShowSelect({ param, onSave, setVisible}) {
+function ShowSelect({ param, onSelect }) {
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleCheckboxChange = (option) => {
-    setSelectedOptions(prevSelected => {
+    setSelectedOptions((prevSelected) => {
       if (prevSelected.includes(option)) {
-        return prevSelected.filter(item => item !== option);
+        return prevSelected.filter((item) => item !== option);
       } else {
         return [...prevSelected, option];
       }
@@ -65,10 +65,9 @@ function ShowSelect({ param, onSave, setVisible}) {
     }
   };
 
-  const handleSave = () => {
-    onSave(selectedOptions);
-    setVisible(false);
-  };
+  useEffect(() => {
+    onSelect(selectedOptions);
+  }, [selectedOptions, onSelect]);
 
   return (
     <div className="block-select text-start pl-4">
@@ -97,32 +96,41 @@ function ShowSelect({ param, onSave, setVisible}) {
           </li>
         ))}
       </ul>
-      <button 
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleSave}
-      >
-        Save
-      </button>
     </div>
   );
 }
 
+export function Filter({ blocks, games, filteredBlocks, filteredGames }) {
+  const [showBlocks, setShowBlocks] = useState(false);
+  const [showGames, setShowGames] = useState(false);
+  const [selectedBlocks, setSelectedBlocks] = useState([]);
+  const [selectedGames, setSelectedGames] = useState([]);
 
-export function Filter ({blocks , games , filteredBlocks , filteredGames}) {
-  const [showBlocks,setShowBlocks] = useState(false)
-  const [showGames,setShowGames] = useState(false)
+  const handleSave = () => {
+    filteredBlocks(selectedBlocks);
+    filteredGames(selectedGames);
+    setShowBlocks(false);
+    setShowGames(false);
+  };
+
   return (
     <div className="text-white w-64 bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-start px-10">
       Available Options -
       <button className="pl-2" onClick={() => setShowBlocks(!showBlocks)}>
         Select Blocks :
       </button>
-      {showBlocks && <ShowSelect param={blocks} onSave={filteredBlocks} setVisible={setShowBlocks}/>}
+      {showBlocks && <ShowSelect param={blocks} onSelect={setSelectedBlocks} />}
       <button className="pl-2" onClick={() => setShowGames(!showGames)}>
         Select Sports :
       </button>
-      {showGames && <ShowSelect param={games} onSave={filteredGames} setVisible={setShowGames}/>}
+      {showGames && <ShowSelect param={games} onSelect={setSelectedGames} />}
       <br />
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+        onClick={handleSave}
+      >
+        Save
+      </button>
     </div>
   );
 }
