@@ -103,8 +103,8 @@ function ShowSelect({ param, onSelect }) {
 export function Filter({ blocks, games, filteredBlocks, filteredGames }) {
   const [showBlocks, setShowBlocks] = useState(false);
   const [showGames, setShowGames] = useState(false);
-  const [selectedBlocks, setSelectedBlocks] = useState([]);
-  const [selectedGames, setSelectedGames] = useState([]);
+  const [selectedBlocks, setSelectedBlocks] = useState([...blocks]);
+  const [selectedGames, setSelectedGames] = useState([...games]);
 
   const handleSave = () => {
     filteredBlocks(selectedBlocks);
