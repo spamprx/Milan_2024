@@ -103,24 +103,32 @@ function ShowSelect({ param, onSelect }) {
 }
 
 export function Filter({ blocks, games, filteredBlocks, filteredGames }) {
+  const [showBlocks, setShowBlocks] = useState(false);
+  const [showGames, setShowGames] = useState(false);
   const [selectedBlocks, setSelectedBlocks] = useState([...blocks]);
   const [selectedGames, setSelectedGames] = useState([...games]);
 
   const handleSave = () => {
     filteredBlocks(selectedBlocks);
     filteredGames(selectedGames);
+    setShowBlocks(false);
+    setShowGames(false);
   };
 
   return (
-    <div className="flex-col">
-      <div className="filter-container flex">
-        <div className="overflow-y-auto flex flex-wrap max-h-40 mx-4 mb-4">
-          <ShowSelect param={blocks} onSelect={setSelectedBlocks} />
-          <ShowSelect param={games} onSelect={setSelectedGames} />
-        </div>
-      </div>
+    <div className="text-white w-64 bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-start px-10">
+      Available Options -
+      <button className="pl-2" onClick={() => setShowBlocks(!showBlocks)}>
+        Select Blocks :
+      </button>
+      {showBlocks && <ShowSelect param={blocks} onSelect={setSelectedBlocks} />}
+      <button className="pl-2" onClick={() => setShowGames(!showGames)}>
+        Select Sports :
+      </button>
+      {showGames && <ShowSelect param={games} onSelect={setSelectedGames} />}
+      <br />
       <button
-        className="flex ml-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded my-2"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
         onClick={handleSave}
       >
         Save
