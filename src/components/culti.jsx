@@ -114,7 +114,7 @@ function Culti() {
         points={isFiltered ? filteredPoints : points}
         title={"Culti"}
       />
-      <div className="table mx-auto py-8">
+      <div className="table mx-auto py-8 px-4">
         <button
           type="button"
           className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-center px-10"
