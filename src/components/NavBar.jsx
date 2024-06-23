@@ -4,7 +4,7 @@ function Navbar({ showNav, setShowNav }) {
     return (
         <div className={showNav ? "navbar-show" : "navbar-hide"}>
         <div className="navbar-effect" onClick={() => setShowNav(!showNav)} />
-        <div className={showNav ? "options-show" : "options-hide"}>
+        {showNav && <div className={showNav ? "options-show" : "options-hide"}>
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/"
@@ -18,6 +18,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             HOME
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/events"
@@ -31,6 +32,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             EVENTS
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/livescore"
@@ -44,6 +46,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             LIVE SCORE
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/login"
@@ -55,8 +58,9 @@ function Navbar({ showNav, setShowNav }) {
                 : "navbar-pending"
             }
             >
-            Login
+            LOGIN
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/calendar"
@@ -70,6 +74,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             CALENDAR
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/sponsors"
@@ -83,6 +88,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             SPONSORS
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/team"
@@ -96,6 +102,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             TEAM
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/profile"
@@ -109,6 +116,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             PROFILE
             </NavLink>
+            |
             <NavLink
             onClick={() => setShowNav(!showNav)}
             to="/rulebook"
@@ -122,7 +130,7 @@ function Navbar({ showNav, setShowNav }) {
             >
             RULEBOOK
             </NavLink>
-        </div>
+        </div>}
         </div>
     );
 }

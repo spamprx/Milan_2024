@@ -9,12 +9,19 @@ import Profile from "./pages/Profile";
 import RuleBook from "./pages/RuleBook";
 import Sponsors from "./pages/Sponsors";
 import Team from "./pages/Team";
+import Navbar from "./components/NavBar";
+import { useState } from "react";
 
 function App() {
+  const [showNav, setShowNav] = useState(true);
   return (
-      <h1>Milan</h1>
+    <div className="p-8 text-center">
+      <div className="px-4 pb-8 text-end">
+        <button onClick={() => setShowNav(!showNav)}>Menu</button>
+        {showNav && <Navbar showNav={showNav} setShowNav={setShowNav} />}
+      </div>
       <Routes>
-        <Route index element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/events" element={<Events />} />
         <Route path="/livescore" element={<LiveScore />} />
@@ -25,7 +32,7 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="*" element={<Error />} />
       </Routes>
-
+    </div>
   );
 }
 
