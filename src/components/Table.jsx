@@ -1,7 +1,18 @@
 import React, { useState } from "react";
 import DataTable from "react-data-table-component";
+import { Filter } from "./DivBar";
 
-function Table({ games, blocknames, points }) {
+function Table({
+  games,
+  blocknames,
+  points,
+  isFiltered,
+  handleFilter,
+  handleFilteredBlocks,
+  handleFilteredGames,
+  allBlocks,
+  allGames,
+}) {
   const [filterText, setFilterText] = useState("");
 
   const headers = [
@@ -49,7 +60,7 @@ function Table({ games, blocknames, points }) {
   );
 
   const subHeaderComponent = (
-    <>
+    <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
       <input
         type="text"
         placeholder="Search..."
@@ -57,12 +68,26 @@ function Table({ games, blocknames, points }) {
         onChange={(e) => setFilterText(e.target.value)}
         style={{
           padding: "6px",
-          marginBottom: "10px",
           fontSize: "14px",
           width: "200px",
         }}
       />
-    </>
+      <button
+        type="button"
+        className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-center px-10"
+        onClick={handleFilter}
+      >
+        {isFiltered ? "Show All" : "Filter"}
+      </button>
+      {isFiltered && (
+        <Filter
+          blocks={allBlocks}
+          games={allGames}
+          filteredBlocks={handleFilteredBlocks}
+          filteredGames={handleFilteredGames}
+        />
+      )}
+    </div>
   );
 
   return (

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DivBar, { Filter } from "./DivBar";
+import DivBar from "./DivBar";
 import Table from "./Table";
 
 const blocknames = [
@@ -110,26 +110,17 @@ function Techy() {
         points={isFiltered ? filteredPoints : points}
         title={"Techy"}
       />
-      <div className="table mx-auto py-8">
-        <button
-          type="button"
-          className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-center px-10"
-          onClick={handleFilter}
-        >
-          {isFiltered ? "Show All" : "Filter"}
-        </button>
-        {isFiltered && (
-          <Filter
-            blocks={blocknames}
-            games={games}
-            filteredBlocks={handleFilteredBlocks}
-            filteredGames={handleFilteredGames}
-          />
-        )}
+      <div className="table mx-auto py-8 px-4">
         <Table
           blocknames={isFiltered ? filteredBlocks : blocknames}
           games={isFiltered ? filteredGames : games}
           points={isFiltered ? filteredPoints : points}
+          isFiltered={isFiltered}
+          handleFilter={handleFilter}
+          handleFilteredBlocks={handleFilteredBlocks}
+          handleFilteredGames={handleFilteredGames}
+          allBlocks={blocknames}
+          allGames={games}
         />
       </div>
     </>
@@ -137,4 +128,3 @@ function Techy() {
 }
 
 export default Techy;
-

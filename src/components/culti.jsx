@@ -1,6 +1,7 @@
 import { useState } from "react";
-import DivBar, { Filter } from "./DivBar";
+import DivBar from "./DivBar";
 import Table from "./Table";
+
 const blocknames = [
   "ARYABHATTA",
   "BHASKARA",
@@ -97,7 +98,6 @@ function Culti() {
     setFilteredGames(selectedGames);
   };
 
-  // Filter points based on filteredGames
   const filteredPoints = {};
   filteredGames.forEach((game, index) => {
     const gameIndex = games.indexOf(game) + 1;
@@ -115,25 +115,16 @@ function Culti() {
         title={"Culti"}
       />
       <div className="table mx-auto py-8 px-4">
-        <button
-          type="button"
-          className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-center px-10"
-          onClick={handleFilter}
-        >
-          {isFiltered ? "Show All" : "Filter"}
-        </button>
-        {isFiltered && (
-          <Filter
-            blocks={blocknames}
-            games={games}
-            filteredBlocks={handleFilteredBlocks}
-            filteredGames={handleFilteredGames}
-          />
-        )}
         <Table
           blocknames={isFiltered ? filteredBlocks : blocknames}
           games={isFiltered ? filteredGames : games}
           points={isFiltered ? filteredPoints : points}
+          isFiltered={isFiltered}
+          handleFilter={handleFilter}
+          handleFilteredBlocks={handleFilteredBlocks}
+          handleFilteredGames={handleFilteredGames}
+          allBlocks={blocknames}
+          allGames={games}
         />
       </div>
     </>

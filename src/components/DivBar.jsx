@@ -9,7 +9,7 @@ import {
   Legend,
 } from "chart.js";
 import "../index.css";
-import { Bar, Doughnut} from "react-chartjs-2";
+import { Bar, Doughnut } from "react-chartjs-2";
 import React, { useState, useEffect } from "react";
 
 ChartJS.register(
@@ -46,61 +46,61 @@ const colorOptions = [
   "rgb(255, 107, 107, 0.9)",
 ];
 
-function ShowSelect({ param, onSelect }) {
-  const [selectedOptions, setSelectedOptions] = useState([]);
+// function ShowSelect({ param, onSelect }) {
+//   const [selectedOptions, setSelectedOptions] = useState([]);
 
-  const handleCheckboxChange = (option) => {
-    setSelectedOptions((prevSelected) => {
-      if (prevSelected.includes(option)) {
-        return prevSelected.filter((item) => item !== option);
-      } else {
-        return [...prevSelected, option];
-      }
-    });
-  };
+//   const handleCheckboxChange = (option) => {
+//     setSelectedOptions((prevSelected) => {
+//       if (prevSelected.includes(option)) {
+//         return prevSelected.filter((item) => item !== option);
+//       } else {
+//         return [...prevSelected, option];
+//       }
+//     });
+//   };
 
-  const handleSelectAll = () => {
-    if (selectedOptions.length === param.length) {
-      setSelectedOptions([]);
-    } else {
-      setSelectedOptions([...param]);
-    }
-  };
+//   const handleSelectAll = () => {
+//     if (selectedOptions.length === param.length) {
+//       setSelectedOptions([]);
+//     } else {
+//       setSelectedOptions([...param]);
+//     }
+//   };
 
-  useEffect(() => {
-    onSelect(selectedOptions);
-  }, [selectedOptions, onSelect]);
+//   useEffect(() => {
+//     onSelect(selectedOptions);
+//   }, [selectedOptions, onSelect]);
 
-  return (
-    <div className="block-select text-start pl-4">
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={selectedOptions.length === param.length}
-            onChange={handleSelectAll}
-          />
-          Select All
-        </label>
-      </div>
-      <ul>
-        {param.map((option, index) => (
-          <li key={index}>
-            <label>
-              <input
-                type="checkbox"
-                value={option}
-                checked={selectedOptions.includes(option)}
-                onChange={() => handleCheckboxChange(option)}
-              />
-              {option}
-            </label>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+//   return (
+//     <div className="block-select text-start pl-4">
+//       <div>
+//         <label>
+//           <input
+//             type="checkbox"
+//             checked={selectedOptions.length === param.length}
+//             onChange={handleSelectAll}
+//           />
+//           Select All
+//         </label>
+//       </div>
+//       <ul>
+//         {param.map((option, index) => (
+//           <li key={index}>
+//             <label>
+//               <input
+//                 type="checkbox"
+//                 value={option}
+//                 checked={selectedOptions.includes(option)}
+//                 onChange={() => handleCheckboxChange(option)}
+//               />
+//               {option}
+//             </label>
+//           </li>
+//         ))}
+//       </ul>
+//     </div>
+//   );
+// }
 
 export function Filter({ blocks, games, filteredBlocks, filteredGames }) {
   const [showBlocks, setShowBlocks] = useState(false);
