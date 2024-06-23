@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Error from "./pages/404";
 import Calendar from "./pages/Calendar";
 import Home from "./pages/Home";
@@ -12,7 +12,6 @@ import Team from "./pages/Team";
 
 function App() {
   return (
-    <BrowserRouter>
       <h1>Milan</h1>
       <Routes>
         <Route index element={<Home />} />
@@ -26,7 +25,7 @@ function App() {
         <Route path="/team" element={<Team />} />
         <Route path="*" element={<Error />} />
       </Routes>
-    </BrowserRouter>
+
   );
 }
 
