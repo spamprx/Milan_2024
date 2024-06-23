@@ -72,21 +72,19 @@ function Table({
           width: "200px",
         }}
       />
-      <button
-        type="button"
-        className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-center px-10"
-        onClick={handleFilter}
-      >
-        {isFiltered ? "Show All" : "Filter"}
-      </button>
-      {isFiltered && (
-        <Filter
-          blocks={allBlocks}
-          games={allGames}
-          filteredBlocks={handleFilteredBlocks}
-          filteredGames={handleFilteredGames}
-        />
-      )}
+      <div className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md flex py-2.5 text-center px-10">
+        <button className="flex" onClick={handleFilter}>
+          {isFiltered ? "Show All" : "Filter"}
+        </button>
+        {isFiltered && (
+          <Filter
+            blocks={allBlocks}
+            games={allGames}
+            filteredBlocks={handleFilteredBlocks}
+            filteredGames={handleFilteredGames}
+          />
+        )}
+      </div>
     </div>
   );
 
