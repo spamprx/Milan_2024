@@ -58,25 +58,17 @@ function ShowSelect({ param, onSelect }) {
 }
 
 export function Filter({ games, filteredGames }) {
-  //   const [showBlocks, setShowBlocks] = useState(false);
   const [showGames, setShowGames] = useState(false);
-  //   const [selectedBlocks, setSelectedBlocks] = useState([...blocks]);
   const [selectedGames, setSelectedGames] = useState([...games]);
 
   const handleSave = () => {
-    // filteredBlocks(selectedBlocks);
     filteredGames(selectedGames);
-    // setShowBlocks(false);
     setShowGames(false);
   };
 
   return (
     <div className="text-white w-64 bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-start px-10">
       Available Options -
-      {/* <button className="pl-2" onClick={() => setShowBlocks(!showBlocks)}>
-        Select Blocks :
-      </button>
-      {showBlocks && <ShowSelect param={blocks} onSelect={setSelectedBlocks} />} */}
       <button className="pl-2" onClick={() => setShowGames(!showGames)}>
         Select Sports :
       </button>
@@ -98,9 +90,7 @@ function LiveScoreTable({
   points,
   isFiltered,
   handleFilter,
-  //   handleFilteredBlocks,
   handleFilteredGames,
-  //   allBlocks,
   allGames,
   tag,
 }) {
@@ -152,21 +142,25 @@ function LiveScoreTable({
     },
   ];
 
-  const data = games.map((game, index) => ({
-    num: index + 1,
-    sport: game.Sport,
-    team1: game.Team1,
-    score1: game.Score1,
-    team2: game.Team2,
-    score2: game.Score2,
-  }));
+  // Reverse order of games and adjust S.No to be in ascending order
+  const data = games
+    .slice()
+    .reverse()
+    .map((game, index) => ({
+      num: index + 1, // Ensure S.No starts from 1 to length of games
+      sport: game.Sport,
+      team1: game.Team1,
+      score1: game.Score1,
+      team2: game.Team2,
+      score2: game.Score2,
+    }));
 
   const filteredData = data.filter(
     (item) =>
       (item.sport.toLowerCase().includes(filterText.toLowerCase()) ||
         item.team1.toLowerCase().includes(filterText.toLowerCase()) ||
         item.team2.toLowerCase().includes(filterText.toLowerCase())) &&
-      selectedSports.includes(item.sport)
+      (isFiltered ? selectedSports.includes(item.sport) : true)
   );
 
   const subHeaderComponent = (
@@ -190,12 +184,7 @@ function LiveScoreTable({
         {isFiltered ? "Show All" : "Filter"}
       </button>
       {isFiltered && (
-        <Filter
-          //   blocks={allBlocks}
-          games={allGames}
-          //   filteredBlocks={handleFilteredBlocks}
-          filteredGames={setSelectedSports}
-        />
+        <Filter games={allGames} filteredGames={setSelectedSports} />
       )}
     </div>
   );

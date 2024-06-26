@@ -4,7 +4,6 @@ import scores from "../scores.json";
 
 function LiveScore() {
   const [isFiltered, setIsFiltered] = useState(false);
-  const [filteredBlocks, setFilteredBlocks] = useState([]);
   const [filteredGames, setFilteredGames] = useState([]);
 
   const games = scores;
@@ -20,10 +19,6 @@ function LiveScore() {
     setIsFiltered(!isFiltered);
   };
 
-  //   const handleFilteredBlocks = (blocks) => {
-  //     setFilteredBlocks(blocks);
-  //   };
-
   const handleFilteredGames = (games) => {
     setFilteredGames(games);
   };
@@ -36,9 +31,7 @@ function LiveScore() {
         points={points}
         isFiltered={isFiltered}
         handleFilter={handleFilter}
-        // handleFilteredBlocks={handleFilteredBlocks}
         handleFilteredGames={handleFilteredGames}
-        // allBlocks={blocknames}
         allGames={games.map((game) => game.Sport)}
         tag="Sport Scores"
       />
