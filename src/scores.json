@@ -1,0 +1,98 @@
+[
+    {
+        "S.No": 1,
+        "Sport": "Cricket",
+        "Team1": "Brahmagupta",
+        "Score1": 3,
+        "Team2": "Charaka",
+        "Score2": 5
+    },
+    {
+        "S.No": 2,
+        "Sport": "Football",
+        "Team1": "Brahmagupta",
+        "Score1": 4,
+        "Team2": "Kapila",
+        "Score2": 3
+    },
+    {
+        "S.No": 3,
+        "Sport": "Hockey",
+        "Team1": "Charaka",
+        "Score1": 5,
+        "Team2": "Ramanuja",
+        "Score2": 5
+    },
+    {
+        "S.No": 4,
+        "Sport": "Volleyball",
+        "Team1": "Kapila",
+        "Score1": 3,
+        "Team2": "Kautilya",
+        "Score2": 7
+    },
+    {
+        "S.No": 5,
+        "Sport": "Basketball",
+        "Team1": "Susruta",
+        "Score1": 5,
+        "Team2": "Vyasa",
+        "Score2": 4
+    },
+    {
+        "S.No": 6,
+        "Sport": "Badminton",
+        "Team1": "Kapila",
+        "Score1": 8,
+        "Team2": "Ramanuja",
+        "Score2": 5
+    },
+    {
+        "S.No": 7,
+        "Sport": "Tennis",
+        "Team1": "Vyasa",
+        "Score1": 6,
+        "Team2": "Kautilya",
+        "Score2": 7
+    },
+    {
+        "S.No": 8,
+        "Sport": "Table Tennis",
+        "Team1": "Brahmagupta",
+        "Score1": 7,
+        "Team2": "Vyasa",
+        "Score2": 4
+    },
+    {
+        "S.No": 9,
+        "Sport": "Carrom",
+        "Team1": "Charaka",
+        "Score1": 5,
+        "Team2": "Varahamihira",
+        "Score2": 8
+    },
+    {
+        "S.No": 10,
+        "Sport": "Chess",
+        "Team1": "Vyasa",
+        "Score1": 4,
+        "Team2": "Ramanuja",
+        "Score2": 2
+    },
+    {
+        "S.No": 11,
+        "Sport": "Squash",
+        "Team1": "Varahamihira",
+        "Score1": 4,
+        "Team2": "Kapila",
+        "Score2": 3
+    },
+    {
+        "S.No": 12,
+        "Sport": "Weightlifting",
+        "Team1": "Charaka",
+        "Score1": 8,
+        "Team2": "Susruta",
+        "Score2": 6
+    }
+]
