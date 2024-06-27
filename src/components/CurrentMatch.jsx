@@ -27,7 +27,6 @@ const CurrentMatch = ({ selectedSport, currentMatches, onSportClick }) => {
                 <p>
                   Score: {match.Score1} - {match.Score2}
                 </p>
-                {/* Add more details as needed */}
               </div>
             ))}
         </div>

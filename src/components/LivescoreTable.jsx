@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import DataTable from "react-data-table-component";
 
 function ShowSelect({ param, onSelect }) {
+  // Create an array of unique values from param
+  const uniqueParam = [...new Set(param)];
+
   const [selectedOptions, setSelectedOptions] = useState([]);
 
   const handleCheckboxChange = (option) => {
@@ -15,10 +18,10 @@ function ShowSelect({ param, onSelect }) {
   };
 
   const handleSelectAll = () => {
-    if (selectedOptions.length === param.length) {
+    if (selectedOptions.length === uniqueParam.length) {
       setSelectedOptions([]);
     } else {
-      setSelectedOptions([...param]);
+      setSelectedOptions([...uniqueParam]);
     }
   };
 
@@ -32,15 +35,15 @@ function ShowSelect({ param, onSelect }) {
         <label>
           <input
             type="checkbox"
-            checked={selectedOptions.length === param.length}
+            checked={selectedOptions.length === uniqueParam.length}
             onChange={handleSelectAll}
           />
           Select All
         </label>
       </div>
       <ul>
-        {param.map((option, index) => (
-          <li key={index}>
+        {uniqueParam.map((option) => (
+          <li key={option}>
             <label>
               <input
                 type="checkbox"
