@@ -1,98 +1,722 @@
 [
     {
-        "S.No": 1,
-        "Sport": "Cricket",
-        "Team1": "Brahmagupta",
-        "Score1": 3,
-        "Team2": "Charaka",
-        "Score2": 5
+      "S.no": 1,
+      "Sport": "Cricket",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "BHASKARA",
+      "Score2": 23
     },
     {
-        "S.No": 2,
-        "Sport": "Football",
-        "Team1": "Brahmagupta",
-        "Score1": 4,
-        "Team2": "Kapila",
-        "Score2": 3
+      "S.no": 2,
+      "Sport": "Cricket",
+      "Team1": "ARYABHATTA",
+      "Score1": 24,
+      "Team2": "GARGI",
+      "Score2": 26
     },
     {
-        "S.No": 3,
-        "Sport": "Hockey",
-        "Team1": "Charaka",
-        "Score1": 5,
-        "Team2": "Ramanuja",
-        "Score2": 5
+      "S.no": 3,
+      "Sport": "Cricket",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "MAITREYI",
+      "Score2": 21
     },
     {
-        "S.No": 4,
-        "Sport": "Volleyball",
-        "Team1": "Kapila",
-        "Score1": 3,
-        "Team2": "Kautilya",
-        "Score2": 7
+      "S.no": 4,
+      "Sport": "Cricket",
+      "Team1": "BHASKARA",
+      "Score1": 30,
+      "Team2": "GARGI",
+      "Score2": 21
     },
     {
-        "S.No": 5,
-        "Sport": "Basketball",
-        "Team1": "Susruta",
-        "Score1": 5,
-        "Team2": "Vyasa",
-        "Score2": 4
+      "S.no": 5,
+      "Sport": "Cricket",
+      "Team1": "BHASKARA",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 28
     },
     {
-        "S.No": 6,
-        "Sport": "Badminton",
-        "Team1": "Kapila",
-        "Score1": 8,
-        "Team2": "Ramanuja",
-        "Score2": 5
+      "S.no": 6,
+      "Sport": "Cricket",
+      "Team1": "GARGI",
+      "Score1": 20,
+      "Team2": "MAITREYI",
+      "Score2": 25
     },
     {
-        "S.No": 7,
-        "Sport": "Tennis",
-        "Team1": "Vyasa",
-        "Score1": 6,
-        "Team2": "Kautilya",
-        "Score2": 7
+      "S.no": 7,
+      "Sport": "Football",
+      "Team1": "ARYABHATTA",
+      "Score1": 24,
+      "Team2": "BHASKARA",
+      "Score2": 21
     },
     {
-        "S.No": 8,
-        "Sport": "Table Tennis",
-        "Team1": "Brahmagupta",
-        "Score1": 7,
-        "Team2": "Vyasa",
-        "Score2": 4
+      "S.no": 8,
+      "Sport": "Football",
+      "Team1": "ARYABHATTA",
+      "Score1": 28,
+      "Team2": "GARGI",
+      "Score2": 30
     },
     {
-        "S.No": 9,
-        "Sport": "Carrom",
-        "Team1": "Charaka",
-        "Score1": 5,
-        "Team2": "Varahamihira",
-        "Score2": 8
+      "S.no": 9,
+      "Sport": "Football",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "MAITREYI",
+      "Score2": 25
     },
     {
-        "S.No": 10,
-        "Sport": "Chess",
-        "Team1": "Vyasa",
-        "Score1": 4,
-        "Team2": "Ramanuja",
-        "Score2": 2
+      "S.no": 10,
+      "Sport": "Football",
+      "Team1": "BHASKARA",
+      "Score1": 24,
+      "Team2": "GARGI",
+      "Score2": 26
     },
     {
-        "S.No": 11,
-        "Sport": "Squash",
-        "Team1": "Varahamihira",
-        "Score1": 4,
-        "Team2": "Kapila",
-        "Score2": 3
+      "S.no": 11,
+      "Sport": "Football",
+      "Team1": "BHASKARA",
+      "Score1": 26,
+      "Team2": "MAITREYI",
+      "Score2": 23
     },
     {
-        "S.No": 12,
-        "Sport": "Weightlifting",
-        "Team1": "Charaka",
-        "Score1": 8,
-        "Team2": "Susruta",
-        "Score2": 6
+      "S.no": 12,
+      "Sport": "Football",
+      "Team1": "GARGI",
+      "Score1": 26,
+      "Team2": "MAITREYI",
+      "Score2": 27
+    },
+    {
+      "S.no": 13,
+      "Sport": "Dodge Ball",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "BHASKARA",
+      "Score2": 25
+    },
+    {
+      "S.no": 14,
+      "Sport": "Dodge Ball",
+      "Team1": "ARYABHATTA",
+      "Score1": 25,
+      "Team2": "GARGI",
+      "Score2": 29
+    },
+    {
+      "S.no": 15,
+      "Sport": "Dodge Ball",
+      "Team1": "ARYABHATTA",
+      "Score1": 27,
+      "Team2": "MAITREYI",
+      "Score2": 22
+    },
+    {
+      "S.no": 16,
+      "Sport": "Dodge Ball",
+      "Team1": "BHASKARA",
+      "Score1": 23,
+      "Team2": "GARGI",
+      "Score2": 30
+    },
+    {
+      "S.no": 17,
+      "Sport": "Dodge Ball",
+      "Team1": "BHASKARA",
+      "Score1": 27,
+      "Team2": "MAITREYI",
+      "Score2": 22
+    },
+    {
+      "S.no": 18,
+      "Sport": "Dodge Ball",
+      "Team1": "GARGI",
+      "Score1": 28,
+      "Team2": "MAITREYI",
+      "Score2": 28
+    },
+    {
+      "S.no": 19,
+      "Sport": "Volleyball",
+      "Team1": "ARYABHATTA",
+      "Score1": 28,
+      "Team2": "BHASKARA",
+      "Score2": 27
+    },
+    {
+      "S.no": 20,
+      "Sport": "Volleyball",
+      "Team1": "ARYABHATTA",
+      "Score1": 22,
+      "Team2": "GARGI",
+      "Score2": 27
+    },
+    {
+      "S.no": 21,
+      "Sport": "Volleyball",
+      "Team1": "ARYABHATTA",
+      "Score1": 20,
+      "Team2": "MAITREYI",
+      "Score2": 28
+    },
+    {
+      "S.no": 22,
+      "Sport": "Volleyball",
+      "Team1": "BHASKARA",
+      "Score1": 24,
+      "Team2": "GARGI",
+      "Score2": 24
+    },
+    {
+      "S.no": 23,
+      "Sport": "Volleyball",
+      "Team1": "BHASKARA",
+      "Score1": 22,
+      "Team2": "MAITREYI",
+      "Score2": 29
+    },
+    {
+      "S.no": 24,
+      "Sport": "Volleyball",
+      "Team1": "GARGI",
+      "Score1": 26,
+      "Team2": "MAITREYI",
+      "Score2": 20
+    },
+    {
+      "S.no": 25,
+      "Sport": "Basketball",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "BHASKARA",
+      "Score2": 30
+    },
+    {
+      "S.no": 26,
+      "Sport": "Basketball",
+      "Team1": "ARYABHATTA",
+      "Score1": 23,
+      "Team2": "GARGI",
+      "Score2": 30
+    },
+    {
+      "S.no": 27,
+      "Sport": "Basketball",
+      "Team1": "ARYABHATTA",
+      "Score1": 26,
+      "Team2": "MAITREYI",
+      "Score2": 22
+    },
+    {
+      "S.no": 28,
+      "Sport": "Basketball",
+      "Team1": "BHASKARA",
+      "Score1": 28,
+      "Team2": "GARGI",
+      "Score2": 20
+    },
+    {
+      "S.no": 29,
+      "Sport": "Basketball",
+      "Team1": "BHASKARA",
+      "Score1": 24,
+      "Team2": "MAITREYI",
+      "Score2": 24
+    },
+    {
+      "S.no": 30,
+      "Sport": "Basketball",
+      "Team1": "GARGI",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 26
+    },
+    {
+      "S.no": 31,
+      "Sport": "Badminton",
+      "Team1": "ARYABHATTA",
+      "Score1": 28,
+      "Team2": "BHASKARA",
+      "Score2": 28
+    },
+    {
+      "S.no": 32,
+      "Sport": "Badminton",
+      "Team1": "ARYABHATTA",
+      "Score1": 27,
+      "Team2": "GARGI",
+      "Score2": 22
+    },
+    {
+      "S.no": 33,
+      "Sport": "Badminton",
+      "Team1": "ARYABHATTA",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 23
+    },
+    {
+      "S.no": 34,
+      "Sport": "Badminton",
+      "Team1": "BHASKARA",
+      "Score1": 23,
+      "Team2": "GARGI",
+      "Score2": 23
+    },
+    {
+      "S.no": 35,
+      "Sport": "Badminton",
+      "Team1": "BHASKARA",
+      "Score1": 26,
+      "Team2": "MAITREYI",
+      "Score2": 26
+    },
+    {
+      "S.no": 36,
+      "Sport": "Badminton",
+      "Team1": "GARGI",
+      "Score1": 20,
+      "Team2": "MAITREYI",
+      "Score2": 23
+    },
+    {
+      "S.no": 37,
+      "Sport": "Tennis",
+      "Team1": "ARYABHATTA",
+      "Score1": 24,
+      "Team2": "BHASKARA",
+      "Score2": 24
+    },
+    {
+      "S.no": 38,
+      "Sport": "Tennis",
+      "Team1": "ARYABHATTA",
+      "Score1": 29,
+      "Team2": "GARGI",
+      "Score2": 23
+    },
+    {
+      "S.no": 39,
+      "Sport": "Tennis",
+      "Team1": "ARYABHATTA",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 20
+    },
+    {
+      "S.no": 40,
+      "Sport": "Tennis",
+      "Team1": "BHASKARA",
+      "Score1": 26,
+      "Team2": "GARGI",
+      "Score2": 28
+    },
+    {
+      "S.no": 41,
+      "Sport": "Tennis",
+      "Team1": "BHASKARA",
+      "Score1": 28,
+      "Team2": "MAITREYI",
+      "Score2": 20
+    },
+    {
+      "S.no": 42,
+      "Sport": "Tennis",
+      "Team1": "GARGI",
+      "Score1": 28,
+      "Team2": "MAITREYI",
+      "Score2": 21
+    },
+    {
+      "S.no": 43,
+      "Sport": "Table Tennis",
+      "Team1": "ARYABHATTA",
+      "Score1": 27,
+      "Team2": "BHASKARA",
+      "Score2": 21
+    },
+    {
+      "S.no": 44,
+      "Sport": "Table Tennis",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "GARGI",
+      "Score2": 30
+    },
+    {
+      "S.no": 45,
+      "Sport": "Table Tennis",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "MAITREYI",
+      "Score2": 30
+    },
+    {
+      "S.no": 46,
+      "Sport": "Table Tennis",
+      "Team1": "BHASKARA",
+      "Score1": 27,
+      "Team2": "GARGI",
+      "Score2": 26
+    },
+    {
+      "S.no": 47,
+      "Sport": "Table Tennis",
+      "Team1": "BHASKARA",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 27
+    },
+    {
+      "S.no": 48,
+      "Sport": "Table Tennis",
+      "Team1": "GARGI",
+      "Score1": 27,
+      "Team2": "MAITREYI",
+      "Score2": 23
+    },
+    {
+      "S.no": 49,
+      "Sport": "Carrom",
+      "Team1": "ARYABHATTA",
+      "Score1": 25,
+      "Team2": "BHASKARA",
+      "Score2": 24
+    },
+    {
+      "S.no": 50,
+      "Sport": "Carrom",
+      "Team1": "ARYABHATTA",
+      "Score1": 21,
+      "Team2": "GARGI",
+      "Score2": 27
+    },
+    {
+      "S.no": 51,
+      "Sport": "Carrom",
+      "Team1": "ARYABHATTA",
+      "Score1": 22,
+      "Team2": "MAITREYI",
+      "Score2": 29
+    },
+    {
+      "S.no": 52,
+      "Sport": "Carrom",
+      "Team1": "BHASKARA",
+      "Score1": 29,
+      "Team2": "GARGI",
+      "Score2": 21
+    },
+    {
+      "S.no": 53,
+      "Sport": "Carrom",
+      "Team1": "BHASKARA",
+      "Score1": 23,
+      "Team2": "MAITREYI",
+      "Score2": 26
+    },
+    {
+      "S.no": 54,
+      "Sport": "Carrom",
+      "Team1": "GARGI",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 29
+    },
+    {
+      "S.no": 55,
+      "Sport": "Chess",
+      "Team1": "ARYABHATTA",
+      "Score1": 28,
+      "Team2": "BHASKARA",
+      "Score2": 28
+    },
+    {
+      "S.no": 56,
+      "Sport": "Chess",
+      "Team1": "ARYABHATTA",
+      "Score1": 24,
+      "Team2": "GARGI",
+      "Score2": 30
+    },
+    {
+      "S.no": 57,
+      "Sport": "Chess",
+      "Team1": "ARYABHATTA",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 27
+    },
+    {
+      "S.no": 58,
+      "Sport": "Chess",
+      "Team1": "BHASKARA",
+      "Score1": 23,
+      "Team2": "GARGI",
+      "Score2": 26
+    },
+    {
+      "S.no": 59,
+      "Sport": "Chess",
+      "Team1": "BHASKARA",
+      "Score1": 25,
+      "Team2": "MAITREYI",
+      "Score2": 22
+    },
+    {
+      "S.no": 60,
+      "Sport": "Chess",
+      "Team1": "GARGI",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 23
+    },
+    {
+      "S.no": 61,
+      "Sport": "Squash",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "BHASKARA",
+      "Score2": 27
+    },
+    {
+      "S.no": 62,
+      "Sport": "Squash",
+      "Team1": "ARYABHATTA",
+      "Score1": 24,
+      "Team2": "GARGI",
+      "Score2": 26
+    },
+    {
+      "S.no": 63,
+      "Sport": "Squash",
+      "Team1": "ARYABHATTA",
+      "Score1": 23,
+      "Team2": "MAITREYI",
+      "Score2": 25
+    },
+    {
+      "S.no": 64,
+      "Sport": "Squash",
+      "Team1": "BHASKARA",
+      "Score1": 21,
+      "Team2": "GARGI",
+      "Score2": 22
+    },
+    {
+      "S.no": 65,
+      "Sport": "Squash",
+      "Team1": "BHASKARA",
+      "Score1": 26,
+      "Team2": "MAITREYI",
+      "Score2": 23
+    },
+    {
+      "S.no": 66,
+      "Sport": "Squash",
+      "Team1": "GARGI",
+      "Score1": 22,
+      "Team2": "MAITREYI",
+      "Score2": 29
+    },
+    {
+      "S.no": 67,
+      "Sport": "Weightlifting",
+      "Team1": "ARYABHATTA",
+      "Score1": 25,
+      "Team2": "BHASKARA",
+      "Score2": 29
+    },
+    {
+      "S.no": 68,
+      "Sport": "Weightlifting",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "GARGI",
+      "Score2": 29
+    },
+    {
+      "S.no": 69,
+      "Sport": "Weightlifting",
+      "Team1": "ARYABHATTA",
+      "Score1": 22,
+      "Team2": "MAITREYI",
+      "Score2": 20
+    },
+    {
+      "S.no": 70,
+      "Sport": "Weightlifting",
+      "Team1": "BHASKARA",
+      "Score1": 29,
+      "Team2": "GARGI",
+      "Score2": 20
+    },
+    {
+      "S.no": 71,
+      "Sport": "Weightlifting",
+      "Team1": "BHASKARA",
+      "Score1": 21,
+      "Team2": "MAITREYI",
+      "Score2": 23
+    },
+    {
+      "S.no": 72,
+      "Sport": "Weightlifting",
+      "Team1": "GARGI",
+      "Score1": 27,
+      "Team2": "MAITREYI",
+      "Score2": 24
+    },
+    {
+      "S.no": 73,
+      "Sport": "Esports",
+      "Team1": "ARYABHATTA",
+      "Score1": 26,
+      "Team2": "BHASKARA",
+      "Score2": 25
+    },
+    {
+      "S.no": 74,
+      "Sport": "Esports",
+      "Team1": "ARYABHATTA",
+      "Score1": 21,
+      "Team2": "GARGI",
+      "Score2": 20
+    },
+    {
+      "S.no": 75,
+      "Sport": "Esports",
+      "Team1": "ARYABHATTA",
+      "Score1": 25,
+      "Team2": "MAITREYI",
+      "Score2": 29
+    },
+    {
+      "S.no": 76,
+      "Sport": "Esports",
+      "Team1": "BHASKARA",
+      "Score1": 21,
+      "Team2": "GARGI",
+      "Score2": 28
+    },
+    {
+      "S.no": 77,
+      "Sport": "Esports",
+      "Team1": "BHASKARA",
+      "Score1": 21,
+      "Team2": "MAITREYI",
+      "Score2": 25
+    },
+    {
+      "S.no": 78,
+      "Sport": "Esports",
+      "Team1": "GARGI",
+      "Score1": 25,
+      "Team2": "MAITREYI",
+      "Score2": 30
+    },
+    {
+      "S.no": 79,
+      "Sport": "Aquatics",
+      "Team1": "ARYABHATTA",
+      "Score1": 30,
+      "Team2": "BHASKARA",
+      "Score2": 26
+    },
+    {
+      "S.no": 80,
+      "Sport": "Aquatics",
+      "Team1": "ARYABHATTA",
+      "Score1": 20,
+      "Team2": "GARGI",
+      "Score2": 20
+    },
+    {
+      "S.no": 81,
+      "Sport": "Aquatics",
+      "Team1": "ARYABHATTA",
+      "Score1": 22,
+      "Team2": "MAITREYI",
+      "Score2": 22
+    },
+    {
+      "S.no": 82,
+      "Sport": "Aquatics",
+      "Team1": "BHASKARA",
+      "Score1": 30,
+      "Team2": "GARGI",
+      "Score2": 22
+    },
+    {
+      "S.no": 83,
+      "Sport": "Aquatics",
+      "Team1": "BHASKARA",
+      "Score1": 21,
+      "Team2": "MAITREYI",
+      "Score2": 29
+    },
+    {
+      "S.no": 84,
+      "Sport": "Aquatics",
+      "Team1": "GARGI",
+      "Score1": 22,
+      "Team2": "MAITREYI",
+      "Score2": 21
+    },
+    {
+      "S.no": 85,
+      "Sport": "Athletics",
+      "Team1": "ARYABHATTA",
+      "Score1": 27,
+      "Team2": "BHASKARA",
+      "Score2": 29
+    },
+    {
+      "S.no": 86,
+      "Sport": "Athletics",
+      "Team1": "ARYABHATTA",
+      "Score1": 22,
+      "Team2": "GARGI",
+      "Score2": 29
+    },
+    {
+      "S.no": 87,
+      "Sport": "Athletics",
+      "Team1": "ARYABHATTA",
+      "Score1": 28,
+      "Team2": "MAITREYI",
+      "Score2": 26
+    },
+    {
+      "S.no": 88,
+      "Sport": "Athletics",
+      "Team1": "BHASKARA",
+      "Score1": 21,
+      "Team2": "GARGI",
+      "Score2": 27
+    },
+    {
+      "S.no": 89,
+      "Sport": "Athletics",
+      "Team1": "BHASKARA",
+      "Score1": 20,
+      "Team2": "MAITREYI",
+      "Score2": 24
+    },
+    {
+      "S.no": 90,
+      "Sport": "Athletics",
+      "Team1": "GARGI",
+      "Score1": 29,
+      "Team2": "MAITREYI",
+      "Score2": 28
     }
-]
+  ]
