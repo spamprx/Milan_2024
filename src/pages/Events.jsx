@@ -1,16 +1,98 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
-import { useState } from "react";
-import data1 from "../content/sports_boys_data.json";
-import data2 from "../content/sports_girls_data.json";
-import data3 from "../content/culti_data.json";
-import data4 from "../content/techy_data.json";
+// import data1 from "../content/sports_boys_data.json";
+// import data2 from "../content/sports_girls_data.json";
+// import data4 from "../content/techy_data.json";
 
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(false);
   const [showSportsGirls, setShowSportsGirls] = useState(false);
   const [showCulti, setShowCulti] = useState(false);
   const [showTechy, setShowTechy] = useState(false);
+  const [cultiData, setCultiData] = useState(null);
+  const [sportsGirlsData, setSportsGirlsData] = useState(null);
+  const [sportsBoysData, setSportsBoysData] = useState(null);
+  const [techyData, setTechyData] = useState(null);
+
+  useEffect(() => {
+    const fetchCultiData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbzv0WclMXfbGduO4HDJN2fvQtGLehXLBNY3DSzj01eTV39AP7abqVqxPHHrUy3jTACl/exec"
+        ); // Replace this with your Google Apps Script web app URL
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched culti data:", result); // Log fetched data
+        setCultiData(result);
+      } catch (error) {
+        console.error("Error fetching culti data:", error);
+      }
+    };
+
+    fetchCultiData();
+  }, []);
+
+  useEffect(() => {
+    const fetchSportsGirlsData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbzVrI_JnIFYZdgO3MCG1oY966K4x56DyLCMiZj3zpc1Ry7Lv0sZdRV9JiLUnZPi4MUz/exec"
+        ); // Replace this with your Google Apps Script web app URL
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched girls sports data:", result); // Log fetched data
+        setSportsGirlsData(result);
+      } catch (error) {
+        console.error("Error fetching girls sports data:", error);
+      }
+    };
+
+    fetchSportsGirlsData();
+  }, []);
+
+  useEffect(() => {
+    const fetchSportsBoysData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbwAkBZpkZAA3RR7yhglhaY0MynyTb7x6RB8aRtDyG0C8rLZxHLlvy1qx838hl3Ys96M/exec"
+        ); // Replace this with your Google Apps Script web app URL
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched boys sports data:", result); // Log fetched data
+        setSportsBoysData(result);
+      } catch (error) {
+        console.error("Error fetching sports boys data:", error);
+      }
+    };
+
+    fetchSportsBoysData();
+  }, []);
+
+  useEffect(() => {
+    const fetchTechyData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbx6Rbwmvzxh79ZK1BUqd_0nllGRg_k827VhcHH1YorEjMIXgrQ4Sar_L27UskZT478Q/exec"
+        ); // Replace this with your Google Apps Script web app URL
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched techy data:", result); // Log fetched data
+        setTechyData(result);
+      } catch (error) {
+        console.error("Error fetching techy data:", error);
+      }
+    };
+
+    fetchTechyData();
+  }, []);
 
   const NavBar = () => {
     return (
@@ -68,36 +150,36 @@ function Events() {
       <div className="flex">
         <NavBar />
       </div>
-      {showSportsBoys && (
+      {showSportsBoys && sportsBoysData && (
         <Category
-          title={data1.title}
-          blocknames={data1.blocknames}
-          games={data1.games}
-          points={data1.points}
+          title={sportsBoysData.title}
+          blocknames={sportsBoysData.blocks}
+          games={sportsBoysData.eventNames}
+          points={sportsBoysData.scores}
         />
       )}
-      {showSportsGirls && (
+      {showSportsGirls && sportsGirlsData && (
         <Category
-          title={data2.title}
-          blocknames={data2.blocknames}
-          games={data2.games}
-          points={data2.points}
+          title={sportsGirlsData.title}
+          blocknames={sportsGirlsData.blocks}
+          games={sportsGirlsData.eventNames}
+          points={sportsGirlsData.scores}
         />
       )}
-      {showCulti && (
+      {showCulti && cultiData && (
         <Category
-          title={data3.title}
-          blocknames={data3.blocknames}
-          games={data3.games}
-          points={data3.points}
+          title={cultiData.title}
+          blocknames={cultiData.blocks}
+          games={cultiData.eventNames}
+          points={cultiData.scores}
         />
       )}
-      {showTechy && (
+      {showTechy && techyData && (
         <Category
-          title={data4.title}
-          blocknames={data4.blocknames}
-          games={data4.games}
-          points={data4.points}
+          title={techyData.title}
+          blocknames={techyData.blocks}
+          games={techyData.eventNames}
+          points={techyData.scores}
         />
       )}
     </>
