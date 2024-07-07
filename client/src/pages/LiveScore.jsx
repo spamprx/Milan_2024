@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import LiveScoreTable from "../components/LivescoreTable";
 import scores from "../scores.json";
+import axios from "axios";
 import CurrentMatch from "../components/CurrentMatch";
 
 function LiveScore() {
   const [isFiltered, setIsFiltered] = useState(false);
   const [filteredGames, setFilteredGames] = useState([]);
   const [currentMatches, setCurrentMatches] = useState([]);
-  const [selectedSport, setSelectedSport] = useState(null); // Track selected sport
+  const [liveMatches, setLiveMatches] = useState([]);
+  const [selectedSport, setSelectedSport] = useState(null);
 
   const games = scores;
   const blocknames = ["Team1", "Score1", "Team2", "Score2"];
@@ -18,6 +20,22 @@ function LiveScore() {
     game.Score2,
   ]);
 
+  const fetchLiveMatches = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:5000/api/live-matches"
+      );
+      console.log("Live matches:", response.data);
+      setLiveMatches(response.data);
+    } catch (error) {
+      console.error("Error fetching live matches:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchLiveMatches();
+  }, []);
+
   const handleFilter = () => {
     setIsFiltered(!isFiltered);
   };
@@ -26,7 +44,6 @@ function LiveScore() {
     setFilteredGames(games);
   };
 
-  // Extract current matches from the scores.json
   useEffect(() => {
     const currentMatchesData = games.reduce((acc, game) => {
       const sport = game.Sport;
@@ -40,9 +57,10 @@ function LiveScore() {
   }, [games]);
 
   const handleSportClick = (sport) => {
-    // Toggle selected sport and filter games
     setSelectedSport(sport === selectedSport ? null : sport);
   };
+
+  const matchesJSON = JSON.stringify(liveMatches, null, 2);
 
   return (
     <div className="table mx-auto py-8 px-4">
@@ -63,6 +81,7 @@ function LiveScore() {
         tag="Sport Scores"
         excludeCurrentMatches={currentMatches}
       />
+      <pre>{matchesJSON}</pre>
     </div>
   );
 }
