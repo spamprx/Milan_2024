@@ -18,6 +18,21 @@ app.use(express.json());
 let matches = [];
 let sportCounters = {};
 
+const getLiveMatches = () => {
+  return matches.map((match) => ({
+    matchId: match.matchId,
+    sport: match.sport,
+    team1: match.team1,
+    team2: match.team2,
+    score1: match.score1 || "0",
+    score2: match.score2 || "0",
+    wicket1: match.wicket1,
+    wicket2: match.wicket2,
+    over1: match.over1,
+    over2: match.over2,
+    startTime: match.startTime,
+  }));
+};
 
 app.get("/api/matches", (req, res) => {
   res.json(matches);
