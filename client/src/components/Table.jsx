@@ -116,7 +116,7 @@ function Table({
       name: tag.split(" ")[0],
       selector: (row) => row.sport,
       sortable: true,
-      width: "80px",
+      width: "200px",
       textAlign: "center",
     },
     ...blocknames.map((block) => ({
@@ -124,7 +124,7 @@ function Table({
       selector: (row) => row[block],
       sortable: true,
       borderWidth: "10px",
-      width: "100px",
+      width: "137px",
       textAlign: "center",
     })),
   ];

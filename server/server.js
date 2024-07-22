@@ -17,6 +17,7 @@ app.use(express.json());
 
 let matches = [];
 let sportCounters = {};
+let endedMatches = [];
 
 const getLiveMatches = () => {
   return matches.map((match) => ({
@@ -41,6 +42,10 @@ app.get("/api/matches", (req, res) => {
 app.get("/api/live-matches", (req, res) => {
   const liveMatches = getLiveMatches();
   res.json(liveMatches);
+});
+
+app.get("/api/ended-matches", (req, res) => {
+  res.json(endedMatches);
 });
 
 app.post("/api/add-match", (req, res) => {
@@ -86,12 +91,17 @@ app.post("/api/end-match/:matchId", (req, res) => {
   const index = matches.findIndex((match) => match.matchId === matchId);
   if (index !== -1) {
     const endedMatch = matches.splice(index, 1)[0];
+    endedMatches.push(endedMatch);
     io.emit("matchEnded", endedMatch);
     res.json({ success: true, match: endedMatch });
   } else {
     res.status(404).json({ success: false, message: "Match not found" });
   }
 });
+
+// app.get("/api/ended-matches", (req, res) => {
+//   res.json(endedMatches);
+// });
 
 io.on("connection", (socket) => {
   console.log("A user connected");
