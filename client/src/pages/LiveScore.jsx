@@ -4,7 +4,7 @@ import LiveScoreTable from "../components/LivescoreTable";
 import axios from "axios";
 import CurrentMatch from "../components/CurrentMatch";
 
-const BACKEND_URL="https://backend-w6vj.onrender.com/"
+const BACKEND_URL="https://backend-w6vj.onrender.com"
 
 function LiveScore() {
   const [isFiltered, setIsFiltered] = useState(false);

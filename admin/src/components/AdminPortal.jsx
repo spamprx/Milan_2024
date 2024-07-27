@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BACKEND_URL = "https://backend-w6vj.onrender.com/";
+const BACKEND_URL = "https://backend-w6vj.onrender.com";
 
 const AdminPortal = () => {
   const [matches, setMatches] = useState([]);
