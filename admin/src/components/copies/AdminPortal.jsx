@@ -24,7 +24,7 @@ const AdminPortal = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/update-score",
+        "http://localhost:8000/api/update-score",
         matchData
       );
       console.log("Server response:", response.data);

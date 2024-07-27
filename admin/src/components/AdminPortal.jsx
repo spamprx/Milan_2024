@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+const BACKEND_URL = "https://backend-w6vj.onrender.com/";
+
 const AdminPortal = () => {
   const [matches, setMatches] = useState([]);
   const [selectedMatch, setSelectedMatch] = useState(null);
@@ -25,7 +27,7 @@ const AdminPortal = () => {
 
   const fetchMatches = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/matches");
+      const response = await axios.get(`${BACKEND_URL}/api/matches`);
       setMatches(response.data);
     } catch (error) {
       console.error("Error fetching matches:", error);
@@ -54,7 +56,7 @@ const AdminPortal = () => {
         matchId: selectedMatch.matchId,
       };
       const response = await axios.post(
-        "http://localhost:5000/api/update-score",
+        `${BACKEND_URL}/api/update-score`,
         updatedMatchData
       );
       console.log("Server response:", response.data);
@@ -71,7 +73,7 @@ const AdminPortal = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/add-match",
+        `${BACKEND_URL}/api/add-match`,
         newMatchData
       );
       console.log("Server response:", response.data);
@@ -91,7 +93,7 @@ const AdminPortal = () => {
 
   const handleEndMatch = async (matchId) => {
     try {
-      await axios.post(`http://localhost:5000/api/end-match/${matchId}`);
+      await axios.post(`${BACKEND_URL}/api/end-match/${matchId}`);
       alert("Match ended successfully");
       fetchMatches();
       setSelectedMatch(null);

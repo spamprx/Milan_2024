@@ -4,6 +4,8 @@ import LiveScoreTable from "../components/LivescoreTable";
 import axios from "axios";
 import CurrentMatch from "../components/CurrentMatch";
 
+const BACKEND_URL="https://backend-w6vj.onrender.com/"
+
 function LiveScore() {
   const [isFiltered, setIsFiltered] = useState(false);
   const [filteredGames, setFilteredGames] = useState([]);
@@ -24,7 +26,7 @@ function LiveScore() {
   const fetchLiveMatches = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/live-matches"
+        `${BACKEND_URL}/api/live-matches`
       );
       console.log("Live matches:", response.data);
       setLiveMatches(response.data);
@@ -36,7 +38,7 @@ function LiveScore() {
   const fetchEndedMatches = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/ended-matches"
+        `${BACKEND_URL}/api/ended-matches`
       );
       console.log("Ended matches:", response.data);
       setEndedMatches(response.data);
