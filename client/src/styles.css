@@ -1,0 +1,6 @@
+input[readonly] {
+    cursor: default;
+    pointer-events: none;
+    -webkit-text-fill-color: #333;
+    opacity: 1;
+  }
