@@ -38,7 +38,7 @@ function LoginPage() {
       <button 
         type="button" 
         style={styles.loginButton} 
-        Sign in with Google
+        Sign in with Google>
       </button>
     </div>
   );
