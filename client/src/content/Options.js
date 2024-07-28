@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 export const blockOptions = [
     { value: 'aryabhatta', label: 'Aryabhatta' },
     { value: 'bhaskara', label: 'Bhaskara' },
