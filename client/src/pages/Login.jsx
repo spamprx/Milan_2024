@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 
 function LoginPage() { 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const handleLogin = () => {
+  useEffect(() => {
+    setLoggedIn(true);
     window.location.href = import.meta.env.VITE_BACKEND_URL+'auth/google';
-  };
+  },[])
 
   const styles = {
     loginContainer: {
@@ -37,7 +38,6 @@ function LoginPage() {
       <button 
         type="button" 
         style={styles.loginButton} 
-        onClick={handleLogin}>
         Sign in with Google
       </button>
     </div>
