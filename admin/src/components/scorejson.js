@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 
-function getScoresJSON(socketUrl = "http://localhost:5000", timeout = 30000) {
+function getScoresJSON(socketUrl = "http://localhost:8000", timeout = 30000) {
   return new Promise((resolve, reject) => {
     const socket = io(socketUrl);
     let scores = [];

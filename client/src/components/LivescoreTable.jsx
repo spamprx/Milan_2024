@@ -88,10 +88,9 @@ export function Filter({ games, filteredGames }) {
 }
 
 function LiveScoreTable({
-  // games,
-  endedMatches,
-  // blocknames,
-  // points,
+  games,
+  blocknames,
+  points,
   isFiltered,
   handleFilter,
   handleFilteredGames,
@@ -127,7 +126,7 @@ function LiveScoreTable({
       name: "Score1",
       selector: (row) => row.score1,
       sortable: true,
-      width: "100px",
+      width: "80px",
       textAlign: "center",
     },
     {
@@ -141,22 +140,22 @@ function LiveScoreTable({
       name: "Score2",
       selector: (row) => row.score2,
       sortable: true,
-      width: "100px",
+      width: "80px",
       textAlign: "center",
     },
   ];
 
   // Reverse order of games and adjust S.No to be in ascending order
-  const data = endedMatches
+  const data = games
     .slice()
     .reverse()
     .map((game, index) => ({
       num: index + 1, // Ensure S.No starts from 1 to length of games
-      sport: game.sport,
-      team1: game.team1,
-      score1: game.score1,
-      team2: game.team2,
-      score2: game.score2,
+      sport: game.Sport,
+      team1: game.Team1,
+      score1: game.Score1,
+      team2: game.Team2,
+      score2: game.Score2,
     }));
 
   const filteredData = data.filter(
