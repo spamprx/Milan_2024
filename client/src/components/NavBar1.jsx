@@ -9,11 +9,17 @@ function NavBar1() {
         to="/"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         HOME
@@ -22,11 +28,17 @@ function NavBar1() {
         to="/events"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         LEADERBOARD
@@ -35,11 +47,17 @@ function NavBar1() {
         to="/livescore"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         LIVE SCORE
@@ -61,11 +79,17 @@ function NavBar1() {
         to="/calendar"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         CALENDAR
@@ -74,11 +98,17 @@ function NavBar1() {
         to="/sponsors"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         SPONSORS
@@ -87,11 +117,17 @@ function NavBar1() {
         to="/team"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         TEAM
@@ -100,11 +136,17 @@ function NavBar1() {
         to="/profile"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         PROFILE
@@ -113,11 +155,17 @@ function NavBar1() {
         to="/rulebook"
         className={({ isActive }) =>
           isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
+            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
             : "px-4 py-2"
         }
         style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
+          isActive
+            ? {
+                backgroundImage: `url(${activeBg})`,
+                backgroundSize: "contain",
+                backgroundRepeat: "no-repeat",
+              }
+            : {}
         }
       >
         RULEBOOK
