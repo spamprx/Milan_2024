@@ -3,174 +3,47 @@ import React from "react";
 import activeBg from "../assets/ActivePage.png";
 
 function NavBar1() {
+  const navItems = [
+    { to: "/", label: "HOME" },
+    { to: "/events", label: "EVENTS" },
+    { to: "/livescore", label: "LIVE SCORE" },
+    { to: "/calendar", label: "CALENDAR" },
+    { to: "/sponsors", label: "SPONSORS" },
+    { to: "/team", label: "TEAM" },
+    { to: "/profile", label: "PROFILE" },
+    { to: "/rulebook", label: "RULEBOOK" },
+  ];
+
   return (
-    <div className="flex justify-center items-center text-white p-2">
-      <NavLink
-        to="/"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        HOME
-      </NavLink>
-      <NavLink
-        to="/events"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        LEADERBOARD
-      </NavLink>
-      <NavLink
-        to="/livescore"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        LIVE SCORE
-      </NavLink>
-      {/* <NavLink
-        to="/login"
-        className={({ isActive }) =>
-          isActive
-            ? `px-4 py-2 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive ? { backgroundImage: `url(${activeBg})` } : {}
-        }
-      >
-        LOGIN
-      </NavLink> */}
-      <NavLink
-        to="/calendar"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        CALENDAR
-      </NavLink>
-      <NavLink
-        to="/sponsors"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        SPONSORS
-      </NavLink>
-      <NavLink
-        to="/team"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        TEAM
-      </NavLink>
-      <NavLink
-        to="/profile"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        PROFILE
-      </NavLink>
-      <NavLink
-        to="/rulebook"
-        className={({ isActive }) =>
-          isActive
-            ? `p-4 bg-cover bg-center rounded-full font-bold text-white`
-            : "px-4 py-2"
-        }
-        style={({ isActive }) =>
-          isActive
-            ? {
-                backgroundImage: `url(${activeBg})`,
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-              }
-            : {}
-        }
-      >
-        RULEBOOK
-      </NavLink>
-    </div>
+    <nav className="flex flex-wrap justify-center items-center mx-auto text-white py-2 px-4 bg-[#270B5D]/[0.9] rounded-full">
+      {navItems.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          className={({ isActive }) =>
+            `px-1 py-1 text-xs font-bold transition-all duration-300 m-0.5 ${
+              isActive
+                ? "bg-no-repeat bg-center bg-contain text-white"
+                : "hover:text-yellow-400"
+            }`
+          }
+          style={({ isActive }) =>
+            isActive
+              ? {
+                  backgroundImage: `url(${activeBg})`,
+                  width: "clamp(4.5rem, 8vw, 7rem)",
+                  height: "clamp(1.75rem, 4vw, 2.25rem)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }
+              : {}
+          }
+        >
+          {item.label}
+        </NavLink>
+      ))}
+    </nav>
   );
 }
 

@@ -18,7 +18,6 @@ function Home() {
 
   return (
   <div className="bg-gradient-to-b from-[#171717] to-[#696969] h-screen">
-    <Header />
   </div>
   )
 }
