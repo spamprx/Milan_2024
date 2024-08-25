@@ -33,11 +33,6 @@ function App() {
             </p>
             <p className="flex text-start text-white text-xs">IIT Hyderabad</p>
           </div>
-          <div className="flex w-[60vw] h-[10vh]">
-            <div className="fixed w-[60vw] h-[10vh] bg-[#270b5de6] rounded-full z-30">
-              <NavBar1 />
-            </div>
-          </div>
           <img src={Logo} className="h-10" />
         </div>
         {/* <div className="px-4 pb-8 text-end text-white">

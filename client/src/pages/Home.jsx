@@ -24,10 +24,7 @@ function Home() {
 
   return (
     // <h1>Welcome Home</h1>
-    <div
-      className="w-full h-full min-h-screen bg-cover bg-center m-0 p-0"
-      style={{ backgroundImage: `url(${HomeBg})` }}
-    >
+    <div className="w-full h-full min-h-screen bg-cover bg-center m-0 p-0 bg-gradient-to-b from [#171717] to [#696969]">
       <div className="relative flex flex-col justify-center items-center pt-10">
         <img src={MilanHome} className="w-full h-auto object-contain z-10" />
         <img
