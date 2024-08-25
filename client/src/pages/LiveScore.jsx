@@ -3,6 +3,8 @@ import LiveScoreTable from "../components/LivescoreTable";
 import scores from "../scores.json";
 import axios from "axios";
 import CurrentMatch from "../components/CurrentMatch";
+import CardLiveScore from "../components/CardLiveScore";
+import CardLiveScoreRev from "../components/CardLiveScoreRev";
 
 function LiveScore() {
   const [isFiltered, setIsFiltered] = useState(false);
@@ -63,13 +65,14 @@ function LiveScore() {
   const matchesJSON = JSON.stringify(liveMatches, null, 2);
 
   return (
-    <div className="table mx-auto py-8 px-4">
-      <CurrentMatch
+    <div className="flex flex-row justify-around mx-auto py-8 px-4">
+      {false ? (
+        <>
+        <CurrentMatch
         selectedSport={selectedSport}
         currentMatches={currentMatches}
         onSportClick={handleSportClick}
       />
-
       <LiveScoreTable
         games={games}
         blocknames={blocknames}
@@ -81,7 +84,10 @@ function LiveScore() {
         tag="Sport Scores"
         excludeCurrentMatches={currentMatches}
       />
-      <pre>{matchesJSON}</pre>
+        </>
+      ) : (<></>)}
+      <CardLiveScore />
+      <CardLiveScoreRev />
     </div>
   );
 }
