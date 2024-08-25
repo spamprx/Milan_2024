@@ -55,8 +55,11 @@ export default function Dates({
   });
 
   return (
-    <div className="md:pr-14 md:col-span-3" ref={calendarRef}>
-      <div className="flex items-center">
+    <div
+      className="md:pr-14 md:col-span-3 bg-[#160631]/[0.85] p-4 rounded-3xl"
+      ref={calendarRef}
+    >
+       {/* * <div className="flex items-center">
         <h2 className="flex-auto font-semibold text-gray-900">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
         </h2>
@@ -76,15 +79,17 @@ export default function Dates({
           <span className="sr-only">Next month</span>
           <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
         </button>
-      </div>
-      <div className="grid grid-cols-7 mt-10 text-xs leading-6 text-center text-gray-500">
-        <div>S</div>
-        <div>M</div>
-        <div>T</div>
-        <div>W</div>
-        <div>T</div>
-        <div>F</div>
-        <div>S</div>
+      </div> */}
+      <div className="grid grid-cols-7 text-xs bg-[#c3de16]/[0.2] rounded-2xl leading-6 text-center text-white font-semibold">
+        <div className="my-2">M</div>
+        <div className="my-2">T</div>
+        <div className="my-2">W</div>
+        <div className="my-2">TH</div>
+        <div className="my-2">F</div>
+        <div className="col-span-2 flex bg-yellow-500 text-black justify-around p-2 rounded-2xl">
+          <span>S</span>
+          <span>S</span>
+        </div>
       </div>
       <div className="grid grid-cols-7 mt-2 text-sm">
         {days.map((day, dayIdx) => (
@@ -99,20 +104,21 @@ export default function Dates({
               type="button"
               onClick={() => setSelectedDay(day)}
               className={classNames(
-                isEqual(day, selectedDay) && "text-white",
-                !isEqual(day, selectedDay) && isToday(day) && "text-red-500",
+                isToday(day) && "text-rose-500",
+                isEqual(day, selectedDay) && "text-white font-bold",
+                !isEqual(day, selectedDay) && isToday(day) && "text-white",
                 !isEqual(day, selectedDay) &&
                   !isToday(day) &&
                   isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-gray-900",
+                  "text-white font-semibold",
                 !isEqual(day, selectedDay) &&
                   !isToday(day) &&
                   !isSameMonth(day, firstDayCurrentMonth) &&
-                  "text-gray-400",
-                isEqual(day, selectedDay) && isToday(day) && "bg-red-500",
-                isEqual(day, selectedDay) && !isToday(day) && "bg-gray-900",
+                  "text-gray-500",
+                isEqual(day, selectedDay) && isToday(day) && "bg-yellow-500",
+                isEqual(day, selectedDay) && !isToday(day) && "bg-yellow-500 text-black",
                 !isEqual(day, selectedDay) && "hover:bg-gray-200",
-                (isEqual(day, selectedDay) || isToday(day)) && "font-semibold",
+                (isEqual(day, selectedDay) || isToday(day)) && "font-bold",
                 "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
               )}
             >
@@ -121,7 +127,7 @@ export default function Dates({
               </time>
             </button>
             {hasPreferredEvent(day) && (
-              <div className="w-1 h-1 mx-auto mt-1 rounded-full bg-blue-500"></div>
+              <div className="w-1 h-1 mx-auto mt-1 rounded-full bg-yellow-500"></div>
             )}
           </div>
         ))}
