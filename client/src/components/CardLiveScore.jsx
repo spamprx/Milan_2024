@@ -9,7 +9,7 @@ function CardLiveScore() {
         <img
           src={Subtract}
           alt="Subtract"
-          className="flex-1 - -x-6 translate-y-3 z-20"
+          className="flex-1 -translate-x-6 translate-y-3 z-20"
         />
         <div className="absolute inset-0 flex items-center translate-x-3 -translate-y-3 justify-center z-20 ">
           <div className="-translate-x-6 -translate-y-40 p-2 rounded-tr-xl rounded-bl-xl z-20">
