@@ -97,24 +97,28 @@ export default function Calendar() {
   return (
     <div className="scroll-smooth pt-16">
       <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
-        <div className="md:grid md:grid-cols-7 md:gap-8">
-          <Dates 
-            currentMonth={currentMonth}
-            setCurrentMonth={setCurrentMonth}
-            selectedDay={selectedDay}
-            setSelectedDay={setSelectedDay}
-            games={games}
-            calendarRef={calendarRef}
-            userPreferredGames={userPreferredGames}
-            preferredTeams={preferredTeams}
-          />
-          <EventList 
-            preferredMeetings={preferredMeetings}
-            otherMeetings={otherMeetings}
-            onGameSelect={handleGameSelect}
-            calendarHeight={calendarHeight}
-            selectedDay={selectedDay}
-          />
+        <div className="lg:flex lg:space-x-8">
+          <div className="lg:w-1/3">
+            <Dates 
+              currentMonth={currentMonth}
+              setCurrentMonth={setCurrentMonth}
+              selectedDay={selectedDay}
+              setSelectedDay={setSelectedDay}
+              games={games}
+              calendarRef={calendarRef}
+              userPreferredGames={userPreferredGames}
+              preferredTeams={preferredTeams}
+            />
+          </div>
+          <div className="lg:w-2/3">
+            <EventList 
+              preferredMeetings={preferredMeetings}
+              otherMeetings={otherMeetings}
+              onGameSelect={handleGameSelect}
+              calendarHeight={calendarHeight}
+              selectedDay={selectedDay}
+            />
+          </div>
         </div>
         
         <div className="my-8 border-t-2 border-gray-300"></div>

@@ -16,7 +16,7 @@ function CardLiveScoreRev() {
             <div className="bg-[#4B16B2] text-xl font-bold font-be-vietnam text-white  ring-[#4B16B2] ring-1 -translate-y-32 p-2 rounded-tl-xl rounded-br-xl z-20">
               LIVESCORE
             </div>
-            <div className="text-md font-bold font-be-vietnam text-white  -translate-y-16 p-2 rounded-tr-xl rounded-bl-xl z-20">
+            <div className="text-md font-bold font-be-vietnam text-white -translate-y-16 p-2 rounded-tr-xl rounded-bl-xl z-20">
               MATCH : 09
             </div>
           </div>
@@ -38,7 +38,7 @@ function CardLiveScoreRev() {
             className="absolute w-1/2 -translate-x-20"
           />
         </div>
-        <div className="flex flex-row absolute inset-0 items-center justify-center z-50 translate-x-20 -translate-y-12">
+        <div className="flex flex-row absolute inset-0 items-center justify-center z-30 translate-x-20 -translate-y-12">
           <div className="flex flex-col translate-x-1 gap-2">
             <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] -translate-y-2">
               00

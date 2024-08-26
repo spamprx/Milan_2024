@@ -8,19 +8,21 @@ const GameDetails = React.forwardRef(({ game }, ref) => {
   return (
     <>
       <div ref={ref} className="bg-white rounded-2xl shadow-lg">
-        <div className="bg-[#4513AD] text-xl text-white rounded-t-2xl p-2 font-semibold text-center">
+        <div className="bg-[#4513AD] text-2xl text-white rounded-t-2xl p-2 font-extrabold text-center">
           {game.title}
-          <p className="text-white text-lg text-center">{game.category}</p>
+          <p className="text-white text-sm text-center font-bold">{game.category}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-[#D1CCB6] ">
           <div className="space-y-2 px-4 text-center">
-            {/* <p>
-              <strong>Teams:</strong> {game.teams}
+            <p>
+              Teams:
+              <br/><span className='font-bold'>{game.teams}</span>
             </p>
-            <hr className="w-full h-[2px] mx-auto bg-black" /> */}
+            
+            <hr className="w-full h-[2px] mx-auto bg-black mt-5" />
             <p className="be-vietnam-pro ">
-              Venue: <br /> {game.body}
+              Venue: <br /> <span className='font-bold'>{game.body}</span>
             </p>
             <hr className="w-full h-[2px] mx-auto bg-black" />
             <p className="be-vietnam-pro">
@@ -28,7 +30,7 @@ const GameDetails = React.forwardRef(({ game }, ref) => {
               <span className="text-2xl font-bold">{game.time}</span>
             </p>
             <hr className="w-full h-[2px] mx-auto bg-black" />
-            <p className="be-vietnam-pro">Winner:</p>
+            <p className="be-vietnam-pro font-bold">WINNER:</p>
           </div>
           <div className="w-full bg-[#DEB116] p-4 rounded-b-2xl text-3xl font-bold">
             {game.winner || "Not decided"}

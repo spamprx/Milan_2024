@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import Dropdown from "../assets/Dropdown.png";
 import Cross from "../assets/Cross.png";
 import Arrow from "../assets/Arrow.png";
@@ -7,16 +8,17 @@ function Hamburger() {
   const [isActive, setIsActive] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const dropdownRef = useRef(null);
 
   const menuItems = [
-    "HOME",
-    "EVENTS",
-    "LIVESCORE",
-    "CALENDAR",
-    "SPONSORS",
-    "TEAM",
-    "PROFILE",
-    "RULEBOOK",
+    { name: "HOME", path: "/" },
+    { name: "EVENTS", path: "/events" },
+    { name: "LIVESCORE", path: "/livescore" },
+    { name: "CALENDAR", path: "/calendar" },
+    { name: "SPONSORS", path: "/sponsors" },
+    { name: "TEAM", path: "/team" },
+    { name: "PROFILE", path: "/profile" },
+    { name: "RULEBOOK", path: "/rulebook" },
   ];
 
   useEffect(() => {
@@ -30,8 +32,14 @@ function Hamburger() {
     }
   }, [isActive]);
 
+  useEffect(() => {
+    if (isActive && dropdownRef.current) {
+      dropdownRef.current.scrollTop = 0;
+    }
+  }, [isActive]);
+
   return (
-    <div className="relative">
+    <div className="fixed top-4 right-4 z-50">
       <div
         className="relative flex flex-col gap-1 w-fit h-fit cursor-pointer"
         onClick={() => setIsActive(!isActive)}
@@ -47,7 +55,8 @@ function Hamburger() {
       </div>
       {(isActive || isTransitioning) && (
         <div
-          className={`fixed -top-6 -right-4 w-screen max-w-[500px] h-screen bg-[#6B5794] z-50 transition-all duration-300 ease-in-out ${
+          ref={dropdownRef}
+          className={`fixed top-0 right-0 w-screen max-w-[500px] h-screen overflow-y-auto bg-[#6B5794] z-50 transition-all duration-300 rounded-l-3xl ease-in-out ${
             isActive
               ? "opacity-100 translate-x-0"
               : "opacity-0 translate-x-full"
@@ -59,7 +68,7 @@ function Hamburger() {
             backgroundPosition: "center",
           }}
         >
-          <div className="flex flex-col gap-8 p-4 overflow-y-auto h-full">
+          <div className="flex flex-col z-50 h-full justify-around p-4">
             <img
               src={Cross}
               alt="Cross"
@@ -67,18 +76,25 @@ function Hamburger() {
               onClick={() => setIsActive(false)}
             />
             {menuItems.map((item, index) => (
-              <div
+              <Link
                 key={index}
-                className={`dropdown my-2 cursor-pointer relative flex items-center justify-between transition-all duration-300 ease-in-out ${
+                to={item.path}
+                className={`dropdown cursor-pointer z-50 relative flex items-center justify-between transition-all duration-300 ease-in-out ${
                   isActive
                     ? "opacity-100 translate-x-0"
                     : "opacity-0 translate-x-full"
                 }`}
                 style={{ transitionDelay: `${index * 50}ms` }}
-                onClick={() => setActiveIndex(index)}
+                onClick={() => {
+                  setActiveIndex(index);
+                  setIsActive(false);
+                }}
               >
-                <span className="py-2 px-4 text-white">{item}</span>
-              </div>
+                <span className="py-2 px-4 text-white">{item.name}</span>
+                {activeIndex === index && (
+                  <img src={Arrow} alt="Arrow" className="w-6 h-6 mr-4" />
+                )}
+              </Link>
             ))}
           </div>
         </div>
