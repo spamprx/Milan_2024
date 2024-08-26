@@ -1,4 +1,4 @@
-import React from "react";
+  import React from "react";
 import Subtract from "../assets/Subtract.svg";
 import Basketball from "../assets/Basketball.png";
 
@@ -38,8 +38,8 @@ function CardLiveScore() {
             className="absolute w-1/2 translate-x-20"
           />
         </div>
-        <div className="flex flex-row absolute inset-0 items-center justify-center z-50 -translate-x-16 -translate-y-12">
-          <div className="flex flex-col translate-x-1 gap-2">
+        <div className="flex flex-row absolute inset-0 items-center justify-center z-30 -translate-x-16 -translate-y-12">
+          <div className="flex flex-col translate-x-1 gap-2 z-10">
             <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] -translate-y-2">
               00
             </span>
