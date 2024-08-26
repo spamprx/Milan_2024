@@ -47,7 +47,7 @@ function Hamburger() {
         </div>
         {(isActive || isTransitioning) && (
             <div
-            className={`absolute -top-6 -right-4 w-screen h-screen bg-[#6B5794] z-50 transition-all duration-300 ease-in-out ${
+            className={`absolute -top-6 -right-4 w-screen max-w-[500px] h-screen bg-[#6B5794] z-50 transition-all duration-300 ease-in-out ${
                 isActive
                 ? "opacity-100 translate-x-0"
                 : "opacity-0 translate-x-full"
@@ -78,9 +78,6 @@ function Hamburger() {
                     onClick={() => setActiveIndex(index)}
                 >
                     <span className="py-2 px-4 text-white">{item}</span>
-                    {activeIndex === index && (
-                    <img src={Arrow} alt="Arrow" className="w-6 h-6 mr-4" />
-                    )}
                 </div>
                 ))}
             </div>
