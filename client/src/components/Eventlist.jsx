@@ -1,12 +1,11 @@
 import React from 'react';
-import { format } from 'date-fns';
 import Meeting from './Meetings.jsx';
 
-export default function EventList({ preferredMeetings, otherMeetings, onGameSelect, calendarHeight, selectedDay }) {
-  const renderMeetings = (meetings) => {
+export default function EventList({ preferredMeetings, otherMeetings, onGameSelect }) {
+  const renderMeetings = (meetings, isPreferred) => {
     if (meetings.length === 0) {
       return (
-        <p className="text-sm text-gray-500">
+        <p className="text-sm text-white">
           No games scheduled for today.
         </p>
       );
@@ -17,36 +16,32 @@ export default function EventList({ preferredMeetings, otherMeetings, onGameSele
         key={`${meeting.title}-${meeting.time}-${index}`} 
         meeting={meeting} 
         onSelect={onGameSelect}
+        isPreferred={isPreferred}
       />
     ));
   };
 
   return (
-    <div className="md:col-span-4">
-      <section className="mt-12 md:mt-0 h-full">
-        <div className="flex flex-col gap-4 space-x-4 h-[calc(100%-2rem)]">
-          <div className="flex-1 overflow-hidden bg-[#270B5D]/[0.75] rounded-2xl">
-            <h3 className="font-bold text-white p-2 mb-4 rounded-2xl bg-[#270B5D]">
-              PREFERRED GAMES
-            </h3>
-            <ol
-              className="space-y-1 overflow-y-auto"
-              style={{ maxHeight: `${calendarHeight - 80}px` }}
-            >
-              {renderMeetings(preferredMeetings)}
-            </ol>
-          </div>
-
-          <div className="flex-1 overflow-hidden bg-[#6B5794]/[0.85] rounded-2xl">
-            <h3 className="font-bold text-black p-2 mb-4 rounded-2xl bg-[#D1CCB6]">
-              OTHER GAMES
-            </h3>
-            <ol className="space-y-1 overflow-y-auto" style={{ maxHeight: `${calendarHeight - 80}px` }}>
-              {renderMeetings(otherMeetings)}
-            </ol>
+    <div className="w-full max-w-md mx-auto">
+      <div className="space-y-4">
+        <div className="bg-[#6B5794]/[0.84] rounded-2xl overflow-hidden">
+          <h3 className="bg-[#4B16B2] text-white h-10 font-extrabold flex items-center justify-center">
+            PREFERRED GAMES
+          </h3>
+          <div className="grid grid-cols-2 gap-4 p-4 max-h-[400px] overflow-y-auto">
+            {renderMeetings(preferredMeetings, true)}
           </div>
         </div>
-      </section>
+
+        <div className="bg-[#6B5794]/[0.84] rounded-2xl overflow-hidden">
+          <h3 className="bg-[#D1CCB6] text-black h-10 font-extrabold flex items-center justify-center">
+            OTHER GAMES
+          </h3>
+          <div className="grid grid-cols-2 gap-4 p-4 max-h-[400px] overflow-y-auto">
+            {renderMeetings(otherMeetings, false)}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

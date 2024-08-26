@@ -56,10 +56,10 @@ export default function Dates({
 
   return (
     <div
-      className="md:pr-14 md:col-span-3 bg-[#160631]/[0.85] p-4 rounded-3xl"
+      className="md:pr-14 md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl"
       ref={calendarRef}
     >
-       {/* * <div className="flex items-center">
+       <div className="flex items-center">
         <h2 className="flex-auto font-semibold text-gray-900">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
         </h2>
@@ -79,7 +79,7 @@ export default function Dates({
           <span className="sr-only">Next month</span>
           <ChevronRightIcon className="w-5 h-5" aria-hidden="true" />
         </button>
-      </div> */}
+      </div>
       <div className="grid grid-cols-7 text-xs bg-[#c3de16]/[0.2] rounded-2xl leading-6 text-center text-white font-semibold">
         <div className="my-2">M</div>
         <div className="my-2">T</div>

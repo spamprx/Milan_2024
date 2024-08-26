@@ -95,7 +95,7 @@ export default function Calendar() {
   }
 
   return (
-    <div className="pt-16">
+    <div className="scroll-smooth pt-16">
       <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
         <div className="md:grid md:grid-cols-7 md:gap-8">
           <Dates 
