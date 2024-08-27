@@ -62,32 +62,40 @@ function LiveScore() {
     setSelectedSport(sport === selectedSport ? null : sport);
   };
 
-  const matchesJSON = JSON.stringify(liveMatches, null, 2);
-
   return (
-    <div className="flex flex-row justify-around mx-auto py-8 px-4">
+    <div className="flex flex-col min-w-[375px] w-fit mx-auto justify-center h-fit">
+      {/* Conditional rendering based on some condition */}
       {false ? (
         <>
-        <CurrentMatch
-        selectedSport={selectedSport}
-        currentMatches={currentMatches}
-        onSportClick={handleSportClick}
-      />
-      <LiveScoreTable
-        games={games}
-        blocknames={blocknames}
-        points={points}
-        isFiltered={selectedSport ? selectedSport === "Cricket" : isFiltered}
-        handleFilter={handleFilter}
-        handleFilteredGames={handleFilteredGames}
-        allGames={games.map((game) => game.Sport)}
-        tag="Sport Scores"
-        excludeCurrentMatches={currentMatches}
-      />
+          <CurrentMatch
+            selectedSport={selectedSport}
+            currentMatches={currentMatches}
+            onSportClick={handleSportClick}
+          />
+          <LiveScoreTable
+            games={games}
+            blocknames={blocknames}
+            points={points}
+            isFiltered={
+              selectedSport ? selectedSport === "Cricket" : isFiltered
+            }
+            handleFilter={handleFilter}
+            handleFilteredGames={handleFilteredGames}
+            allGames={games.map((game) => game.Sport)}
+            tag="Sport Scores"
+            excludeCurrentMatches={currentMatches}
+          />
         </>
-      ) : (<></>)}
-      <CardLiveScore />
-      <CardLiveScoreRev />
+      ) : null}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 scale-75 lg:scale-90 w-full gap-x-24 gap-y-32 justify-items-center">
+        <CardLiveScoreRev />
+        <CardLiveScore />
+        <CardLiveScoreRev />
+        <CardLiveScore />
+        <CardLiveScoreRev />
+        <CardLiveScore />
+      </div>
     </div>
   );
 }
