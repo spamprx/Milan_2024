@@ -11,6 +11,7 @@ import Sponsors from "./pages/Sponsors";
 import Team from "./pages/Team";
 import Background from "./assets/Background.png";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 function App() {
   // const [showNav, setShowNav] = useState(true);
@@ -34,6 +35,7 @@ function App() {
           <Route path="*" element={<Error />} />
         </Routes>
       </div>
+    <Footer/>
     </div>
   );
 }
