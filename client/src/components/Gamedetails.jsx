@@ -7,7 +7,7 @@ const GameDetails = React.forwardRef(({ game }, ref) => {
 
   return (
     <>
-      <div ref={ref} className="bg-white rounded-2xl shadow-lg">
+      <div ref={ref} className="bg-white rounded-2xl shadow-lg m-10">
         <div className="bg-[#4513AD] text-2xl text-white rounded-t-2xl p-2 font-extrabold text-center">
           {game.title}
           <p className="text-white text-sm text-center font-bold">{game.category}</p>

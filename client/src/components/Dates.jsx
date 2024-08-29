@@ -117,7 +117,7 @@ export default function Dates({
                   "text-gray-500",
                 isEqual(day, selectedDay) && isToday(day) && "bg-yellow-500",
                 isEqual(day, selectedDay) && !isToday(day) && "bg-yellow-500 text-black",
-                !isEqual(day, selectedDay) && "hover:bg-gray-200",
+                !isEqual(day, selectedDay) && "hover:bg-yellow-500",
                 (isEqual(day, selectedDay) || isToday(day)) && "font-bold",
                 "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
               )}
