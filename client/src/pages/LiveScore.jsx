@@ -63,9 +63,9 @@ function LiveScore() {
   };
 
   return (
-    <div className="flex flex-col min-w-[375px] w-fit mx-auto justify-center h-fit">
+    <div className="flex flex-col min-w-[340px] w-screen scale-75 mx-auto justify-center h-fit">
       {/* Conditional rendering based on some condition */}
-      {false ? (
+      {/* {false ? (
         <>
           <CurrentMatch
             selectedSport={selectedSport}
@@ -86,9 +86,9 @@ function LiveScore() {
             excludeCurrentMatches={currentMatches}
           />
         </>
-      ) : null}
+      ) : null} */}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 scale-75 lg:scale-90 w-full gap-x-24 gap-y-32 justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:scale-125 scale-75 sm:scale-90 w-full gap-x-24 gap-y-32 justify-items-center">
         <CardLiveScoreRev />
         <CardLiveScore />
         <CardLiveScoreRev />

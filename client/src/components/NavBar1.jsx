@@ -15,13 +15,13 @@ function NavBar1() {
   ];
 
   return (
-    <nav className="flex flex-wrap justify-center items-center mx-auto text-white py-2 px-4 bg-[#270B5D]/[0.9] rounded-full">
+    <nav className="flex flex-wrap justify-center items-center mx-auto text-white py-0.5 px-4 bg-[#270B5D]/[0.9] rounded-full">
       {navItems.map((item) => (
         <NavLink
           key={item.to}
           to={item.to}
           className={({ isActive }) =>
-            `px-1 py-1 text-xs font-bold transition-all duration-300 m-0.5 ${
+            `px-1 text-xs font-bold transition-all duration-300 m-0.5 ${
               isActive
                 ? "bg-no-repeat bg-center bg-contain text-white"
                 : "hover:text-yellow-400"

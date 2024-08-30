@@ -14,28 +14,35 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 function App() {
-  // const [showNav, setShowNav] = useState(true);
   return (
     <div
-      className="w-full h-full min-h-screen bg-cover bg-center m-0"
-      style={{ backgroundImage: `url(${Background})` }}
+      className="flex flex-col min-h-screen"
+      style={{
+        backgroundImage: `url(${Background})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
-    <Header/>
-      <div className="text-center">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/calendar" element={<Calendar />} />
-          <Route path="/events" element={<Events />} />
-          <Route path="/livescore" element={<LiveScore />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/rulebook" element={<RuleBook />} />
-          <Route path="/sponsors" element={<Sponsors />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </div>
-    <Footer/>
+      <Header />
+
+      <main className="flex-grow">
+        <div className="text-center">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/calendar" element={<Calendar />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/livescore" element={<LiveScore />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/rulebook" element={<RuleBook />} />
+            <Route path="/sponsors" element={<Sponsors />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </div>
+      </main>
+
+      {/* <Footer /> */}
     </div>
   );
 }
