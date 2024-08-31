@@ -68,24 +68,28 @@ function LiveScore() {
     <div className="flex flex-row justify-around mx-auto py-8 px-4">
       {false ? (
         <>
-        <CurrentMatch
-        selectedSport={selectedSport}
-        currentMatches={currentMatches}
-        onSportClick={handleSportClick}
-      />
-      <LiveScoreTable
-        games={games}
-        blocknames={blocknames}
-        points={points}
-        isFiltered={selectedSport ? selectedSport === "Cricket" : isFiltered}
-        handleFilter={handleFilter}
-        handleFilteredGames={handleFilteredGames}
-        allGames={games.map((game) => game.Sport)}
-        tag="Sport Scores"
-        excludeCurrentMatches={currentMatches}
-      />
+          <CurrentMatch
+            selectedSport={selectedSport}
+            currentMatches={currentMatches}
+            onSportClick={handleSportClick}
+          />
+          <LiveScoreTable
+            games={games}
+            blocknames={blocknames}
+            points={points}
+            isFiltered={
+              selectedSport ? selectedSport === "Cricket" : isFiltered
+            }
+            handleFilter={handleFilter}
+            handleFilteredGames={handleFilteredGames}
+            allGames={games.map((game) => game.Sport)}
+            tag="Sport Scores"
+            excludeCurrentMatches={currentMatches}
+          />
         </>
-      ) : (<></>)}
+      ) : (
+        <></>
+      )}
       <CardLiveScore />
       <CardLiveScoreRev />
     </div>
