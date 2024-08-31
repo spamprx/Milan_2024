@@ -12,6 +12,7 @@ import Team from "./pages/Team";
 import Background from "./assets/Background.png";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import BackToTopButton from "./components/BackToTopButton";
 
 function App() {
   return (
@@ -38,10 +39,10 @@ function App() {
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/team" element={<Team />} />
             <Route path="*" element={<Error />} />
-          </Routes>
+          </Routes> 
         </div>
       </main>
-
+      <BackToTopButton/>
       <Footer />
     </div>
   );
