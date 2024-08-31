@@ -50,17 +50,17 @@ export default function Dates({
   }
 
   let days = eachDayOfInterval({
-    start: startOfWeek(firstDayCurrentMonth),
+    start: startOfWeek(firstDayCurrentMonth ,{ weekStartsOn: 1 }),
     end: endOfMonth(firstDayCurrentMonth),
   });
 
   return (
     <div
-      className="md:pr-14 md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl"
+      className="md:max-w-md px-6 mx-auto md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl lg:translate-y-16 lg:-translate-x-16 "
       ref={calendarRef}
     >
        <div className="flex items-center">
-        <h2 className="flex-auto font-semibold text-gray-900">
+        <h2 className="flex-auto font-semibold text-white pb-2">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
         </h2>
         <button
@@ -117,7 +117,7 @@ export default function Dates({
                   "text-gray-500",
                 isEqual(day, selectedDay) && isToday(day) && "bg-yellow-500",
                 isEqual(day, selectedDay) && !isToday(day) && "bg-yellow-500 text-black",
-                !isEqual(day, selectedDay) && "hover:bg-gray-200",
+                !isEqual(day, selectedDay) && "hover:bg-yellow-500",
                 (isEqual(day, selectedDay) || isToday(day)) && "font-bold",
                 "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
               )}
@@ -138,6 +138,7 @@ export default function Dates({
 
 let colStartClasses = [
   "",
+  "col-start-1",
   "col-start-2",
   "col-start-3",
   "col-start-4",

@@ -15,24 +15,24 @@ function NavBar1() {
   ];
 
   return (
-    <nav className="flex flex-wrap justify-center items-center mx-auto text-white py-2 px-4 bg-[#270B5D]/[0.9] rounded-full">
+    <nav className="flex flex-wrap justify-center scale-90 items-center mx-auto text-white px-4 bg-[#270B5D]/[0.9] rounded-full">
       {navItems.map((item) => (
         <NavLink
           key={item.to}
           to={item.to}
           className={({ isActive }) =>
-            `px-1 py-1 text-xs font-bold transition-all duration-300 m-0.5 ${
+            `px-1 text-sm font-semibold transition-all duration-300 my-1 rounded ${
               isActive
-                ? "bg-no-repeat bg-center bg-contain text-white"
-                : "hover:text-yellow-400"
+                ? "bg-no-repeat bg-center bg-contain text-white scale-105"
+                : "hover:text-yellow-400 scale-100"
             }`
           }
           style={({ isActive }) =>
             isActive
               ? {
                   backgroundImage: `url(${activeBg})`,
-                  width: "clamp(4.5rem, 8vw, 7rem)",
-                  height: "clamp(1.75rem, 4vw, 2.25rem)",
+                  width: "clamp(5rem, 8vw, 6.5rem)",
+                  height: "clamp(2rem, 3vw, 2.5rem)",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",

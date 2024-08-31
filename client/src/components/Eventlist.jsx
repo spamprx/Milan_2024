@@ -23,7 +23,7 @@ export default function EventList({ preferredMeetings, otherMeetings, onGameSele
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full md:max-w-md mx-auto lg:max-w-none">
       <h2 className="text-lg font-semibold text-white mb-4">Schedule for {format(selectedDay, 'MMM dd, yyyy')}</h2>
       <div className="lg:flex lg:space-x-4 space-y-4 lg:space-y-0">
         <div className="bg-[#6B5794]/[0.84] rounded-2xl overflow-hidden lg:flex-1">

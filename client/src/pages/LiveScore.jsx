@@ -62,11 +62,10 @@ function LiveScore() {
     setSelectedSport(sport === selectedSport ? null : sport);
   };
 
-  const matchesJSON = JSON.stringify(liveMatches, null, 2);
-
   return (
-    <div className="flex flex-row justify-around mx-auto py-8 px-4">
-      {false ? (
+    <div className="flex flex-col min-w-[340px] w-screen scale-75 mx-auto justify-center h-fit">
+      {/* Conditional rendering based on some condition */}
+      {/* {false ? (
         <>
           <CurrentMatch
             selectedSport={selectedSport}
@@ -87,11 +86,16 @@ function LiveScore() {
             excludeCurrentMatches={currentMatches}
           />
         </>
-      ) : (
-        <></>
-      )}
-      <CardLiveScore />
-      <CardLiveScoreRev />
+      ) : null} */}
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:scale-125 scale-75 sm:scale-90 w-full gap-x-24 gap-y-32 justify-items-center">
+        <CardLiveScoreRev />
+        <CardLiveScore />
+        <CardLiveScoreRev />
+        <CardLiveScore />
+        <CardLiveScoreRev />
+        <CardLiveScore />
+      </div>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import Basketball from "../assets/Basketball.png";
 function CardLiveScoreRev() {
   return (
     <div className="relative">
-      <div className="relative flex w-fit bg-gradient-to-r from-[#D9d9d9] to-gray-400 rounded-lg">
+      <div className="relative flex w-fit max-w-screen-sm bg-gradient-to-r from-[#D9d9d9] to-gray-400 rounded-lg">
         <img
           src={Subtract}
           alt="Subtract"

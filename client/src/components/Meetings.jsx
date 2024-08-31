@@ -74,7 +74,7 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
       className={"bg-[#270B5D]/[0.75] rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all duration-200 ease-in-out "}
       onClick={() => onSelect(meeting)}
     >
-      <div className="rounded-2xl w-full text-white font-medium text-sm">
+      <div className=" rounded-2xl w-full text-white font-medium text-sm">
         {meeting.category}
       </div>
       <p className="text-white font-bold text-sm mb-1">
@@ -89,8 +89,7 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
         {meeting.teams || "ALL BLOCKS"}
       </p>
 
-      {/* Notification button commented out for now
-      <div className="mt-2">
+      {/* <div className="mt-2">
         <p className="text-xs text-gray-300 mb-1">Notifications</p>
         <button
           onClick={toggleNotification}

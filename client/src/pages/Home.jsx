@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import Header from "../components/Header";
+// <<<<<<< HEAD
 import SportCard from "../components/SportCard";
 import HomeBg from "../assets/Home.png";
 import Home2 from "../assets/Home2.png";
@@ -10,6 +11,9 @@ import Theme from "../assets/Theme.png";
 import Pattern from "../assets/Pattern.png";
 import Pattern2 from "../assets/Pattern2.png";
 import Select from "react-select";
+// =======
+// import Image from "../assets/Arrow.png";
+// >>>>>>> 6ec991de3baeda8f514fa1f25b5ec8ac4d55cf07
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -85,6 +89,7 @@ function Home() {
   };
 
   return (
+    // <<<<<<< HEAD
     <div className="bg-gradient-to-b from-[#171717] to-[#696969] h-screen">
       <div
         className="relative w-full min-h-screen bg-cover bg-center"
@@ -251,6 +256,16 @@ function Home() {
               </div>
             </div>
           </div>
+          {/* =======
+    <div className="flex flex-col">
+      <div className=""></div>
+
+      <div className="relative w-full">
+        <div className="absolute inset-0 bg-[#DEB11647] opacity-30 blur-sm"></div>
+        <div className="relative flex flex-row">
+          <img src={Image} alt="Arrow" className="w-1/2" />
+          <img src={Image} alt="Arrow" className="w-1/2" />
+>>>>>>> 6ec991de3baeda8f514fa1f25b5ec8ac4d55cf07 */}
         </div>
       </div>
     </div>
