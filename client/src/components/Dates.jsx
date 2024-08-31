@@ -50,13 +50,13 @@ export default function Dates({
   }
 
   let days = eachDayOfInterval({
-    start: startOfWeek(firstDayCurrentMonth),
+    start: startOfWeek(firstDayCurrentMonth ,{ weekStartsOn: 1 }),
     end: endOfMonth(firstDayCurrentMonth),
   });
 
   return (
     <div
-      className="md:pr-14 md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl"
+      className="md:max-w-md px-6 mx-auto md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl translate-y-24  -translate-x-16 scale-110"
       ref={calendarRef}
     >
        <div className="flex items-center">
@@ -138,6 +138,7 @@ export default function Dates({
 
 let colStartClasses = [
   "",
+  "col-start-1",
   "col-start-2",
   "col-start-3",
   "col-start-4",
