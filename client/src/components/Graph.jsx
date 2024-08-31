@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -8,9 +9,8 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import "../index.css";
 import { Bar, Doughnut } from "react-chartjs-2";
-import React from "react";
+import "../index.css";
 
 ChartJS.register(
   CategoryScale,
@@ -23,20 +23,6 @@ ChartJS.register(
 );
 
 const colorOptions = [
-  "rgb(112, 0, 53, 0.9)",
-  "rgb(57, 0, 53, 0.9)",
-  "rgb(164, 0, 53, 0.9)",
-  "rgb(206, 0, 53, 0.9)",
-  "rgb(109, 211, 206, 0.9)",
-  "rgb(175, 122, 197, 0.9)",
-  "rgb(255, 107, 107, 0.9)",
-  "rgb(112, 0, 53, 0.9)",
-  "rgb(57, 0, 53, 0.9)",
-  "rgb(164, 0, 53, 0.9)",
-  "rgb(206, 0, 53, 0.9)",
-  "rgb(109, 211, 206, 0.9)",
-  "rgb(175, 122, 197, 0.9)",
-  "rgb(255, 107, 107, 0.9)",
   "rgb(112, 0, 53, 0.9)",
   "rgb(57, 0, 53, 0.9)",
   "rgb(164, 0, 53, 0.9)",
@@ -165,7 +151,7 @@ function DivBar({ blocknames, games, points, title }) {
       tooltip: {
         callbacks: {
           label: function (context) {
-            let label = context.dataset.label + " : " + context.parsed.x;
+            let label = context.dataset.label + " : " + context.parsed.y;
             return label;
           },
         },
@@ -185,10 +171,6 @@ function DivBar({ blocknames, games, points, title }) {
     },
   };
 
-  const doughnutOptionsMobile = {
-    responsive: true,
-  };
-
   const barData = {
     labels: blocknames,
     datasets: games.map((game, index) => {
@@ -200,18 +182,19 @@ function DivBar({ blocknames, games, points, title }) {
     }),
   };
 
-  // Mobile data aggregation
   const barDataMobile = {
     labels: blocknames,
     datasets: [
       {
         label: "Total Points",
-        data: blocknames.map((_, blockIndex) =>
-          games.reduce(
-            (sum, _, gameIndex) => sum + points[gameIndex + 1][blockIndex],
-            0
-          )
-        ),
+        data: blocknames.map((block, blockIndex) => {
+          const total = games.reduce((sum, _, gameIndex) => {
+            const pointValue = points[gameIndex + 1]?.[blockIndex] || 0;
+            return sum + pointValue;
+          }, 0);
+          console.log(`Total for ${block}: ${total}`);
+          return total;
+        }),
         backgroundColor: colorOptions[0],
       },
     ],
