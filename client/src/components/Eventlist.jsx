@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import Meeting from './Meetings.jsx';
 
-export default function EventList({ preferredMeetings, otherMeetings, onGameSelect, calendarHeight, selectedDay }) {
+export default function EventList({ preferredMeetings, otherMeetings, onGameSelect, selectedDay }) {
   const renderMeetings = (meetings, isPreferred) => {
     if (meetings.length === 0) {
       return (
