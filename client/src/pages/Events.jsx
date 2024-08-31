@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
-import TableMobile from "../components/TableMobile";
+// import data1 from "../content/sports_boys_data.json";
+// import data2 from "../content/sports_girls_data.json";
+// import data4 from "../content/techy_data.json";
+
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(false);
   const [showSportsGirls, setShowSportsGirls] = useState(false);
@@ -145,8 +148,40 @@ function Events() {
   return (
     <>
       <div className="flex">
-        <TableMobile />
-      </div>      
+        <NavBar />
+      </div>
+      {showSportsBoys && sportsBoysData && (
+        <Category
+          title={sportsBoysData.title}
+          blocknames={sportsBoysData.blocks}
+          games={sportsBoysData.eventNames}
+          points={sportsBoysData.scores}
+        />
+      )}
+      {showSportsGirls && sportsGirlsData && (
+        <Category
+          title={sportsGirlsData.title}
+          blocknames={sportsGirlsData.blocks}
+          games={sportsGirlsData.eventNames}
+          points={sportsGirlsData.scores}
+        />
+      )}
+      {showCulti && cultiData && (
+        <Category
+          title={cultiData.title}
+          blocknames={cultiData.blocks}
+          games={cultiData.eventNames}
+          points={cultiData.scores}
+        />
+      )}
+      {showTechy && techyData && (
+        <Category
+          title={techyData.title}
+          blocknames={techyData.blocks}
+          games={techyData.eventNames}
+          points={techyData.scores}
+        />
+      )}
     </>
   );
 }

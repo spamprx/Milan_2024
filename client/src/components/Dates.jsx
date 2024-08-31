@@ -56,7 +56,7 @@ export default function Dates({
 
   return (
     <div
-      className="md:max-w-md px-6 mx-auto md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl lg:translate-y-16  "
+      className="md:max-w-md px-6 mx-auto md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl lg:translate-y-16 lg:-translate-x-16 "
       ref={calendarRef}
     >
        <div className="flex items-center">
