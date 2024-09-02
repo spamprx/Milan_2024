@@ -42,8 +42,8 @@ function App() {
           </Routes> 
         </div>
       </main>
-      <BackToTopButton/>
       <Footer />
+      <BackToTopButton/>
     </div>
   );
 }
