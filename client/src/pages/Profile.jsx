@@ -3,10 +3,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Select from 'react-select';
 import { blockOptions, eventOptions } from '../content/Options';
-import InputField from '../components/InputField';
-import SelectField from '../components/SelectField';
-import SubmitButton from '../components/SubmitButton';
 import '../styles.css';
 
 const Profile = () => {
@@ -133,17 +131,80 @@ const Profile = () => {
     setSelectedEvents(uniqueOptions);
   };
 
+  const InputField = ({ label, id, type, placeholder, value, onChange , readOnly, }) => {
+    return (
+      <div className="mb-4">
+        <label
+          className="block text-gray-700 font-bold mb-2 text-left"
+          htmlFor={id}
+        >
+          {label}
+        </label>
+        <input
+          className="shadow appearance-none border rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          readOnly={readOnly}
+          disabled={readOnly}
+        />
+      </div>
+    );
+  };
+
+  const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placeholder, isMulti }) => {
+    const selectedValues = Array.isArray(value) ? value : [];
+  
+    // Disable options that are already selected
+    const updatedOptions = options.map(option => ({
+      ...option,
+      isDisabled: selectedValues.some(v => v.value === option.value)
+    }));
+  
+    return (
+      <div className="mb-4">
+        <label className="block text-gray-700 font-bold mb-2 text-left" htmlFor={id}>
+          {label}
+        </label>
+        <Select
+          id={id}
+          options={options}
+          value={value}
+          onChange={onChange}
+          onMenuOpen={onMenuOpen}
+          placeholder={placeholder}
+          isMulti={isMulti}
+        />
+      </div>
+    );
+  };
+
+  const SubmitButton = () => {
+    return (
+      <div className="flex items-center justify-center mb-4">
+        <button
+          className="bg-[#8F33BA] text-white py-4 px-6 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline mb-8 mt-6"
+          type="submit"
+        >
+          Submit
+        </button>
+      </div>
+    );
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="md:w-2/5 mx-auto mt-10 mb-20 bg-white shadow-lg rounded-lg overflow-hidden min-h-[600px]">
-      <div className="text-2xl py-6 px-6 bg-gray-900 text-white text-left font-bold uppercase">
-        Profile
+    <div className="md:w-2/5 mx-auto mt-10 mb-20 bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px]">
+      <div className="text-2xl py-6 px-6 text-white text-center font-bold uppercase">
+        SIGN UP
       </div>
-      <div ref={formContainerRef} className="overflow-y-auto h-[calc(100%-20px)]">
+      <div ref={formContainerRef} className=" bg-[#D1CCB6] rounded-3xl overflow-y-auto h-[calc(100%-20px)]">
         {!submitted ? (
-          <form className="py-4 px-6 space-y-6" onSubmit={handleSubmit}>
+          <form className="py-4 px-6 space-y-6 rounded-2xl" onSubmit={handleSubmit}>
             <InputField
               label="Name"
               id="name"
