@@ -39,10 +39,10 @@ function App() {
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/team" element={<Team />} />
             <Route path="*" element={<Error />} />
-          </Routes> 
+          </Routes>
         </div>
       </main>
-      <BackToTopButton/>
+      <BackToTopButton />
       <Footer />
     </div>
   );

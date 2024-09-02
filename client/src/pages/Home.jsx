@@ -2,12 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import Header from "../components/Header";
 // <<<<<<< HEAD
 import SportCard from "../components/SportCard";
+import HomeSponsorCard from "../components/HomeSponsorCard";
 import HomeBg from "../assets/Home.png";
 import Home2 from "../assets/Home2.png";
 import MilanFont from "../assets/Milan-font1.png";
 import MilanHome from "../assets/MilanHome2.png";
 import Skateboard from "../assets/Skateboard.png";
+import Basketball from "../assets/Basketball.png";
 import Theme from "../assets/Theme.png";
+import Mascot from "../assets/Mascot.jpeg";
 import Pattern from "../assets/Pattern.png";
 import Pattern2 from "../assets/Pattern2.png";
 import Select from "react-select";
@@ -17,7 +20,7 @@ import Select from "react-select";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const cardContainerRef = useRef(null);
@@ -85,22 +88,23 @@ function Home() {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    setIsOpen(false);
+    console.log(option);
+    // setIsOpen(!isOpen);
   };
 
   return (
     // <<<<<<< HEAD
-    <div className="bg-gradient-to-b from-[#171717] to-[#696969] h-screen">
+    <div className="bg-gradient-to-b from-[#171717] to-[#696969] min-h-screen w-screen">
       <div
-        className="relative w-full min-h-screen bg-cover bg-center"
+        className="relative w-screen min-h-screen bg-cover bg-center"
         style={{ backgroundImage: `url(${HomeBg})` }}
       >
-        <div className="relative w-full min-h-screen bg-gradient-to-b from-[#171717] to-[#696969]">
+        <div className="absolute w-screen min-h-screen bg-gradient-to-b from-[#171717] to-[#696969]">
           <div className="relative flex flex-col justify-center items-center pt-10">
             <img
               src={MilanHome}
               alt="Milan Home"
-              className="w-full h-auto object-contain z-10"
+              className="w-screen h-auto object-contain z-10"
             />
             <img
               src={MilanFont}
@@ -122,14 +126,14 @@ function Home() {
                 and camaraderie. <br />
                 Drawing over 6,000+ attendees
               </p>
-              <img
+              {/* <img
                 src={Home2}
                 alt="Home2"
-                className="w-full h-auto object-contain z-10 mt-10"
-              />
+                className="w-full h-1/2 object-contain z-10 mt-10"
+              /> */}
             </div>
           </div>
-          <div className="flex flex-row justify-between items-center mt-32 p-10">
+          <div className="flex w-screen h-1/2 flex-row justify-between items-center mt-10 p-10 z-30 bg-transparent">
             <div className="flex flex-col">
               <label
                 className="block text-white mb-2 text-left"
@@ -179,7 +183,7 @@ function Home() {
 
           <div
             ref={cardContainerRef}
-            className="relative w-full flex overflow-x-scroll scroll-snap-x p-10 space-x-5"
+            className="relative w-full flex overflow-x-scroll scroll-snap-x p-10 space-x-5 bg-transparent"
             style={{
               scrollSnapType: "x mandatory",
               scrollbarWidth: "none", // Hide scrollbar for Firefox
@@ -200,25 +204,31 @@ function Home() {
             ))}
           </div>
 
-          <div className="flex justify-center mt-4">
+          <div className="flex justify-center ">
             <div className="flex space-x-2">
-              <div
-                className="w-3 h-3 rounded-full bg-gray-400 cursor-pointer"
+              {/* <div
+                className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
                 onClick={() => handleCircleClick("left")}
-              ></div>
+              ></div> */}
               {[0, 1, 2, 3, 4].map((_, index) => (
                 <div
                   key={index}
-                  className={`w-3 h-3 rounded-full cursor-pointer ${
-                    index === activeIndex ? "bg-red-500" : "bg-gray-400"
+                  className={`w-12 h-12 rounded-full cursor-pointer bg-[#A020F0] mb-10 ${
+                    index === activeIndex
+                      ? "border border-[#DAA827] border-2"
+                      : ""
                   }`}
                   onClick={() => scrollToCard(index)}
-                ></div>
+                >
+                  {index === activeIndex && (
+                    <img src={Basketball} className="w-full h-full p-1" />
+                  )}
+                </div>
               ))}
-              <div
-                className="w-3 h-3 rounded-full bg-gray-400 cursor-pointer"
+              {/* <div
+                className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
                 onClick={() => handleCircleClick("right")}
-              ></div>
+              ></div> */}
             </div>
           </div>
 
@@ -227,35 +237,135 @@ function Home() {
               <div className="absolute flex w-full h-1/2 items-center justify-center">
                 <img
                   src={Pattern}
-                  style={{ transform: "rotate(-2.71deg)" }}
+                  // style={{ transform: "rotate(-2.71deg)" }}
                   className="w-full h-full opacity-15"
                 />
               </div>
               <img
                 src={Skateboard}
                 style={{ transform: "rotate(-47.36deg)" }}
-                className="absolute w-1/5 h-auto z-10 opacity-50"
+                className="absolute w-1/2 h-auto z-10 opacity-50"
               />
-              <p className="relative z-20 text-white text-center">OUR THEME</p>
+              <p className="relative z-20 text-white text-center text-4xl">
+                OUR THEME
+              </p>
             </div>
             <div className="w-screen h-4/5 flex justify-between items-center p-2">
-              <div className="w-1/2 h-3/4 p-2">
+              <div className="w-1/2 h-3/4 p-2 rounded-xl">
                 <img
                   src={Theme}
-                  className="w-full h-full object-cover rounded-xl"
+                  className="w-full h-full object-contain rounded-xl"
                 />
               </div>
               <div className="relative w-1/2 h-3/4 p-2 flex items-center justify-center">
                 <div className="relative w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
                   <img
                     src={Pattern2}
-                    className="w-full h-full object-cover opacity-25 z-20"
+                    className="w-full h-full object-cover opacity-15 z-20"
                   />
                 </div>
-                <div className="absolute w-1/2 h-full bg-[#6B5794] rounded-2xl h-full flex items-center"></div>
+                <div className="absolute w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
+                  <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] leading-relaxed p-3">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Aspernatur nobis, autem, aliquid repellendus totam veritatis
+                    quis quae facilis itaque eos maxime perspiciatis accusamus
+                    dolores, culpa ab modi! Ratione, commodi optio!
+                  </p>
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="w-screen h-screen">
+            <div className="relative flex items-center justify-center h-1/5 w-full p-10">
+              <div className="absolute flex w-full h-1/2 items-center justify-center">
+                <img
+                  src={Pattern}
+                  // style={{ transform: "rotate(2.71deg)" }}
+                  className="w-full h-full opacity-15"
+                />
+              </div>
+              <img
+                src={Skateboard}
+                style={{ transform: "rotate(-47.36deg)" }}
+                className="absolute w-1/2 h-auto z-10 opacity-50"
+              />
+              <p className="relative z-20 text-white text-center text-4xl">
+                OUR MASCOT
+              </p>
+            </div>
+            <div className="w-screen h-4/5 flex justify-between items-center p-2">
+              <div className="relative w-1/2 h-3/4 p-2 flex items-center justify-center">
+                <div className="relative w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
+                  <img
+                    src={Pattern2}
+                    className="w-full h-full object-cover opacity-15 z-20"
+                  />
+                </div>
+                <div className="absolute w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
+                  <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] leading-relaxed p-3">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Aspernatur nobis, autem, aliquid repellendus totam veritatis
+                    quis quae facilis itaque eos maxime perspiciatis accusamus
+                    dolores, culpa ab modi! Ratione, commodi optio!
+                  </p>
+                </div>
+              </div>
+              <div className="w-1/2 h-3/4 pr-10 rounded-xl">
+                <img
+                  src={Mascot}
+                  className="w-full h-full object-contain rounded-xl"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="w-screen h-screen">
+            <div className="relative flex items-center justify-center h-1/5 w-full p-10 mt-10">
+              <div className="absolute flex w-full h-1/2 items-center justify-center">
+                <img
+                  src={Pattern}
+                  // style={{ transform: "rotate(0.41deg)" }}
+                  className="w-full h-full opacity-15"
+                />
+              </div>
+              <img
+                src={Skateboard}
+                style={{ transform: "rotate(-47.36deg)" }}
+                className="absolute w-1/2 h-auto z-10 opacity-50"
+              />
+              <p className="relative z-20 text-white text-center text-3xl">
+                OVERALL LEADERBOARD
+              </p>
+            </div>
+            <div className="flex flex-row justify-between items-center w-full h-1/6 mt-10 p-10">
+              <div className="flex items-center justify-center bg-[#D1CCB6] font-vietnam-regular rounded-2xl w-1/2 h-full m-3">
+                <button className="">Leaderboard</button>
+              </div>
+              <div className="flex items-center justify-center bg-[#D1CCB6] font-vietnam-regular rounded-2xl w-1/2 h-full m-3">
+                <button className="">Block Race</button>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-screen h-screen">
+            <div className="flex justify-start">
+              <div className="relative flex items-center h-1/5 w-1/2 p-10">
+                <img
+                  src={Skateboard}
+                  style={{ transform: "rotate(-47.36deg)" }}
+                  className="absolute w-1/2 h-auto opacity-50"
+                />
+                <p className="relative z-10 text-white text-center text-4xl">
+                  SPONSORS
+                </p>
+              </div>
+            </div>
+            <div className="flex justify-center w-screen h-1/2">
+              <HomeSponsorCard />
+            </div>
+          </div>
+
           {/* =======
     <div className="flex flex-col">
       <div className=""></div>

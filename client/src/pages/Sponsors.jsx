@@ -22,10 +22,8 @@ function Sponsors() {
     <>
       // <h1>Work under Progress.......</h1>
       <div
-        className={`${
-          isSmallScreen
-            ? "relative flex items-center w-full h-fit justify-between px-4"
-            : "relative flex items-center w-full pt-1 justify-between px-4"
+        className={`relative flex flex-col justify-between px-4 items-center w-full ${
+          isSmallScreen ? "h-fit" : "pt-1"
         }`}
       >
         <div className="relative w-full h-screen">
@@ -39,35 +37,47 @@ function Sponsors() {
             className="flex flex-col w-full h-full bg-cover bg-center"
             style={{ backgroundImage: `url(${SponsorBg})` }}
           >
-            <div className="flex flex-row justify-between items-center bg-transparent w-full h-full rounded-2xl">
+            <div
+              className={`${
+                isSmallScreen
+                  ? "flex flex-col items-center bg-transparent w-full h-full rounded-2xl"
+                  : "flex flex-row justify-between items-center bg-transparent w-full h-full rounded-2xl"
+              }`}
+            >
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
             </div>
-            <div className="flex flex-row bg-transparent w-full h-full rounded-2xl">
+            <div
+              className={`bg-transparent w-full h-full rounded-2xl ${
+                isSmallScreen
+                  ? "flex flex-col items-center"
+                  : "flex flex-row justify-between items-center"
+              }`}
+            >
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
             </div>
@@ -83,35 +93,47 @@ function Sponsors() {
             className="flex flex-col w-full h-full bg-cover bg-center"
             style={{ backgroundImage: `url(${SponsorBg2})` }}
           >
-            <div className="flex flex-row justify-between items-center bg-transparent w-full h-full rounded-2xl">
+            <div
+              className={`${
+                isSmallScreen
+                  ? "flex flex-col items-center bg-transparent w-full h-full rounded-2xl"
+                  : "flex flex-row justify-between items-center bg-transparent w-full h-full rounded-2xl"
+              }`}
+            >
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
             </div>
-            <div className="flex flex-row bg-transparent w-full h-full rounded-2xl">
+            <div
+              className={`${
+                isSmallScreen
+                  ? "flex flex-col items-center bg-transparent w-full h-full rounded-2xl"
+                  : "flex flex-row justify-between items-center bg-transparent w-full h-full rounded-2xl"
+              }`}
+            >
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
               <div className="w-1/2 h-2/3 rounded-2xl m-5">
                 <img
                   src={SponsorBg}
                   alt="Sponsor1"
-                  className="rounded-2xl w-full h-full"
+                  className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
             </div>
