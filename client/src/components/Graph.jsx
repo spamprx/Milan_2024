@@ -23,17 +23,18 @@ ChartJS.register(
 );
 
 const colorOptions = [
-  "rgb(112, 0, 53, 0.9)",
-  "rgb(57, 0, 53, 0.9)",
-  "rgb(164, 0, 53, 0.9)",
-  "rgb(206, 0, 53, 0.9)",
-  "rgb(109, 211, 206, 0.9)",
-  "rgb(175, 122, 197, 0.9)",
-  "rgb(255, 107, 107, 0.9)",
+  "#A9AB4A",
+  "#DEB117",
+  "#D1CCB6",
+  "#DC8F48",
+  "#9F3C09",
+  "#385175",
+  "#2D88AD"
 ];
 
-function DivBar({ blocknames, games, points, title }) {
+function DivBar({ blocknames, games, points, title,}) {
   const barOptions = {
+    responsive: true,
     animation: {
       easing: "easeIn",
     },
@@ -42,14 +43,14 @@ function DivBar({ blocknames, games, points, title }) {
       title: {
         display: true,
         text: title,
-        color: "black",
+        color: "white",
         font: {
           size: 18,
           family: "sans-serif",
         },
       },
       legend: {
-        display: true,
+        display: false,
         position: "bottom",
         align: "center",
         padding: 10,
@@ -77,13 +78,14 @@ function DivBar({ blocknames, games, points, title }) {
       x: {
         stacked: true,
         ticks: {
-          color: "black",
+          color: "white",
         },
       },
       y: {
         stacked: true,
         ticks: {
-          color: "black",
+          color: "white",
+          size: 10,
         },
       },
     },
@@ -120,56 +122,57 @@ function DivBar({ blocknames, games, points, title }) {
     },
   };
 
-  const barOptionsMobile = {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: title + " (Mobile)",
-        color: "black",
-        font: {
-          size: 18,
-          family: "sans-serif",
-        },
-      },
-      legend: {
-        display: true,
-        position: "bottom",
-        align: "center",
-        padding: 10,
-        labels: {
-          color: "#000",
-          boxWidth: 15,
-          padding: 10,
-          borderRadius: 100,
-          font: {
-            size: 12,
-            family: "sans-serif",
-          },
-        },
-      },
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            let label = context.dataset.label + " : " + context.parsed.y;
-            return label;
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        ticks: {
-          color: "black",
-        },
-      },
-      y: {
-        ticks: {
-          color: "black",
-        },
-      },
-    },
-  };
+  // const barOptionsMobile = {
+  //   responsive: true,
+  //   indexAxis: "y",
+  //   plugins: {
+  //     title: {
+  //       display: true,
+  //       text: title + " (Mobile)",
+  //       color: "black",
+  //       font: {
+  //         size: 18,
+  //         family: "sans-serif",
+  //       },
+  //     },
+  //     legend: {
+  //       display: true,
+  //       position: "bottom",
+  //       align: "center",
+  //       padding: 10,
+  //       labels: {
+  //         color: "#000",
+  //         boxWidth: 15,
+  //         padding: 10,
+  //         borderRadius: 100,
+  //         font: {
+  //           size: 12,
+  //           family: "sans-serif",
+  //         },
+  //       },
+  //     },
+  //     tooltip: {
+  //       callbacks: {
+  //         label: function (context) {
+  //           let label = context.dataset.label + " : " + context.parsed.x;
+  //           return label;
+  //         },
+  //       },
+  //     },
+  //   },
+  //   scales: {
+  //     x: {
+  //       ticks: {
+  //         color: "black",
+  //       },
+  //     },
+  //     y: {
+  //       ticks: {
+  //         color: "black",
+  //       },
+  //     },
+  //   },
+  // };
 
   const barData = {
     labels: blocknames,
@@ -177,28 +180,30 @@ function DivBar({ blocknames, games, points, title }) {
       return {
         label: game,
         data: points[index + 1],
-        backgroundColor: colorOptions[index],
+        backgroundColor: colorOptions[index % colorOptions.length], // Cycle through colors
       };
     }),
   };
 
-  const barDataMobile = {
-    labels: blocknames,
-    datasets: [
-      {
-        label: "Total Points",
-        data: blocknames.map((block, blockIndex) => {
-          const total = games.reduce((sum, _, gameIndex) => {
-            const pointValue = points[gameIndex + 1]?.[blockIndex] || 0;
-            return sum + pointValue;
-          }, 0);
-          console.log(`Total for ${block}: ${total}`);
-          return total;
-        }),
-        backgroundColor: colorOptions[0],
-      },
-    ],
-  };
+
+  // const barDataMobile = {
+  //   labels: blocknames,
+  //   datasets: [
+  //     {
+  //       label: "Total Points",
+  //       data: blocknames.map((block, blockIndex) => {
+  //         // Aggregate points for each block
+  //         const total = games.reduce((sum, _, gameIndex) => {
+  //           const pointValue = points[gameIndex + 1]?.[blockIndex] || 0;
+  //           return sum + pointValue;
+  //         }, 0);
+  //         return total;
+  //       }),
+  //       backgroundColor: colorOptions[0],
+  //     },
+  //   ],
+  // };
+
 
   const doughnutData = {
     labels: games,
@@ -213,18 +218,15 @@ function DivBar({ blocknames, games, points, title }) {
   };
 
   return (
-    <div className="FirstTab">
-      <div className="canvas-container justify-center items-center flex h-96">
-        {blocknames.length !== 1 ? (
-          <>
-            {/* Desktop Version */}
-            <Bar options={barOptions} data={barData} />
-            {/* Mobile Version */}
-            <Bar options={barOptionsMobile} data={barDataMobile} />
-          </>
-        ) : (
-          <Doughnut options={doughnutOptions} data={doughnutData} />
-        )}
+    <div className="FirstTab w-screen">
+      <div className="canvas-container rounded-2xl bg-[#150338] mx-auto p-4 w-1/2 justify-center items-center flex">
+          {blocknames.length !== 1 ? (
+            <>
+              <Bar options={barOptions} data={barData} />
+            </>
+          ) : (
+            <Doughnut options={doughnutOptions} data={doughnutData} />
+          )}
       </div>
     </div>
   );
