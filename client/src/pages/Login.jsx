@@ -3,10 +3,10 @@ import React, { useState , useEffect } from 'react';
 function LoginPage() { 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-    setLoggedIn(true);
-    window.location.href = import.meta.env.VITE_BACKEND_URL+'auth/google';
-  },[])
+ const handleLogin = () =>
+{    setLoggedIn(true);
+    window.location.href = "https://backend-w6vj.onrender.com/auth/google";
+};
 
   const styles = {
     loginContainer: {
@@ -37,7 +37,8 @@ function LoginPage() {
     <div style={styles.loginContainer}>
       <button 
         type="button" 
-        style={styles.loginButton} 
+        style={styles.loginButton}
+        onClick={handleLogin} 
         Sign in with Google>
       </button>
     </div>

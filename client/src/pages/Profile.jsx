@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Select from 'react-select';
 import { blockOptions, eventOptions } from '../content/Options';
+import LoginPage from './Login';
 import '../styles.css';
 
 const Profile = () => {
@@ -135,13 +136,13 @@ const Profile = () => {
     return (
       <div className="mb-4">
         <label
-          className="block text-gray-700 font-bold mb-2 text-left"
+          className="block text-[#1E1E1E] font-be-vietnam-pro font-[600] mb-2 text-left"
           htmlFor={id}
         >
           {label}
         </label>
         <input
-          className="shadow appearance-none border rounded-2xl w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline "
           id={id}
           type={type}
           placeholder={placeholder}
@@ -154,41 +155,66 @@ const Profile = () => {
     );
   };
 
-  const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placeholder, isMulti }) => {
-    const selectedValues = Array.isArray(value) ? value : [];
-  
-    // Disable options that are already selected
-    const updatedOptions = options.map(option => ({
-      ...option,
-      isDisabled: selectedValues.some(v => v.value === option.value)
-    }));
-  
-    return (
-      <div className="mb-4">
-        <label className="block text-gray-700 font-bold mb-2 text-left" htmlFor={id}>
-          {label}
-        </label>
-        <Select
-          id={id}
-          options={options}
-          value={value}
-          onChange={onChange}
-          onMenuOpen={onMenuOpen}
-          placeholder={placeholder}
-          isMulti={isMulti}
-        />
-      </div>
-    );
-  };
+
+const customStyles = {
+  control: (provided) => ({
+    ...provided,
+    backgroundColor: '#D8DDFF',
+    borderColor: '#e2e8f0',
+    padding: '8px',
+    borderRadius: '1rem',
+    boxShadow: 'none',
+    ':hover': {
+      borderColor: '#cbd5e0',
+    },
+  }),
+  singleValue: (provided) => ({
+    ...provided,
+    color: '#4D4D4D',
+  }),
+  placeholder: (provided) => ({
+    ...provided,
+    color: '#4D4D4D',
+  }),
+};
+
+const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placeholder, isMulti }) => {
+  const selectedValues = Array.isArray(value) ? value : [];
+  const updatedOptions = options.map(option => ({
+    ...option,
+    isDisabled: selectedValues.some(v => v.value === option.value)
+  }));
+
+  return (
+    <div className="mb-4">
+      <label 
+        className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left" 
+        htmlFor={id}>
+        {label}
+      </label>
+      <Select
+        styles={customStyles}
+        id={id}
+        options={updatedOptions}
+        value={value}
+        onChange={onChange}
+        onMenuOpen={onMenuOpen}
+        placeholder={placeholder}
+        isMulti={isMulti}
+      />
+    </div>
+  );
+};
+
 
   const SubmitButton = () => {
     return (
       <div className="flex items-center justify-center mb-4">
         <button
-          className="bg-[#8F33BA] text-white py-4 px-6 rounded hover:bg-gray-800 focus:outline-none focus:shadow-outline mb-8 mt-6"
+          className="bg-[#8F33BA] text-[#D1CCB6] font-[700] font-montserrat py-4 px-20 rounded-xl focus:outline-none focus:shadow-outline mb-8 mt-6"
           type="submit"
         >
-          Submit
+          Sign Up
         </button>
       </div>
     );
@@ -198,6 +224,8 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
   return (
+    <>
+    <LoginPage/>
     <div className="md:w-2/5 mx-auto mt-10 mb-20 bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px]">
       <div className="text-2xl py-6 px-6 text-white text-center font-bold uppercase">
         SIGN UP
@@ -303,6 +331,7 @@ const Profile = () => {
       </div>
       <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
+    </>
   );
 };
 
