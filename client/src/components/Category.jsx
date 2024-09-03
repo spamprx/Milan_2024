@@ -96,7 +96,27 @@ function Category({ title, blocknames, games, points }) {
   const [isFiltered, setIsFiltered] = useState(false);
   const [filteredBlocks, setFilteredBlocks] = useState(blocknames);
   const [filteredGames, setFilteredGames] = useState(games);
+  const [pages, setPages] = useState(7);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setPages(window.innerWidth < 880 ? 5 : 7);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 750);
+    setPages(window.innerWidth < 750 ? 3 : pages);
+  },[pages]);
+  
   const handleFilter = () => {
     setIsFiltered(!isFiltered);
   };
@@ -119,12 +139,16 @@ function Category({ title, blocknames, games, points }) {
 
   return (
     <>
-      <DivBar
-        blocknames={isFiltered ? filteredBlocks : blocknames}
-        games={isFiltered ? filteredGames : games}
-        points={isFiltered ? filteredPoints : points}
-        title={title}
-      />
+      {isMobile ? (
+        <></>
+      ) : (
+        <DivBar
+          blocknames={isFiltered ? filteredBlocks : blocknames}
+          games={isFiltered ? filteredGames : games}
+          points={isFiltered ? filteredPoints : points}
+          title={title}
+        />
+      )}
       <button
         type="button"
         className="text-white bg-gradient-to-r from-purple-500 to-purple-700 font-medium rounded-lg text-md py-2.5 text-center px-10"
@@ -146,6 +170,7 @@ function Category({ title, blocknames, games, points }) {
           games={isFiltered ? filteredGames : games}
           points={isFiltered ? filteredPoints : points}
           tag={title}
+          pages={pages}
         />
       </div>
     </>

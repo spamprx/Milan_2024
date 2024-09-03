@@ -2,12 +2,12 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import Arrow from "../assets/Page_Arrow.png";
 
-function Table({ games, blocknames, points, tag }) {
+function Table({ games, blocknames, points, tag , pages}) {
   const [currentPage, setCurrentPage] = useState(0);
   const [filterText, setFilterText] = useState("");
   const [visibleBlocks, setVisibleBlocks] = useState([]);
 
-  const hostelsPerPage = 5;
+  const hostelsPerPage = pages;
 
   useEffect(() => {
     const start = currentPage * hostelsPerPage;

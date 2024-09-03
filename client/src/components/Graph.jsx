@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -29,25 +29,21 @@ const colorOptions = [
   "#DC8F48",
   "#9F3C09",
   "#385175",
-  "#2D88AD"
+  "#2D88AD",
 ];
 
-function DivBar({ blocknames, games, points, title,}) {
-  const barOptions = {
+function DivBar({ blocknames, games, points, title }) {
+  const [barOptions, setBarOptions] = useState({
     responsive: true,
-    animation: {
-      easing: "easeIn",
-    },
+    maintainAspectRatio: false,
+    animation: { easing: "easeIn" },
     indexAxis: "y",
     plugins: {
       title: {
         display: true,
         text: title,
         color: "white",
-        font: {
-          size: 18,
-          family: "sans-serif",
-        },
+        font: { size: 18, family: "sans-serif" },
       },
       legend: {
         display: false,
@@ -59,37 +55,22 @@ function DivBar({ blocknames, games, points, title,}) {
           boxWidth: 15,
           padding: 10,
           borderRadius: 100,
-          font: {
-            size: 12,
-            family: "sans-serif",
-          },
+          font: { size: 12, family: "sans-serif" },
         },
       },
       tooltip: {
         callbacks: {
           label: function (context) {
-            let label = context.dataset.label + " : " + context.parsed.x;
-            return label;
+            return `${context.dataset.label} : ${context.parsed.x}`;
           },
         },
       },
     },
     scales: {
-      x: {
-        stacked: true,
-        ticks: {
-          color: "white",
-        },
-      },
-      y: {
-        stacked: true,
-        ticks: {
-          color: "white",
-          size: 10,
-        },
-      },
+      x: { stacked: true, ticks: { color: "white" } },
+      y: { stacked: true, ticks: { color: "white", size: 10 } },
     },
-  };
+  });
 
   const doughnutOptions = {
     responsive: true,
@@ -98,112 +79,93 @@ function DivBar({ blocknames, games, points, title,}) {
       title: {
         display: true,
         text: title,
-        color: "black",
-        font: {
-          size: 24,
-          family: "sans-serif",
-        },
-        padding: {
-          top: 10,
-          bottom: 10,
-        },
+        color: "white",
+        font: { size: 24, family: "sans-serif" },
+        padding: { top: 10, bottom: 10 },
       },
       legend: {
-        display: true,
+        display: false,
         position: "bottom",
-        labels: {
-          boxWidth: 15,
-          padding: 10,
-        },
+        labels: { boxWidth: 15, padding: 10 },
       },
     },
-    layout: {
-      padding: 0,
-    },
+    layout: { padding: 0 },
   };
 
-  // const barOptionsMobile = {
-  //   responsive: true,
-  //   indexAxis: "y",
-  //   plugins: {
-  //     title: {
-  //       display: true,
-  //       text: title + " (Mobile)",
-  //       color: "black",
-  //       font: {
-  //         size: 18,
-  //         family: "sans-serif",
-  //       },
-  //     },
-  //     legend: {
-  //       display: true,
-  //       position: "bottom",
-  //       align: "center",
-  //       padding: 10,
-  //       labels: {
-  //         color: "#000",
-  //         boxWidth: 15,
-  //         padding: 10,
-  //         borderRadius: 100,
-  //         font: {
-  //           size: 12,
-  //           family: "sans-serif",
-  //         },
-  //       },
-  //     },
-  //     tooltip: {
-  //       callbacks: {
-  //         label: function (context) {
-  //           let label = context.dataset.label + " : " + context.parsed.x;
-  //           return label;
-  //         },
-  //       },
-  //     },
-  //   },
-  //   scales: {
-  //     x: {
-  //       ticks: {
-  //         color: "black",
-  //       },
-  //     },
-  //     y: {
-  //       ticks: {
-  //         color: "black",
-  //       },
-  //     },
-  //   },
-  // };
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 768) {
+        setBarOptions((prevOptions) => ({
+          ...prevOptions,
+          plugins: {
+            ...prevOptions.plugins,
+            title: {
+              ...prevOptions.plugins.title,
+              font: { ...prevOptions.plugins.title.font, size: 14 },
+            },
+            legend: {
+              ...prevOptions.plugins.legend,
+              labels: {
+                ...prevOptions.plugins.legend.labels,
+                font: { size: 10 },
+              },
+            },
+          },
+        }));
+      } else if (width < 1200) {
+        setBarOptions((prevOptions) => ({
+          ...prevOptions,
+          plugins: {
+            ...prevOptions.plugins,
+            title: {
+              ...prevOptions.plugins.title,
+              font: { ...prevOptions.plugins.title.font, size: 16 },
+            },
+            legend: {
+              ...prevOptions.plugins.legend,
+              labels: {
+                ...prevOptions.plugins.legend.labels,
+                font: { size: 11 },
+              },
+            },
+          },
+        }));
+      } else {
+        setBarOptions((prevOptions) => ({
+          ...prevOptions,
+          plugins: {
+            ...prevOptions.plugins,
+            title: {
+              ...prevOptions.plugins.title,
+              font: { ...prevOptions.plugins.title.font, size: 18 },
+            },
+            legend: {
+              ...prevOptions.plugins.legend,
+              labels: {
+                ...prevOptions.plugins.legend.labels,
+                font: { size: 12 },
+              },
+            },
+          },
+        }));
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Call once to set initial state
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, [title]);
 
   const barData = {
     labels: blocknames,
-    datasets: games.map((game, index) => {
-      return {
-        label: game,
-        data: points[index + 1],
-        backgroundColor: colorOptions[index % colorOptions.length], // Cycle through colors
-      };
-    }),
+    datasets: games.map((game, index) => ({
+      label: game,
+      data: points[index + 1],
+      backgroundColor: colorOptions[index % colorOptions.length],
+    })),
   };
-
-
-  // const barDataMobile = {
-  //   labels: blocknames,
-  //   datasets: [
-  //     {
-  //       label: "Total Points",
-  //       data: blocknames.map((block, blockIndex) => {
-  //         // Aggregate points for each block
-  //         const total = games.reduce((sum, _, gameIndex) => {
-  //           const pointValue = points[gameIndex + 1]?.[blockIndex] || 0;
-  //           return sum + pointValue;
-  //         }, 0);
-  //         return total;
-  //       }),
-  //       backgroundColor: colorOptions[0],
-  //     },
-  //   ],
-  // };
-
 
   const doughnutData = {
     labels: games,
@@ -218,15 +180,17 @@ function DivBar({ blocknames, games, points, title,}) {
   };
 
   return (
-    <div className="FirstTab w-screen">
-      <div className="canvas-container rounded-2xl bg-[#150338] mx-auto p-4 w-1/2 justify-center items-center flex">
-          {blocknames.length !== 1 ? (
-            <>
-              <Bar options={barOptions} data={barData} />
-            </>
-          ) : (
+    <div className="FirstTab w-full p-4">
+      <div className="canvas-container rounded-2xl bg-[#150338] mx-auto p-4 w-full flex justify-center items-center">
+        {blocknames.length !== 1 ? (
+          <div style={{ position: "relative", width: "100%", height: "400px" }}>
+            <Bar options={barOptions} data={barData} />
+          </div>
+        ) : (
+          <div style={{ position: "relative", width: "100%", height: "400px" }}>
             <Doughnut options={doughnutOptions} data={doughnutData} />
-          )}
+          </div>
+        )}
       </div>
     </div>
   );

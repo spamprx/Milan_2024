@@ -43,3 +43,21 @@
 .menu-item-exit {
     animation: menuItemExit 300ms ease-in forwards;
 }
+
+.canvas-container {
+  width: 50%;
+  padding: 20px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #150338;
+  border-radius: 16px;
+}
+
+@media (max-width: 1200px) {
+  .canvas-container {
+    width: 70%;
+    padding: 15px;
+  }
+}

@@ -3,7 +3,7 @@ import Category from "../components/Category";
 import GraphMobile from "../components/GraphMobile";
 
 function Events() {
-  const [showSportsBoys, setShowSportsBoys] = useState(false);
+  const [showSportsBoys, setShowSportsBoys] = useState(true);
   const [showSportsGirls, setShowSportsGirls] = useState(false);
   const [showCulti, setShowCulti] = useState(false);
   const [showTechy, setShowTechy] = useState(false);
@@ -11,38 +11,7 @@ function Events() {
   const [sportsGirlsData, setSportsGirlsData] = useState(null);
   const [sportsBoysData, setSportsBoysData] = useState(null);
   const [techyData, setTechyData] = useState(null);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 880);
-  const blocks = [
-    "ARYABHATTA",
-    "BHASKARA",
-    "MAITREYI",
-    "GARGI",
-    "SARABHAI",
-    "CHARAKA",
-    "SUSRUTA",
-    "KAUTILYA",
-    "VYASA",
-    "BRAHMAGUPTA",
-    "VARAHAMIHIRA",
-    "RAMANUJA",
-    "RAMANUJAN",
-    "RAMAN",
-    "VISWESWARAYA",
-    "BHABHA",
-    "KALAM",
-    "KAPILA",
-  ];
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 880);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+  
   useEffect(() => {
     const fetchCultiData = async () => {
       try {
