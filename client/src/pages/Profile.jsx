@@ -133,6 +133,8 @@ const Profile = () => {
   };
 
   const InputField = ({ label, id, type, placeholder, value, onChange , readOnly, }) => {
+
+
     return (
       <div className="mb-4">
         <label
@@ -142,7 +144,7 @@ const Profile = () => {
           {label}
         </label>
         <input
-          className="shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline "
+          className="shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-gray-100 font-[500] leading-tight focus:outline-none focus:shadow-outline"
           id={id}
           type={type}
           placeholder={placeholder}
@@ -179,6 +181,7 @@ const customStyles = {
 };
 
 const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placeholder, isMulti }) => {
+
   const selectedValues = Array.isArray(value) ? value : [];
   const updatedOptions = options.map(option => ({
     ...option,
@@ -223,14 +226,18 @@ const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placehol
   if (loading) {
     return <div>Loading...</div>;
   }
+
+ 
+
   return (
     <>
-    <LoginPage/>
-    <div className="md:w-2/5 mx-auto mt-10 mb-20 bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px]">
-      <div className="text-2xl py-6 px-6 text-white text-center font-bold uppercase">
-        SIGN UP
+    {/* <LoginPage/> */}
+
+    <div className="sm:w-2/5 lg:w-full mx-auto mt-10 mb-20 bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px]">
+      <div className="text-2xl py-6 px-6 text-white text-center font-[700] uppercase">
+        {!submitted ? "MILAN" : "Your Profile has been created!"}
       </div>
-      <div ref={formContainerRef} className=" bg-[#D1CCB6] rounded-3xl overflow-y-auto h-[calc(100%-20px)]">
+      <div ref={formContainerRef} className="bg-[#D1CCB6] w-[300] rounded-3xl overflow-y-auto h-[calc(100%-20px)]">
         {!submitted ? (
           <form className="py-4 px-6 space-y-6 rounded-2xl" onSubmit={handleSubmit}>
             <InputField
@@ -287,17 +294,17 @@ const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placehol
               readOnly={true}
             />
             <div className="mb-4">
-              <h3 className="text-lg font-bold mb-2">Selected Block:</h3>
+              <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">Selected Block:</h3>
               <div className="bg-gray-100 p-2 rounded">
                 {user.Block ? user.Block.label : 'None'}
               </div>
             </div>
             <div className="mb-4">
-              <h3 className="text-lg font-bold mb-2">
+              <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">
                 Interested In:
                 <button
                   onClick={toggleEditMode}
-                  className="ml-2 px-2 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600"
+                  className="ml-2 px-2 py-1 text-sm bg-[#8F33BA] text-[#D1CCB6] rounded"
                 >
                   {isEditing ? 'Save' : 'Edit'}
                 </button>
@@ -313,9 +320,9 @@ const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placehol
                   isMulti={true}
                 />
               ) : (
-                <div className="bg-gray-100 p-2 rounded">
+                <div className="bg-gray-100 p-2 mb-10 rounded">
                   {selectedEvents.length > 0 ? (
-                    <ul className="list-disc list-inside">
+                    <ul className="list-disc list-inside bg">
                       {selectedEvents.map(event => (
                         <li key={event.value}>{event.label}</li>
                       ))}
@@ -329,7 +336,7 @@ const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placehol
           </div>
         )}
       </div>
-      <ToastContainer position="bottom-right" autoClose={3000} />
+      <ToastContainer position="bottom-right"  autoClose={3000} />
     </div>
     </>
   );
