@@ -1,8 +1,9 @@
-  import React from "react";
+import React from "react";
 import Subtract from "../assets/Subtract.svg";
-import Basketball from "../assets/Basketball.png";
 
-function CardLiveScore() {
+function CardLiveScore({ sport, team1, team2 }) {
+  const sportImage = `/src/assets/CARD_ASSETS/${sport}.png`;
+
   return (
     <div className="relative">
       <div className="relative flex w-fit max-w-screen-sm bg-gradient-to-r from-[#D9d9d9] to-gray-400 rounded-lg">
@@ -21,20 +22,20 @@ function CardLiveScore() {
             </div>
           </div>
           <div className="flex flex-col -translate-y-2 gap-2 translate-x-7">
-            <div className="bg-[#4B16B2] text-xl font-bold font-be-vietnam text-white  ring-[#4B16B2] ring-1 -translate-y-32 p-2 rounded-tr-xl rounded-bl-xl z-20">
+            <div className="bg-[#4B16B2] text-xl font-bold font-be-vietnam text-white ring-[#4B16B2] ring-1 -translate-y-32 p-2 rounded-tr-xl rounded-bl-xl z-20">
               LIVESCORE
             </div>
-            <div className="text-md font-bold font-be-vietnam text-white  -translate-y-16 p-2 rounded-tr-xl rounded-bl-xl z-20">
+            <div className="text-md font-bold font-be-vietnam text-white -translate-y-16 p-2 rounded-tr-xl rounded-bl-xl z-20">
               MATCH : 09
             </div>
           </div>
         </div>
-        <div className="absolute inset-0 flex flex-col items-center  translate-x-20 translate-y-8 justify-center">
+        <div className="absolute inset-0 flex flex-col items-center translate-x-20 translate-y-8 justify-center">
           <div className="bg-[#170734]/[0.57] w-1/4 h-1/4 z-10"></div>
           <div className="bg-[#170734]/[0.57] w-1/4 h-1/2 z-10"></div>
           <img
-            src={Basketball}
-            alt="Basketball"
+            src={sportImage}
+            alt={sport}
             className="absolute w-1/2 translate-x-20"
           />
         </div>
@@ -43,19 +44,19 @@ function CardLiveScore() {
             <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] -translate-y-2">
               00
             </span>
-            <span className="text-md font-be-vietnam text-[#F3F1F6]">
-              Hostel 1
+            <span className="text-xs font-be-vietnam w-4 text-[#F3F1F6]">
+              {team1}
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />
             <span className="text-ld font-bold font-be-vietnam text-[#F3F1F6]">
               00
             </span>
           </div>
-          <div className="flex flex-col -translate-x-1 gap-3">
+          <div className="flex flex-col -translate-x-1 gap-2">
             <span className="text-4xl font-bold font-be-vietnam text-white mb-6 -translate-y-2">
               :
             </span>
-            <hr className="w-16 border-1 border-[#F3F1F6] translate-y-1" />
+            <hr className="w-16 border-2" />
             <span className="text-xs font-semibold font-be-vietnam bg-[#F3F1F6] text-[#4B16B2] rounded-2xl my-1">
               Fouls
             </span>
@@ -64,8 +65,8 @@ function CardLiveScore() {
             <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] -translate-y-2">
               00
             </span>
-            <span className="text-md font-be-vietnam text-[#F3F1F6]">
-              Hostel 2
+            <span className="text-xs font-be-vietnam w-4 text-[#F3F1F6]">
+              {team2}
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />
             <span className="text-ld font-bold font-be-vietnam text-[#F3F1F6]">
