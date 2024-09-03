@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
-// import data1 from "../content/sports_boys_data.json";
-// import data2 from "../content/sports_girls_data.json";
-// import data4 from "../content/techy_data.json";
+import GraphMobile from "../components/GraphMobile";
 
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(false);
@@ -13,6 +11,37 @@ function Events() {
   const [sportsGirlsData, setSportsGirlsData] = useState(null);
   const [sportsBoysData, setSportsBoysData] = useState(null);
   const [techyData, setTechyData] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 880);
+  const blocks = [
+    "ARYABHATTA",
+    "BHASKARA",
+    "MAITREYI",
+    "GARGI",
+    "SARABHAI",
+    "CHARAKA",
+    "SUSRUTA",
+    "KAUTILYA",
+    "VYASA",
+    "BRAHMAGUPTA",
+    "VARAHAMIHIRA",
+    "RAMANUJA",
+    "RAMANUJAN",
+    "RAMAN",
+    "VISWESWARAYA",
+    "BHABHA",
+    "KALAM",
+    "KAPILA",
+  ];
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 880);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const fetchCultiData = async () => {
@@ -24,7 +53,7 @@ function Events() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        console.log("Fetched culti data:", result); 
+        console.log("Fetched culti data:", result);
         setCultiData(result);
       } catch (error) {
         console.error("Error fetching culti data:", error);
@@ -90,7 +119,6 @@ function Events() {
         console.error("Error fetching techy data:", error);
       }
     };
-
     fetchTechyData();
   }, []);
 
