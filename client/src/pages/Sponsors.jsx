@@ -46,57 +46,43 @@ function Sponsors() {
             className="flex flex-col w-full h-full bg-cover bg-center"
             style={{ backgroundImage: `url(${SponsorBg})` }}
           >
-            <div
-              className={`bg-transparent w-full h-full rounded-2xl ${
-                isSmallScreen
-                  ? "flex flex-col items-center"
-                  : "flex flex-row justify-between items-center"
-              }`}
-            >
-              <div className="w-1/3 h-1/2 rounded-2xl m-5">
+            <div className="w-full h-full flex flex-wrap justify-center items-center">
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
                   className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
-              <div className="w-1/3 h-1/2 rounded-2xl m-5">
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
                   className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
-              <div className="w-1/3 h-1/2 rounded-2xl m-5">
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
                   className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
-            </div>
-            <div
-              className={`bg-transparent w-full h-full rounded-2xl ${
-                isSmallScreen
-                  ? "flex flex-col items-center"
-                  : "flex flex-row justify-between items-center"
-              }`}
-            >
-              <div className="w-1/3 h-1/2 rounded-2xl m-5">
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
                   className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
-              <div className="w-1/3 h-1/2 rounded-2xl m-5">
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
                   className="rounded-2xl w-full h-full object-contain"
                 />
               </div>
-              <div className="w-1/3 h-1/2 rounded-2xl m-5">
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"

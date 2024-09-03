@@ -13,6 +13,7 @@ import Theme from "../assets/Theme.png";
 import Mascot from "../assets/Mascot.jpeg";
 import Pattern from "../assets/Pattern.png";
 import Pattern2 from "../assets/Pattern2.png";
+import HomeArrow from "../assets/HomeArrow.png";
 import Select from "react-select";
 // =======
 // import Image from "../assets/Arrow.png";
@@ -94,7 +95,7 @@ function Home() {
 
   return (
     // <<<<<<< HEAD
-    <div className="bg-gradient-to-b from-[#171717] to-[#696969] min-h-screen w-screen">
+    <div className="relative bg-gradient-to-b from-[#171717] to-[#696969] min-h-screen w-screen">
       <div
         className="relative w-screen min-h-screen bg-cover bg-center"
         style={{ backgroundImage: `url(${HomeBg})` }}
@@ -234,11 +235,11 @@ function Home() {
 
           <div className="w-screen h-screen">
             <div className="relative flex items-center justify-center h-1/5 w-full p-10">
-              <div className="absolute flex w-full h-1/2 items-center justify-center">
+              <div className="absolute flex w-full h-3/4 items-center justify-center">
                 <img
-                  src={Pattern}
+                  src={HomeArrow}
                   // style={{ transform: "rotate(-2.71deg)" }}
-                  className="w-full h-full opacity-15"
+                  className="w-full h-full opacity-75 object-cover"
                 />
               </div>
               <img
@@ -246,7 +247,7 @@ function Home() {
                 style={{ transform: "rotate(-47.36deg)" }}
                 className="absolute w-1/2 h-auto z-10 opacity-50"
               />
-              <p className="relative z-20 text-white text-center text-4xl">
+              <p className="relative z-20 text-white text-center text-4xl font-semibold">
                 OUR THEME
               </p>
             </div>
@@ -278,11 +279,11 @@ function Home() {
 
           <div className="w-screen h-screen">
             <div className="relative flex items-center justify-center h-1/5 w-full p-10">
-              <div className="absolute flex w-full h-1/2 items-center justify-center">
+              <div className="absolute flex w-full h-3/4 items-center justify-center">
                 <img
-                  src={Pattern}
-                  // style={{ transform: "rotate(2.71deg)" }}
-                  className="w-full h-full opacity-15"
+                  src={HomeArrow}
+                  // style={{ transform: "rotate(-2.71deg)" }}
+                  className="w-full h-full opacity-75 object-cover"
                 />
               </div>
               <img
@@ -290,7 +291,7 @@ function Home() {
                 style={{ transform: "rotate(-47.36deg)" }}
                 className="absolute w-1/2 h-auto z-10 opacity-50"
               />
-              <p className="relative z-20 text-white text-center text-4xl">
+              <p className="relative z-20 text-white text-center text-4xl font-semibold">
                 OUR MASCOT
               </p>
             </div>
@@ -322,19 +323,19 @@ function Home() {
 
           <div className="w-screen h-screen">
             <div className="relative flex items-center justify-center h-1/5 w-full p-10 mt-10">
-              <div className="absolute flex w-full h-1/2 items-center justify-center">
+              <div className="absolute flex w-full h-3/4 items-center justify-center">
                 <img
-                  src={Pattern}
-                  // style={{ transform: "rotate(0.41deg)" }}
-                  className="w-full h-full opacity-15"
+                  src={HomeArrow}
+                  // style={{ transform: "rotate(-2.71deg)" }}
+                  className="w-full h-full opacity-75 object-cover"
                 />
               </div>
-              <img
+              {/* <img
                 src={Skateboard}
                 style={{ transform: "rotate(-47.36deg)" }}
                 className="absolute w-1/2 h-auto z-10 opacity-50"
-              />
-              <p className="relative z-20 text-white text-center text-3xl">
+              /> */}
+              <p className="relative z-20 text-white text-center text-3xl font-semibold">
                 OVERALL LEADERBOARD
               </p>
             </div>
@@ -356,7 +357,7 @@ function Home() {
                   style={{ transform: "rotate(-47.36deg)" }}
                   className="absolute w-1/2 h-auto opacity-50"
                 />
-                <p className="relative z-10 text-white text-center text-4xl">
+                <p className="relative z-10 text-white text-center text-4xl font-semibold">
                   SPONSORS
                 </p>
               </div>
