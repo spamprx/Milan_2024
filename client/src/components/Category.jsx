@@ -1,5 +1,6 @@
 import { useState , useEffect } from "react";
 import DivBar from "./Graph";
+import GraphMobile from "./GraphMobile";
 import Table from "./Table";
 
 function ShowSelect({ param, onSelect }) {
@@ -134,7 +135,14 @@ function Category({ title, blocknames, games, points }) {
   return (
     <>
       {isMobile ? (
-        <></>
+        <>
+          <GraphMobile
+            blocknames={isFiltered ? filteredBlocks : blocknames}
+            games={isFiltered ? filteredGames : games}
+            points={isFiltered ? filteredPoints : points}
+            title={title}
+          />
+        </>
       ) : (
         <DivBar
           blocknames={isFiltered ? filteredBlocks : blocknames}

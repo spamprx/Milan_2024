@@ -22,7 +22,6 @@ import Select from "react-select";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  // const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const cardContainerRef = useRef(null);
@@ -265,14 +264,14 @@ function Home() {
               OUR THEME
             </p>
           </div>
-          <div className="w-screen h-4/5 flex flex-wrap justify-between items-center p-2">
-            <div className="w-full lg:w-1/2 h-3/4 p-2 rounded-xl">
+          <div className="w-full h-4/5 flex flex-wrap justify-between items-center p-2">
+            <div className="w-1/2 lg:w-1/2 h-3/4 p-2 rounded-xl">
               <img
                 src={Theme}
                 className="w-full h-full object-contain rounded-xl"
               />
             </div>
-            <div className="relative w-full lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
+            <div className="relative w-1/2 h-3/4 p-2 flex items-center justify-center">
               <div className="relative w-full lg:w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
                 <img
                   src={Pattern2}
@@ -317,7 +316,7 @@ function Home() {
                   className="w-full h-full object-cover opacity-15 z-20"
                 />
               </div>
-              <div className="absolute w-full lg:w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
+              <div className="absolute w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
                 <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-xl leading-relaxed p-1 lg:p-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Aspernatur nobis, autem, aliquid repellendus totam veritatis

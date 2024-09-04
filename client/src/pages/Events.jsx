@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
-import GraphMobile from "../components/GraphMobile";
 
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(true);

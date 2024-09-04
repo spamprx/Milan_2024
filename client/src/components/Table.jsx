@@ -7,11 +7,9 @@ function Table({ games, blocknames, points, tag}) {
   const [filterText, setFilterText] = useState("");
   const [visibleBlocks, setVisibleBlocks] = useState([]);
   const [pages, setPages] = useState(7);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 750);
       setPages(window.innerWidth < 880 ? (window.innerWidth < 750 ? 2 : 5) : 7);
     };
 
