@@ -1,26 +1,13 @@
 import React, { useState, useEffect } from "react";
-import LiveScoreTable from "../components/LivescoreTable";
-import scores from "../scores.json";
 import axios from "axios";
-import CurrentMatch from "../components/CurrentMatch";
 import CardLiveScore from "../components/CardLiveScore";
 import CardLiveScoreRev from "../components/CardLiveScoreRev";
 
 function LiveScore() {
-  const [isFiltered, setIsFiltered] = useState(false);
-  const [filteredGames, setFilteredGames] = useState([]);
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
-  const [selectedSport, setSelectedSport] = useState(null);
 
-  const games = scores;
-  const blocknames = ["Team1", "Score1", "Team2", "Score2"];
-  const points = games.map((game) => [
-    game.Team1,
-    game.Score1,
-    game.Team2,
-    game.Score2,
-  ]);
+  const sports = ["Cricket", "Basketball", "Hockey", "Volleyball"];
 
   const fetchLiveMatches = async () => {
     try {
@@ -38,63 +25,36 @@ function LiveScore() {
     fetchLiveMatches();
   }, []);
 
-  const handleFilter = () => {
-    setIsFiltered(!isFiltered);
-  };
-
-  const handleFilteredGames = (games) => {
-    setFilteredGames(games);
-  };
-
   useEffect(() => {
-    const currentMatchesData = games.reduce((acc, game) => {
-      const sport = game.Sport;
+    // Process live matches to determine current matches for each sport
+    const matches = liveMatches.reduce((acc, match) => {
+      const sport = match.Sport;
       if (!acc[sport]) {
-        acc[sport] = game;
+        acc[sport] = match;
       }
       return acc;
     }, {});
 
-    setCurrentMatches(Object.values(currentMatchesData));
-  }, [games]);
-
-  const handleSportClick = (sport) => {
-    setSelectedSport(sport === selectedSport ? null : sport);
-  };
+    setCurrentMatches(Object.values(matches));
+  }, [liveMatches]);
 
   return (
-    <div className="flex flex-col min-w-[340px] w-screen scale-75 mx-auto justify-center h-fit">
-      {/* Conditional rendering based on some condition */}
-      {/* {false ? (
-        <>
-          <CurrentMatch
-            selectedSport={selectedSport}
-            currentMatches={currentMatches}
-            onSportClick={handleSportClick}
-          />
-          <LiveScoreTable
-            games={games}
-            blocknames={blocknames}
-            points={points}
-            isFiltered={
-              selectedSport ? selectedSport === "Cricket" : isFiltered
-            }
-            handleFilter={handleFilter}
-            handleFilteredGames={handleFilteredGames}
-            allGames={games.map((game) => game.Sport)}
-            tag="Sport Scores"
-            excludeCurrentMatches={currentMatches}
-          />
-        </>
-      ) : null} */}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:scale-125 scale-75 sm:scale-90 w-full gap-x-24 gap-y-32 justify-items-center">
-        <CardLiveScoreRev />
-        <CardLiveScore />
-        <CardLiveScoreRev />
-        <CardLiveScore />
-        <CardLiveScoreRev />
-        <CardLiveScore />
+    <div className="flex flex-col min-w-[340px] w-screen mx-auto justify-center">
+      <div className="grid grid-cols-1 card-col scale-90 w-full gap-8 justify-items-center">
+        {sports.map((match) => (
+          <React.Fragment key={match}>
+            <CardLiveScore
+              sport={match}
+              team1={"ARYABHATTA"}
+              team2={"BHASKARA"}
+            />
+            <CardLiveScoreRev
+              sport={match}
+              team1={"ARYABHATTA"}
+              team2={"BHASKARA"}
+            />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
