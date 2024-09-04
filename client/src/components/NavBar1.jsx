@@ -6,7 +6,7 @@ function NavBar1() {
   const navItems = [
     { to: "/", label: "HOME" },
     { to: "/events", label: "EVENTS" },
-    { to: "/livescore", label: "LIVE SCORE" },
+    { to: "/livescore", label: "LIVESCORE" },
     { to: "/calendar", label: "CALENDAR" },
     { to: "/sponsors", label: "SPONSORS" },
     { to: "/team", label: "TEAM" },
@@ -21,7 +21,7 @@ function NavBar1() {
           key={item.to}
           to={item.to}
           className={({ isActive }) =>
-            `px-1 text-sm font-semibold transition-all duration-300 my-1 rounded ${
+            `px-1 text-sm transition-all duration-300 my-1 rounded ${
               isActive
                 ? "bg-no-repeat bg-center bg-contain text-white scale-105"
                 : "hover:text-yellow-400 scale-100"
