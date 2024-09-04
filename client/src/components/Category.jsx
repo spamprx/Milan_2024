@@ -96,12 +96,11 @@ function Category({ title, blocknames, games, points }) {
   const [isFiltered, setIsFiltered] = useState(false);
   const [filteredBlocks, setFilteredBlocks] = useState(blocknames);
   const [filteredGames, setFilteredGames] = useState(games);
-  const [pages, setPages] = useState(7);
   const [isMobile, setIsMobile] = useState(false);
-
+  
   useEffect(() => {
     const handleResize = () => {
-      setPages(window.innerWidth < 880 ? 5 : 7);
+      setIsMobile(window.innerWidth < 750);
     };
 
     handleResize();
@@ -110,13 +109,8 @@ function Category({ title, blocknames, games, points }) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isMobile]);
 
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 750);
-    setPages(window.innerWidth < 750 ? 3 : pages);
-  },[pages]);
-  
   const handleFilter = () => {
     setIsFiltered(!isFiltered);
   };
@@ -170,7 +164,6 @@ function Category({ title, blocknames, games, points }) {
           games={isFiltered ? filteredGames : games}
           points={isFiltered ? filteredPoints : points}
           tag={title}
-          pages={pages}
         />
       </div>
     </>

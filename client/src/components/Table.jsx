@@ -2,10 +2,27 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import Arrow from "../assets/Page_Arrow.png";
 
-function Table({ games, blocknames, points, tag , pages}) {
+function Table({ games, blocknames, points, tag}) {
   const [currentPage, setCurrentPage] = useState(0);
   const [filterText, setFilterText] = useState("");
   const [visibleBlocks, setVisibleBlocks] = useState([]);
+  const [pages, setPages] = useState(7);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 750);
+      setPages(window.innerWidth < 880 ? (window.innerWidth < 750 ? 2 : 5) : 7);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
 
   const hostelsPerPage = pages;
 
@@ -13,7 +30,8 @@ function Table({ games, blocknames, points, tag , pages}) {
     const start = currentPage * hostelsPerPage;
     const end = start + hostelsPerPage;
     setVisibleBlocks(blocknames.slice(start, end));
-  }, [currentPage, blocknames]);
+  }, [currentPage, blocknames, hostelsPerPage]);
+
 
   useEffect(() => {
     setCurrentPage(0);
@@ -127,6 +145,7 @@ function Table({ games, blocknames, points, tag , pages}) {
       setCurrentPage(currentPage - 1);
     }
   };
+
 
   return (
     <div>
