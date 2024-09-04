@@ -2,7 +2,7 @@ import React from "react";
 import Subtract from "../assets/Subtract.svg";
 
 function CardLiveScore({ sport, team1, team2 }) {
-  const sportImage = `/src/assets/CARD_ASSETS/${sport}.png`;
+  const sportImage = `/CARD_ASSETS/${sport}.png`;
 
   return (
     <div className="relative scale-75 lg:scale-90">
