@@ -106,12 +106,12 @@ function Home() {
             <img
               src={MilanHome}
               alt="Milan Home"
-              className="w-screen h-auto object-contain z-10"
+              className="w-full h-auto object-contain z-10"
             />
             <img
               src={MilanFont}
               alt="Milan Font"
-              className="absolute top-[10%] left-1/2 transform -translate-x-1/2 z-20 w-[80%] max-w-[1000px] h-auto"
+              className="absolute top-[10%] left-1/2 transform -translate-x-1/2 z-20 w-3/4 max-w-[1000px] h-auto"
             />
             <div className="absolute top-[60%] w-full z-20 text-center">
               <p className="font-vietnam-regular font-bold text-white mx-auto">
@@ -135,110 +135,112 @@ function Home() {
               /> */}
             </div>
           </div>
-          <div className="flex w-screen h-1/2 flex-row justify-between items-center mt-10 p-10 z-30 bg-transparent">
-            <div className="flex flex-col">
-              <label
-                className="block text-white mb-2 text-left"
-                htmlFor="event"
-              >
-                SPORTS YOU LIKE:
-              </label>
-              <Select
-                id="event"
-                options={sportOptions}
-                value={selectedOption}
-                onChange={handleOptionClick}
-                styles={{
-                  control: (base) => ({
-                    ...base,
-                    backgroundColor: "transparent",
-                    border: "none",
-                    boxShadow: "none",
-                    color: "#ffffff",
-                  }),
-                  singleValue: (base) => ({
-                    ...base,
-                    color: "#ffffff",
-                  }),
-                  menu: (base) => ({
-                    ...base,
-                    backgroundColor: "#000000",
-                  }),
-                  option: (base, state) => ({
-                    ...base,
-                    backgroundColor: state.isSelected ? "#333333" : "#000000",
-                    color: "#ffffff",
-                    "&:hover": {
-                      backgroundColor: "#333333",
-                    },
-                  }),
-                }}
-              />
-            </div>
-            <div className="w-1/2 flex flex-col justify-end items-end">
-              <p className="text-[#f0f0f0d9] font-vietnam-thin font-thin">
-                There will be
-              </p>
-              <p className="text-white text-xl font-bold">5 Incoming Events</p>
-            </div>
-          </div>
-
-          <div
-            ref={cardContainerRef}
-            className="relative w-full flex overflow-x-scroll scroll-snap-x p-10 space-x-5 bg-transparent"
-            style={{
-              scrollSnapType: "x mandatory",
-              scrollbarWidth: "none", // Hide scrollbar for Firefox
-              msOverflowStyle: "none", // Hide scrollbar for Internet Explorer and Edge
-              overflow: "auto", // Ensure scroll functionality is enabled
-            }}
-          >
-            {[0, 1, 2, 3, 4].map((_, index) => (
-              <div
-                key={index}
-                className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 h-1/2 lg:h-auto mx-20 transition-transform duration-300 ease-in-out ${
-                  index === activeIndex ? "scale-105 z-10" : "opacity-50"
-                }`}
-                style={{ scrollSnapAlign: "center" }}
-              >
-                <SportCard />
+          <div>
+            <div className="relative flex w-screen h-1/2 flex-row justify-between items-center mt-10 p-10 z-30 bg-transparent">
+              <div className="flex flex-col">
+                <label
+                  className="block text-white mb-2 text-left"
+                  htmlFor="event"
+                >
+                  SPORTS YOU LIKE:
+                </label>
+                <Select
+                  id="event"
+                  options={sportOptions}
+                  value={selectedOption}
+                  onChange={handleOptionClick}
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      backgroundColor: "transparent",
+                      border: "none",
+                      boxShadow: "none",
+                      color: "#ffffff",
+                    }),
+                    singleValue: (base) => ({
+                      ...base,
+                      color: "#ffffff",
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      backgroundColor: "#000000",
+                    }),
+                    option: (base, state) => ({
+                      ...base,
+                      backgroundColor: state.isSelected ? "#333333" : "#000000",
+                      color: "#ffffff",
+                      "&:hover": {
+                        backgroundColor: "#333333",
+                      },
+                    }),
+                  }}
+                />
               </div>
-            ))}
-          </div>
-
-          <div className="flex justify-center ">
-            <div className="flex space-x-2">
-              {/* <div
-                className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
-                onClick={() => handleCircleClick("left")}
-              ></div> */}
+              <div className="w-1/2 flex flex-col justify-end items-end">
+                <p className="text-[#f0f0f0d9] font-vietnam-thin font-thin">
+                  There will be
+                </p>
+                <p className="text-white text-xl font-bold">
+                  5 Incoming Events
+                </p>
+              </div>
+            </div>
+            <div
+              ref={cardContainerRef}
+              className="relative w-full flex overflow-x-scroll scroll-snap-x p-10 space-x-5 bg-transparent"
+              style={{
+                scrollSnapType: "x mandatory",
+                scrollbarWidth: "none", // Hide scrollbar for Firefox
+                msOverflowStyle: "none", // Hide scrollbar for Internet Explorer and Edge
+                overflow: "auto", // Ensure scroll functionality is enabled
+              }}
+            >
               {[0, 1, 2, 3, 4].map((_, index) => (
                 <div
                   key={index}
-                  className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-11 lg:h-11 rounded-full cursor-pointer bg-[#A020F0] mb-10 ${
-                    index === activeIndex
-                      ? "border border-[#DAA827] border-2"
-                      : ""
+                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 h-1/2 lg:h-auto mx-20 transition-transform duration-300 ease-in-out ${
+                    index === activeIndex ? "scale-105 z-10" : "opacity-50"
                   }`}
-                  onClick={() => {
-                    if (index < activeIndex) {
-                      handleCircleClick("left");
-                    } else if (index > activeIndex) {
-                      handleCircleClick("right");
-                    } else {
-                      scrollToCard(index); // If clicking on the active index, just scroll to the card
-                    }
-                  }}
+                  style={{ scrollSnapAlign: "center" }}
                 >
-                  {index === activeIndex && (
-                    <img src={Basketball} className="w-full h-full p-1" />
-                  )}
+                  <SportCard />
                 </div>
               ))}
-              {/* <div
-                className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
-                onClick={() => handleCircleClick("right")}
-              ></div> */}
+            </div>
+            <div className="flex justify-center ">
+              <div className="flex space-x-2">
+                {/* <div
+                  className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
+                  onClick={() => handleCircleClick("left")}
+                ></div> */}
+                {[0, 1, 2, 3, 4].map((_, index) => (
+                  <div
+                    key={index}
+                    className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-11 lg:h-11 rounded-full cursor-pointer bg-[#A020F0] mb-10 ${
+                      index === activeIndex
+                        ? "border border-[#DAA827] border-2"
+                        : ""
+                    }`}
+                    onClick={() => {
+                      if (index < activeIndex) {
+                        handleCircleClick("left");
+                      } else if (index > activeIndex) {
+                        handleCircleClick("right");
+                      } else {
+                        scrollToCard(index); // If clicking on the active index, just scroll to the card
+                      }
+                    }}
+                  >
+                    {index === activeIndex && (
+                      <img src={Basketball} className="w-full h-full p-1" />
+                    )}
+                  </div>
+                ))}
+                {/* <div
+                  className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
+                  onClick={() => handleCircleClick("right")}
+                ></div> */}
+              </div>
             </div>
           </div>
         </div>
@@ -270,8 +272,8 @@ function Home() {
                 className="w-full h-full object-contain rounded-xl"
               />
             </div>
-            <div className="relative w-screen lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
-              <div className="relative w-screen lg:w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
+            <div className="relative w-full lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
+              <div className="relative w-full lg:w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
                 <img
                   src={Pattern2}
                   className="w-full h-full object-cover opacity-15 z-20"
