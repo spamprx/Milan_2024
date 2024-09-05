@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import "../index.css";
+import Table from "./Table"; // Import your Table component
 
 ChartJS.register(
   CategoryScale,
@@ -22,17 +23,20 @@ ChartJS.register(
   Legend
 );
 
-const colorOptions = [
-  "#A9AB4A",
-  "#DEB117",
-  "#D1CCB6",
-  "#DC8F48",
-  "#9F3C09",
-  "#385175",
-  "#2D88AD",
-];
+const colorOptions = ["#FF7900", "#2C88AD", "#A9AB4A"];
+function GraphMobile({
+  blocknames,
+  sportsBoysData,
+  sportsGirlsData,
+  cultiData,
+  techyData,
+}) {
+  const gamesBoys = sportsBoysData?.eventNames || [];
+  const gamesGirls = sportsGirlsData?.eventNames || [];
+  const games = [...new Set([...gamesBoys, ...gamesGirls])];
+  const cultiEvents = cultiData?.eventNames || [];
+  const techyEvents = techyData?.eventNames || [];
 
-function GraphMobile({ blocknames, games, points, title }) {
   const [barOptions, setBarOptions] = useState({
     responsive: true,
     maintainAspectRatio: false,
@@ -40,8 +44,8 @@ function GraphMobile({ blocknames, games, points, title }) {
     indexAxis: "y",
     plugins: {
       title: {
-        display: true,
-        text: title,
+        display: false,
+        text: "Total Points",
         color: "white",
         font: { size: 18, family: "sans-serif" },
       },
@@ -51,7 +55,7 @@ function GraphMobile({ blocknames, games, points, title }) {
         align: "center",
         padding: 10,
         labels: {
-          color: "#000",
+          color: "#FFF",
           boxWidth: 15,
           padding: 10,
           borderRadius: 100,
@@ -67,7 +71,10 @@ function GraphMobile({ blocknames, games, points, title }) {
       },
     },
     scales: {
-      x: { stacked: true, ticks: { color: "white" } },
+      x: {
+        stacked: true,
+        ticks: { color: "white" },
+      },
       y: { stacked: true, ticks: { color: "white", size: 10 } },
     },
   });
@@ -133,34 +140,108 @@ function GraphMobile({ blocknames, games, points, title }) {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Call once to set initial state
+    handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
-  }, [title]);
+  }, []);
 
   const barDataMobile = {
     labels: blocknames,
     datasets: [
       {
-        label: "Total Points",
+        label: "Sports",
         data: blocknames.map((_, blockIndex) =>
           games.reduce(
-            (sum, _, gameIndex) => sum + points[gameIndex + 1][blockIndex],
+            (sum, _, gameIndex) =>
+              sum +
+              (sportsBoysData.scores[gameIndex] &&
+              sportsBoysData.scores[gameIndex][blockIndex]
+                ? sportsBoysData.scores[gameIndex][blockIndex]
+                : 0) +
+              (sportsGirlsData.scores[gameIndex] &&
+              sportsGirlsData.scores[gameIndex][blockIndex]
+                ? sportsGirlsData.scores[gameIndex][blockIndex]
+                : 0),
             0
           )
         ),
         backgroundColor: colorOptions[0],
       },
+      {
+        label: "Culturals",
+        data: blocknames.map((_, blockIndex) =>
+          cultiEvents.reduce(
+            (sum, _, eventIndex) =>
+              sum +
+              (cultiData.scores[eventIndex] &&
+              cultiData.scores[eventIndex][blockIndex]
+                ? cultiData.scores[eventIndex][blockIndex]
+                : 0),
+            0
+          )
+        ),
+        backgroundColor: colorOptions[1],
+      },
+      {
+        label: "Sci-Tech",
+        data: blocknames.map((_, blockIndex) =>
+          techyEvents.reduce(
+            (sum, _, eventIndex) =>
+              sum +
+              (techyData.scores[eventIndex] &&
+              techyData.scores[eventIndex][blockIndex]
+                ? techyData.scores[eventIndex][blockIndex]
+                : 0),
+            0
+          )
+        ),
+        backgroundColor: colorOptions[2],
+      },
     ],
   };
 
   return (
-    <div className="FirstTab w-full p-4">
-      <div className="canvas-container rounded-2xl bg-[#150338] mx-auto p-4 w-full flex justify-center items-center">
-          <div style={{ position: "relative", width: "100%", height: "400px" }}>
-            <Bar options={barOptions} data={barDataMobile} />
-          </div>
+    <div className="FirstTab w-full">
+      <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] mx-auto p-4 w-screen justify-center items-center">
+        <div className="flex flex-row w-4/5 gap-2 justify-between">
+          <span className="font-semibold bg-[#FF7900] w-full rounded-lg">
+            SPORTS
+          </span>
+          <span className="font-semibold bg-[#2C88AD] w-full rounded-lg">
+            CULTI
+          </span>
+          <span className="font-semibold bg-[#A9AB4A] w-full rounded-lg">
+            TECHY
+          </span>
+        </div>
+        <div className="w-full h-96 relative">
+          <Bar options={barOptions} data={barDataMobile} />
+        </div>
       </div>
+      <Table
+        blocknames={sportsBoysData.blocks}
+        games={gamesBoys}
+        points={sportsBoysData.scores}
+        tag="Sports Boys"
+      />
+      <Table
+        blocknames={sportsGirlsData.blocks}
+        games={gamesGirls}
+        points={sportsGirlsData.scores}
+        tag="Sports Girls"
+      />
+      <Table
+        blocknames={blocknames}
+        games={cultiEvents}
+        points={cultiData.scores}
+        tag="Culturals"
+      />
+      <Table
+        blocknames={blocknames}
+        games={techyEvents}
+        points={techyData.scores}
+        tag="Sci-Tech"
+      />
     </div>
   );
 }

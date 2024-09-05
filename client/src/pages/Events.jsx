@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
+import GraphMobile from "../components/GraphMobile";
 
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(false);
@@ -11,6 +12,12 @@ function Events() {
   const [sportsBoysData, setSportsBoysData] = useState(null);
   const [techyData, setTechyData] = useState(null);
   const [isMobile,setIsMobile] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
+
+  useEffect(() => {
+    setDataFetched(sportsBoysData && sportsGirlsData && techyData && cultiData);
+  },[sportsBoysData, sportsGirlsData, techyData, cultiData]);
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 750);
@@ -158,8 +165,9 @@ function Events() {
     <>
       <div className="flex">
         {!isMobile && <NavBar />}
+        {isMobile && dataFetched && <GraphMobile blocknames={techyData.blocks} sportsBoysData={sportsBoysData} sportsGirlsData={sportsGirlsData} cultiData={cultiData} techyData={techyData}/>}
       </div>
-      {showSportsBoys && sportsBoysData && (
+      {!isMobile && showSportsBoys && sportsBoysData && (
         <Category
           title={sportsBoysData.title}
           blocknames={sportsBoysData.blocks}
@@ -167,7 +175,7 @@ function Events() {
           points={sportsBoysData.scores}
         />
       )}
-      {showSportsGirls && sportsGirlsData && (
+      {!isMobile && showSportsGirls && sportsGirlsData && (
         <Category
           title={sportsGirlsData.title}
           blocknames={sportsGirlsData.blocks}
@@ -175,7 +183,7 @@ function Events() {
           points={sportsGirlsData.scores}
         />
       )}
-      {showCulti && cultiData && (
+      {!isMobile && showCulti && cultiData && (
         <Category
           title={cultiData.title}
           blocknames={cultiData.blocks}
@@ -183,7 +191,7 @@ function Events() {
           points={cultiData.scores}
         />
       )}
-      {showTechy && techyData && (
+      {!isMobile && showTechy && techyData && (
         <Category
           title={techyData.title}
           blocknames={techyData.blocks}
