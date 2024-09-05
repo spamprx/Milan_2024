@@ -101,18 +101,18 @@ function Home() {
         style={{ backgroundImage: `url(${HomeBg})` }}
       >
         <div className="w-screen h-full">
-          <div className="relative flex flex-col justify-center items-center pt-10">
+          <div className="w-screen h-screen relative flex lg:flex-col justify-center items-center pt-10">
             <img
               src={MilanHome}
               alt="Milan Home"
-              className="w-full h-auto object-contain z-10"
+              className="w-screen h-auto object-contain z-10"
             />
             <img
               src={MilanFont}
               alt="Milan Font"
-              className="absolute top-[10%] left-1/2 transform -translate-x-1/2 z-20 w-3/4 max-w-[1000px] h-auto"
+              className="absolute top-[10%] transform  z-20 w-3/4 max-w-[1000px] h-auto"
             />
-            <div className="absolute top-[60%] w-full z-20 text-center">
+            <div className="absolute top-[60%] w-screen z-20 text-center">
               <p className="font-vietnam-regular font-bold text-white mx-auto">
                 MILAN stands as one of the largest and most eagerly awaited
                 inter-hostel competitions in India.
@@ -264,14 +264,14 @@ function Home() {
               OUR THEME
             </p>
           </div>
-          <div className="w-full h-4/5 flex flex-wrap justify-between items-center p-2">
-            <div className="w-1/2 lg:w-1/2 h-3/4 p-2 rounded-xl">
+          <div className="w-screen h-4/5 flex flex-wrap justify-center lg:justify-between items-center p-2">
+            <div className="w-3/4 lg:w-1/2 h-3/4 p-2 rounded-xl">
               <img
                 src={Theme}
                 className="w-full h-full object-contain rounded-xl"
               />
             </div>
-            <div className="relative w-1/2 h-3/4 p-2 flex items-center justify-center">
+            <div className="relative w-3/4 lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
               <div className="relative w-full lg:w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
                 <img
                   src={Pattern2}
@@ -308,15 +308,15 @@ function Home() {
               OUR MASCOT
             </p>
           </div>
-          <div className="w-screen h-4/5 flex flex-wrap justify-between items-center p-2">
-            <div className="relative w-full lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
+          <div className="w-screen h-4/5 flex flex-wrap justify-center lg:justify-between items-center p-2">
+            <div className="relative w-3/4 lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
               <div className="relative w-full lg:w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
                 <img
                   src={Pattern2}
                   className="w-full h-full object-cover opacity-15 z-20"
                 />
               </div>
-              <div className="absolute w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
+              <div className="absolute w-full lg:w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
                 <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-xl leading-relaxed p-1 lg:p-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Aspernatur nobis, autem, aliquid repellendus totam veritatis
@@ -325,7 +325,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="w-full lg:w-1/2 h-3/4 p-2 rounded-xl">
+            <div className="w-3/4 lg:w-1/2 lg:w-1/2 h-3/4 p-2 rounded-xl">
               <img
                 src={Mascot}
                 className="w-full h-full object-contain rounded-xl"
@@ -366,20 +366,25 @@ function Home() {
           </div>
         </div>
 
-        <div className="flex justify-start">
-          <div className="relative flex items-center h-1/5 w-1/2 p-10">
-            <img
-              src={Skateboard}
-              style={{ transform: "rotate(-47.36deg)" }}
-              className="absolute w-1/2 h-auto opacity-50"
-            />
-            <p className="relative z-10 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
-              SPONSORS
-            </p>
+        <div
+          className="w-screen h-screen"
+          style={{ backgroundImage: `url(${HomeArrow2})` }}
+        >
+          <div className="flex justify-start">
+            <div className="relative flex items-center h-1/5 w-1/2 p-10">
+              <img
+                src={Skateboard}
+                style={{ transform: "rotate(-47.36deg)" }}
+                className="absolute w-1/2 h-auto opacity-50"
+              />
+              <p className="relative z-10 text-white text-center text-xl sm:text-2xl ml-10 lg:text-4xl font-semibold">
+                SPONSORS
+              </p>
+            </div>
           </div>
-        </div>
-        <div className="flex justify-center w-screen h-1/2">
-          <HomeSponsorCard />
+          <div className="flex justify-center w-screen h-1/2">
+            <HomeSponsorCard />
+          </div>
         </div>
         {/* </div> */}
       </div>
