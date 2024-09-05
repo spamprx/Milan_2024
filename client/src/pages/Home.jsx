@@ -247,7 +247,7 @@ function Home() {
 
       <div className="w-screen mb-10">
         <div className="w-screen min-h-screen lg:h-screen">
-          <div className="relative flex items-center justify-center h-1/5 w-full p-10 my-10">
+          <div className="relative flex items-center justify-center h-1/5 w-screen pr-0 p-10 my-10">
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
@@ -257,8 +257,8 @@ function Home() {
             </div>
             <img
               src={Skateboard}
-              style={{ transform: "rotate(-47.36deg)" }}
-              className="absolute w-1/2 h-auto z-10 opacity-50"
+              // style={{ transform: "rotate(-47.36deg)" }}
+              className="absolute w-1/2 h-auto z-10 opacity-90"
             />
             <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
               OUR THEME
@@ -301,8 +301,8 @@ function Home() {
             </div>
             <img
               src={Skateboard}
-              style={{ transform: "rotate(-47.36deg)" }}
-              className="absolute w-1/2 h-auto z-10 opacity-50"
+              // style={{ transform: "rotate(-47.36deg)" }}
+              className="absolute w-1/2 h-auto z-10 opacity-90"
             />
             <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
               OUR MASCOT
@@ -371,13 +371,13 @@ function Home() {
           style={{ backgroundImage: `url(${HomeArrow2})` }}
         >
           <div className="flex justify-start">
-            <div className="relative flex items-center h-1/5 w-1/2 p-10">
+            <div className="relative flex items-center h-1/5 w-1/2 p-5">
               <img
                 src={Skateboard}
-                style={{ transform: "rotate(-47.36deg)" }}
-                className="absolute w-1/2 h-auto opacity-50"
+                // style={{ transform: "rotate(-47.36deg)" }}
+                className="absolute w-full lg:w-3/4 h-auto opacity-90"
               />
-              <p className="relative z-10 text-white text-center text-xl sm:text-2xl ml-10 lg:text-4xl font-semibold">
+              <p className="relative z-10 text-white text-center text-lg sm:text-2xl ml-10 lg:text-4xl font-semibold lg:pl-20">
                 SPONSORS
               </p>
             </div>
