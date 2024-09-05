@@ -8,19 +8,34 @@ function Table({ games, blocknames, points, tag}) {
   const [visibleBlocks, setVisibleBlocks] = useState([]);
   const [pages, setPages] = useState(7);
 
+  function responsivePages() {
+    const minScreenWidth = 320;
+    const maxScreenWidth = 1280;
+    const minPages = 2;
+    const maxPages = 7;
+
+    const screenWidth = window.innerWidth;
+
+    const clampedScreenWidth = Math.max(
+      minScreenWidth,
+      Math.min(screenWidth, maxScreenWidth)
+    );
+
+    const pages = Math.round(
+      ((clampedScreenWidth - minScreenWidth) /
+        (maxScreenWidth - minScreenWidth)) *
+        (maxPages - minPages) +
+        minPages
+    );
+
+    setPages(pages);
+  }
+
   useEffect(() => {
-    const handleResize = () => {
-      setPages(window.innerWidth < 880 ? (window.innerWidth < 750 ? 2 : 5) : 7);
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    responsivePages();
+    window.addEventListener("resize", responsivePages);
+    return () => window.removeEventListener("resize", responsivePages);
   }, []);
-
 
   const hostelsPerPage = pages;
 
@@ -29,7 +44,6 @@ function Table({ games, blocknames, points, tag}) {
     const end = start + hostelsPerPage;
     setVisibleBlocks(blocknames.slice(start, end));
   }, [currentPage, blocknames, hostelsPerPage]);
-
 
   useEffect(() => {
     setCurrentPage(0);
@@ -144,7 +158,6 @@ function Table({ games, blocknames, points, tag}) {
     }
   };
 
-
   return (
     <div>
       <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
@@ -160,16 +173,16 @@ function Table({ games, blocknames, points, tag}) {
           }}
         />
       </div>
-      <div className="flex">
-        <div className="bg-[#24104E] rounded-2xl">
-          <table {...getSportsTableProps()} className="w-auto table-fixed">
+      <div className="flex justify-center">
+        <div className="bg-[#24104E] rounded-l-2xl ml-4 max-w-[33%] overflow-x-auto">
+          <table {...getSportsTableProps()} className="w-full lg:w-auto table-fixed">
             <thead>
               {sportsHeaderGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center p-2 bg-[#7842E2] text-white"
+                      className="text-center p-2 bg-[#7842E2] text-white truncate"
                     >
                       {column.render("Header")}
                     </th>
@@ -185,7 +198,7 @@ function Table({ games, blocknames, points, tag}) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center p-2 text-white"
+                        className="text-center p-2 text-white truncate"
                       >
                         {cell.render("Cell")}
                       </td>
@@ -197,7 +210,7 @@ function Table({ games, blocknames, points, tag}) {
           </table>
         </div>
 
-        <div className="bg-[#24104E] w-full overflow-auto">
+        <div className="bg-[#24104E] rounded-r-2xl mr-4 overflow-auto">
           <table {...getBlockTableProps()} className="w-fit table-fixed">
             <thead>
               {blockHeaderGroups.map((headerGroup) => (

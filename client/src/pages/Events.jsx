@@ -2,15 +2,28 @@ import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
 
 function Events() {
-  const [showSportsBoys, setShowSportsBoys] = useState(true);
+  const [showSportsBoys, setShowSportsBoys] = useState(false);
   const [showSportsGirls, setShowSportsGirls] = useState(false);
   const [showCulti, setShowCulti] = useState(false);
-  const [showTechy, setShowTechy] = useState(false);
+  const [showTechy, setShowTechy] = useState(true);
   const [cultiData, setCultiData] = useState(null);
   const [sportsGirlsData, setSportsGirlsData] = useState(null);
   const [sportsBoysData, setSportsBoysData] = useState(null);
   const [techyData, setTechyData] = useState(null);
-  
+  const [isMobile,setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 750);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isMobile]);
+
   useEffect(() => {
     const fetchCultiData = async () => {
       try {
@@ -144,7 +157,7 @@ function Events() {
   return (
     <>
       <div className="flex">
-        <NavBar />
+        {!isMobile && <NavBar />}
       </div>
       {showSportsBoys && sportsBoysData && (
         <Category
