@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { startOfToday, format, parse, isSameDay } from "date-fns";
+import { startOfToday, format, isSameDay } from "date-fns";
 import axios from 'axios';
 import Dates from "../components/Dates.jsx"
 import EventList from "../components/Eventlist.jsx";
@@ -9,7 +9,6 @@ export default function Calendar() {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
   let [currentMonth, setCurrentMonth] = useState(format(today, "MMM-yyyy"));
-  let firstDayCurrentMonth = parse(currentMonth, "MMM-yyyy", new Date());
   const [games, setGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
   const detailsRef = useRef(null);
@@ -121,7 +120,7 @@ export default function Calendar() {
           </div>
         </div>
         
-        <div className="my-24 border-t-2 border-gray-300"></div>
+        <div className="my-16 border-t-2 border-gray-300"></div>
         
         {selectedGame && (
           <GameDetails game={selectedGame} ref={detailsRef} />

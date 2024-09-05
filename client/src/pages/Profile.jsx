@@ -69,7 +69,7 @@ const Profile = () => {
       toast.error('Please enter your email');
       return false;
     }
-    
+
     if (!user.Block || !user.Block.value) {
       toast.error('Please select a block');
       return false;
@@ -107,20 +107,20 @@ const Profile = () => {
   const toggleEditMode = () => {
     if (isEditing) {
       const updatedEvents = selectedEvents.map(event => event.value);
-      setUser(prevUser => ({...prevUser, interested_in: updatedEvents}));
-      
+      setUser(prevUser => ({ ...prevUser, interested_in: updatedEvents }));
+
       axios.post(import.meta.env.VITE_BACKEND_URL + "profile/update", {
         interested_in: updatedEvents
       }, {
         withCredentials: true
       })
-      .then(response => {
-        toast.success('Events updated successfully!');
-      })
-      .catch(error => {
-        console.error("Error updating events: ", error);
-        toast.error("Failed to update events. Please try again later.");
-      });
+        .then(response => {
+          toast.success('Events updated successfully!');
+        })
+        .catch(error => {
+          console.error("Error updating events: ", error);
+          toast.error("Failed to update events. Please try again later.");
+        });
     }
     setIsEditing(!isEditing);
   };
@@ -132,7 +132,7 @@ const Profile = () => {
     setSelectedEvents(uniqueOptions);
   };
 
-  const InputField = ({ label, id, type, placeholder, value, onChange , readOnly, }) => {
+  const InputField = ({ label, id, type, placeholder, value, onChange, readOnly, }) => {
 
 
     return (
@@ -144,7 +144,7 @@ const Profile = () => {
           {label}
         </label>
         <input
-          className="shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-gray-100 font-[500] leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline"
           id={id}
           type={type}
           placeholder={placeholder}
@@ -158,56 +158,56 @@ const Profile = () => {
   };
 
 
-const customStyles = {
-  control: (provided) => ({
-    ...provided,
-    backgroundColor: '#D8DDFF',
-    borderColor: '#e2e8f0',
-    padding: '8px',
-    borderRadius: '1rem',
-    boxShadow: 'none',
-    ':hover': {
-      borderColor: '#cbd5e0',
-    },
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    color: '#4D4D4D',
-  }),
-  placeholder: (provided) => ({
-    ...provided,
-    color: '#4D4D4D',
-  }),
-};
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      backgroundColor: '#D8DDFF',
+      borderColor: '#e2e8f0',
+      padding: '8px',
+      borderRadius: '1rem',
+      boxShadow: 'none',
+      ':hover': {
+        borderColor: '#cbd5e0',
+      },
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: '#4D4D4D',
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: '#4D4D4D',
+    }),
+  };
 
-const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placeholder, isMulti }) => {
+  const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placeholder, isMulti }) => {
 
-  const selectedValues = Array.isArray(value) ? value : [];
-  const updatedOptions = options.map(option => ({
-    ...option,
-    isDisabled: selectedValues.some(v => v.value === option.value)
-  }));
+    const selectedValues = Array.isArray(value) ? value : [];
+    const updatedOptions = options.map(option => ({
+      ...option,
+      isDisabled: selectedValues.some(v => v.value === option.value)
+    }));
 
-  return (
-    <div className="mb-4">
-      <label 
-        className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left" 
-        htmlFor={id}>
-        {label}
-      </label>
-      <Select
-        styles={customStyles}
-        id={id}
-        options={updatedOptions}
-        value={value}
-        onChange={onChange}
-        onMenuOpen={onMenuOpen}
-        placeholder={placeholder}
-        isMulti={isMulti}
-      />
-    </div>
-  );
-};
+    return (
+      <div className="mb-4">
+        <label
+          className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left"
+          htmlFor={id}>
+          {label}
+        </label>
+        <Select
+          styles={customStyles}
+          id={id}
+          options={updatedOptions}
+          value={value}
+          onChange={onChange}
+          onMenuOpen={onMenuOpen}
+          placeholder={placeholder}
+          isMulti={isMulti}
+        />
+      </div>
+    );
+  };
 
 
   const SubmitButton = () => {
@@ -227,90 +227,46 @@ const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placehol
     return <div>Loading...</div>;
   }
 
- 
+
 
   return (
     <>
     {/* <LoginPage/> */}
-
-    <div className="sm:w-2/5 lg:w-full mx-auto mt-10 mb-20 bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px]">
-      <div className="text-2xl py-6 px-6 text-white text-center font-[700] uppercase">
-        {!submitted ? "MILAN" : "Your Profile has been created!"}
-      </div>
-      <div ref={formContainerRef} className="bg-[#D1CCB6] w-[300] rounded-3xl overflow-y-auto h-[calc(100%-20px)]">
-        {!submitted ? (
-          <form className="py-4 px-6 space-y-6 rounded-2xl" onSubmit={handleSubmit}>
-            <InputField
-              label="Name"
-              id="name"
-              type="text"
-              placeholder="Enter your name"
-              value={user.name}
-              onChange={(e) => setUser({...user, name: e.target.value})}
-            />
-            <InputField
-              label="Email"
-              id="email"
-              type="email"
-              placeholder="Enter your email"
-              value={user.email}
-              onChange={(e) => setUser({...user, email: e.target.value})}
-            />
-            <SelectField
-              label="Select Block:"
-              id="block"
-              options={blockOptions}
-              value={user.Block}
-              onChange={(selected) => setUser({...user, Block: selected})}
-              onMenuOpen={handleSelectOpen}
-              placeholder="Select a Block"
-            />
-            <SelectField
-               label="Select Events:"
-               id="event"
-               options={eventOptions}
-               value={selectedEvents}
-               onChange={handleEventChange}
-               onMenuOpen={handleSelectOpen}
-               placeholder="Select Events"
-               isMulti={true}
-            />
-            <SubmitButton />
-          </form>
-        ) : (
-          <div className="py-4 px-6 space-y-6">
-            <InputField
-              label="Name"
-              id="name"
-              type="text"
-              value={user.name}
-              readOnly={true}
-            />
-            <InputField
-              label="Email"
-              id="email"
-              type="email"
-              value={user.email}
-              readOnly={true}
-            />
-            <div className="mb-4">
-              <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">Selected Block:</h3>
-              <div className="bg-gray-100 p-2 rounded">
-                {user.Block ? user.Block.label : 'None'}
-              </div>
-            </div>
-            <div className="mb-4">
-              <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">
-                Interested In:
-                <button
-                  onClick={toggleEditMode}
-                  className="ml-2 px-2 py-1 text-sm bg-[#8F33BA] text-[#D1CCB6] rounded"
-                >
-                  {isEditing ? 'Save' : 'Edit'}
-                </button>
-              </h3>
-              {isEditing ? (
+    <div className="container mx-auto px-4 mt-10 mb-20">
+        <div className="bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px] max-w-4xl mx-auto">
+          <div className="text-2xl py-6 px-6 text-white text-center font-[700] uppercase">
+            {!submitted ? "MILAN" : "Your Profile has been created!"}
+          </div>
+          <div ref={formContainerRef} className="form-container bg-[#D1CCB6] rounded-3xl w-full sm:w-3/4 md:w-1/2 lg:w-1/2 mx-auto overflow-y-auto h-[calc(100%-20px)]">
+            {!submitted ? (
+              <form className="py-4 px-6 space-y-6 rounded-2xl mx-auto" onSubmit={handleSubmit}>
+                <InputField
+                  label="Name"
+                  id="name"
+                  type="text"
+                  placeholder="Enter your name"
+                  value={user.name}
+                  onChange={(e) => setUser({ ...user, name: e.target.value })}
+                />
+                <InputField
+                  label="Email"
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={user.email}
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
+                />
                 <SelectField
+                  label="Select Block:"
+                  id="block"
+                  options={blockOptions}
+                  value={user.Block}
+                  onChange={(selected) => setUser({ ...user, Block: selected })}
+                  onMenuOpen={handleSelectOpen}
+                  placeholder="Select a Block"
+                />
+                <SelectField
+                  label="Select Events:"
                   id="event"
                   options={eventOptions}
                   value={selectedEvents}
@@ -319,25 +275,70 @@ const SelectField = ({ label, id, options, value, onChange, onMenuOpen, placehol
                   placeholder="Select Events"
                   isMulti={true}
                 />
-              ) : (
-                <div className="bg-gray-100 p-2 mb-10 rounded">
-                  {selectedEvents.length > 0 ? (
-                    <ul className="list-disc list-inside bg">
-                      {selectedEvents.map(event => (
-                        <li key={event.value}>{event.label}</li>
-                      ))}
-                    </ul>
+                <SubmitButton />
+              </form>
+            ) : (
+              <div className="py-4 px-6 space-y-6 md:w-4/5 lg:w-3/5 mx-auto">
+                <InputField
+                  label="Name"
+                  id="name"
+                  type="text"
+                  value={user.name}
+                  readOnly={true}
+                />
+                <InputField
+                  label="Email"
+                  id="email"
+                  type="email"
+                  value={user.email}
+                  readOnly={true}
+                />
+                <div className="mb-4">
+                  <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">Selected Block:</h3>
+                  <div className="bg-gray-100 p-2 rounded">
+                    {user.Block ? user.Block.label : 'None'}
+                  </div>
+                </div>
+                <div className="mb-4">
+                  <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">
+                    Interested In:
+                    <button
+                      onClick={toggleEditMode}
+                      className="ml-2 px-2 py-1 text-sm bg-[#8F33BA] text-[#D1CCB6] rounded"
+                    >
+                      {isEditing ? 'Save' : 'Edit'}
+                    </button>
+                  </h3>
+                  {isEditing ? (
+                    <SelectField
+                      id="event"
+                      options={eventOptions}
+                      value={selectedEvents}
+                      onChange={handleEventChange}
+                      onMenuOpen={handleSelectOpen}
+                      placeholder="Select Events"
+                      isMulti={true}
+                    />
                   ) : (
-                    'None'
+                    <div className="bg-gray-100 p-2 mb-10 rounded">
+                      {selectedEvents.length > 0 ? (
+                        <ul className="list-disc list-inside bg">
+                          {selectedEvents.map(event => (
+                            <li key={event.value}>{event.label}</li>
+                          ))}
+                        </ul>
+                      ) : (
+                        'None'
+                      )}
+                    </div>
                   )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </div>
-        )}
+          <ToastContainer position="bottom-right" autoClose={3000} />
+        </div>
       </div>
-      <ToastContainer position="bottom-right"  autoClose={3000} />
-    </div>
     </>
   );
 };
