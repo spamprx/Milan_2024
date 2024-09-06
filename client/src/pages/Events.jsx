@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
 import GraphMobile from "../components/GraphMobile";
+import Navbar from "../components/CategoryFilter";
+import SportsMenu from "../components/Filter";
 
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(false);
@@ -110,61 +112,62 @@ function Events() {
     fetchTechyData();
   }, []);
 
-  const NavBar = () => {
-    return (
-      <div className="flex justify-center mx-auto my-10">
-        <button
-          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-          onClick={() => {
-            setShowSportsBoys(true);
-            setShowSportsGirls(false);
-            setShowCulti(false);
-            setShowTechy(false);
-          }}
-        >
-          Sports Boys
-        </button>
-        <button
-          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-          onClick={() => {
-            setShowSportsBoys(false);
-            setShowSportsGirls(true);
-            setShowCulti(false);
-            setShowTechy(false);
-          }}
-        >
-          Sports Girls
-        </button>
-        <button
-          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-          onClick={() => {
-            setShowSportsBoys(false);
-            setShowSportsGirls(false);
-            setShowCulti(true);
-            setShowTechy(false);
-          }}
-        >
-          Culti
-        </button>
-        <button
-          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-          onClick={() => {
-            setShowSportsBoys(false);
-            setShowSportsGirls(false);
-            setShowCulti(false);
-            setShowTechy(true);
-          }}
-        >
-          Techy
-        </button>
-      </div>
-    );
-  };
+  // const NavBar = () => {
+  //   return (
+  //     <div className="flex justify-center mx-auto my-10">
+  //       <button
+  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+  //         onClick={() => {
+  //           setShowSportsBoys(true);
+  //           setShowSportsGirls(false);
+  //           setShowCulti(false);
+  //           setShowTechy(false);
+  //         }}
+  //       >
+  //         Sports Boys
+  //       </button>
+  //       <button
+  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+  //         onClick={() => {
+  //           setShowSportsBoys(false);
+  //           setShowSportsGirls(true);
+  //           setShowCulti(false);
+  //           setShowTechy(false);
+  //         }}
+  //       >
+  //         Sports Girls
+  //       </button>
+  //       <button
+  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+  //         onClick={() => {
+  //           setShowSportsBoys(false);
+  //           setShowSportsGirls(false);
+  //           setShowCulti(true);
+  //           setShowTechy(false);
+  //         }}
+  //       >
+  //         Culti
+  //       </button>
+  //       <button
+  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+  //         onClick={() => {
+  //           setShowSportsBoys(false);
+  //           setShowSportsGirls(false);
+  //           setShowCulti(false);
+  //           setShowTechy(true);
+  //         }}
+  //       >
+  //         Techy
+  //       </button>
+  //     </div>
+  //   );
+  // };
 
   return (
     <>
       <div className="flex">
-        {!isMobile && <NavBar />}
+        {/* <SportsMenu/> */}
+        {!isMobile && <Navbar />}
         {isMobile && dataFetched && <GraphMobile blocknames={techyData.blocks} sportsBoysData={sportsBoysData} sportsGirlsData={sportsGirlsData} cultiData={cultiData} techyData={techyData}/>}
       </div>
       {!isMobile && showSportsBoys && sportsBoysData && (
