@@ -1,0 +1,82 @@
+[
+    {
+    "name": "Spons",
+    "heads" : ["Parvez","Abhay","Nisha"],
+    "coords" : ["Shiva Sai","H Ananth Krishna","Prudhvi Raj","Sameer Mirza","Aashna Sahu","Uday Kumar","Pochimireddy Ajith Reddy","Soumik"]
+    },
+    {
+    "name": "Pronites",
+    "heads": ["Ram Charan","Yash","Mishal"],
+    "coords": ["Prabhat Kukunuri","Pritam Kumar Mandal","Harshit Vaibhav","Meghana Makkapati","Narayana Karthik Kumar","Rishikesh Kasireddy"]
+    },
+    {
+    "name": "Hospi",
+    "heads": ["Jayathi","Anand","Abhinash"],
+    "coords": [
+      "Sammeta Saipoorna",
+      "Vishnupraneeswar P",
+      "Krapa Sandeep",
+      "Saanvi Amrutha",
+      "Kowsith Gurubilli",
+      "Manoj Kumar",
+      "Pydimarri Sindhu",
+      "Roja Hasini Vadapalli",
+      "B Sai Midhun",
+      "Karthikeya Kanithi",
+      "G Madhukar",
+      "K Manisha",
+      "Y A Karthik",
+      "Akhil Nistala",
+      "Jaswanth"
+    ]
+    },
+    {
+    "name": "Multimedia",
+    "heads": ["Venu","Kiran","Naveen"],
+    "coords" : ["Ira Khare","Harini","Ashok","Ramu","Srikanth","Krishna Pranav","Sahil","Abhishek","Krishna Kowshik","Blessy Anvitha","Gnana Ezhil"]
+    },
+    {
+    "name" : "Finance",
+    "heads": ["Punith"],
+    "coords" : ["Tanish Reddy","Mirudulla"]
+    },
+    {
+    "name" : "PR",
+    "heads": ["Harini","Surya"],
+    "coords" :  ["Abhinav Karan","Srivastav","Mohana","Monish","Vinod Kumar"]
+    },
+    {
+    "name": "Events",
+    "heads": ["Simhadri","Karthik","Srinivas","Varshini"],
+    "coords" : [
+      "Abhinay Varshith",
+      "Preetham Rachamalla",
+      "Gnaneshwarii",
+      "Akshith Mantha",
+      "Hanokk",
+      "Mahani Kunche",
+      "K.Sai Chandraneel",
+      "Jatavathi Ajay",
+      "Surgavi Peela",
+      "Suniras Ram Rapelli",
+      "Thanushka Patani",
+      "Srinidhi Chandrabotla",
+      "M. Dhyana Teja",
+      "Venkata Dheeraj Kurapati",
+      "Sravanthi",
+      "Vinod Kumar",
+      "Sujan Rada",
+      "D. Abhinay Shashanth"
+    ]
+    },
+    {
+    "name" : "Web",
+    "heads": ["Nihar","Manohar"],
+    "coords" : ["Sathwik Kodamarthi","Praneeth Chamarthy","Tejasri Namagiri","Ankush Singh","Pradyumn"]
+    },
+    {
+    "name": "Design",
+    "heads": ["Shripadh","Swarnima"],
+    "coords" : ["Girijesh Dasari","Nidhiya Susan Siby","Tanvi Vineeth","Kushagra Upadhay","Enosh Andrade","Shlloak Thombaray"]
+    }
+]
