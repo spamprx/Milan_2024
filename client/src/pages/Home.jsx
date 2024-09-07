@@ -12,6 +12,7 @@ import Basketball from "../assets/Basketball.png";
 import Theme from "../assets/Theme.png";
 import Mascot from "../assets/Mascot.jpeg";
 import Pattern from "../assets/Pattern.png";
+import Sponsor from "../assets/Sponsor.png";
 import Pattern2 from "../assets/Pattern2.png";
 import HomeArrow from "../assets/HomeArrow.png";
 import HomeArrow2 from "../assets/Double_Arrow.png";
@@ -247,38 +248,38 @@ function Home() {
 
       <div className="w-screen mb-10">
         <div className="w-screen min-h-screen lg:h-screen">
-          <div className="relative flex items-center justify-center h-1/5 w-screen pr-0 p-10 my-10">
+          <div className="relative flex items-center justify-center h-1/5 w-full p-10 my-10">
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
                 // style={{ transform: "rotate(-2.71deg)" }}
-                className="w-full h-full opacity-85 object-cover"
+                className="w-screen h-full opacity-85 object-cover"
               />
             </div>
             <img
               src={Skateboard}
               // style={{ transform: "rotate(-47.36deg)" }}
-              className="absolute w-1/2 h-auto z-10 opacity-90"
+              className="absolute w-3/4 sm:w-1/2 lg:w-1/3 h-auto z-10 opacity-90"
             />
-            <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
+            <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
               OUR THEME
             </p>
           </div>
           <div className="w-screen h-4/5 flex flex-wrap justify-center lg:justify-between items-center p-2">
-            <div className="w-3/4 lg:w-1/2 h-3/4 p-2 rounded-xl">
+            <div className="w-3/4 sm:w-2/3 lg:w-1/2 h-3/4 p-2 rounded-xl">
               <img
                 src={Theme}
                 className="w-full h-full object-contain rounded-xl"
               />
             </div>
-            <div className="relative w-3/4 lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
-              <div className="relative w-full lg:w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
+            <div className="relative w-3/4 sm:w-2/3 lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
+              <div className="relative w-full lg:w-2/3 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
                 <img
                   src={Pattern2}
                   className="w-full h-full object-cover opacity-15 z-20"
                 />
               </div>
-              <div className="absolute w-full lg:w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
+              <div className="absolute w-full lg:w-2/3 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
                 <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-xl leading-relaxed p-1 lg:p-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Aspernatur nobis, autem, aliquid repellendus totam veritatis
@@ -302,21 +303,21 @@ function Home() {
             <img
               src={Skateboard}
               // style={{ transform: "rotate(-47.36deg)" }}
-              className="absolute w-1/2 h-auto z-10 opacity-90"
+              className="absolute w-3/4 sm:w-1/2 lg:w-1/3 h-auto z-10 opacity-90"
             />
-            <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
+            <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
               OUR MASCOT
             </p>
           </div>
           <div className="w-screen h-4/5 flex flex-wrap justify-center lg:justify-between items-center p-2">
-            <div className="relative w-3/4 lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
-              <div className="relative w-full lg:w-1/2 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
+            <div className="relative w-3/4 sm:w-2/3 lg:w-1/2 h-3/4 p-2 flex items-center justify-center">
+              <div className="relative w-full lg:w-2/3 h-full rounded-lg flex items-center justify-center z-10 bg-transparent">
                 <img
                   src={Pattern2}
                   className="w-full h-full object-cover opacity-15 z-20"
                 />
               </div>
-              <div className="absolute w-full lg:w-1/2 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
+              <div className="absolute w-full lg:w-2/3 h-full bg-[#8F33BA] rounded-2xl flex items-center text-[#D1CCB6] text-center">
                 <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-xl leading-relaxed p-1 lg:p-3">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Aspernatur nobis, autem, aliquid repellendus totam veritatis
@@ -325,7 +326,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="w-3/4 lg:w-1/2 lg:w-1/2 h-3/4 p-2 rounded-xl">
+            <div className="w-3/4 sm:w-2/3 lg:w-1/2 h-3/4 p-2 rounded-xl">
               <img
                 src={Mascot}
                 className="w-full h-full object-contain rounded-xl"
@@ -348,7 +349,7 @@ function Home() {
                     style={{ transform: "rotate(-47.36deg)" }}
                     className="absolute w-1/2 h-auto z-10 opacity-50"
                   /> */}
-            <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
+            <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
               OVERALL LEADERBOARD
             </p>
           </div>
@@ -372,14 +373,15 @@ function Home() {
         >
           <div className="flex justify-start">
             <div className="relative flex items-center h-1/5 w-1/2 p-5">
-              <img
+              {/* <img
                 src={Skateboard}
                 // style={{ transform: "rotate(-47.36deg)" }}
                 className="absolute w-full lg:w-3/4 h-auto opacity-90"
               />
-              <p className="relative z-10 text-white text-center text-lg sm:text-2xl ml-10 lg:text-4xl font-semibold lg:pl-20">
+              <p className="relative z-10 text-white text-center text-lg sm:text-2xl ml-10 lg:text-3xl font-semibold lg:pl-20">
                 SPONSORS
-              </p>
+              </p> */}
+              <img src={Sponsor} alt="Sponsor" className="sm:w-1/2 lg:w-1/3" />
             </div>
           </div>
           <div className="flex justify-center w-screen h-1/2">

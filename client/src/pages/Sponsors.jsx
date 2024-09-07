@@ -33,7 +33,7 @@ function Sponsors() {
               <img
                 src={SponsorArrow}
                 alt="SponsorArrow"
-                className="w-full h-full"
+                className="w-full scale-y-50"
               />
             </div>
 
@@ -97,7 +97,7 @@ function Sponsors() {
               <img
                 src={SponsorArrow}
                 alt="SponsorArrow"
-                className="w-full h-full"
+                className="w-full scale-y-50"
               />
             </div>
 
