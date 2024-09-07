@@ -1,24 +1,18 @@
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Header from "../components/Header";
-// <<<<<<< HEAD
 import SportCard from "../components/SportCard";
 import HomeSponsorCard from "../components/HomeSponsorCard";
 import HomeBg from "../assets/Home.png";
-import Home2 from "../assets/Home2.png";
 import MilanFont from "../assets/Milan-font1.png";
 import MilanHome from "../assets/MilanHome2.png";
 import Skateboard from "../assets/Skateboard.png";
 import Basketball from "../assets/Basketball.png";
 import Theme from "../assets/Theme.png";
 import Mascot from "../assets/Mascot.jpeg";
-import Pattern from "../assets/Pattern.png";
 import Pattern2 from "../assets/Pattern2.png";
 import HomeArrow from "../assets/HomeArrow.png";
 import HomeArrow2 from "../assets/Double_Arrow.png";
 import Select from "react-select";
-// =======
-// import Image from "../assets/Arrow.png";
-// >>>>>>> 6ec991de3baeda8f514fa1f25b5ec8ac4d55cf07
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -36,23 +30,23 @@ function Home() {
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 880);
+      if (cardContainerRef.current) {
+        const containerWidth = cardContainerRef.current.clientWidth;
+        const cardWidth = containerWidth < 640 ? containerWidth : containerWidth / 3;
+        cardContainerRef.current.scrollLeft = cardWidth * activeIndex;
+      }
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [activeIndex]);
 
   const handleScroll = () => {
     if (cardContainerRef.current) {
       const containerWidth = cardContainerRef.current.clientWidth;
-      const cardWidth = containerWidth / 3;
-      const newIndex = Math.round(
-        cardContainerRef.current.scrollLeft / cardWidth
-      );
+      const cardWidth = containerWidth < 640 ? containerWidth : containerWidth / 3;
+      const newIndex = Math.round(cardContainerRef.current.scrollLeft / cardWidth);
       setActiveIndex(newIndex);
     }
   };
@@ -67,34 +61,22 @@ function Home() {
 
   const scrollToCard = (index) => {
     if (cardContainerRef.current) {
-      const cardWidth = cardContainerRef.current.clientWidth / 3;
+      const containerWidth = cardContainerRef.current.clientWidth;
+      const cardWidth = containerWidth < 640 ? containerWidth : containerWidth / 3;
       cardContainerRef.current.scrollTo({
         left: cardWidth * index,
-        behavior: "auto", // Instant shifting
+        behavior: "smooth",
       });
       setActiveIndex(index);
-    }
-  };
-
-  const handleCircleClick = (direction) => {
-    if (cardContainerRef.current) {
-      const cardWidth = cardContainerRef.current.clientWidth / 3;
-      const newIndex =
-        direction === "left"
-          ? Math.max(activeIndex - 1, 0)
-          : Math.min(activeIndex + 1, 4);
-      scrollToCard(newIndex);
     }
   };
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
     console.log(option);
-    // setIsOpen(!isOpen);
   };
 
   return (
-    // <<<<<<< HEAD
     <div className="relative bg-transparent min-h-screen w-screen flex flex-col">
       <div
         className="relative w-screen h-full bg-cover bg-center"
@@ -127,11 +109,6 @@ function Home() {
                 and camaraderie. <br />
                 Drawing over 6,000+ attendees
               </p>
-              {/* <img
-                src={Home2}
-                alt="Home2"
-                className="w-full h-1/2 object-contain z-10 mt-10"
-              /> */}
             </div>
           </div>
           <div>
@@ -186,19 +163,20 @@ function Home() {
             </div>
             <div
               ref={cardContainerRef}
-              className="relative w-full flex overflow-x-scroll scroll-snap-x p-10 space-x-5 bg-transparent"
+              className="relative w-full flex overflow-x-scroll scroll-snap-x p-4 space-x-4 bg-transparent"
               style={{
                 scrollSnapType: "x mandatory",
-                scrollbarWidth: "none", // Hide scrollbar for Firefox
-                msOverflowStyle: "none", // Hide scrollbar for Internet Explorer and Edge
-                overflow: "auto", // Ensure scroll functionality is enabled
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
+                WebkitOverflowScrolling: "touch",
+                overflow: "auto",
               }}
             >
               {[0, 1, 2, 3, 4].map((_, index) => (
                 <div
                   key={index}
-                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 h-1/2 lg:h-auto mx-20 transition-transform duration-300 ease-in-out ${
-                    index === activeIndex ? "scale-105 z-10" : "opacity-50"
+                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 transition-transform duration-300 ease-in-out ${
+                    index === activeIndex ? "scale-105 z-10" : "scale-95 opacity-50"
                   }`}
                   style={{ scrollSnapAlign: "center" }}
                 >
@@ -206,39 +184,21 @@ function Home() {
                 </div>
               ))}
             </div>
-            <div className="flex justify-center ">
+            <div className="flex justify-center mt-4">
               <div className="flex space-x-2">
-                {/* <div
-                  className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
-                  onClick={() => handleCircleClick("left")}
-                ></div> */}
                 {[0, 1, 2, 3, 4].map((_, index) => (
                   <div
                     key={index}
-                    className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-11 lg:h-11 rounded-full cursor-pointer bg-[#A020F0] mb-10 ${
-                      index === activeIndex
-                        ? "border border-[#DAA827] border-2"
-                        : ""
+                    className={`w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 rounded-full cursor-pointer bg-[#A020F0] ${
+                      index === activeIndex ? "border-2 border-[#DAA827]" : ""
                     }`}
-                    onClick={() => {
-                      if (index < activeIndex) {
-                        handleCircleClick("left");
-                      } else if (index > activeIndex) {
-                        handleCircleClick("right");
-                      } else {
-                        scrollToCard(index); // If clicking on the active index, just scroll to the card
-                      }
-                    }}
+                    onClick={() => scrollToCard(index)}
                   >
                     {index === activeIndex && (
-                      <img src={Basketball} className="w-full h-full p-1" />
+                      <img src={Basketball} className="w-full h-full p-1" alt="Basketball" />
                     )}
                   </div>
                 ))}
-                {/* <div
-                  className="w-3 h-3 rounded-full bg-[#A020F0] cursor-pointer"
-                  onClick={() => handleCircleClick("right")}
-                ></div> */}
               </div>
             </div>
           </div>
@@ -251,13 +211,11 @@ function Home() {
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
-                // style={{ transform: "rotate(-2.71deg)" }}
                 className="w-full h-full opacity-85 object-cover"
               />
             </div>
             <img
               src={Skateboard}
-              // style={{ transform: "rotate(-47.36deg)" }}
               className="absolute w-1/2 h-auto z-10 opacity-90"
             />
             <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
@@ -295,13 +253,11 @@ function Home() {
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
-                // style={{ transform: "rotate(-2.71deg)" }}
                 className="w-full h-full opacity-85 object-cover"
               />
             </div>
             <img
               src={Skateboard}
-              // style={{ transform: "rotate(-47.36deg)" }}
               className="absolute w-1/2 h-auto z-10 opacity-90"
             />
             <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
@@ -325,7 +281,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className="w-3/4 lg:w-1/2 lg:w-1/2 h-3/4 p-2 rounded-xl">
+            <div className="w-3/4 lg:w-1/2 h-3/4 p-2 rounded-xl">
               <img
                 src={Mascot}
                 className="w-full h-full object-contain rounded-xl"
@@ -339,15 +295,9 @@ function Home() {
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
-                // style={{ transform: "rotate(-2.71deg)" }}
                 className="w-full h-full opacity-85 object-cover"
               />
             </div>
-            {/* <img
-                    src={Skateboard}
-                    style={{ transform: "rotate(-47.36deg)" }}
-                    className="absolute w-1/2 h-auto z-10 opacity-50"
-                  /> */}
             <p className="relative z-20 text-white text-center text-xl sm:text-2xl lg:text-4xl font-semibold">
               OVERALL LEADERBOARD
             </p>
@@ -374,7 +324,6 @@ function Home() {
             <div className="relative flex items-center h-1/5 w-1/2 p-5">
               <img
                 src={Skateboard}
-                // style={{ transform: "rotate(-47.36deg)" }}
                 className="absolute w-full lg:w-3/4 h-auto opacity-90"
               />
               <p className="relative z-10 text-white text-center text-lg sm:text-2xl ml-10 lg:text-4xl font-semibold lg:pl-20">
@@ -386,19 +335,7 @@ function Home() {
             <HomeSponsorCard />
           </div>
         </div>
-        {/* </div> */}
       </div>
-
-      {/* =======
-    <div className="flex flex-col">
-      <div className=""></div>
-
-      <div className="relative w-full">
-        <div className="absolute inset-0 bg-[#DEB11647] opacity-30 blur-sm"></div>
-        <div className="relative flex flex-row">
-          <img src={Image} alt="Arrow" className="w-1/2" />
-          <img src={Image} alt="Arrow" className="w-1/2" />
->>>>>>> 6ec991de3baeda8f514fa1f25b5ec8ac4d55cf07 */}
     </div>
   );
 }
