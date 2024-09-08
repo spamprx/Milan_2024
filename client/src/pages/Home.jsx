@@ -259,43 +259,51 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-[#160631]">
-        <div className="w-screen relative mb-10">
-          <img
-            src={Stripes}
-            alt="Stripes background"
-            className="w-full h-auto object-cover"
-          />
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <h2 className="text-[#D1CCB6] text-lg md:text-3xl lg:text-4xl font-semibold text-center">
-              MORE ABOUT OTHER EVENTS
-            </h2>
+      <div className="w-full min-h-screen mb-5">
+        <div className="bg-[#160631] mb-5">
+          <div className="w-screen relative mb-10">
+            <img
+              src={Stripes}
+              alt="Stripes background"
+              className="w-full h-auto object-cover"
+            />
+            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+              <h2 className="text-[#D1CCB6] text-lg md:text-3xl lg:text-4xl font-semibold text-center">
+                MORE ABOUT OTHER EVENTS
+              </h2>
+            </div>
+          </div>
+          <div className="w-screen relative flex flex-row gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6]">
+            <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
+            <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+            <div className="bg-[#D1CCB6] text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
+              THE AFTERMOVIE
+            </div>
+            <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+            <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
           </div>
         </div>
-
-        <div className="w-screen relative flex flex-row gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6]">
-          <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
-          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
-          <div className="bg-[#D1CCB6] text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
-            THE AFTERMOVIE
+        <div className="w-full max-w-7xl flex-grow flex flex-col lg:flex-row justify-between items-center gap-8 px-4 lg:px-8">
+          <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 lg:order-2 overflow-hidden">
+            <iframe
+              className="w-full h-full"
+              src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
-          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
-          <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
-        </div>
-      </div>
-
-      <div className="flex flex-col w-[75vw] lg:flex-row p-2 mx-auto gap-8 py-12">
-        <div className="relative w-full lg:w-1/2 max-h-[40vh] h-auto p-2 flex items-center justify-center">
-          <div className="relative w-full h-full bg-[#8F33BA] max-h-[40vh] rounded-2xl flex items-center text-[#D1CCB6] py-4 lg:py-6 text-center overflow-hidden">
-            <div className="absolute inset-0 rounded-2xl overflow-hidden">
+          <div className="relative w-full lg:w-1/2 aspect-square max-w-[500px] flex items-center justify-center order-2 lg:order-1">
+            <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
               <img
                 src={Pattern2}
-                className="w-full h-full object-cover opacity-15"
-                alt="Background Pattern"
+                className="w-full h-full object-cover opacity-15 z-20"
               />
             </div>
-            <div className="relative w-full h-full flex items-center justify-center p-4 lg:p-6 z-10">
-              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm sm:text-md lg:text-md leading-relaxed">
+            <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
+              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
                 Lorem ipsum dolor sit amet, ne ferri iudico mnesarchum mel, no
                 nam liber animal, sea tollit scaevola necessitatibus cu. In est
                 facer appellantur. Et mea debet dolorem voluptaria. Ne commodo
@@ -308,21 +316,9 @@ function Home() {
             </div>
           </div>
         </div>
-
-        <div className="w-full lg:w-1/2 h-[40vh] flex justify-center">
-          <iframe
-            className="w-full h-full"
-            src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          ></iframe>
-        </div>
       </div>
 
-      <div className="w-full min-h-screen flex flex-col justify-center items-center">
+      <div className="w-full min-h-screen flex flex-col justify-center items-center mb-5">
         <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
           <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
@@ -361,7 +357,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="w-full min-h-screen flex flex-col justify-center items-center">
+      <div className="w-full min-h-screen flex flex-col justify-center items-center mb-5">
         <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
           <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
@@ -401,7 +397,7 @@ function Home() {
       </div>
 
       <div className="w-full h-screen flex flex-col justify-center items-center lg:mt-20">
-        <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-3">
+        <div className="relative flex items-center justify-center h-1/7 lg:h-2/5 w-full p-6 lg:p-10 mb-3">
           <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
               src={HomeArrow}
@@ -412,10 +408,9 @@ function Home() {
             OVERALL LEADERBOARD
           </p>
         </div>
-        {/* <div> */}
-        <div className="flex flex-row justify-between items-center w-full font-bold h-1/6 lg:w-full lg:h-full mt-1 lg:m-5">
+        <div className="flex flex-row justify-between items-center w-full font-bold h-1/6 lg:w-full lg:h-1/6 mt-1 lg:m-5">
           <div
-            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 sm:h-2/3 lg:h-full m-3 ${
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 sm:h-3/4 lg:h-full m-3 ${
               leaderBoard === "leaderboard"
                 ? "bg-[#4B16B2] text-white"
                 : "bg-[#D1CCB6]"
@@ -429,7 +424,7 @@ function Home() {
             </button>
           </div>
           <div
-            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 sm:h-2/3 lg:h-full m-3 ${
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 sm:h-3/4 lg:h-full m-3 ${
               leaderBoard === "blockrace"
                 ? "bg-[#4B16B2] text-white"
                 : "bg-[#D1CCB6]"
@@ -443,7 +438,7 @@ function Home() {
             </button>
           </div>
         </div>
-        <div className="w-full max-w-7xl lg:w-screen flex flex-col lg:flex-row justify-center items-center lg:items-start gap-8 px-4 lg:px-8">
+        <div className="w-full max-w-7xl lg:w-screen flex flex-col lg:flex-row justify-center items-center lg:items-start px-4 lg:px-8">
           <div
             className={`relative w-full lg:w-screen lg:h-1/2 bg-[#8F33BA] flex items-center justify-center p-3 ${
               isSmallScreen ? "max-w-[500px] aspect-square" : ""
