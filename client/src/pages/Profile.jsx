@@ -7,6 +7,7 @@ import Select from 'react-select';
 import { blockOptions, eventOptions } from '../content/Options';
 import LoginPage from './Login';
 import '../styles.css';
+import GoogleButton from './Login';
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -231,7 +232,7 @@ const Profile = () => {
 
   return (
     <>
-    {/* <LoginPage/> */}
+    <GoogleButton/>
     <div className="container mx-auto px-4 mt-10 mb-20">
         <div className="bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px] max-w-4xl mx-auto">
           <div className="text-2xl py-6 px-6 text-white text-center font-[700] uppercase">
@@ -278,7 +279,7 @@ const Profile = () => {
                 <SubmitButton />
               </form>
             ) : (
-              <div className="py-4 px-6 space-y-6 md:w-4/5 lg:w-3/5 mx-auto">
+              <div className="py-10 px-10 space-y-6 md:w-4/5 lg:w-3/5 mx-auto">
                 <InputField
                   label="Name"
                   id="name"
