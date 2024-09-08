@@ -129,7 +129,7 @@ function Home() {
   return (
     <div className="relative bg-transparent min-h-screen w-screen flex flex-col">
       <div
-        className="relative w-screen h-full bg-cover bg-center"
+        className="relative w-screen h-full bg-cover bg-center pb-10"
         style={{ backgroundImage: `url(${HomeBg})` }}
       >
         <div className="w-screen h-full">
@@ -225,10 +225,11 @@ function Home() {
               {currentEvents.map((event, index) => (
                 <div
                   key={index}
-                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 transition-transform duration-300 ease-in-out ${index === activeIndex
+                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 transition-transform duration-300 ease-in-out ${
+                    index === activeIndex
                       ? "scale-105 z-10"
                       : "scale-95 opacity-50"
-                    }`}
+                  }`}
                   style={{ scrollSnapAlign: "center" }}
                 >
                   <SportCard event={event} />
@@ -240,8 +241,9 @@ function Home() {
                 {currentEvents.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 rounded-full cursor-pointer bg-[#A020F0] ${index === activeIndex ? "border-2 border-[#DAA827]" : ""
-                      }`}
+                    className={`w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 rounded-full cursor-pointer bg-[#A020F0] ${
+                      index === activeIndex ? "border-2 border-[#DAA827]" : ""
+                    }`}
                     onClick={() => scrollToCard(index)}
                   >
                     {index === activeIndex && (
@@ -258,20 +260,63 @@ function Home() {
           </div>
         </div>
       </div>
+      <div
+        className={`relative bg-gradient-to-b from-[#0E0E0E] to-[#160631] h-[20vh]`}
+      ></div>
+      <div className="bg-[#160631]">
+        <div className="w-screen relative mb-10">
+          <img
+            src={Stripes}
+            alt="Stripes background"
+            className="w-full h-auto object-cover"
+          />
+          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+            <h2 className="text-[#D1CCB6] text-lg md:text-3xl lg:text-4xl font-semibold text-center">
+              MORE ABOUT OTHER EVENTS
+            </h2>
+          </div>
+        </div>
 
-
-      <div className="w-screen relative my-10">
-        <img
-          src={Stripes}
-          alt="Stripes background"
-          className="w-full scale-125 h-auto object-cover"
-        />
-        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-          <h2 className="text-[#D1CCB6] text-2xl sm:text-3xl lg:text-4xl font-semibold text-center">
-            MORE ABOUT OTHER EVENTS
-          </h2>
+        <div className="w-screen relative flex flex-row gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6]">
+          <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
+          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+          <div className="bg-[#D1CCB6] text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
+            THE AFTERMOVIE
+          </div>
+          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+          <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
         </div>
       </div>
+
+      <div className="flex flex-row p-2">
+        <div className="relative w-3/4 sm:w-2/3 lg:w-1/2 p-2 flex items-center justify-center mt-6">
+          <div className="absolute w-full lg:w-2/3 bg-[#270B5D] rounded-2xl flex items-center text-[#D1CCB6] text-center p-1 lg:p-3 overflow-auto">
+            <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed">
+              Lorem ipsum dolor sit amet, ne ferri iudico mnesarchum mel, no nam
+              liber animal, sea tollit scaevola necessitatibus cu. In est facer
+              appellantur. Et mea debet dolorem voluptaria. Ne commodo fabulas
+              eos. Ius ei minim aeque laudem. Hinc tation nominati vis et,
+              alienum epicurei pro eu. At per munere eloquentiam. An wisi
+              lobortis vix. Eos cu scripta atomorum, an est cetero liberavisse,
+              affert postea conclusionemque ad ius. Tamquam civibus pri cu,
+              exerci timeam consequuntur.
+            </p>
+          </div>
+        </div>
+        <div className="flex-shrink-0 mt-6">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
+
       <div className="w-screen mb-10">
         <div className="w-screen min-h-screen lg:h-screen">
           <div className="relative flex items-center justify-center h-1/5 w-full p-10 my-10">
