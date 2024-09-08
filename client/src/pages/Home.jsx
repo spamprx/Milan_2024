@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import Header from "../components/Header";
 import SportCard from "../components/SportCard";
 import HomeSponsorCard from "../components/HomeSponsorCard";
+import HomeLeaderboard from "../components/HomeLeaderboard";
 import HomeBg from "../assets/Home.png";
 import MilanFont from "../assets/Milan-font1.png";
 import MilanHome from "../assets/MilanHome2.png";
@@ -19,7 +20,8 @@ import Select from "react-select";
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1);
+  const [leaderBoard, setLeaderBoard] = useState("leaderboard");
   const cardContainerRef = useRef(null);
 
   const sportOptions = [
@@ -117,7 +119,7 @@ function Home() {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    setActiveIndex(0);
+    setActiveIndex(1);
   };
 
   const currentEvents =
@@ -126,7 +128,7 @@ function Home() {
       : [];
 
   return (
-    <div className="relative bg-transparent min-h-screen w-screen flex flex-col">
+    <div className="relative bg-transparent min-h-screen max-w-screen flex flex-col">
       <div
         className="relative w-screen h-full bg-cover bg-center"
         style={{ backgroundImage: `url(${HomeBg})` }}
@@ -141,17 +143,17 @@ function Home() {
             <img
               src={MilanFont}
               alt="Milan Font"
-              className="absolute top-[10%] transform  z-20 w-3/4 max-w-[1000px] h-auto"
+              className="absolute top-[10%] transform z-20 w-3/4 max-w-[1000px] h-auto"
             />
-            <div className="absolute top-[60%] w-screen z-20 text-center">
-              <p className="font-vietnam-regular font-bold text-white mx-auto">
+            <div className="absolute top-[60%] w-screen z-20 text-center text-[#D1CCB6] text-lg font-vietnam-pro mt-10">
+              <p className="font-normal mx-auto">
                 MILAN stands as one of the largest and most eagerly awaited
                 inter-hostel competitions in India.
                 <br />
                 It is a thrilling showcase of talent and spirit, uniting
                 students in a vibrant and dynamic celebration.
               </p>
-              <p className="font-vietnam-regular font-extralight text-white mx-auto mt-20">
+              <p className="font-extralight mx-auto mt-20">
                 With each passing year, participation in this General
                 Championship has been on the rise,
                 <br /> contributing to an atmosphere of heightened enthusiasm
@@ -161,10 +163,10 @@ function Home() {
             </div>
           </div>
           <div>
-            <div className="relative flex w-screen h-1/2 flex-row justify-between items-center my-20 lg:my-10 p-10 z-30 bg-transparent">
+            <div className="relative flex w-screen h-1/2 flex-row justify-between items-center my-20 lg:my-10 p-10 z-30 font-vietnam-pro bg-transparent">
               <div className="flex flex-col">
                 <label
-                  className="block text-white mb-2 text-left"
+                  className="block text-[#D1CCB6] mb-2 text-left"
                   htmlFor="event"
                 >
                   SPORTS YOU LIKE:
@@ -262,7 +264,7 @@ function Home() {
 
       <div className="w-screen mb-10">
         <div className="w-screen min-h-screen lg:h-screen">
-          <div className="relative flex items-center justify-center h-1/5 w-full p-10 my-10">
+          <div className="relative flex items-center justify-center h-1/5 w-screen p-10 my-10">
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
@@ -305,7 +307,7 @@ function Home() {
         </div>
 
         <div className="w-screen min-h-screen lg:h-screen">
-          <div className="relative flex items-center justify-center h-1/5 w-full p-10">
+          <div className="relative flex items-center justify-center h-1/5 w-screen p-10">
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
@@ -347,8 +349,8 @@ function Home() {
           </div>
         </div>
 
-        <div className="w-screen min-h-screen lg:h-screen">
-          <div className="relative flex items-center justify-center h-1/5 w-full p-10">
+        <div className="w-screen min-h-screen">
+          <div className="relative flex items-center justify-center h-1/5 w-screen p-10">
             <div className="absolute flex w-full h-3/4 items-center justify-center">
               <img
                 src={HomeArrow}
@@ -364,16 +366,45 @@ function Home() {
               OVERALL LEADERBOARD
             </p>
           </div>
-          <div className="flex flex-row justify-between items-center w-full h-1/5 mt-1 p-10">
-            <div className="flex items-center justify-center bg-[#D1CCB6] font-vietnam-regular rounded-2xl w-1/2 h-full m-3">
-              <button className="h-1/2 md:text-xl lg:text-xl">
-                Leaderboard
-              </button>
+          <div className="relative w-screen h-screen flex flex-wrap justify-center">
+            <div className="flex flex-row justify-between items-center w-full lg:w-3/4 h-1/6 lg:h-1/5 mt-1">
+              <div
+                className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 lg:h-1/2 m-3 ${
+                  leaderBoard === "leaderboard"
+                    ? "bg-[#4B16B2]"
+                    : "bg-[#D1CCB6]"
+                }`}
+              >
+                <button
+                  className="h-1/2 md:text-xl lg:text-xl w-full"
+                  onClick={() => setLeaderBoard("leaderboard")}
+                >
+                  Leaderboard
+                </button>
+              </div>
+              <div
+                className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 lg:h-1/2 m-3 ${
+                  leaderBoard === "blockrace" ? "bg-[#4B16B2]" : "bg-[#D1CCB6]"
+                }`}
+              >
+                <button
+                  className="h-1/2 md:text-xl lg:text-xl w-full"
+                  onClick={() => setLeaderBoard("blockrace")}
+                >
+                  Block Race
+                </button>
+              </div>
             </div>
-            <div className="flex items-center justify-center bg-[#D1CCB6] font-vietnam-regular rounded-2xl w-1/2 h-full m-3">
-              <button className="h-1/2 md:text-xl lg:text-xl">
-                Block Race
-              </button>
+            <div className="relative w-screen h-1/2 mx-3 my-0 lg:w-3/4 lg:h-3/4 bg-[#8F33BA] rounded-xl p-3">
+              <div className="relative w-full h-full bg-[#0000004F] opacity-31 rounded-lg">
+                {leaderBoard === "leaderboard" ? (
+                  <HomeLeaderboard />
+                ) : (
+                  <div className="flex justify-center items-center w-full h-full">
+                    <p className="text-white text-2xl">Block Race Component</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

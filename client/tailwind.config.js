@@ -7,6 +7,8 @@ export default {
         "dropdown-bg": "#000000", // Black background
         "dropdown-text": "#ffffff", // White text
         "dropdown-hover": "#333333", // Slightly lighter black for hover
+        "scrollbar-thumb": "",
+        "scrollbar-track": "#270B5D",
       },
       fontFamily: {
         "vietnam-thin": [
@@ -21,7 +23,32 @@ export default {
           "Arial",
           "sans-serif",
         ],
+        "vietnam-pro": ["Vietnam Pro", "sans-serif"],
       },
     },
   },
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".scrollbar-thin": {
+          "scrollbar-width": "thin",
+        },
+        ".scrollbar-thumb": {
+          "scrollbar-color": "#ffbe5e #D1CCB6",
+        },
+        ".scrollbar-thumb:hover": {
+          "scrollbar-color": "#270B5D #D1CCB6",
+        },
+        ".scrollbar-track": {
+          "--tw-scrollbar-track": "#D1CCB6",
+        },
+        ".scrollbar-thumb-custom": {
+          "--tw-scrollbar-thumb": "#ffbe5e",
+          "border-radius": "10px",
+        },
+      };
+
+      addUtilities(newUtilities, ["responsive", "hover"]);
+    },
+  ],
 };
