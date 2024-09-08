@@ -11,7 +11,6 @@ import Basketball from "../assets/Basketball.png";
 import Theme from "../assets/Theme.png";
 import Mascot from "../assets/Mascot.jpeg";
 import Stripes from "../assets/Stripes.png";
-import Pattern from "../assets/Pattern.png";
 import Sponsor from "../assets/Sponsor.png";
 import Pattern2 from "../assets/Pattern2.png";
 import HomeArrow from "../assets/HomeArrow.png";
@@ -146,25 +145,23 @@ function Home() {
               alt="Milan Font"
               className="absolute top-[10%] transform z-20 w-3/4 max-w-[1000px] h-auto"
             />
-            <div className="absolute top-[60%] w-screen z-20 text-center text-[#D1CCB6] text-lg font-vietnam-pro mt-10">
+            <div className="absolute top-[60%] w-screen sm:w-3/4 lg:w-1/2 z-20 text-center text-[#D1CCB6] text-xl font-be-vietnam-pro mt-10">
               <p className="font-normal mx-auto">
                 MILAN stands as one of the largest and most eagerly awaited
-                inter-hostel competitions in India.
-                <br />
-                It is a thrilling showcase of talent and spirit, uniting
-                students in a vibrant and dynamic celebration.
+                inter-hostel competitions in India. It is a thrilling showcase
+                of talent and spirit, uniting students in a vibrant and dynamic
+                celebration.
               </p>
-              <p className="font-extralight mx-auto mt-20">
+              <p className="font-extralightmx-2 lg:mx-auto mt-20">
                 With each passing year, participation in this General
-                Championship has been on the rise,
-                <br /> contributing to an atmosphere of heightened enthusiasm
-                and camaraderie. <br />
-                Drawing over 6,000+ attendees
+                Championship has been on the rise, contributing to an atmosphere
+                of heightened enthusiasm and camaraderie. Drawing over 6,000+
+                attendees
               </p>
             </div>
           </div>
-          <div>
-            <div className="relative flex w-screen h-1/2 flex-row justify-between items-center my-20 lg:my-10 p-10 z-30 font-vietnam-pro bg-transparent">
+          <div className="h-full mt-20">
+            <div className="relative flex w-screen h-1/2 flex-row justify-between items-center mt-20 lg:my-10 p-10 z-30 font-be-vietnam-pro bg-transparent">
               <div className="flex flex-col">
                 <label
                   className="block text-[#D1CCB6] mb-2 text-left"
@@ -205,10 +202,10 @@ function Home() {
                 />
               </div>
               <div className="w-1/2 flex flex-col justify-end items-end">
-                <p className="text-[#f0f0f0d9] font-vietnam-thin font-thin">
+                <p className="text-[#f0f0f0d9] font-be-vietnam-pro font-thin">
                   There will be
                 </p>
-                <p className="text-white text-xl font-bold">
+                <p className="text-white text-xl font-bold font-be-vietnam-pro">
                   {currentEvents.length} Incoming Events
                 </p>
               </div>
@@ -262,9 +259,6 @@ function Home() {
           </div>
         </div>
       </div>
-      <div
-        className={`relative bg-gradient-to-b from-[#0E0E0E] to-[#160631] h-[20vh]`}
-      ></div>
       <div className="bg-[#160631]">
         <div className="w-screen relative mb-10">
           <img
@@ -292,17 +286,26 @@ function Home() {
 
       <div className="flex flex-col w-[75vw] lg:flex-row p-2 mx-auto gap-8 py-12">
         <div className="relative w-full lg:w-1/2 max-h-[40vh] h-auto p-2 flex items-center justify-center">
-          <div className="relative w-full h-full bg-[#270B5D] max-h-[40vh] rounded-2xl flex items-center text-[#D1CCB6] text-center p-2 lg:p-4 overflow-clip">
-            <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed">
-              Lorem ipsum dolor sit amet, ne ferri iudico mnesarchum mel, no nam
-              liber animal, sea tollit scaevola necessitatibus cu. In est facer
-              appellantur. Et mea debet dolorem voluptaria. Ne commodo fabulas
-              eos. Ius ei minim aeque laudem. Hinc tation nominati vis et,
-              alienum epicurei pro eu. At per munere eloquentiam. An wisi
-              lobortis vix. Eos cu scripta atomorum, an est cetero liberavisse,
-              affert postea conclusionemque ad ius. Tamquam civibus pri cu,
-              exerci timeam consequuntur.
-            </p>
+          <div className="relative w-full h-full bg-[#8F33BA] max-h-[40vh] rounded-2xl flex items-center text-[#D1CCB6] py-4 lg:py-6 text-center overflow-hidden">
+            <div className="absolute inset-0 rounded-2xl overflow-hidden">
+              <img
+                src={Pattern2}
+                className="w-full h-full object-cover opacity-15"
+                alt="Background Pattern"
+              />
+            </div>
+            <div className="relative w-full h-full flex items-center justify-center p-4 lg:p-6 z-10">
+              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm sm:text-md lg:text-md leading-relaxed">
+                Lorem ipsum dolor sit amet, ne ferri iudico mnesarchum mel, no
+                nam liber animal, sea tollit scaevola necessitatibus cu. In est
+                facer appellantur. Et mea debet dolorem voluptaria. Ne commodo
+                fabulas eos. Ius ei minim aeque laudem. Hinc tation nominati vis
+                et, alienum epicurei pro eu. At per munere eloquentiam. An wisi
+                lobortis vix. Eos cu scripta atomorum, an est cetero
+                liberavisse, affert postea conclusionemque ad ius. Tamquam
+                civibus pri cu, exerci timeam consequuntur.
+              </p>
+            </div>
           </div>
         </div>
 
@@ -319,7 +322,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="w-full min-h-screen lg:h-screen flex flex-col justify-center items-center">
+      <div className="w-full min-h-screen flex flex-col justify-center items-center">
         <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
           <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
@@ -335,7 +338,7 @@ function Home() {
             OUR THEME
           </p>
         </div>
-        <div className="w-full max-w-7xl flex flex-col lg:flex-row justify-center items-center gap-8 px-4 lg:px-8">
+        <div className="w-full max-w-7xl flex flex-col lg:flex-row justify-between items-center lg:items-start gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center overflow-hidden">
             <img src={Theme} className="w-full h-full object-contain" />
           </div>
@@ -358,8 +361,8 @@ function Home() {
         </div>
       </div>
 
-      <div className="w-screen min-h-screen lg:h-screen">
-        <div className="relative flex items-center justify-center h-1/5 w-screen p-10">
+      <div className="w-full min-h-screen flex flex-col justify-center items-center">
+        <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
           <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
               src={HomeArrow}
@@ -374,22 +377,19 @@ function Home() {
             OUR MASCOT
           </p>
         </div>
-        <div className="w-full flex-grow flex flex-col lg:flex-row justify-center items-center p-2 gap-8 lg:mt-0">
-          <div className="w-full lg:w-1/2 aspect-square max-w-[500px] p-2 rounded-xl order-1 lg:order-2 flex items-center justify-center">
-            <img
-              src={Mascot}
-              className="w-full h-full object-contain rounded-xl"
-            />
+        <div className="w-full max-w-7xl flex-grow flex flex-col lg:flex-row justify-between lg:items-start items-center gap-8 px-4 lg:px-8">
+          <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 lg:order-2 overflow-hidden">
+            <img src={Mascot} className="w-full h-full object-contain" />
           </div>
-          <div className="relative w-full lg:w-1/2 aspect-square max-w-[500px] p-2 flex items-center justify-center order-2 lg:order-1">
-            <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent">
+          <div className="relative w-full lg:w-1/2 aspect-square max-w-[500px] flex items-center justify-center order-2 lg:order-1">
+            <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
               <img
                 src={Pattern2}
-                className="w-full h-full object-cover opacity-15 z-20 rounded-xl"
+                className="w-full h-full object-cover opacity-15 z-20"
               />
             </div>
-            <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center">
-              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed p-4 lg:p-6 overflow-auto max-h-full">
+            <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
+              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
                 Aspernatur nobis, autem, aliquid repellendus totam veritatis
                 quis quae facilis itaque eos maxime perspiciatis accusamus
@@ -400,51 +400,55 @@ function Home() {
         </div>
       </div>
 
-      <div className="w-screen min-h-screen">
-        <div className="relative flex items-center justify-center h-1/5 w-screen p-10">
+      <div className="w-full h-screen flex flex-col justify-center items-center lg:mt-20">
+        <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-3">
           <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
               src={HomeArrow}
               className="w-full h-full opacity-85 object-cover"
             />
           </div>
-          {/* <img
-                    src={Skateboard}
-                    style={{ transform: "rotate(-47.36deg)" }}
-                    className="absolute w-1/2 h-auto z-10 opacity-50"
-                  /> */}
           <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
             OVERALL LEADERBOARD
           </p>
         </div>
-        <div className="relative w-screen h-screen flex flex-wrap justify-center">
-          <div className="flex flex-row justify-between items-center w-full lg:w-3/4 h-1/6 lg:h-1/5 mt-1">
-            <div
-              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 lg:h-1/2 m-3 ${
-                leaderBoard === "leaderboard" ? "bg-[#4B16B2]" : "bg-[#D1CCB6]"
-              }`}
+        {/* <div> */}
+        <div className="flex flex-row justify-between items-center w-full font-bold h-1/6 lg:w-full lg:h-full mt-1 lg:m-5">
+          <div
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 sm:h-2/3 lg:h-full m-3 ${
+              leaderBoard === "leaderboard"
+                ? "bg-[#4B16B2] text-white"
+                : "bg-[#D1CCB6]"
+            }`}
+          >
+            <button
+              className="h-1/2 md:text-xl lg:text-xl w-full"
+              onClick={() => setLeaderBoard("leaderboard")}
             >
-              <button
-                className="h-1/2 md:text-xl lg:text-xl w-full"
-                onClick={() => setLeaderBoard("leaderboard")}
-              >
-                Leaderboard
-              </button>
-            </div>
-            <div
-              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 lg:h-1/2 m-3 ${
-                leaderBoard === "blockrace" ? "bg-[#4B16B2]" : "bg-[#D1CCB6]"
-              }`}
-            >
-              <button
-                className="h-1/2 md:text-xl lg:text-xl w-full"
-                onClick={() => setLeaderBoard("blockrace")}
-              >
-                Block Race
-              </button>
-            </div>
+              Leaderboard
+            </button>
           </div>
-          <div className="relative w-screen h-1/2 mx-3 my-0 lg:w-3/4 lg:h-3/4 bg-[#8F33BA] rounded-xl p-3">
+          <div
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 h-1/3 sm:h-2/3 lg:h-full m-3 ${
+              leaderBoard === "blockrace"
+                ? "bg-[#4B16B2] text-white"
+                : "bg-[#D1CCB6]"
+            }`}
+          >
+            <button
+              className="h-1/2 md:text-xl lg:text-xl w-full"
+              onClick={() => setLeaderBoard("blockrace")}
+            >
+              Block Race
+            </button>
+          </div>
+        </div>
+        <div className="w-full max-w-7xl lg:w-screen flex flex-col lg:flex-row justify-center items-center lg:items-start gap-8 px-4 lg:px-8">
+          <div
+            className={`relative w-full lg:w-screen lg:h-1/2 bg-[#8F33BA] flex items-center justify-center p-3 ${
+              isSmallScreen ? "max-w-[500px] aspect-square" : ""
+            }`}
+          >
             <div className="relative w-full h-full bg-[#0000004F] opacity-31 rounded-lg">
               {leaderBoard === "leaderboard" ? (
                 <HomeLeaderboard />
@@ -459,18 +463,11 @@ function Home() {
       </div>
 
       <div
-        className="w-screen h-screen"
+        className="w-screen min-h-screen"
         style={{ backgroundImage: `url(${HomeArrow2})` }}
       >
         <div className="flex justify-start">
           <div className="relative flex items-center h-1/5 w-1/2 p-5">
-            {/* <img
-                src={Skateboard}
-                className="absolute w-full lg:w-3/4 h-auto opacity-90"
-              />
-              <p className="relative z-10 text-white text-center text-lg sm:text-2xl ml-10 lg:text-3xl font-semibold lg:pl-20">
-                SPONSORS
-              </p> */}
             <img src={Sponsor} alt="Sponsor" className="sm:w-1/2 lg:w-1/3" />
           </div>
         </div>

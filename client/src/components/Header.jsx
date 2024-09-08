@@ -22,7 +22,7 @@ function Header() {
   return (
     <>
       {isSmallScreen ? (
-        <div className="relative flex items-center w-full pt-1 justify-between px-4 z-30">
+        <div className="relative flex items-center w-full pt-1 justify-between px-4 z-50">
           <img src={Logo} alt="Logo" className="logo p-2" />
           <Hamburger />
         </div>

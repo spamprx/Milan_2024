@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import Dropdown from "../assets/Dropdown.png";
 import Cross from "../assets/Cross.png";
-import Arrow from "../assets/Arrow.png";
+import Arrow from "../assets/Stripes.png";
 
 function Hamburger() {
   const [isActive, setIsActive] = useState(false);
