@@ -9,6 +9,7 @@ import Skateboard from "../assets/Skateboard.png";
 import Basketball from "../assets/Basketball.png";
 import Theme from "../assets/Theme.png";
 import Mascot from "../assets/Mascot.jpeg";
+import Stripes from "../assets/Stripes.png"
 import Pattern from "../assets/Pattern.png";
 import Sponsor from "../assets/Sponsor.png";
 import Pattern2 from "../assets/Pattern2.png";
@@ -224,11 +225,10 @@ function Home() {
               {currentEvents.map((event, index) => (
                 <div
                   key={index}
-                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 transition-transform duration-300 ease-in-out ${
-                    index === activeIndex
+                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 transition-transform duration-300 ease-in-out ${index === activeIndex
                       ? "scale-105 z-10"
                       : "scale-95 opacity-50"
-                  }`}
+                    }`}
                   style={{ scrollSnapAlign: "center" }}
                 >
                   <SportCard event={event} />
@@ -240,9 +240,8 @@ function Home() {
                 {currentEvents.map((_, index) => (
                   <div
                     key={index}
-                    className={`w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 rounded-full cursor-pointer bg-[#A020F0] ${
-                      index === activeIndex ? "border-2 border-[#DAA827]" : ""
-                    }`}
+                    className={`w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 rounded-full cursor-pointer bg-[#A020F0] ${index === activeIndex ? "border-2 border-[#DAA827]" : ""
+                      }`}
                     onClick={() => scrollToCard(index)}
                   >
                     {index === activeIndex && (
@@ -260,6 +259,19 @@ function Home() {
         </div>
       </div>
 
+
+      <div className="w-screen relative my-10">
+        <img
+          src={Stripes}
+          alt="Stripes background"
+          className="w-full scale-125 h-auto object-cover"
+        />
+        <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+          <h2 className="text-[#D1CCB6] text-2xl sm:text-3xl lg:text-4xl font-semibold text-center">
+            MORE ABOUT OTHER EVENTS
+          </h2>
+        </div>
+      </div>
       <div className="w-screen mb-10">
         <div className="w-screen min-h-screen lg:h-screen">
           <div className="relative flex items-center justify-center h-1/5 w-full p-10 my-10">
