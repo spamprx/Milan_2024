@@ -288,9 +288,9 @@ function Home() {
         </div>
       </div>
 
-      <div className="flex flex-row p-2">
-        <div className="relative w-3/4 sm:w-2/3 lg:w-1/2 p-2 flex items-center justify-center mt-6">
-          <div className="absolute w-full lg:w-2/3 bg-[#270B5D] rounded-2xl flex items-center text-[#D1CCB6] text-center p-1 lg:p-3 overflow-auto">
+      <div className="flex flex-col w-[75vw] lg:flex-row p-2 mx-auto gap-8 py-12">
+        <div className="relative w-full lg:w-1/2 max-h-[40vh] h-auto p-2 flex items-center justify-center">
+          <div className="relative w-full h-full bg-[#270B5D] max-h-[40vh] rounded-2xl flex items-center text-[#D1CCB6] text-center p-2 lg:p-4 overflow-clip">
             <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed">
               Lorem ipsum dolor sit amet, ne ferri iudico mnesarchum mel, no nam
               liber animal, sea tollit scaevola necessitatibus cu. In est facer
@@ -303,10 +303,10 @@ function Home() {
             </p>
           </div>
         </div>
-        <div className="flex-shrink-0 mt-6">
+
+        <div className="w-full lg:w-1/2 h-[40vh] flex justify-center">
           <iframe
-            width="560"
-            height="315"
+            className="w-full h-full"
             src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
             title="YouTube video player"
             frameBorder="0"
