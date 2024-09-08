@@ -4,7 +4,7 @@ import Calendar from "./pages/Calendar";
 import Home from "./pages/Home";
 import Events from "./pages/Events";
 import LiveScore from "./pages/LiveScore";
-import Login from "./pages/Login";
+import GoogleButton from "./pages/Login";
 import Profile from "./pages/Profile";
 import RuleBook from "./pages/RuleBook";
 import Sponsors from "./pages/Sponsors";
@@ -33,7 +33,7 @@ function App() {
             <Route path="/calendar" element={<Calendar />} />
             <Route path="/events" element={<Events />} />
             <Route path="/livescore" element={<LiveScore />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<GoogleButton />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/rulebook" element={<RuleBook />} />
             <Route path="/sponsors" element={<Sponsors />} />
