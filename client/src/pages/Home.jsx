@@ -128,7 +128,7 @@ function Home() {
       : [];
 
   return (
-    <div className="relative bg-transparent h-full max-w-7xl flex flex-col mx-auto">
+    <div className="relative bg-transparent h-full flex flex-col mx-auto">
       <div
         className="relative w-full h-full bg-cover bg-center mt-6"
         style={{ backgroundImage: `url(${HomeBg})` }}
@@ -140,7 +140,7 @@ function Home() {
               alt="Milan Home"
               className="w-full h-auto object-contain z-10"
             />
-            <div className="absolute left-0 z-10 flex flex-col gap-6 gap1 sm:gap-10 items-center justify-center scale-90 sm:scale-100">
+            <div className="absolute z-10 flex flex-col gap-6 gap1 sm:gap-10 items-center justify-center scale-90 sm:scale-100">
               <img
                 src={MilanFont}
                 alt="Milan Font"
@@ -261,9 +261,9 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full h-full mb-8">
+      <div className="w-full h-full mb-8 flex flex-col justify-center items-center">
         <div className="bg-[#160631] mb-8">
-          <div className="w-full relative">
+          <div className="w-screen relative">
             <img
               src={Stripes}
               alt="Stripes background"
@@ -352,7 +352,7 @@ function Home() {
             OUR THEME
           </p>
         </div>
-        <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-around items-center lg:items-start gap-8 px-4 lg:px-8">
+        <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between items-center lg:items-start gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center overflow-hidden">
             <img src={Theme} className="w-full h-full object-contain" />
           </div>
@@ -391,7 +391,7 @@ function Home() {
             OUR MASCOT
           </p>
         </div>
-        <div className="w-full max-w-7xl flex-grow flex flex-col sm:flex-row justify-around lg:items-start items-center gap-8 px-4 lg:px-8">
+        <div className="w-full max-w-7xl flex-grow flex flex-col sm:flex-row justify-between lg:items-start items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <img src={Mascot} className="w-full h-full object-contain" />
           </div>

@@ -21,7 +21,6 @@ function Sponsors() {
 
   return (
     <>
-      // <h1>Work under Progress.......</h1>
       <div
         className={`relative flex flex-col justify-between items-center w-full bg-[#140432] ${
           isSmallScreen ? "h-fit" : "pt-1 min-h-screen"
