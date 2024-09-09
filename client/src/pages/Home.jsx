@@ -152,7 +152,7 @@ function Home() {
     dotsClass: "slick-dots custom-dots",
     responsive: [
       {
-        breakpoint: 768,
+        breakpoint: 475,
         settings: {
           slidesToShow: 1, // Show 1 slide on smaller screens
           centerPadding: "20px",
