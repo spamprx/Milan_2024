@@ -22,8 +22,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [leaderBoard, setLeaderBoard] = useState("leaderboard");
   const cardContainerRef = useRef(null);
 
@@ -33,6 +32,8 @@ function Home() {
     { value: "badminton", label: "Badminton" },
     { value: "cricket", label: "Cricket" },
   ];
+
+  const [selectedOption, setSelectedOption] = useState(sportOptions[0]);
 
   const sportEvents = {
     basketball: [
@@ -122,7 +123,7 @@ function Home() {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
-    setActiveIndex(1);
+    setActiveIndex(0);
   };
 
   const currentEvents =
@@ -139,6 +140,16 @@ function Home() {
     speed: 500,
     dots: true,
     arrows: false,
+    slidesToScroll: 1,
+    beforeChange: (current, next) => setActiveIndex(next),
+    customPaging: (i) => (
+      <div
+        className={`w-3 h-3 rounded-full mx-2 cursor-pointer ${
+          i === activeIndex ? "bg-white" : "bg-gray-500"
+        }`}
+      />
+    ),
+    dotsClass: "slick-dots custom-dots",
     responsive: [
       {
         breakpoint: 768,
@@ -193,7 +204,7 @@ function Home() {
           </div>
 
           <div className="h-full w-full">
-            <div className="relative w-full h-1/2 flex flex-col justify-between items-center md:my-4 px-6 py-10 z-30 font-be-vietnam-pro bg-transparent">
+            <div className="relative w-full text-sm lg:text-md h-1/2 flex flex-col justify-between items-center md:my-4 px-6 py-10 z-30 font-be-vietnam-pro bg-transparent">
               <div className="flex w-full justify-between items-center">
                 <div className="flex flex-col items-start">
                   <label className="block text-[#D1CCB6] mb-2" htmlFor="event">
@@ -234,17 +245,17 @@ function Home() {
                 </div>
                 <div className="w-1/2 flex flex-col justify-end items-end">
                   <p className="text-[#f0f0f0d9] font-thin">There will be</p>
-                  <p className="text-white text-xl font-bold">
+                  <p className="text-white text-lg lg:text-xl font-bold">
                     {currentEvents.length} Incoming Events
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="slider-container w-full">
+            <div className="slider-container w-full mb-7">
               <Slider {...settings}>
                 {currentEvents.map((event, index) => (
-                  <div key={index} className="p-2">
+                  <div key={index} className="p-2 mb-2">
                     <SportCard event={event} />
                   </div>
                 ))}
