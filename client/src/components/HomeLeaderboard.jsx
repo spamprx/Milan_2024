@@ -79,7 +79,7 @@ const HomeLeaderboard = () => {
                 {row.cells.map((cell) => (
                   <td
                     {...cell.getCellProps()}
-                    className="px-4 py-4 border border-[#D1CCB6]"
+                    className="p-3 border border-[#D1CCB6]"
                   >
                     {cell.render("Cell")}
                   </td>

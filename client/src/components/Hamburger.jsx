@@ -39,7 +39,7 @@ function Hamburger() {
   }, [isActive]);
 
   return (
-    <div className="top-4 right-4 z-50">
+    <div className="top-4 right-4 z-50 p-2">
       <div
         className="relative flex flex-col gap-1 w-fit h-fit cursor-pointer"
         onClick={() => setIsActive(!isActive)}
