@@ -267,7 +267,7 @@ function Home() {
             <img
               src={Stripes}
               alt="Stripes background"
-              className="w-full h-auto object-cover"
+              className="w-full h-auto object-cover lg:scale-y-75"
             />
             <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
               <h2 className="text-[#D1CCB6] text-lg md:text-3xl lg:text-4xl font-semibold text-center">
@@ -285,7 +285,7 @@ function Home() {
             <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
           </div>
         </div>
-        <div className="w-full max-w-7xl flex-grow flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
+        <div className="w-full flex-grow flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <iframe
               className="w-full h-full"
@@ -352,7 +352,7 @@ function Home() {
             OUR THEME
           </p>
         </div>
-        <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between items-center lg:items-start gap-8 px-4 lg:px-8">
+        <div className="w-full flex flex-col sm:flex-row justify-around items-center lg:items-start gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center overflow-hidden">
             <img src={Theme} className="w-full h-full object-contain" />
           </div>
@@ -391,7 +391,7 @@ function Home() {
             OUR MASCOT
           </p>
         </div>
-        <div className="w-full max-w-7xl flex-grow flex flex-col sm:flex-row justify-between lg:items-start items-center gap-8 px-4 lg:px-8">
+        <div className="w-full flex-grow flex flex-col sm:flex-row justify-around lg:items-start items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <img src={Mascot} className="w-full h-full object-contain" />
           </div>
@@ -426,7 +426,7 @@ function Home() {
             OVERALL LEADERBOARD
           </p>
         </div>
-        <div className="flex flex-row gap-4 justify-between items-center w-full font-bold px-4 lg:px-8 mb-8">
+        <div className="flex flex-row gap-4 max-w-7xl justify-between items-center w-full font-bold px-4 lg:px-8 mb-8">
           <div
             className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
               leaderBoard === "leaderboard"
