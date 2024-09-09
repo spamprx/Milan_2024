@@ -16,6 +16,9 @@ import Pattern2 from "../assets/Pattern2.png";
 import HomeArrow from "../assets/HomeArrow.png";
 import HomeArrow2 from "../assets/Double_Arrow.png";
 import Select from "react-select";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -127,6 +130,32 @@ function Home() {
       ? sportEvents[selectedOption.value]
       : [];
 
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow: 3,
+    speed: 500,
+    dots: true,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1, // Show 1 slide on smaller screens
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2, // Show 2 slides on medium screens
+          centerPadding: "40px",
+        },
+      },
+    ],
+  };
   return (
     <div className="relative bg-transparent h-full flex flex-col mx-auto">
       <div
@@ -162,101 +191,64 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="h-full">
-            <div className="relative flex w-full h-1/2 flex-row justify-between items-center md:my-4 px-6 py-10 z-30 font-be-vietnam-pro bg-transparent">
-              <div className="flex flex-col items-start">
-                <label
-                  className="block text-[#D1CCB6] mb-2 text-left"
-                  htmlFor="event"
-                >
-                  SPORTS YOU LIKE:
-                </label>
-                <Select
-                  id="event"
-                  options={sportOptions}
-                  value={selectedOption}
-                  onChange={handleOptionClick}
-                  styles={{
-                    control: (base) => ({
-                      ...base,
-                      backgroundColor: "transparent",
-                      border: "none",
-                      boxShadow: "none",
-                      color: "#ffffff",
-                    }),
-                    singleValue: (base) => ({
-                      ...base,
-                      color: "#ffffff",
-                    }),
-                    menu: (base) => ({
-                      ...base,
-                      backgroundColor: "#000000",
-                    }),
-                    option: (base, state) => ({
-                      ...base,
-                      backgroundColor: state.isSelected ? "#333333" : "#000000",
-                      color: "#ffffff",
-                      "&:hover": {
-                        backgroundColor: "#333333",
-                      },
-                    }),
-                  }}
-                />
-              </div>
-              <div className="w-1/2 flex flex-col justify-end items-end">
-                <p className="text-[#f0f0f0d9] font-be-vietnam-pro font-thin">
-                  There will be
-                </p>
-                <p className="text-white text-xl font-bold font-be-vietnam-pro">
-                  {currentEvents.length} Incoming Events
-                </p>
-              </div>
-            </div>
-            <div
-              ref={cardContainerRef}
-              className="relative w-full flex overflow-x-scroll scroll-snap-x space-x-4 bg-transparent"
-              style={{
-                scrollSnapType: "x mandatory",
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
-                // WebkitOverflowScrolling: "touch",
-                overflow: "auto",
-              }}
-            >
-              {currentEvents.map((event, index) => (
-                <div
-                  key={index}
-                  className={`flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 transition-transform duration-300 ease-in-out ${
-                    index === activeIndex
-                      ? "scale-105 z-10"
-                      : "scale-95 opacity-50"
-                  }`}
-                  style={{ scrollSnapAlign: "center" }}
-                >
-                  <SportCard event={event} />
+
+          <div className="h-full w-full">
+            <div className="relative w-full h-1/2 flex flex-col justify-between items-center md:my-4 px-6 py-10 z-30 font-be-vietnam-pro bg-transparent">
+              <div className="flex w-full justify-between items-center">
+                <div className="flex flex-col items-start">
+                  <label className="block text-[#D1CCB6] mb-2" htmlFor="event">
+                    SPORTS YOU LIKE:
+                  </label>
+                  <Select
+                    id="event"
+                    options={sportOptions}
+                    value={selectedOption}
+                    onChange={handleOptionClick}
+                    styles={{
+                      control: (base) => ({
+                        ...base,
+                        backgroundColor: "transparent",
+                        border: "none",
+                        boxShadow: "none",
+                      }),
+                      singleValue: (base) => ({
+                        ...base,
+                        color: "#ffffff",
+                      }),
+                      menu: (base) => ({
+                        ...base,
+                        backgroundColor: "#000000",
+                      }),
+                      option: (base, state) => ({
+                        ...base,
+                        backgroundColor: state.isSelected
+                          ? "#333333"
+                          : "#000000",
+                        color: "#ffffff",
+                        "&:hover": {
+                          backgroundColor: "#333333",
+                        },
+                      }),
+                    }}
+                  />
                 </div>
-              ))}
+                <div className="w-1/2 flex flex-col justify-end items-end">
+                  <p className="text-[#f0f0f0d9] font-thin">There will be</p>
+                  <p className="text-white text-xl font-bold">
+                    {currentEvents.length} Incoming Events
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="flex justify-center">
-              <div className="flex space-x-2">
-                {currentEvents.map((_, index) => (
-                  <div
-                    key={index}
-                    className={`w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 rounded-full cursor-pointer bg-[#A020F0] ${
-                      index === activeIndex ? "border-2 border-[#DAA827]" : ""
-                    }`}
-                    onClick={() => scrollToCard(index)}
-                  >
-                    {index === activeIndex && (
-                      <img
-                        src={Basketball}
-                        className="w-full h-full p-1"
-                        alt="Basketball"
-                      />
-                    )}
+
+            <div className="slider-container w-full">
+              <Slider {...settings}>
+                {currentEvents.map((event, index) => (
+                  <div key={index} className="p-2">
+                    <SportCard event={event} />
                   </div>
                 ))}
-              </div>
+              </Slider>
             </div>
           </div>
         </div>
