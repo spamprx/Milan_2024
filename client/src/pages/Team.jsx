@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "../assets/SponsorArrow.png";
 import TeamMember from "../components/TeamMember";
+import OCText from "/public/TEAM/OC/OCText.png";
+import OCBg from "/public/TEAM/OC/Addy_Bg.png";
+
 function Team() {
   const [teams, setTeams] = useState([]);
 
@@ -12,7 +15,21 @@ function Team() {
   }, []);
 
   return (
-    <div className="w-full px-4 min-h-screen">
+    <div className="w-screen min-h-screen">
+      <div className="w-screen h-auto flex justify-center items-center">
+        <div className="relative w-3/4 md:w-2/3 lg:w-1/3 h-auto flex justify-center items-center">
+          <img
+            src={OCBg}
+            className="w-full h-auto object-contain"
+            alt="OC Background"
+          />
+          <img
+            src={OCText}
+            className="absolute bottom-0 w-full h-1/3 object-contain"
+            alt="OC Text"
+          />
+        </div>
+      </div>
       {teams.map((team) => (
         <div
           key={team.name}
@@ -39,7 +56,7 @@ function Team() {
                   key={head.name}
                   name={head.name}
                   personImage={head.image || "/TEAM/Heads/Missing.png"}
-                  isHead = {true}
+                  isHead={true}
                 />
               ))}
             </div>
@@ -52,7 +69,7 @@ function Team() {
                   key={coord.name}
                   name={coord.name}
                   personImage={coord.image || "/TEAM/Coords/Missing.png"}
-                  isHead = {false}
+                  isHead={false}
                 />
               ))}
             </div>
