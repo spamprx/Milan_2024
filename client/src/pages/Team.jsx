@@ -32,25 +32,27 @@ function Team() {
             </p>
           </div>
 
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center py-10">
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
               {team.heads.map((head) => (
                 <TeamMember
                   key={head.name}
                   name={head.name}
                   personImage={head.image || "/TEAM/Heads/Missing.png"}
+                  isHead = {true}
                 />
               ))}
             </div>
           </div>
 
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center py-10">
             <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 mt-10">
               {team.coords.map((coord) => (
                 <TeamMember
                   key={coord.name}
                   name={coord.name}
                   personImage={coord.image || "/TEAM/Coords/Missing.png"}
+                  isHead = {false}
                 />
               ))}
             </div>

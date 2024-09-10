@@ -1,17 +1,30 @@
-import React from "react";
+import { useState } from "react";
 
-const TeamMember = ({ name, personImage }) => {
+const TeamMember = ({ name, personImage, isHead }) => {
+  const [imageError, setImageError] = useState(false);
+  // var person = personImage || "/TEAM/Coords/Missing.png";
+  // console.log(person);
+
+  var dummyImage = isHead
+    ? "/TEAM/Heads/Missing.png"
+    : "/TEAM/Coords/Missing.png";
+
   return (
-    <div className="flex flex-col items-center justify-center w-full">
-      <div className="w-1/2 overflow-hidden">
+    <div className="flex flex-col items-center justify-center gap-4">
+      <div className="w-3/5 overflow-hidden">
         <img
-          src={personImage}
+          src={imageError ? dummyImage : personImage}
           alt={name}
           className="w-full h-full object-cover"
+          onError={() => setImageError(true)}
         />
       </div>
 
-      <div className="bg-[#4B16B2] w-auto px-4 py-2 rounded-br-xl rounded-tl-xl text-white text-center mt-4">
+      <div
+        className={`${
+          isHead ? "bg-[#4B06B2]" : "bg-[#FF7900]"
+        } w-auto px-4 py-2 rounded-br-xl rounded-tl-xl text-white text-center mt-4`}
+      >
         {name}
       </div>
     </div>
