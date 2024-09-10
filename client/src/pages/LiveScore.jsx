@@ -39,7 +39,7 @@ function LiveScore() {
   }, [liveMatches]);
 
   return (
-    <div className="flex flex-col min-w-[340px] w-full mx-auto justify-center">
+    <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center">
       <div className="grid grid-cols-1 card-col scale-90 w-full gap-8 justify-items-center">
         {sports.map((match) => (
           <React.Fragment key={match}>
