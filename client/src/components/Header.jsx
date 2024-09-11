@@ -12,7 +12,7 @@ function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 896);
+      setIsSmallScreen(window.innerWidth < 1000);
     };
 
     handleResize();
@@ -29,12 +29,16 @@ function Header() {
         {isSmallScreen ? (
           <div className="relative flex items-center w-full pt-1 justify-between px-4 z-50">
             <img src={Logo} alt="Logo" className="logo p-2" />
-            <div className="relative flex items-center w-fit text-white">
-              <img src={BG} alt="BG" className="h-12 scale-x-125 w-auto" />
-              <div className="absolute inset-0 font-bold flex justify-center items-center">
-                {text.toUpperCase()}
+            {text === "" ? (
+              <></>
+            ) : (
+              <div className="relative flex items-center w-fit text-white">
+                <img src={BG} alt="BG" className="h-12 scale-x-125 w-auto" />
+                <div className="absolute inset-0 font-bold flex justify-center items-center">
+                  {text.toUpperCase()}
+                </div>
               </div>
-            </div>
+            )}
             <Hamburger />
           </div>
         ) : (
