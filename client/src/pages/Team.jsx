@@ -17,7 +17,7 @@ function Team() {
   return (
     <div className="w-screen min-h-screen">
       <div className="w-screen h-auto flex justify-center items-center my-16">
-        <div className="relative w-3/4 md:w-2/3 lg:w-1/3 h-auto flex justify-center items-center">
+        <div className="relative w-full sm:w-3/4 md:w-2/3 lg:w-1/3 h-auto flex justify-center items-center m-2 sm:m-0">
           <img
             src={OCBg}
             className="w-full h-auto object-contain"
