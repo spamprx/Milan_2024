@@ -11,10 +11,10 @@ const GameDetails = React.forwardRef(({ game }, ref) => {
         <p className="text-center mt-1 text-white">{game.category}</p>
       </div>
       
-      <div className="p-8">
-        <div className="grid grid-cols-2 items-center justify-between gap-4 mx-8">
+      <div className="lg:p-8 p-4">
+        <div className="grid grid-cols-2 items-center justify-between gap-4 lg:mx-4">
           <InfoItem icon={<Users className="w-5 h-5" />} label="Teams" value={game.teams} />
-          <div className="row-span-2 flex items-center ">
+          <div className="row-span-2 flex items-center lg:ml-8">
             <InfoItem icon={<MapPin className="w-5 h-5" />} label="Venue" value={game.body} />
           </div>
           <InfoItem icon={<Clock className="w-5 h-5" />} label="Time" value={game.time} />
@@ -42,7 +42,7 @@ const WinnerSection = ({ winner }) => (
       <Trophy className="w-6 h-6 text-[#DEB116] mr-3" />
       <span className="text-purple-200 font-semibold">Winner</span>
     </div>
-    <div className="bg-[#DEB116] p-3 rounded-lg">
+    <div className="bg-[#DEB116] p-3 rounded-full">
       <p className="text-[#2D1B69] font-bold">{winner || "Not decided"}</p>
     </div>
   </div>
