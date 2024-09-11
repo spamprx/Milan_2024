@@ -32,12 +32,12 @@ function Sponsors() {
               <img
                 src={SponsorArrow}
                 alt="SponsorArrow"
-                className="w-full scale-y-90 sm:scale-y-75 lg:scale-y-50"
+                className="w-full scale-y-90 sm:scale-y-75 lg:scale-y-[65%]"
               />
             </div>
 
-            <p className="relative z-10 text-white text-center text-2xl sm:text-3xl lg:text-3xl">
-              LOREM IPSUM
+            <p className="relative z-10 text-white text-center text-xl sm:text-2xl lg:text-3xl">
+              Our Supporters
             </p>
           </div>
 
@@ -96,12 +96,12 @@ function Sponsors() {
               <img
                 src={SponsorArrow}
                 alt="SponsorArrow"
-                className="w-full scale-y-90 sm:scale-y-75 lg:scale-y-50"
+                className="w-full scale-y-90 sm:scale-y-75 lg:scale-y-[65%] lg:scale-y-[65%]"
               />
             </div>
 
-            <p className="relative z-10 text-white text-center text-2xl sm:text-3xl lg:text-3xl">
-              LOREM IPSUM
+            <p className="relative z-10 text-white text-center text-xl sm:text-2xl lg:text-3xl">
+              Our Supporters
             </p>
           </div>
 
