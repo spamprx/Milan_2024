@@ -29,7 +29,7 @@ const Profile = () => {
       .then((response) => {
         const userData = response.data.user;
         setUser({
-          name: userData.displayame,
+          name: userData.displayName,
           email: userData.email,
           Block: userData.Block
             ? { value: userData.Block, label: userData.Block }
