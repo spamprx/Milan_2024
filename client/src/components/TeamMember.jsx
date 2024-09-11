@@ -23,7 +23,7 @@ const TeamMember = ({ name, personImage, isHead }) => {
       <div
         className={`${
           isHead ? "bg-[#4B06B2]" : "bg-[#FF7900]"
-        } w-auto px-4 py-2 rounded-br-xl rounded-tl-xl text-white text-center mt-4`}
+        } w-auto px-4 py-2 rounded-br-xl rounded-tl-xl text-white text-sm lg:text-lg text-center mt-4`}
       >
         {name}
       </div>

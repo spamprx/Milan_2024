@@ -10,7 +10,7 @@ const Loading = () => {
       setIsSmallScreen(window.innerWidth < 880);
     };
 
-    handleResize(); // Check screen size on component mount
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => {
