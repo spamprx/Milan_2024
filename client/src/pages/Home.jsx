@@ -189,7 +189,7 @@ function Home() {
               <p className="text-8xl sm:text-[150px] md:text-[175px] lg:text-[280px] font-darkgraffiti text-[#deb116] tracking-wide">
                 MILAN
               </p>
-              <div className="w-[90%] sm:w-3/4 z-20 text-center text-[#D1CCB6] text-xs herotext1 sm:text-lg md:text-xl lg:text-3xl font-be-vietnam-pro">
+              <div className="w-[90%] sm:w-3/4 z-20 text-center text-[#D1CCB6] text-xs herotext1 sm:text-lg md:text-xl lg:text-2xl font-be-vietnam-pro">
                 <p className="font-normal mx-auto">
                   MILAN stands as one of the largest and most eagerly awaited
                   inter-hostel competitions in India. It is a thrilling showcase
