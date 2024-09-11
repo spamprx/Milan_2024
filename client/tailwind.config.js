@@ -24,6 +24,7 @@ export default {
           "sans-serif",
         ],
         "vietnam-pro": ["Vietnam Pro", "sans-serif"],
+        funkrocker: ["Funkrocker", "sans-serif"],
       },
     },
   },

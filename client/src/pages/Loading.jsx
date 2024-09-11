@@ -9,6 +9,22 @@ const Loading = () => {
         <h1 className="text-[#E4CF63] text-4xl font-bold">MILAN</h1>
       </div>
     </div>
+    //   <div className="title-animation">
+    //   <svg viewBox="0 -350 5000 1500" xmlns="http://www.w3.org/2000/svg">
+    //     <text
+    //       id="textPath"
+    //       x="50%"
+    //       y="60%"
+    //       textAnchor="middle"
+    //       fontSize="1500"
+    //       fill="#fff"
+    //       stroke="#fff"
+    //       strokeWidth="70"
+    //     >
+    //       MILAN
+    //     </text>
+    //   </svg>
+    // </div>
   );
 };
 
