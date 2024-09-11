@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
 import GraphMobile from "../components/GraphMobile";
 import Filter from "../components/CategoryFilter";
-import SportsMenu from "../components/Filter";
 
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(true);
@@ -15,10 +14,15 @@ function Events() {
   const [techyData, setTechyData] = useState(null);
   const [isMobile,setIsMobile] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
+  const [categories, setCategories] = useState(["Select All"]);
 
   useEffect(() => {
     setDataFetched(sportsBoysData && sportsGirlsData && techyData && cultiData);
   },[sportsBoysData, sportsGirlsData, techyData, cultiData]);
+
+  const handleCategoriesChange = (selectedCategory) => {
+    setCategories(selectedCategory);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -40,7 +44,7 @@ function Events() {
           "https://script.google.com/macros/s/AKfycbzv0WclMXfbGduO4HDJN2fvQtGLehXLBNY3DSzj01eTV39AP7abqVqxPHHrUy3jTACl/exec"
         );
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error("HTTP error! status: ${response.status}");
         }
         const result = await response.json();
         console.log("Fetched culti data:", result);
@@ -60,7 +64,7 @@ function Events() {
           "https://script.google.com/macros/s/AKfycbzVrI_JnIFYZdgO3MCG1oY966K4x56DyLCMiZj3zpc1Ry7Lv0sZdRV9JiLUnZPi4MUz/exec"
         );
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error("HTTP error! status: ${response.status}");
         }
         const result = await response.json();
         console.log("Fetched girls sports data:", result);
@@ -80,7 +84,7 @@ function Events() {
           "https://script.google.com/macros/s/AKfycbwAkBZpkZAA3RR7yhglhaY0MynyTb7x6RB8aRtDyG0C8rLZxHLlvy1qx838hl3Ys96M/exec"
         );
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error("HTTP error! status: ${response.status}");
         }
         const result = await response.json();
         console.log("Fetched boys sports data:", result);
@@ -100,7 +104,7 @@ function Events() {
           "https://script.google.com/macros/s/AKfycbx6Rbwmvzxh79ZK1BUqd_0nllGRg_k827VhcHH1YorEjMIXgrQ4Sar_L27UskZT478Q/exec"
         );
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error("HTTP error! status: ${response.status}");
         }
         const result = await response.json();
         console.log("Fetched techy data:", result);
@@ -167,12 +171,22 @@ function Events() {
     <>
       {isMobile && dataFetched && (
         <div className="flex gap-8 flex-col scale-90 justify-center">
-          <div className="flex flex-row gap-[20vw] justify-center">
+          <div className="flex flex-row justify-center">
             <Filter options={techyData.blocks} title="SELECT BLOCK" />
-            <Filter options={techyData.blocks} title="SELECT EVENT" />
+            <Filter
+              options={[
+                "Sports Boys",
+                "Sports Girls",
+                "Culturals",
+                "Sci-Tech",
+              ]}
+              onCategoryChange={handleCategoriesChange}
+              title="SELECT TYPE"
+            />
           </div>
           <GraphMobile
             blocknames={techyData.blocks}
+            categories={categories}
             sportsBoysData={sportsBoysData}
             sportsGirlsData={sportsGirlsData}
             cultiData={cultiData}
@@ -182,7 +196,7 @@ function Events() {
       )}
       {!isMobile && (
         <>
-          <NavBar/>
+          <NavBar />
           {showSportsBoys && sportsBoysData && (
             <Category
               title={sportsBoysData.title}

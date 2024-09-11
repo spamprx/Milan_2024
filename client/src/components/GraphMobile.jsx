@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -27,74 +27,50 @@ const colorOptions = ["#FF7900", "#2C88AD", "#A9AB4A"];
 
 function GraphMobile({
   blocknames,
+  categories,
   sportsBoysData,
   sportsGirlsData,
   cultiData,
   techyData,
 }) {
-  const [selectedCategory, setSelectedCategory] = useState("Sports Boys");
+  const [selectedGraphCategories, setSelectedGraphCategories] =
+    useState(categories);
+  const [selectedTableCategory, setSelectedTableCategory] =
+    useState("Select All");
 
   const gamesBoys = sportsBoysData?.eventNames || [];
   const gamesGirls = sportsGirlsData?.eventNames || [];
-  const games = [...new Set([...gamesBoys, ...gamesGirls])];
   const cultiEvents = cultiData?.eventNames || [];
   const techyEvents = techyData?.eventNames || [];
 
-  const [barOptions, setBarOptions] = useState({
-    responsive: true,
-    maintainAspectRatio: false,
-    animation: { easing: "easeIn" },
-    indexAxis: "y",
-    plugins: {
-      title: {
-        display: false,
-        text: "Total Points",
-        color: "white",
-        font: { size: 18, family: "sans-serif" },
-      },
-      legend: {
-        display: false,
-        position: "bottom",
-        align: "center",
-        padding: 10,
-        labels: {
-          color: "#FFF",
-          boxWidth: 15,
-          padding: 10,
-          borderRadius: 100,
-          font: { size: 12, family: "sans-serif" },
-        },
-      },
-      tooltip: {
-        callbacks: {
-          label: function (context) {
-            return `${context.dataset.label} : ${context.parsed.x}`;
-          },
-        },
-      },
-    },
-    scales: {
-      x: {
-        stacked: true,
-        ticks: { color: "white" },
-      },
-      y: { stacked: true, ticks: { color: "white", size: 10 } },
-    },
-  });
+  const getDataSet = () => {
+    let datasets = [];
 
-  const barDataMobile = {
-    labels: blocknames,
-    datasets: [
-      {
-        label: "Sports",
+    if (selectedGraphCategories.includes("Sports Boys")) {
+      datasets.push({
+        label: "Sports Boys",
         data: blocknames.map((_, blockIndex) =>
-          games.reduce(
+          gamesBoys.reduce(
             (sum, _, gameIndex) =>
               sum +
               (sportsBoysData.scores[gameIndex] &&
               sportsBoysData.scores[gameIndex][blockIndex]
                 ? sportsBoysData.scores[gameIndex][blockIndex]
-                : 0) +
+                : 0),
+            0
+          )
+        ),
+        backgroundColor: colorOptions[0],
+      });
+    }
+
+    if (selectedGraphCategories.includes("Sports Girls")) {
+      datasets.push({
+        label: "Sports Girls",
+        data: blocknames.map((_, blockIndex) =>
+          gamesGirls.reduce(
+            (sum, _, gameIndex) =>
+              sum +
               (sportsGirlsData.scores[gameIndex] &&
               sportsGirlsData.scores[gameIndex][blockIndex]
                 ? sportsGirlsData.scores[gameIndex][blockIndex]
@@ -103,8 +79,11 @@ function GraphMobile({
           )
         ),
         backgroundColor: colorOptions[0],
-      },
-      {
+      });
+    }
+
+    if (selectedGraphCategories.includes("Culturals")) {
+      datasets.push({
         label: "Culturals",
         data: blocknames.map((_, blockIndex) =>
           cultiEvents.reduce(
@@ -118,8 +97,11 @@ function GraphMobile({
           )
         ),
         backgroundColor: colorOptions[1],
-      },
-      {
+      });
+    }
+
+    if (selectedGraphCategories.includes("Sci-Tech")) {
+      datasets.push({
         label: "Sci-Tech",
         data: blocknames.map((_, blockIndex) =>
           techyEvents.reduce(
@@ -133,54 +115,90 @@ function GraphMobile({
           )
         ),
         backgroundColor: colorOptions[2],
-      },
-    ],
+      });
+    }
+
+    return datasets;
+  };
+
+  const barDataMobile = {
+    labels: blocknames,
+    datasets: getDataSet(),
+  };
+
+  const toggleGraphCategory = (category) => {
+    if (selectedGraphCategories.includes(category)) {
+      setSelectedGraphCategories(
+        selectedGraphCategories.filter((cat) => cat !== category)
+      );
+    } else {
+      setSelectedGraphCategories([...selectedGraphCategories, category]);
+    }
   };
 
   return (
     <div className="FirstTab w-full">
       <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] mx-auto p-4 w-screen justify-center items-center">
         <div className="w-full h-96 relative">
-          <Bar options={barOptions} data={barDataMobile} />
+          <Bar
+            options={{
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: { easing: "easeIn" },
+              indexAxis: "y",
+              plugins: {
+                title: {
+                  display: false,
+                },
+                legend: {
+                  display: false,
+                },
+                tooltip: {
+                  callbacks: {
+                    label: function (context) {
+                      return `${context.dataset.label} : ${context.parsed.x}`;
+                    },
+                  },
+                },
+              },
+              scales: {
+                x: {
+                  stacked: true,
+                  ticks: { color: "white" },
+                },
+                y: { stacked: true, ticks: { color: "white", size: 10 } },
+              },
+            }}
+            data={barDataMobile}
+          />
         </div>
       </div>
+
+      {/* Separate Navbar for Table */}
       <div className="tabs-container mt-4">
         <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center">
           <button
             className={`tab-button ${
-              selectedCategory === "Sports Boys" ? "active" : ""
+              selectedTableCategory === "Select All" ? "active" : ""
             }`}
-            onClick={() => setSelectedCategory("Sports Boys")}
+            onClick={() => setSelectedTableCategory("Select All")}
           >
-            Sports Boys
+            Select All
           </button>
-          <button
-            className={`tab-button ${
-              selectedCategory === "Sports Girls" ? "active" : ""
-            }`}
-            onClick={() => setSelectedCategory("Sports Girls")}
-          >
-            Sports Girls
-          </button>
-          <button
-            className={`tab-button ${
-              selectedCategory === "Culturals" ? "active" : ""
-            }`}
-            onClick={() => setSelectedCategory("Culturals")}
-          >
-            Culturals
-          </button>
-          <button
-            className={`tab-button ${
-              selectedCategory === "Sci-Tech" ? "active" : ""
-            }`}
-            onClick={() => setSelectedCategory("Sci-Tech")}
-          >
-            Sci-Tech
-          </button>
+          {categories.map((category) => (
+            <button
+              key={category}
+              className={`tab-button ${
+                selectedTableCategory === category ? "active" : ""
+              }`}
+              onClick={() => setSelectedTableCategory(category)}
+            >
+              {category}
+            </button>
+          ))}
         </div>
         <div className="tab-content">
-          {selectedCategory === "Sports Boys" && (
+          {selectedTableCategory === "Sports Boys" && (
             <Table
               blocknames={sportsBoysData.blocks}
               games={gamesBoys}
@@ -188,7 +206,7 @@ function GraphMobile({
               tag="Sports Boys"
             />
           )}
-          {selectedCategory === "Sports Girls" && (
+          {selectedTableCategory === "Sports Girls" && (
             <Table
               blocknames={sportsGirlsData.blocks}
               games={gamesGirls}
@@ -196,7 +214,7 @@ function GraphMobile({
               tag="Sports Girls"
             />
           )}
-          {selectedCategory === "Culturals" && (
+          {selectedTableCategory === "Culturals" && (
             <Table
               blocknames={blocknames}
               games={cultiEvents}
@@ -204,7 +222,7 @@ function GraphMobile({
               tag="Culturals"
             />
           )}
-          {selectedCategory === "Sci-Tech" && (
+          {selectedTableCategory === "Sci-Tech" && (
             <Table
               blocknames={blocknames}
               games={techyEvents}
