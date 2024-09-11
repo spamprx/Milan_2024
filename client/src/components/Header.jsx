@@ -12,7 +12,7 @@ function Header() {
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth < 880);
+      setIsSmallScreen(window.innerWidth < 896);
     };
 
     handleResize();
