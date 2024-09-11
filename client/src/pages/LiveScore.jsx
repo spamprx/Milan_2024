@@ -2,12 +2,29 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CardLiveScore from "../components/CardLiveScore";
 import CardLiveScoreRev from "../components/CardLiveScoreRev";
+import Filter from "../components/CategoryFilter";
 
 function LiveScore() {
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
+  const [selectedSport, setSelectedSport] = useState("CRICKET");
 
-  const sports = ["Cricket", "Basketball", "Hockey", "Volleyball"];
+  const eventOptions = [
+    "CRICKET",
+    "FOOTBALL",
+    "HOCKEY",
+    "VOLLEYBALL",
+    "BASKETBALL",
+    "BADMINTON",
+    "TENNIS",
+    "TABLE TENNIS",
+    "CARROM",
+    "CHESS",
+    "SQUASH",
+    "WEIGHTLIFTING",
+    "POWER LIFTING",
+    "ATHLETICS"
+  ];
 
   const fetchLiveMatches = async () => {
     try {
@@ -26,32 +43,38 @@ function LiveScore() {
   }, []);
 
   useEffect(() => {
-    // Process live matches to determine current matches for each sport
-    const matches = liveMatches.reduce((acc, match) => {
-      const sport = match.Sport;
-      if (!acc[sport]) {
-        acc[sport] = match;
-      }
-      return acc;
-    }, {});
+    // Process live matches to determine current matches for the selected sport
+    const matches = liveMatches.filter(match => match.Sport.toUpperCase() === selectedSport);
+    setCurrentMatches(matches);
+  }, [liveMatches, selectedSport]);
 
-    setCurrentMatches(Object.values(matches));
-  }, [liveMatches]);
+  const handleSportChange = (sport) => {
+    setSelectedSport(sport);
+  };
 
   return (
     <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center">
+      <div className="flex flex-row gap-[20vw] justify-center">
+        <Filter 
+          options={eventOptions} 
+          title="SELECT EVENT" 
+          isSingle={true}
+          onCategoryChange={handleSportChange}
+        />
+      </div>
+      
       <div className="grid grid-cols-1 card-col scale-90 w-full gap-8 justify-items-center">
-        {sports.map((match) => (
-          <React.Fragment key={match}>
+        {currentMatches.map((match, index) => (
+          <React.Fragment key={index}>
             <CardLiveScore
-              sport={match}
-              team1={"ARYABHATTA"}
-              team2={"BHASKARA"}
+              sport={match.Sport}
+              team1={match.Team1}
+              team2={match.Team2}
             />
             <CardLiveScoreRev
-              sport={match}
-              team1={"ARYABHATTA"}
-              team2={"BHASKARA"}
+              sport={match.Sport}
+              team1={match.Team1}
+              team2={match.Team2}
             />
           </React.Fragment>
         ))}

@@ -163,6 +163,7 @@ const Profile = () => {
     </div>
   );
 
+  
   const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -178,10 +179,24 @@ const Profile = () => {
     singleValue: (provided) => ({
       ...provided,
       color: "#4D4D4D",
+      textAlign: "left",
     }),
     placeholder: (provided) => ({
       ...provided,
       color: "#4D4D4D",
+      textAlign: "left",
+    }),
+    input: (provided) => ({
+      ...provided,
+      textAlign: "left",
+    }),
+    option: (provided) => ({
+      ...provided,
+      textAlign: "left",
+    }),
+    menu: (provided) => ({
+      ...provided,
+      textAlign: "left",
     }),
   };
 
