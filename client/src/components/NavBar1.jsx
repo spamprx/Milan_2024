@@ -12,6 +12,7 @@ function NavBar1() {
     { to: "/team", label: "TEAM" },
     { to: "/profile", label: "PROFILE" },
     { to: "/rulebook", label: "RULEBOOK" },
+    { to: "/loading", label: "LOADING" },
   ];
 
   return (

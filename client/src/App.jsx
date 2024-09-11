@@ -12,6 +12,7 @@ import Team from "./pages/Team";
 import Background from "./assets/Background.png";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Loading from "./pages/Loading";
 import BackToTopButton from "./components/BackToTopButton";
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
             <Route path="/rulebook" element={<RuleBook />} />
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/loading" element={<Loading />} />
             <Route path="*" element={<Error />} />
           </Routes>
         </div>
