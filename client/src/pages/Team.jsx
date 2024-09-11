@@ -16,7 +16,7 @@ function Team() {
 
   return (
     <div className="w-screen min-h-screen">
-      <div className="w-screen h-auto flex justify-center items-center">
+      <div className="w-screen h-auto flex justify-center items-center my-16">
         <div className="relative w-3/4 md:w-2/3 lg:w-1/3 h-auto flex justify-center items-center">
           <img
             src={OCBg}
@@ -33,14 +33,14 @@ function Team() {
       {teams.map((team) => (
         <div
           key={team.name}
-          className="mb-12 flex flex-col items-center justify-center"
+          className="flex flex-col items-center justify-center"
         >
-          <div className="relative flex items-center justify-center h-4/5 w-screen p-10 mt-5 mb-10">
+          <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
             <div className="absolute flex w-full h-full items-center justify-center">
               <img
                 src={Image}
                 alt="SponsorArrow"
-                className="w-full scale-y-125 sm:scale-y-75 lg:scale-y-50"
+                className="w-full scale-y-125 sm:scale-y-75"
               />
             </div>
 
@@ -49,7 +49,7 @@ function Team() {
             </p>
           </div>
 
-          <div className="flex items-center justify-center py-10">
+          <div className="flex items-center justify-center my-6 md:my-10">
             <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
               {team.heads.map((head) => (
                 <TeamMember
@@ -62,7 +62,7 @@ function Team() {
             </div>
           </div>
 
-          <div className="flex items-center justify-center py-10">
+          <div className="flex items-center justify-center my-10 md:my-16">
             <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 mt-10">
               {team.coords.map((coord) => (
                 <TeamMember
