@@ -22,7 +22,7 @@ function Sponsors() {
   return (
     <>
       <div
-        className={`relative flex flex-col justify-between items-center w-full bg-[#140432] ${
+        className={`relative flex flex-col justify-between items-center w-full bg-none ${
           isSmallScreen ? "h-fit" : "pt-1 min-h-screen"
         }`}
       >
@@ -32,7 +32,7 @@ function Sponsors() {
               <img
                 src={SponsorArrow}
                 alt="SponsorArrow"
-                className="w-full scale-y-90 sm:scale-y-75 lg:scale-y-[65%]"
+                className="w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
               />
             </div>
 
@@ -96,7 +96,7 @@ function Sponsors() {
               <img
                 src={SponsorArrow}
                 alt="SponsorArrow"
-                className="w-full scale-y-90 sm:scale-y-75 lg:scale-y-[65%] lg:scale-y-[65%]"
+                className="w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
               />
             </div>
 
