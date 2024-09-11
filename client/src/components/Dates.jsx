@@ -59,8 +59,8 @@ export default function Dates({
       className="md:max-w-md px-6 mx-auto md:col-span-3 mb-4 bg-[#160631]/[0.85] p-4 rounded-3xl  "
       ref={calendarRef}
     >
-       <div className="flex items-center">
-        <h2 className="flex-auto font-semibold text-white pb-2">
+       <div className="flex items-center mb-4">
+        <h2 className="flex-auto font-semibold text-white">
           {format(firstDayCurrentMonth, "MMMM yyyy")}
         </h2>
         <button

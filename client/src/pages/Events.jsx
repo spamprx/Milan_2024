@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Category from "../components/Category";
 import GraphMobile from "../components/GraphMobile";
-import Navbar from "../components/CategoryFilter";
+import Filter from "../components/CategoryFilter";
 import SportsMenu from "../components/Filter";
 
 function Events() {
-  const [showSportsBoys, setShowSportsBoys] = useState(false);
+  const [showSportsBoys, setShowSportsBoys] = useState(true);
   const [showSportsGirls, setShowSportsGirls] = useState(false);
   const [showCulti, setShowCulti] = useState(false);
-  const [showTechy, setShowTechy] = useState(true);
+  const [showTechy, setShowTechy] = useState(false);
   const [cultiData, setCultiData] = useState(null);
   const [sportsGirlsData, setSportsGirlsData] = useState(null);
   const [sportsBoysData, setSportsBoysData] = useState(null);
@@ -112,95 +112,110 @@ function Events() {
     fetchTechyData();
   }, []);
 
-  // const NavBar = () => {
-  //   return (
-  //     <div className="flex justify-center mx-auto my-10">
-  //       <button
-  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-  //         onClick={() => {
-  //           setShowSportsBoys(true);
-  //           setShowSportsGirls(false);
-  //           setShowCulti(false);
-  //           setShowTechy(false);
-  //         }}
-  //       >
-  //         Sports Boys
-  //       </button>
-  //       <button
-  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-  //         onClick={() => {
-  //           setShowSportsBoys(false);
-  //           setShowSportsGirls(true);
-  //           setShowCulti(false);
-  //           setShowTechy(false);
-  //         }}
-  //       >
-  //         Sports Girls
-  //       </button>
-  //       <button
-  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-  //         onClick={() => {
-  //           setShowSportsBoys(false);
-  //           setShowSportsGirls(false);
-  //           setShowCulti(true);
-  //           setShowTechy(false);
-  //         }}
-  //       >
-  //         Culti
-  //       </button>
-  //       <button
-  //         className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
-  //         onClick={() => {
-  //           setShowSportsBoys(false);
-  //           setShowSportsGirls(false);
-  //           setShowCulti(false);
-  //           setShowTechy(true);
-  //         }}
-  //       >
-  //         Techy
-  //       </button>
-  //     </div>
-  //   );
-  // };
+  const NavBar = () => {
+    return (
+      <div className="flex justify-center mx-auto my-10">
+        <button
+          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          onClick={() => {
+            setShowSportsBoys(true);
+            setShowSportsGirls(false);
+            setShowCulti(false);
+            setShowTechy(false);
+          }}
+        >
+          Sports Boys
+        </button>
+        <button
+          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          onClick={() => {
+            setShowSportsBoys(false);
+            setShowSportsGirls(true);
+            setShowCulti(false);
+            setShowTechy(false);
+          }}
+        >
+          Sports Girls
+        </button>
+        <button
+          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          onClick={() => {
+            setShowSportsBoys(false);
+            setShowSportsGirls(false);
+            setShowCulti(true);
+            setShowTechy(false);
+          }}
+        >
+          Culti
+        </button>
+        <button
+          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          onClick={() => {
+            setShowSportsBoys(false);
+            setShowSportsGirls(false);
+            setShowCulti(false);
+            setShowTechy(true);
+          }}
+        >
+          Techy
+        </button>
+      </div>
+    );
+  };
 
   return (
     <>
-      <div className="flex">
-        {/* <SportsMenu/> */}
-        {!isMobile && <Navbar />}
-        {isMobile && dataFetched && <GraphMobile blocknames={techyData.blocks} sportsBoysData={sportsBoysData} sportsGirlsData={sportsGirlsData} cultiData={cultiData} techyData={techyData}/>}
-      </div>
-      {!isMobile && showSportsBoys && sportsBoysData && (
-        <Category
-          title={sportsBoysData.title}
-          blocknames={sportsBoysData.blocks}
-          games={sportsBoysData.eventNames}
-          points={sportsBoysData.scores}
-        />
+      {isMobile && dataFetched && (
+        <div className="flex gap-8 flex-col scale-90 justify-center">
+          <div className="flex flex-row gap-[20vw] justify-center">
+            <Filter options={techyData.blocks} title="SELECT BLOCK" />
+            <Filter options={techyData.blocks} title="SELECT EVENT" />
+          </div>
+          <GraphMobile
+            blocknames={techyData.blocks}
+            sportsBoysData={sportsBoysData}
+            sportsGirlsData={sportsGirlsData}
+            cultiData={cultiData}
+            techyData={techyData}
+          />
+        </div>
       )}
-      {!isMobile && showSportsGirls && sportsGirlsData && (
-        <Category
-          title={sportsGirlsData.title}
-          blocknames={sportsGirlsData.blocks}
-          games={sportsGirlsData.eventNames}
-          points={sportsGirlsData.scores}
-        />
-      )}
-      {!isMobile && showCulti && cultiData && (
-        <Category
-          title={cultiData.title}
-          blocknames={cultiData.blocks}
-          games={cultiData.eventNames}
-          points={cultiData.scores}
-        />
-      )}
-      {!isMobile && showTechy && techyData && (
-        <Category
-          title={techyData.title}
-          blocknames={techyData.blocks}
-          games={techyData.eventNames}
-          points={techyData.scores}
-        />
+      {!isMobile && (
+        <>
+          <NavBar/>
+          {showSportsBoys && sportsBoysData && (
+            <Category
+              title={sportsBoysData.title}
+              blocknames={sportsBoysData.blocks}
+              games={sportsBoysData.eventNames}
+              points={sportsBoysData.scores}
+            />
+          )}
+          {showSportsGirls && sportsGirlsData && (
+            <Category
+              title={sportsGirlsData.title}
+              blocknames={sportsGirlsData.blocks}
+              games={sportsGirlsData.eventNames}
+              points={sportsGirlsData.scores}
+            />
+          )}
+          {showCulti && cultiData && (
+            <Category
+              title={cultiData.title}
+              blocknames={cultiData.blocks}
+              games={cultiData.eventNames}
+              points={cultiData.scores}
+            />
+          )}
+          {showTechy && techyData && (
+            <Category
+              title={techyData.title}
+              blocknames={techyData.blocks}
+              games={techyData.eventNames}
+              points={techyData.scores}
+            />
+          )}
+        </>
       )}
     </>
   );

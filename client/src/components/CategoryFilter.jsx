@@ -1,41 +1,112 @@
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 
-const Navbar = () => {
+const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("SPORTS BOYS");
+  const [selectedCategories, setSelectedCategories] = useState(
+    isSingle ? [(options && options[0]) || "Select"] : []
+  );
 
-  const categories = ["SPORTS BOYS", "SPORTS GIRLS", "CULTI", "TECHY"];
+  const handleCategoryChange = (category) => {
+    if (isSingle) {
+      setSelectedCategories([category]);
+      setIsOpen(false);
+      if (onCategoryChange) {
+        onCategoryChange(category);
+      }
+    } else {
+      setSelectedCategories((prev) =>
+        prev.includes(category)
+          ? prev.filter((c) => c !== category)
+          : [...prev, category]
+      );
+    }
+  };
+
+  const handleSave = () => {
+    setIsOpen(false);
+    if (onCategoryChange) {
+      onCategoryChange(selectedCategories);
+    }
+  };
+
+  const handleSelectAll = () => {
+    if (selectedCategories.length === options.length) {
+      setSelectedCategories([]);
+    } else {
+      setSelectedCategories([...options]);
+    }
+  };
 
   return (
-    <div className="w-32">
-      <div className="bg-indigo-900 rounded-lg overflow-hidden">
+    <div className="w-full sm:w-1/3 max-w-52 min-w-32">
+      <div className="bg-[#270B5D] rounded-2xl overflow-hidden">
         <div
-          className="px-4 py-2 bg-indigo-800 text-white flex justify-between items-center cursor-pointer"
+          className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
-          <span>{selectedCategory}</span>
-          <ChevronDown
-            className={`transition-transform ${
-              isOpen ? "transform rotate-180" : ""
-            }`}
-            size={16}
-          />
+          <div className="flex justify-between items-center w-full text-[#D1CCB6] font-extralight">
+            {title}
+            <ChevronDown
+              className={`transition-transform ${
+                isOpen ? "transform rotate-180" : ""
+              }`}
+              size={24}
+            />
+          </div>
+          <span className="text-md text-[#D1CCB6] font-bold text-left w-full">
+            {isSingle
+              ? selectedCategories[0]
+              : `${selectedCategories.length} selected`}
+          </span>
         </div>
+
         {isOpen && (
-          <div className="py-2">
-            {categories.map((category, index) => (
+          <div className="py-2 px-4 text-white">
+            {!isSingle && (
+              <div
+                className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
+                onClick={handleSelectAll}
+              >
+                <div
+                  className={`w-4 h-4 border-2 rounded-full ${
+                    selectedCategories.length === options.length
+                      ? "bg-white border-white"
+                      : "border-white"
+                  }`}
+                ></div>
+                <span className="text-sm text-[#D1CCB6] truncate text-left">
+                  Select All
+                </span>
+              </div>
+            )}
+            {options.map((category, index) => (
               <div
                 key={index}
-                className="px-4 py-2 text-white flex items-center space-x-2 hover:bg-indigo-800 cursor-pointer"
-                onClick={() => {
-                  setSelectedCategory(category);
-                  setIsOpen(false);
-                }}
+                className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
+                onClick={() => handleCategoryChange(category)}
               >
-                <span className="text-sm">{category}</span>
+                <div
+                  className={`w-4 h-4 border-2 rounded-full ${
+                    selectedCategories.includes(category)
+                      ? "bg-white border-white"
+                      : "border-white"
+                  }`}
+                ></div>
+                <span className="text-sm text-[#D1CCB6] truncate text-left">
+                  {category}
+                </span>
               </div>
             ))}
+
+            {!isSingle && (
+              <div
+                className="mt-4 py-2 px-4 bg-[#6539BA] text-center text-white cursor-pointer rounded-md hover:bg-[#5328A4]"
+                onClick={handleSave}
+              >
+                Save
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -43,4 +114,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Filter;
