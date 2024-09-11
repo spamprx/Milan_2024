@@ -5,7 +5,7 @@ import Table from "./Table";
 
 function Filters({ blocks, games, filteredBlocks, filteredGames }) {
   return (
-    <div className="flex flex-row gap-[30vw] justify-center">
+    <div className="absolute top-0 z-50 flex flex-row h-fit w-1/3 justify-between">
       <Filter
         options={blocks}
         onCategoryChange={filteredBlocks}
@@ -41,19 +41,21 @@ function Category({ title, blocknames, games, points }) {
   });
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="relative flex flex-col items-center">
       <Filters
         blocks={blocknames}
         games={games}
         filteredBlocks={handleFilteredBlocks}
         filteredGames={handleFilteredGames}
       />
-      <DivBar
-        blocknames={filteredBlocks}
-        games={filteredGames}
-        points={filteredPoints}
-        title={title}
-      />
+      <div className="pt-16 w-full">
+        <DivBar
+          blocknames={filteredBlocks}
+          games={filteredGames}
+          points={filteredPoints}
+          title={title}
+        />
+      </div>
       <div className="table mx-auto py-8 px-4 w-full">
         <Table
           blocknames={filteredBlocks}
