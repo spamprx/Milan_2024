@@ -291,7 +291,7 @@ function Home() {
             <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
           </div>
         </div>
-        <div className="w-full flex-grow flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
+        <div className="w-full flex-grow flex-wrap flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <iframe
               className="w-full h-full"
@@ -338,6 +338,19 @@ function Home() {
                 consequuntur.
               </p>
             </div>
+          </div>
+        </div>
+        <div className="w-full lg:w-3/4 h-full p-5">
+          <div className="flex items-center justify-center m-5 object-contain aspect-[16/9]">
+            <iframe
+              className="w-full h-full rounded-2xl object-contain"
+              src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
       </div>
