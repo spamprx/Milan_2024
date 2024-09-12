@@ -134,6 +134,7 @@ const Profile = () => {
     setSelectedEvents(uniqueOptions);
   };
 
+
   const InputField = ({
     label,
     id,
@@ -143,9 +144,9 @@ const Profile = () => {
     onChange,
     readOnly,
   }) => (
-    <div className="mb-4">
+    <div className="mb-6">
       <label
-        className="block text-[#1E1E1E] font-be-vietnam-pro font-[600] mb-2 text-left"
+        className="block text-[#1E1E1E] font-be-vietnam-pro font-[600] mb-2 text-left w-full"
         htmlFor={id}
       >
         {label}
@@ -192,6 +193,7 @@ const Profile = () => {
     option: (provided) => ({
       ...provided,
       textAlign: "left",
+      padding: "10px",
     }),
     menu: (provided) => ({
       ...provided,
@@ -216,9 +218,9 @@ const Profile = () => {
     }));
 
     return (
-      <div className="mb-4">
+      <div className="mb-6">
         <label
-          className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left"
+          className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left w-full"
           htmlFor={id}
         >
           {label}
@@ -238,9 +240,9 @@ const Profile = () => {
   };
 
   const SubmitButton = () => (
-    <div className="flex items-center justify-center mb-4">
+    <div className="flex items-center justify-center mb-6">
       <button
-        className="bg-[#8F33BA] text-[#D1CCB6] font-[700] font-montserrat py-4 px-20 rounded-xl focus:outline-none focus:shadow-outline mb-8 mt-6 hover:bg-[#7a2a9e]"
+        className="bg-[#8F33BA] text-[#D1CCB6] font-[700] font-montserrat py-4 px-20 rounded-xl focus:outline-none focus:shadow-outline hover:bg-[#7a2a9e] transition duration-300 ease-in-out w-full"
         type="submit"
       >
         Sign Up
@@ -249,7 +251,7 @@ const Profile = () => {
   );
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center py-10">Loading...</div>;
   }
 
   return (
@@ -263,16 +265,16 @@ const Profile = () => {
       {auth && (
         <div className="container mx-auto px-4 mt-10 mb-20">
           <div className="bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px] max-w-4xl mx-auto">
-            <div className="text-2xl py-6 px-6 text-white text-center font-[700] uppercase">
+            <div className="text-2xl py-8 px-6 text-white text-center font-[700] uppercase bg-[#8F33BA]">
               {!submitted ? "MILAN" : "Your Profile has been created!"}
             </div>
             <div
               ref={formContainerRef}
-              className="form-container bg-[#D1CCB6] rounded-3xl w-full sm:w-3/4 md:w-1/2 lg:w-1/2 mx-auto overflow-y-auto h-[calc(100%-20px)]"
+              className="form-container bg-[#D1CCB6] rounded-3xl w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto overflow-y-auto h-[calc(100%-20px)] p-8"
             >
               {!submitted ? (
                 <form
-                  className="py-4 px-6 space-y-6 rounded-2xl mx-auto"
+                  className="space-y-6 rounded-2xl mx-auto"
                   onSubmit={handleSubmit}
                 >
                   <InputField
@@ -315,7 +317,7 @@ const Profile = () => {
                   <SubmitButton />
                 </form>
               ) : (
-                <div className="space-y-6 md:w-4/5 lg:w-3/5 mx-auto">
+                <div className="space-y-6">
                   <InputField
                     label="Name"
                     id="name"
@@ -330,20 +332,20 @@ const Profile = () => {
                     value={user.email}
                     readOnly={true}
                   />
-                  <div className="mb-4">
-                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">
+                  <div className="mb-6">
+                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro w-full">
                       Selected Block:
                     </h3>
-                    <div className="bg-gray-100 p-2 rounded">
+                    <div className="bg-gray-100 p-4 rounded-xl">
                       {user.Block ? user.Block.label : "None"}
                     </div>
                   </div>
-                  <div className="mb-4">
-                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro">
+                  <div className="mb-6">
+                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro w-full">
                       Interested In:
                       <button
                         onClick={toggleEditMode}
-                        className="ml-2 px-2 py-1 text-sm bg-[#8F33BA] text-[#D1CCB6] rounded hover:bg-[#7a2a9e]"
+                        className="ml-2 px-4 py-2 text-sm bg-[#8F33BA] text-[#D1CCB6] rounded-lg hover:bg-[#7a2a9e] transition duration-300 ease-in-out"
                       >
                         {isEditing ? "Save" : "Edit"}
                       </button>
@@ -359,11 +361,11 @@ const Profile = () => {
                         isMulti={true}
                       />
                     ) : (
-                      <div className="bg-gray-100 p-2 mb-10 rounded">
+                      <div className="bg-gray-100 p-4 rounded-xl">
                         {selectedEvents.length > 0 ? (
-                          <ul className="list-disc list-inside bg">
+                          <ul className="list-disc list-inside">
                             {selectedEvents.map((event) => (
-                              <li key={event.value}>{event.label}</li>
+                              <li key={event.value} className="mb-1">{event.label}</li>
                             ))}
                           </ul>
                         ) : (
