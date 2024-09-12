@@ -14,7 +14,13 @@ function Events() {
   const [techyData, setTechyData] = useState(null);
   const [isMobile,setIsMobile] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
-  const [categories, setCategories] = useState(["Select All"]);
+  const [categories, setCategories] = useState([
+    "Sports Boys",
+    "Sports Girls",
+    "Culturals",
+    "Sci-Tech",
+  ]);
+  const [blocks,setBlocks] = useState(["Select All"]);
 
   useEffect(() => {
     setDataFetched(sportsBoysData && sportsGirlsData && techyData && cultiData);
@@ -22,6 +28,10 @@ function Events() {
 
   const handleCategoriesChange = (selectedCategory) => {
     setCategories(selectedCategory);
+  };
+
+  const handleBlocksChange = (selectedBlock) => {
+    setBlocks(selectedBlock);
   };
 
   useEffect(() => {
@@ -172,7 +182,7 @@ function Events() {
       {isMobile && dataFetched && (
         <div className="flex gap-8 flex-col scale-90 justify-center">
           <div className="flex flex-row justify-center">
-            <Filter options={techyData.blocks} title="SELECT BLOCK" />
+            <Filter options={techyData.blocks} onCategoryChange={handleBlocksChange} title="SELECT BLOCK" />
             <Filter
               options={[
                 "Sports Boys",

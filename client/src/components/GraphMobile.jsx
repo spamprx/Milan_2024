@@ -36,12 +36,17 @@ function GraphMobile({
   const [selectedGraphCategories, setSelectedGraphCategories] =
     useState(categories);
 
+  const [selectedTableCategory, setSelectedTableCategory] =
+    useState(categories[0]);
+
   useEffect(() => {
     setSelectedGraphCategories(categories);
-  },[categories]);
-  const [selectedTableCategory, setSelectedTableCategory] =
-    useState("Select All");
+  }, [categories]);
 
+  useEffect(() => {
+    setSelectedTableCategory(categories[0]);
+  }, [categories]);
+  
   const gamesBoys = sportsBoysData?.eventNames || [];
   const gamesGirls = sportsGirlsData?.eventNames || [];
   const cultiEvents = cultiData?.eventNames || [];
