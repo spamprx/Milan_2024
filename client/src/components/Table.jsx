@@ -160,22 +160,21 @@ function Table({ games, blocknames, points, tag}) {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: "10px", marginBottom: "10px" }}>
+      <div className="flex w-1/3 min-w-52">
         <input
           type="text"
           placeholder="Search..."
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
-          style={{
-            padding: "6px",
-            fontSize: "14px",
-            width: "200px",
-          }}
+          className="bg-[#7842E2] rounded-lg p-1 w-1/2 m-4 "
         />
       </div>
       <div className="flex justify-center">
         <div className="bg-[#24104E] rounded-l-2xl ml-4 max-w-[33%] overflow-x-auto">
-          <table {...getSportsTableProps()} className="w-full lg:w-auto table-fixed">
+          <table
+            {...getSportsTableProps()}
+            className="w-full lg:w-auto table-fixed"
+          >
             <thead>
               {sportsHeaderGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
@@ -235,7 +234,7 @@ function Table({ games, blocknames, points, tag}) {
                       <td
                         {...cell.getCellProps()}
                         className="text-center p-2 text-white"
-                        style={{ width: "150px" }} // Fixed width for block columns
+                        style={{ width: "150px" }}
                       >
                         {cell.render("Cell")}
                       </td>
