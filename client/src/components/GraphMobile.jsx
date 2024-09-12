@@ -35,6 +35,10 @@ function GraphMobile({
 }) {
   const [selectedGraphCategories, setSelectedGraphCategories] =
     useState(categories);
+
+  useEffect(() => {
+    setSelectedGraphCategories(categories);
+  },[categories]);
   const [selectedTableCategory, setSelectedTableCategory] =
     useState("Select All");
 
@@ -177,14 +181,6 @@ function GraphMobile({
       {/* Separate Navbar for Table */}
       <div className="tabs-container mt-4">
         <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center">
-          <button
-            className={`tab-button ${
-              selectedTableCategory === "Select All" ? "active" : ""
-            }`}
-            onClick={() => setSelectedTableCategory("Select All")}
-          >
-            Select All
-          </button>
           {categories.map((category) => (
             <button
               key={category}
