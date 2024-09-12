@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
 const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategories, setSelectedCategories] = useState(
-    isSingle ? [(options && options[0]) || "Select"] : []
-  );
+  const [selectedCategories, setSelectedCategories] = useState([]);
+
+  // Set "Select All" as default when the component mounts and for single mode
+  useEffect(() => {
+    if (isSingle) {
+      setSelectedCategories(options.length > 0 ? ["Select All"] : []);
+    }
+  }, [isSingle, options]);
 
   const handleCategoryChange = (category) => {
     if (isSingle) {
@@ -31,10 +36,18 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   };
 
   const handleSelectAll = () => {
-    if (selectedCategories.length === options.length) {
-      setSelectedCategories([]);
+    if (isSingle) {
+      setSelectedCategories(["Select All"]);
+      setIsOpen(false);
+      if (onCategoryChange) {
+        onCategoryChange("Select All");
+      }
     } else {
-      setSelectedCategories([...options]);
+      if (selectedCategories.length === options.length) {
+        setSelectedCategories([]);
+      } else {
+        setSelectedCategories([...options]);
+      }
     }
   };
 
@@ -63,23 +76,23 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
         {isOpen && (
           <div className="py-2 px-4 text-white">
-            {!isSingle && (
+            {/* "Select All" option visible even when `isSingle` is true */}
+            <div
+              className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
+              onClick={handleSelectAll}
+            >
               <div
-                className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
-                onClick={handleSelectAll}
-              >
-                <div
-                  className={`w-4 h-4 border-2 rounded-full ${
-                    selectedCategories.length === options.length
-                      ? "bg-white border-white"
-                      : "border-white"
-                  }`}
-                ></div>
-                <span className="text-sm text-[#D1CCB6] truncate text-left">
-                  Select All
-                </span>
-              </div>
-            )}
+                className={`w-4 h-4 border-2 rounded-full ${
+                  selectedCategories.includes("Select All")
+                    ? "bg-white border-white"
+                    : "border-white"
+                }`}
+              ></div>
+              <span className="text-sm text-[#D1CCB6] truncate text-left">
+                Select All
+              </span>
+            </div>
+
             {options.map((category, index) => (
               <div
                 key={index}

@@ -182,7 +182,7 @@ function Events() {
       {isMobile && dataFetched && (
         <div className="flex gap-8 flex-col scale-90 justify-center">
           <div className="flex flex-row justify-center">
-            <Filter options={techyData.blocks} onCategoryChange={handleBlocksChange} title="SELECT BLOCK" />
+            <Filter options={techyData.blocks} onCategoryChange={handleBlocksChange} title="SELECT BLOCK" isSingle={true}/>
             <Filter
               options={[
                 "Sports Boys",

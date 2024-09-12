@@ -46,7 +46,7 @@ function GraphMobile({
   useEffect(() => {
     setSelectedTableCategory(categories[0]);
   }, [categories]);
-  
+
   const gamesBoys = sportsBoysData?.eventNames || [];
   const gamesGirls = sportsGirlsData?.eventNames || [];
   const cultiEvents = cultiData?.eventNames || [];
