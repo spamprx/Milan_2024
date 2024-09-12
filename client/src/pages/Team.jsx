@@ -19,16 +19,6 @@ function Team() {
     <div className="w-screen min-h-screen">
       <div className="w-screen h-auto flex justify-center items-center my-8 md:my-12">
         <div className="relative w-full sm:w-3/4 md:w-2/3 lg:w-1/2 h-auto flex justify-center items-center m-2 sm:m-0">
-          {/* <img
-            src={OCBg}
-            className="w-full h-auto object-contain"
-            alt="OC Background"
-          />
-          <img
-            src={OCText}
-            className="absolute bottom-0 w-full h-1/3 object-contain"
-            alt="OC Text"
-          /> */}
           <img
             src={Milan_OC}
             className="w-full h-auto object-contain"
@@ -56,7 +46,13 @@ function Team() {
           </div>
 
           <div className="flex items-center justify-center my-6 md:my-10">
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+            <div
+              className={`w-full grid gap-8 ${
+                team.heads.length === 1
+                  ? "grid-cols-1"
+                  : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"
+              }`}
+            >
               {team.heads.map((head) => (
                 <TeamMember
                   key={head.name}
@@ -69,7 +65,13 @@ function Team() {
           </div>
 
           <div className="flex items-center justify-center my-10 md:my-16">
-            <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-8 mt-10">
+            <div
+              className={`w-full grid gap-8 mt-10 ${
+                team.coords.length < 3
+                  ? "grid-cols-2"
+                  : "grid-cols-2 sm:grid-cols-3 lg:grid-cols-3"
+              }`}
+            >
               {team.coords.map((coord) => (
                 <TeamMember
                   key={coord.name}
