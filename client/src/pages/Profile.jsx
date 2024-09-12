@@ -279,7 +279,7 @@ const Profile = () => {
             </div>
             <div
               ref={formContainerRef}
-              className="form-container bg-[#D1CCB6] rounded-3xl w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto overflow-y-auto h-[calc(100%-20px)] p-8"
+              className="form-container bg-[#D1CCB6] rounded-3xl w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto overflow-y-auto h-[calc(100%-20px)] px-6 py-8"
             >
               {!submitted ? (
                 <form
