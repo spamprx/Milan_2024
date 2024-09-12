@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
+import { FaTimesCircle } from 'react-icons/fa';
 import { blockOptions, eventOptions } from "../content/Options";
 import "../styles.css";
 import GoogleButton from "./Login";
@@ -134,7 +135,6 @@ const Profile = () => {
     setSelectedEvents(uniqueOptions);
   };
 
-
   const InputField = ({
     label,
     id,
@@ -144,23 +144,32 @@ const Profile = () => {
     onChange,
     readOnly,
   }) => (
-    <div className="mb-6">
+    <div className="mb-6 relative">
       <label
         className="block text-[#1E1E1E] font-be-vietnam-pro font-[600] mb-2 text-left w-full"
         htmlFor={id}
       >
         {label}
       </label>
-      <input
-        className="shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline"
-        id={id}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        readOnly={readOnly}
-        disabled={readOnly}
-      />
+      <div className="relative">
+        <input
+          className={`shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline ${readOnly ? 'cursor-not-allowed' : ''
+            }`}
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          readOnly={readOnly}
+          disabled={readOnly}
+        />
+        {readOnly && (
+          <FaTimesCircle
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-red-500"
+            size={20}
+          />
+        )}
+      </div>
     </div>
   );
 
@@ -283,7 +292,8 @@ const Profile = () => {
                     type="text"
                     placeholder="Enter your name"
                     value={user.name}
-                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    onChange={() => { }}
+                    readOnly={true}
                   />
                   <InputField
                     label="Email"
@@ -291,9 +301,8 @@ const Profile = () => {
                     type="email"
                     placeholder="Enter your email"
                     value={user.email}
-                    onChange={(e) =>
-                      setUser({ ...user, email: e.target.value })
-                    }
+                    onChange={() => { }}
+                    readOnly={true}
                   />
                   <SelectField
                     label="Select Block:"
