@@ -265,7 +265,7 @@ const Profile = () => {
       {auth && (
         <div className="container mx-auto px-4 mt-10 mb-20">
           <div className="bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px] max-w-4xl mx-auto">
-            <div className="text-2xl py-8 px-6 text-white text-center font-[700] uppercase bg-[#8F33BA]">
+            <div className="text-2xl py-8 px-6 text-white text-center font-[700] uppercase">
               {!submitted ? "MILAN" : "Your Profile has been created!"}
             </div>
             <div
