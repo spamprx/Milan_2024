@@ -87,17 +87,31 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      toast.success("Profile updated successfully!");
-      setSubmitted(true);
-      setIsEditing(false);
+      const userData = {
+        name: user.name,
+        email: user.email,
+        Block: user.Block.value,
+        interested_in: selectedEvents.map(event => event.value)
+      };
+
+      axios.post(import.meta.env.VITE_BACKEND_URL + "profile", userData, {
+        withCredentials: true,
+      })
+        .then(response => {
+          toast.success("Profile created successfully!");
+          setSubmitted(true);
+        })
+        .catch(error => {
+          console.error("Error creating profile: ", error);
+          toast.error("Failed to create profile. Please try again later.");
+        });
     }
   };
 
   const handleSelectOpen = () => {
     if (formContainerRef.current) {
       setTimeout(() => {
-        formContainerRef.current.scrollTop =
-          formContainerRef.current.scrollHeight;
+        formContainerRef.current.scrollTop = formContainerRef.current.scrollHeight;
       }, 0);
     }
   };
@@ -128,12 +142,28 @@ const Profile = () => {
     setIsEditing(!isEditing);
   };
 
-  const handleEventChange = (selectedOptions) => {
-    const uniqueOptions = selectedOptions.filter(
-      (option, index, self) =>
-        index === self.findIndex((t) => t.value === option.value)
+  const renderInterests = () => {
+    return (
+      <div className="bg-[#E8EAFF] p-4 rounded-xl">
+        <div className="max-h-28 overflow-y-auto">
+          {selectedEvents.map((event) => (
+            <div key={event.value} className="bg-white rounded-full px-3 py-1 text-sm inline-flex items-center mr-2 mb-2">
+              {event.label}
+              <button
+                onClick={() => handleRemoveEvent(event)}
+                className="ml-2 text-gray-500 hover:text-gray-700"
+              >
+                <FaTimesCircle size={14} />
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
     );
-    setSelectedEvents(uniqueOptions);
+  };
+
+  const handleRemoveEvent = (eventToRemove) => {
+    setSelectedEvents(selectedEvents.filter(event => event.value !== eventToRemove.value));
   };
 
   const InputField = ({
@@ -154,8 +184,7 @@ const Profile = () => {
       </label>
       <div className="relative">
         <input
-          className={`shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline ${readOnly ? 'cursor-not-allowed' : ''
-            }`}
+          className={`shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline ${readOnly ? 'cursor-not-allowed' : ''}`}
           id={id}
           type={type}
           placeholder={placeholder}
@@ -171,92 +200,6 @@ const Profile = () => {
           />
         )}
       </div>
-    </div>
-  );
-
-  const customStyles = {
-    control: (provided) => ({
-      ...provided,
-      backgroundColor: "#D8DDFF",
-      borderColor: "#e2e8f0",
-      padding: "8px",
-      borderRadius: "1rem",
-      boxShadow: "none",
-      ":hover": {
-        borderColor: "#cbd5e0",
-      },
-    }),
-    singleValue: (provided) => ({
-      ...provided,
-      color: "#4D4D4D",
-      textAlign: "left",
-    }),
-    placeholder: (provided) => ({
-      ...provided,
-      color: "#4D4D4D",
-      textAlign: "left",
-    }),
-    input: (provided) => ({
-      ...provided,
-      textAlign: "left",
-    }),
-    option: (provided) => ({
-      ...provided,
-      textAlign: "left",
-      padding: "10px",
-    }),
-    menu: (provided) => ({
-      ...provided,
-      textAlign: "left",
-    }),
-  };
-
-  const SelectField = ({
-    label,
-    id,
-    options,
-    value,
-    onChange,
-    onMenuOpen,
-    placeholder,
-    isMulti,
-  }) => {
-    const selectedValues = Array.isArray(value) ? value : [];
-    const updatedOptions = options.map((option) => ({
-      ...option,
-      isDisabled: selectedValues.some((v) => v.value === option.value),
-    }));
-
-    return (
-      <div className="mb-6">
-        <label
-          className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left w-full"
-          htmlFor={id}
-        >
-          {label}
-        </label>
-        <Select
-          styles={customStyles}
-          id={id}
-          options={updatedOptions}
-          value={value}
-          onChange={onChange}
-          onMenuOpen={onMenuOpen}
-          placeholder={placeholder}
-          isMulti={isMulti}
-        />
-      </div>
-    );
-  };
-
-  const SubmitButton = () => (
-    <div className="flex items-center justify-center mb-6">
-      <button
-        className="bg-[#8F33BA] text-[#D1CCB6] font-[700] font-montserrat py-4 px-20 rounded-xl focus:outline-none focus:shadow-outline hover:bg-[#7a2a9e] transition duration-300 ease-in-out w-full"
-        type="submit"
-      >
-        Sign Up
-      </button>
     </div>
   );
 
@@ -283,18 +226,15 @@ const Profile = () => {
               className="form-container bg-[#D1CCB6] rounded-3xl w-full sm:w-3/4 md:w-2/3 lg:w-1/2 mx-auto overflow-y-auto h-[calc(100%-20px)] px-6 py-8"
             >
               {!submitted ? (
-                <form
-                  className="space-y-6 rounded-2xl mx-auto"
-                  onSubmit={handleSubmit}
-                >
+                <form className="space-y-6 rounded-2xl mx-auto" onSubmit={handleSubmit}>
                   <InputField
                     label="Name"
                     id="name"
                     type="text"
                     placeholder="Enter your name"
                     value={user.name}
-                    onChange={() => { }}
-                    readOnly={true}
+                    onChange={(e) => setUser({ ...user, name: e.target.value })}
+                    readOnly={false}
                   />
                   <InputField
                     label="Email"
@@ -302,29 +242,40 @@ const Profile = () => {
                     type="email"
                     placeholder="Enter your email"
                     value={user.email}
-                    onChange={() => { }}
-                    readOnly={true}
+                    onChange={(e) => setUser({ ...user, email: e.target.value })}
+                    readOnly={false}
                   />
-                  <SelectField
-                    label="Select Block:"
-                    id="block"
-                    options={blockOptions}
-                    value={user.Block}
-                    onChange={(selected) => setUser({ ...user, Block: selected })}
-                    onMenuOpen={handleSelectOpen}
-                    placeholder="Select a Block"
-                  />
-                  <SelectField
-                    label="Select Events:"
-                    id="event"
-                    options={eventOptions}
-                    value={selectedEvents}
-                    onChange={handleEventChange}
-                    onMenuOpen={handleSelectOpen}
-                    placeholder="Select Events"
-                    isMulti={true}
-                  />
-                  <SubmitButton />
+                  <div className="mb-6">
+                    <label className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left w-full">
+                      Select Block:
+                    </label>
+                    <Select
+                      options={blockOptions}
+                      value={user.Block}
+                      onChange={(selected) => setUser({ ...user, Block: selected })}
+                      placeholder="Select a Block"
+                    />
+                  </div>
+                  <div className="mb-6">
+                    <label className="block text-[#1E1E1E] font-[600] font-be-vietnam-pro mb-2 text-left w-full">
+                      Select Events:
+                    </label>
+                    <Select
+                      isMulti
+                      options={eventOptions}
+                      value={selectedEvents}
+                      onChange={setSelectedEvents}
+                      placeholder="Select Events"
+                    />
+                  </div>
+                  <div className="flex items-center justify-center mb-6">
+                    <button
+                      className="bg-[#8F33BA] text-[#D1CCB6] font-[700] font-montserrat py-4 px-20 rounded-xl focus:outline-none focus:shadow-outline hover:bg-[#7a2a9e] transition duration-300 ease-in-out w-full"
+                      type="submit"
+                    >
+                      Sign Up
+                    </button>
+                  </div>
                 </form>
               ) : (
                 <div className="space-y-6">
@@ -351,38 +302,24 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="mb-6">
-                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro w-full">
+                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro w-full flex justify-between items-center">
                       Interested In:
                       <button
                         onClick={toggleEditMode}
-                        className="ml-2 px-4 py-2 text-sm bg-[#8F33BA] text-[#D1CCB6] rounded-lg hover:bg-[#7a2a9e] transition duration-300 ease-in-out"
+                        className="px-4 py-2 text-sm bg-[#8F33BA] text-white rounded-lg hover:bg-[#7a2a9e] transition duration-300 ease-in-out"
                       >
                         {isEditing ? "Save" : "Edit"}
                       </button>
                     </h3>
                     {isEditing ? (
-                      <SelectField
-                        id="event"
+                      <Select
+                        isMulti
                         options={eventOptions}
                         value={selectedEvents}
-                        onChange={handleEventChange}
-                        onMenuOpen={handleSelectOpen}
-                        placeholder="Select Events"
-                        isMulti={true}
+                        onChange={setSelectedEvents}
+                        className="mt-2"
                       />
-                    ) : (
-                      <div className="bg-gray-100 p-4 rounded-xl text-">
-                        {selectedEvents.length > 0 ? (
-                          <ul className="list-disc list-inside">
-                            {selectedEvents.map((event) => (
-                              <li key={event.value} className="mb-1">{event.label}</li>
-                            ))}
-                          </ul>
-                        ) : (
-                          "None"
-                        )}
-                      </div>
-                    )}
+                    ) : renderInterests()}
                   </div>
                 </div>
               )}
