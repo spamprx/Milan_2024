@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -16,7 +15,7 @@ const Profile = () => {
     Block: null,
     interested_in: [],
   });
-
+  
   const [auth, setAuth] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedEvents, setSelectedEvents] = useState([]);
@@ -26,7 +25,7 @@ const Profile = () => {
 
   useEffect(() => {
     axios
-      .get("https://backend-w6vj.onrender.com/" + "profile/update", {
+      .get(import.meta.env.VITE_BACKEND_URL + "profile", {
         withCredentials: true,
       })
       .then((response) => {
@@ -88,24 +87,9 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      const userData = {
-        name: user.name,
-        email: user.email,
-        Block: user.Block.value,
-        interested_in: selectedEvents.map(event => event.value)
-      };
-
-      axios.post("https://backend-w6vj.onrender.com/" + "profile/update", userData, {
-        withCredentials: true,
-      })
-        .then(response => {
-          toast.success("Profile created successfully!");
-          setSubmitted(true);
-        })
-        .catch(error => {
-          console.error("Error creating profile: ", error);
-          toast.error("Failed to create profile. Please try again later.");
-        });
+      toast.success("Profile updated successfully!");
+      setSubmitted(true);
+      setIsEditing(false);
     }
   };
 
@@ -125,7 +109,7 @@ const Profile = () => {
 
       axios
         .post(
-          "https://backend-w6vj.onrender.com/" + "profile/update",
+          import.meta.env.VITE_BACKEND_URL + "profile/update",
           {
             interested_in: updatedEvents,
           },
@@ -280,29 +264,6 @@ const Profile = () => {
     return <div className="text-center py-10">Loading...</div>;
   }
 
-  const renderInterests = () => {
-    return (
-      <div className="bg-[#E8EAFF] p-4 rounded-xl">
-        <div className="max-h-28 overflow-y-auto">
-          {selectedEvents.map((event) => (
-            <div key={event.value} className="bg-white rounded-full px-3 py-1 text-sm inline-flex items-center mr-2 mb-2">
-              {event.label}
-              <button
-                onClick={() => handleRemoveEvent(event)}
-                className="ml-2 text-gray-500 hover:text-gray-700"
-              >
-                <FaTimesCircle size={14} />
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-    );
-  };
-
-  const handleRemoveEvent = (eventToRemove) => {
-    setSelectedEvents(selectedEvents.filter(event => event.value !== eventToRemove.value));
-  };
   return (
     <>
       {!auth && (
@@ -376,7 +337,7 @@ const Profile = () => {
                   />
                   <InputField
                     label="Email"
-                    id="email" z
+                    id="email"
                     type="email"
                     value={user.email}
                     readOnly={true}
@@ -410,7 +371,7 @@ const Profile = () => {
                         isMulti={true}
                       />
                     ) : (
-                      <div className="bg-gray-100 p-4 rounded-xl text-left">
+                      <div className="bg-gray-100 p-4 rounded-xl text-">
                         {selectedEvents.length > 0 ? (
                           <ul className="list-disc list-inside">
                             {selectedEvents.map((event) => (
