@@ -19,6 +19,7 @@ function Hamburger() {
     { name: "TEAM", path: "/team" },
     { name: "PROFILE", path: "/profile" },
     { name: "RULEBOOK", path: "/rulebook" },
+    { name: "LOADING", path: "/loading" },
   ];
 
   useEffect(() => {

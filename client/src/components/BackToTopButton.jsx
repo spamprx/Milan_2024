@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import Image from "../assets/BackToTop.png"
+import React, { useState, useEffect } from "react";
+import Image from "../assets/BackToTop.png";
 const BackToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -12,29 +12,28 @@ const BackToTopButton = () => {
       }
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener("scroll", toggleVisibility);
 
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
   }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
   return (
     <>
       {isVisible && (
-        <img
+        <div
           onClick={scrollToTop}
-          src={Image}
-          // Replace with the path to your custom image (PNG or SVG)
-          alt="Back to top"
-          className="fixed bottom-0.5 right-0.5 w-16 h-16 cursor-pointer"
+          className="fixed bottom-4 right-4 w-16 h-16 rounded-full bg-[#4B16B2] flex items-center justify-center cursor-pointer"
           aria-label="Back to top"
-        />
+        >
+          <img src={Image} alt="Back to top" className="w-16 h-16" />
+        </div>
       )}
     </>
   );

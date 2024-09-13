@@ -1,23 +1,28 @@
-.title-animation {
+.progress {
+  background: rgba(255, 255, 255, 0.1);
+  justify-content: flex-start;
+  border-radius: 100px;
+  align-items: center;
+  position: relative;
+  padding: 0 5px;
+  display: flex;
+  height: 40px;
+}
+
+.progress-value {
+  animation: load 3s infinite;
+  box-shadow: 0 10px 40px -10px #fff;
+  border-radius: 100px;
+  background: #e4cf63;
+  height: 30px;
+  width: 0;
+}
+
+@keyframes load {
+  0% {
+    width: 0;
+  }
+  100% {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-#textPath {
-    stroke-dasharray: 10000;
-    stroke-dashoffset: 10000;
-    stroke: #deb116;
-    animation: drawTitle 4s linear forwards;
-}
-
-@keyframes drawTitle {
-    0% {
-    stroke-dashoffset: 10000;
-    }
-    100% {
-    stroke-dashoffset: 0;
-    }
+  }
 }

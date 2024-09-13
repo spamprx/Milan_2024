@@ -340,8 +340,8 @@ function Home() {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-3/4 h-full p-5">
-          <div className="flex items-center justify-center m-5 object-contain aspect-[16/9]">
+        <div className="w-full max-w-7xl lg:w-3/4 h-full p-3">
+          <div className="flex items-center justify-center my-5 object-contain aspect-[16/9]">
             <iframe
               className="w-full h-full rounded-2xl object-contain"
               src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
