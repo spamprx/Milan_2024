@@ -15,6 +15,7 @@ const Profile = () => {
     Block: null,
     interested_in: [],
   });
+  
   const [auth, setAuth] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedEvents, setSelectedEvents] = useState([]);
@@ -345,7 +346,7 @@ const Profile = () => {
                     <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro w-full">
                       Selected Block:
                     </h3>
-                    <div className="bg-gray-100 p-4 rounded-xl">
+                    <div className="bg-gray-100 p-4 rounded-xl text-left">
                       {user.Block ? user.Block.label : "None"}
                     </div>
                   </div>
@@ -370,7 +371,7 @@ const Profile = () => {
                         isMulti={true}
                       />
                     ) : (
-                      <div className="bg-gray-100 p-4 rounded-xl">
+                      <div className="bg-gray-100 p-4 rounded-xl text-">
                         {selectedEvents.length > 0 ? (
                           <ul className="list-disc list-inside">
                             {selectedEvents.map((event) => (
