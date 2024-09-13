@@ -36,8 +36,9 @@ function GraphMobile({
   const [selectedGraphCategories, setSelectedGraphCategories] =
     useState(categories);
 
-  const [selectedTableCategory, setSelectedTableCategory] =
-    useState(categories[0]);
+  const [selectedTableCategory, setSelectedTableCategory] = useState(
+    categories[0]
+  );
 
   useEffect(() => {
     setSelectedGraphCategories(categories);
@@ -58,7 +59,7 @@ function GraphMobile({
     if (selectedGraphCategories.includes("Sports Boys")) {
       datasets.push({
         label: "Sports Boys",
-        data: blocknames.map((_, blockIndex) =>
+        data: sportsBoysData.blocks.map((_, blockIndex) =>
           gamesBoys.reduce(
             (sum, _, gameIndex) =>
               sum +
@@ -76,7 +77,7 @@ function GraphMobile({
     if (selectedGraphCategories.includes("Sports Girls")) {
       datasets.push({
         label: "Sports Girls",
-        data: blocknames.map((_, blockIndex) =>
+        data: sportsGirlsData.blocks.map((_, blockIndex) =>
           gamesGirls.reduce(
             (sum, _, gameIndex) =>
               sum +
@@ -91,9 +92,9 @@ function GraphMobile({
       });
     }
 
-    if (selectedGraphCategories.includes("Culturals")) {
+    if (selectedGraphCategories.includes("Culti")) {
       datasets.push({
-        label: "Culturals",
+        label: "Culti",
         data: blocknames.map((_, blockIndex) =>
           cultiEvents.reduce(
             (sum, _, eventIndex) =>
@@ -173,9 +174,20 @@ function GraphMobile({
               scales: {
                 x: {
                   stacked: true,
-                  ticks: { color: "white" },
+                  ticks: {
+                    color: "white",
+                    font: {},
+                  },
                 },
-                y: { stacked: true, ticks: { color: "white", size: 10 } },
+                y: {
+                  stacked: true,
+                  ticks: {
+                    color: "white",
+                    font: {
+                      size: 10,
+                    },
+                  },
+                },
               },
             }}
             data={barDataMobile}
@@ -215,12 +227,12 @@ function GraphMobile({
               tag="Sports Girls"
             />
           )}
-          {selectedTableCategory === "Culturals" && (
+          {selectedTableCategory === "Culti" && (
             <Table
               blocknames={blocknames}
               games={cultiEvents}
               points={cultiData.scores}
-              tag="Culturals"
+              tag="Culti"
             />
           )}
           {selectedTableCategory === "Sci-Tech" && (

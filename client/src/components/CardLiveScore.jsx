@@ -1,7 +1,13 @@
 import React from "react";
 import Subtract from "../assets/Subtract.svg";
 
-function CardLiveScore({ sport, team1, team2 }) {
+function CardLiveScore({ match }) {
+  const sport = match.sport;
+  const team1 = match.team1;
+  const team2 = match.team2;
+  const score1 = match.score1;
+  const score2 = match.score2;
+  const ID = match.matchId.replace(/\D/g, "");
   const sportImage = `/CARD_ASSETS/${sport}.png`;
 
   return (
@@ -17,7 +23,7 @@ function CardLiveScore({ sport, team1, team2 }) {
             <div className="flex flex-col text-xs font-be-vietnam text-[#4B16B2]">
               TIME
               <span className="text-xl font-extrabold -translate-y-2">
-                00:00
+                {match.startTime.slice(11, 16)}
               </span>
             </div>
           </div>
@@ -26,7 +32,7 @@ function CardLiveScore({ sport, team1, team2 }) {
               LIVESCORE
             </div>
             <div className="text-md font-bold font-be-vietnam text-white -translate-y-16 p-2 rounded-tr-xl rounded-bl-xl z-20">
-              MATCH : 09
+              MATCH : {ID}
             </div>
           </div>
         </div>
@@ -41,10 +47,10 @@ function CardLiveScore({ sport, team1, team2 }) {
         </div>
         <div className="flex flex-row absolute inset-0 items-center justify-center z-30 -translate-x-16 -translate-y-12">
           <div className="flex flex-col translate-x-1 gap-2 z-10">
-            <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] -translate-y-2">
-              00
+            <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] text-center -translate-y-2">
+              {score1}
             </span>
-            <span className="text-xs font-be-vietnam w-4 text-[#F3F1F6]">
+            <span className="text-xs font-be-vietnam w-full text-[#F3F1F6]">
               {team1}
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />
@@ -62,10 +68,10 @@ function CardLiveScore({ sport, team1, team2 }) {
             </span>
           </div>
           <div className="flex flex-col -translate-x-4 gap-2">
-            <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] -translate-y-2">
-              00
+            <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] text-center -translate-y-2">
+              {score2}
             </span>
-            <span className="text-xs font-be-vietnam w-4 text-[#F3F1F6]">
+            <span className="text-xs font-be-vietnam w-full text-[#F3F1F6]">
               {team2}
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />

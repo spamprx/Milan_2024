@@ -7,9 +7,10 @@ import Filter from "../components/CategoryFilter";
 function LiveScore() {
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
-  const [selectedSport, setSelectedSport] = useState("CRICKET");
+  const [selectedSport, setSelectedSport] = useState("ALL");
 
   const eventOptions = [
+    "ALL",
     "CRICKET",
     "FOOTBALL",
     "HOCKEY",
@@ -23,7 +24,7 @@ function LiveScore() {
     "SQUASH",
     "WEIGHTLIFTING",
     "POWER LIFTING",
-    "ATHLETICS"
+    "ATHLETICS",
   ];
 
   const fetchLiveMatches = async () => {
@@ -40,12 +41,19 @@ function LiveScore() {
 
   useEffect(() => {
     fetchLiveMatches();
+    const intervalId = setInterval(fetchLiveMatches, 10000);
+    return () => clearInterval(intervalId);
   }, []);
 
   useEffect(() => {
-    // Process live matches to determine current matches for the selected sport
-    const matches = liveMatches.filter(match => match.Sport.toUpperCase() === selectedSport);
-    setCurrentMatches(matches);
+    if (selectedSport === "ALL") {
+      setCurrentMatches(liveMatches);
+    } else {
+      const matches = liveMatches.filter(
+        (match) => match.sport.toUpperCase() === selectedSport
+      );
+      setCurrentMatches(matches);
+    }
   }, [liveMatches, selectedSport]);
 
   const handleSportChange = (sport) => {
@@ -55,30 +63,35 @@ function LiveScore() {
   return (
     <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center">
       <div className="flex flex-row gap-[20vw] justify-center">
-        <Filter 
-          options={eventOptions} 
-          title="SELECT EVENT" 
+        <Filter
+          options={eventOptions}
+          title="SELECT EVENT"
           isSingle={true}
           onCategoryChange={handleSportChange}
         />
       </div>
-      
+
       <div className="grid grid-cols-1 card-col scale-90 w-full gap-8 justify-items-center">
-        {currentMatches.map((match, index) => (
-          <React.Fragment key={index}>
-            <CardLiveScore
-              sport={match.Sport}
-              team1={match.Team1}
-              team2={match.Team2}
-            />
-            <CardLiveScoreRev
-              sport={match.Sport}
-              team1={match.Team1}
-              team2={match.Team2}
-            />
-          </React.Fragment>
-        ))}
+        {currentMatches.length >= 2
+          ? currentMatches.map((match, index) =>
+              index % 2 === 0 ? (
+                <CardLiveScore key={index} match={match} />
+              ) : (
+                <CardLiveScoreRev key={index} match={match} />
+              )
+            )
+          : currentMatches.map((match, index) => (
+              <CardLiveScore key={index} match={match} />
+            ))}
       </div>
+
+      {currentMatches.length === 0 && (
+        <div className="bg-[#6539BA] flex w-fit rounded-xl mx-auto m-4">
+          <p className="text-[#D1CCB6] font-extrabold p-2">
+            No ongoing matches........
+          </p>
+        </div>
+      )}
     </div>
   );
 }

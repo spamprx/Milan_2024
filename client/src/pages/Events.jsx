@@ -17,7 +17,7 @@ function Events() {
   const [categories, setCategories] = useState([
     "Sports Boys",
     "Sports Girls",
-    "Culturals",
+    "Culti",
     "Sci-Tech",
   ]);
   const [blocks,setBlocks] = useState(["Select All"]);
@@ -180,14 +180,14 @@ function Events() {
   return (
     <>
       {isMobile && dataFetched && (
-        <div className="flex gap-8 flex-col scale-90 justify-center">
+        <div className="flex gap-8 flex-col justify-center">
           <div className="flex flex-row justify-center">
-            <Filter options={techyData.blocks} onCategoryChange={handleBlocksChange} title="SELECT BLOCK" isSingle={true}/>
+            <Filter options={techyData.blocks} onCategoryChange={handleBlocksChange} title="SET BLOCK" isSingle={true}/>
             <Filter
               options={[
                 "Sports Boys",
                 "Sports Girls",
-                "Culturals",
+                "Culti",
                 "Sci-Tech",
               ]}
               onCategoryChange={handleCategoriesChange}

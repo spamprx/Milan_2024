@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BACKEND_URL = "https://backend-w6vj.onrender.com";
+const BACKEND_URL = "http://localhost:5000"; // Ensure HTTP, not HTTPS
+
+const capitalizeFirstLetter = (string) => {
+  if (!string) return "";
+  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+};
+
+// Helper function to format time to display only hours and minutes
+const formatTimeToHHMM = (dateTimeString) => {
+  if (!dateTimeString) return "";
+  return dateTimeString.slice(11, 16); // Extracts HH:MM from "YYYY-MM-DDTHH:MM"
+};
 
 const AdminPortal = () => {
   const [matches, setMatches] = useState([]);
@@ -22,17 +33,23 @@ const AdminPortal = () => {
   });
 
   useEffect(() => {
-    fetchMatches();
-  }, []);
+    const fetchMatches = async () => {
+      try {
+        const response = await axios.get(`${BACKEND_URL}/api/matches`);
+        setMatches(response.data);
+      } catch (error) {
+        console.error("Error fetching matches:", error);
+      }
+    };
 
-  const fetchMatches = async () => {
-    try {
-      const response = await axios.get(`${BACKEND_URL}/api/matches`);
-      setMatches(response.data);
-    } catch (error) {
-      console.error("Error fetching matches:", error);
-    }
-  };
+    fetchMatches(); // Initial fetch
+
+    const intervalId = setInterval(() => {
+      fetchMatches(); // Fetch matches periodically
+    }, 30000); // Refresh every 30 seconds
+
+    return () => clearInterval(intervalId); // Clear interval on component unmount
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -61,7 +78,6 @@ const AdminPortal = () => {
       );
       console.log("Server response:", response.data);
       alert("Score updated successfully");
-      fetchMatches();
       setSelectedMatch(null);
     } catch (error) {
       console.error("Error updating score:", error);
@@ -72,13 +88,16 @@ const AdminPortal = () => {
   const handleAddMatch = async (e) => {
     e.preventDefault();
     try {
+      const formattedNewMatchData = {
+        ...newMatchData,
+        sport: capitalizeFirstLetter(newMatchData.sport),
+      };
       const response = await axios.post(
         `${BACKEND_URL}/api/add-match`,
-        newMatchData
+        formattedNewMatchData
       );
       console.log("Server response:", response.data);
       alert(`Match added successfully with ID: ${response.data.match.matchId}`);
-      fetchMatches();
       setNewMatchData({
         sport: "football",
         team1: "",
@@ -95,7 +114,6 @@ const AdminPortal = () => {
     try {
       await axios.post(`${BACKEND_URL}/api/end-match/${matchId}`);
       alert("Match ended successfully");
-      fetchMatches();
       setSelectedMatch(null);
     } catch (error) {
       console.error("Error ending match:", error);
@@ -106,7 +124,7 @@ const AdminPortal = () => {
   return (
     <div>
       <h1>Admin Portal</h1>
-      
+
       <h2>Add New Match</h2>
       <form onSubmit={handleAddMatch}>
         <select
@@ -155,14 +173,17 @@ const AdminPortal = () => {
       <ul>
         {matches.map((match) => (
           <li key={match.matchId} onClick={() => setSelectedMatch(match)}>
-            {match.team1} vs {match.team2} - {match.sport} (ID: {match.matchId})
+            {match.team1} vs {match.team2} - {match.sport} - Time:{" "}
+            {formatTimeToHHMM(match.startTime)} (ID: {match.matchId})
           </li>
         ))}
       </ul>
 
       {selectedMatch && (
         <div>
-          <h2>Update Score for {selectedMatch.team1} vs {selectedMatch.team2}</h2>
+          <h2>
+            Update Score for {selectedMatch.team1} vs {selectedMatch.team2}
+          </h2>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -180,7 +201,7 @@ const AdminPortal = () => {
               placeholder="Score 2"
               required
             />
-            {selectedMatch.sport === "cricket" && (
+            {selectedMatch.sport === "Cricket" && (
               <>
                 <input
                   type="text"
@@ -214,7 +235,9 @@ const AdminPortal = () => {
             )}
             <button type="submit">Update Score</button>
           </form>
-          <button onClick={() => handleEndMatch(selectedMatch.matchId)}>End Match</button>
+          <button onClick={() => handleEndMatch(selectedMatch.matchId)}>
+            End Match
+          </button>
         </div>
       )}
     </div>
