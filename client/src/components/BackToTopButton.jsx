@@ -32,7 +32,7 @@ const BackToTopButton = () => {
           src={Image}
           // Replace with the path to your custom image (PNG or SVG)
           alt="Back to top"
-          className="fixed bottom-0.5 right-0.5 w-16 h-16 cursor-pointer"
+          className="fixed bottom-0.5 right-0.5 w-16 h-16 cursor-pointer z-10"
           aria-label="Back to top"
         />
       )}

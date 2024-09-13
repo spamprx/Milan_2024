@@ -61,20 +61,16 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
     return null;
   }
 
-  
   const timeStyle = isPreferred
     ? "bg-[#8B5CF6] text-white"
     : "bg-[#F2B84B] text-black";
 
-  
-
-
   return (
     <div
-      className={"bg-[#270B5D]/[0.75] rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all duration-200 ease-in-out "}
+      className="bg-[#270B5D]/[0.75] rounded-xl p-4 cursor-pointer hover:shadow-lg transition-all duration-200 ease-in-out"
       onClick={() => onSelect(meeting)}
     >
-      <div className=" rounded-2xl w-full text-white font-medium text-sm">
+      <div className="rounded-2xl w-full text-white font-medium text-sm">
         {meeting.category}
       </div>
       <p className="text-white font-bold text-sm mb-1">
@@ -89,27 +85,33 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
         {meeting.teams || "ALL BLOCKS"}
       </p>
 
-      {/* <div className="mt-2">
-        <p className="text-xs text-gray-300 mb-1">Notifications</p>
+      <div className="mt-2 flex min-[320px]:flex-col  items-center justify-between">
+        <p className="text-xs text-gray-300">Notifications</p>
         <button
           onClick={toggleNotification}
-          className="w-6 h-6 rounded-full bg-gray-700 flex items-center justify-center"
+          className="w-10 h-6 rounded-full bg-gray-700 flex items-center justify-start p-1 transition-all duration-300 ease-in-out focus:outline-none"
           disabled={isLoading}
         >
-          {isLoading ? (
-            <div className="w-4 h-4 border-t-2 border-white rounded-full animate-spin"></div>
-          ) : notificationEnabled ? (
-            <svg className="w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-            </svg>
-          ) : (
-            <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-          )}
+          <div
+            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
+              }`}
+          >
+            {isLoading && (
+              <div className="w-4 h-4 border-t-2 border-gray-700 rounded-full animate-spin"></div>
+            )}
+            {!isLoading && notificationEnabled && (
+              <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+              </svg>
+            )}
+            {!isLoading && !notificationEnabled && (
+              <svg className="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            )}
+          </div>
         </button>
       </div>
-      */}
 
       {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
