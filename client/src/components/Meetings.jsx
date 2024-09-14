@@ -85,8 +85,8 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
         {meeting.teams || "ALL BLOCKS"}
       </p>
 
-      <div className="mt-2 flex min-[320px]:flex-col  items-center justify-between">
-        <p className="text-xs text-gray-300">Notifications</p>
+      <div className="mt-2 flex flex-col sm:flex-row items-center justify-between">
+        <p className="text-xs text-gray-300 pb-2">Notifications</p>
         <button
           onClick={toggleNotification}
           className="w-10 h-6 rounded-full bg-gray-700 flex items-center justify-start p-1 transition-all duration-300 ease-in-out focus:outline-none"

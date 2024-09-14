@@ -7,7 +7,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -35,22 +35,37 @@ const getLiveMatches = () => {
   }));
 };
 
+// API to get all matches
 app.get("/api/matches", (req, res) => {
   res.json(matches);
 });
 
+// API to get live matches
 app.get("/api/live-matches", (req, res) => {
   const liveMatches = getLiveMatches();
   res.json(liveMatches);
 });
 
+// API to get ended matches
 app.get("/api/ended-matches", (req, res) => {
   res.json(endedMatches);
 });
 
+// API to add a new match
 app.post("/api/add-match", (req, res) => {
   const newMatch = req.body;
   console.log("Received new match data:", newMatch);
+
+  if (
+    !newMatch.team1 ||
+    !newMatch.team2 ||
+    !newMatch.startTime ||
+    !newMatch.sport
+  ) {
+    return res
+      .status(400)
+      .json({ success: false, message: "Invalid match data" });
+  }
 
   const sportPrefix = newMatch.sport.toUpperCase();
   if (!sportCounters[sportPrefix]) {
@@ -67,6 +82,7 @@ app.post("/api/add-match", (req, res) => {
   res.json({ success: true, match: newMatch });
 });
 
+// API to update a match score
 app.post("/api/update-score", (req, res) => {
   const scoreData = req.body;
   console.log("Received score update:", scoreData);
@@ -86,6 +102,7 @@ app.post("/api/update-score", (req, res) => {
   }
 });
 
+// API to end a match
 app.post("/api/end-match/:matchId", (req, res) => {
   const { matchId } = req.params;
   const index = matches.findIndex((match) => match.matchId === matchId);
@@ -98,10 +115,6 @@ app.post("/api/end-match/:matchId", (req, res) => {
     res.status(404).json({ success: false, message: "Match not found" });
   }
 });
-
-// app.get("/api/ended-matches", (req, res) => {
-//   res.json(endedMatches);
-// });
 
 io.on("connection", (socket) => {
   console.log("A user connected");
