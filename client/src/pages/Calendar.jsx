@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { startOfToday, format, isSameDay } from "date-fns";
-import axios from 'axios';
-import Dates from "../components/Dates.jsx"
+import axios from "axios";
+import Dates from "../components/Dates.jsx";
 import EventList from "../components/Eventlist.jsx";
 import GameDetails from "../components/Gamedetails.jsx";
+import { useNavigate } from "react-router-dom";
 
 export default function Calendar() {
   let today = startOfToday();
@@ -16,32 +17,40 @@ export default function Calendar() {
   const [calendarHeight, setCalendarHeight] = useState(0);
   const [userPreferredGames, setUserPreferredGames] = useState([]);
   const [preferredTeams, setPreferredTeams] = useState([]);
+  const [auth, setAuth] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user details
-    axios.get(import.meta.env.VITE_BACKEND_URL + "profile", {
-      withCredentials: true,
-    })
-    .then((response) => {
-      const userData = response.data.user;
-      setUserPreferredGames(userData.interested_in || []);
-      setPreferredTeams(userData.Block ? [userData.Block] : []);
-    })
-    .catch((error) => {
-      console.error("Error fetching user details: ", error);
-    });
+    axios
+      .get(import.meta.env.VITE_BACKEND_URL + "profile", {
+        withCredentials: true,
+      })
+      .then((response) => {
+        const userData = response.data.user;
+        setUserPreferredGames(userData.interested_in || []);
+        setPreferredTeams(userData.Block ? [userData.Block] : []);
+        setAuth(true); // Set auth to true if the user data is fetched successfully
+      })
+      .catch((error) => {
+        console.error("Error fetching user details: ", error);
+        setAuth(false); // Set auth to false if there's an error
+      });
 
     // Fetch games data
-    axios.get('https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM')
-      .then(response => response.data)
-      .then(data => {
+    axios
+      .get(
+        "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
+      )
+      .then((response) => response.data)
+      .then((data) => {
         if (data && Object.keys(data).length > 0) {
-          const loadedGames = Object.entries(data).flatMap(([date, events]) => 
-            events.map(event => ({
+          const loadedGames = Object.entries(data).flatMap(([date, events]) =>
+            events.map((event) => ({
               ...event,
-              startDatetime: new Date(date + 'T' + event.time),
-              endDatetime: new Date(date + 'T' + event.time),
-              date: new Date(date)
+              startDatetime: new Date(date + "T" + event.time),
+              endDatetime: new Date(date + "T" + event.time),
+              date: new Date(date),
             }))
           );
           setGames(loadedGames);
@@ -50,7 +59,7 @@ export default function Calendar() {
           setGames([]);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Failed to load games:", error);
         setGames([]);
       });
@@ -79,10 +88,11 @@ export default function Calendar() {
     isSameDay(game.date, selectedDay)
   );
 
-  let preferredMeetings = selectedDayMeetings.filter((meeting) =>
-    userPreferredGames.includes(meeting.title) ||
-    preferredTeams.some(team => meeting.teams.includes(team)) ||
-    meeting.teams.toLowerCase().includes("all blocks")
+  let preferredMeetings = selectedDayMeetings.filter(
+    (meeting) =>
+      userPreferredGames.includes(meeting.title) ||
+      preferredTeams.some((team) => meeting.teams.includes(team)) ||
+      meeting.teams.toLowerCase().includes("all blocks")
   );
 
   let otherMeetings = selectedDayMeetings.filter(
@@ -93,12 +103,16 @@ export default function Calendar() {
     setSelectedGame(game);
   }
 
+  const handleLoginRedirect = () => {
+    navigate("/profile");
+  };
+
   return (
     <div className="scroll-smooth pt-16">
       <div className="max-w-md px-4 mx-auto sm:px-7 md:max-w-7xl md:px-6">
         <div className="lg:flex lg:space-x-8">
           <div className="lg:w-1/3">
-            <Dates 
+            <Dates
               currentMonth={currentMonth}
               setCurrentMonth={setCurrentMonth}
               selectedDay={selectedDay}
@@ -110,20 +124,37 @@ export default function Calendar() {
             />
           </div>
           <div className="lg:w-2/3">
-            <EventList 
-              preferredMeetings={preferredMeetings}
-              otherMeetings={otherMeetings}
-              onGameSelect={handleGameSelect}
-              calendarHeight={calendarHeight}
-              selectedDay={selectedDay}
-            />
+            {auth ? (
+              <EventList
+                preferredMeetings={preferredMeetings}
+                otherMeetings={otherMeetings}
+                onGameSelect={handleGameSelect}
+                calendarHeight={calendarHeight}
+                selectedDay={selectedDay}
+              />
+            ) : (
+              <>
+                <EventList
+                  showError={true}
+                  handleLoginRedirect={handleLoginRedirect}
+                  preferredMeetings={[]}
+                  otherMeetings={selectedDayMeetings}
+                  onGameSelect={handleGameSelect}
+                  calendarHeight={calendarHeight}
+                  selectedDay={selectedDay}
+                />
+              </>
+            )}
           </div>
         </div>
-        
+
         <div className="my-8 border-t-2 border-gray-300"></div>
-        
-        {selectedGame && (
-          <GameDetails game={selectedGame} ref={detailsRef} />
+
+        {/* Preferred games section */}
+        {auth ? (
+          selectedGame && <GameDetails game={selectedGame} ref={detailsRef} />
+        ) : (
+          <></>
         )}
       </div>
     </div>
