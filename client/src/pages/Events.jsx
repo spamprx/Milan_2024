@@ -12,7 +12,7 @@ function Events() {
   const [sportsGirlsData, setSportsGirlsData] = useState(null);
   const [sportsBoysData, setSportsBoysData] = useState(null);
   const [techyData, setTechyData] = useState(null);
-  const [isMobile,setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   const [categories, setCategories] = useState([
     "Sports Boys",
@@ -20,11 +20,11 @@ function Events() {
     "Culturals",
     "Sci-Tech",
   ]);
-  const [blocks,setBlocks] = useState(["Select All"]);
+  const [blocks, setBlocks] = useState(["Select All"]);
 
   useEffect(() => {
     setDataFetched(sportsBoysData && sportsGirlsData && techyData && cultiData);
-  },[sportsBoysData, sportsGirlsData, techyData, cultiData]);
+  }, [sportsBoysData, sportsGirlsData, techyData, cultiData]);
 
   const handleCategoriesChange = (selectedCategory) => {
     setCategories(selectedCategory);
@@ -91,7 +91,7 @@ function Events() {
     const fetchSportsBoysData = async () => {
       try {
         const response = await fetch(
-          "https://script.google.com/macros/s/AKfycbwAkBZpkZAA3RR7yhglhaY0MynyTb7x6RB8aRtDyG0C8rLZxHLlvy1qx838hl3Ys96M/exec"
+          "https://script.google.com/macros/s/AKfycby3D4yrP5M2xRoadR7oSVauTj01hNRDHAhR-eZURWzeHSFlj9cT8B2x_G65w99y_wcCgw/exec"
         );
         if (!response.ok) {
           throw new Error("HTTP error! status: ${response.status}");
@@ -182,14 +182,14 @@ function Events() {
       {isMobile && dataFetched && (
         <div className="flex gap-8 flex-col scale-90 justify-center">
           <div className="flex flex-row justify-center">
-            <Filter options={techyData.blocks} onCategoryChange={handleBlocksChange} title="SELECT BLOCK" isSingle={true}/>
             <Filter
-              options={[
-                "Sports Boys",
-                "Sports Girls",
-                "Culturals",
-                "Sci-Tech",
-              ]}
+              options={techyData.blocks}
+              onCategoryChange={handleBlocksChange}
+              title="SELECT BLOCK"
+              isSingle={true}
+            />
+            <Filter
+              options={["Sports Boys", "Sports Girls", "Culturals", "Sci-Tech"]}
               onCategoryChange={handleCategoriesChange}
               title="SELECT TYPE"
             />

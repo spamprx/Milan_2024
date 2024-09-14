@@ -27,16 +27,16 @@ function Home() {
   const cardContainerRef = useRef(null);
 
   const sportOptions = [
-    { value: "basketball", label: "Basketball" },
-    { value: "football", label: "Football" },
-    { value: "badminton", label: "Badminton" },
-    { value: "cricket", label: "Cricket" },
+    { value: "sportsBoys", label: "SportsBoys" },
+    { value: "sportsGirls", label: "SportsGirls" },
+    { value: "techy", label: "Techy" },
+    { value: "culti", label: "Culti" },
   ];
 
   const [selectedOption, setSelectedOption] = useState(sportOptions[0]);
 
   const sportEvents = {
-    basketball: [
+    sportsBoys: [
       { id: 1, hostel1: "Hostel A", hostel2: "Hostel B" },
       { id: 2, hostel1: "Hostel A", hostel2: "Hostel B" },
       { id: 3, hostel1: "Hostel A", hostel2: "Hostel B" },
@@ -44,14 +44,14 @@ function Home() {
       { id: 5, hostel1: "Hostel A", hostel2: "Hostel B" },
       { id: 6, hostel1: "Hostel A", hostel2: "Hostel B" },
     ],
-    football: [
+    sportsGirls: [
       { id: 1, hostel1: "Hostel C", hostel2: "Hostel D" },
       { id: 2, hostel1: "Hostel C", hostel2: "Hostel D" },
       { id: 3, hostel1: "Hostel C", hostel2: "Hostel D" },
       { id: 4, hostel1: "Hostel C", hostel2: "Hostel D" },
       { id: 5, hostel1: "Hostel C", hostel2: "Hostel D" },
     ],
-    badminton: [
+    techy: [
       { id: 2, hostel1: "Hostel E", hostel2: "Hostel F" },
       { id: 1, hostel1: "Hostel E", hostel2: "Hostel F" },
       { id: 3, hostel1: "Hostel E", hostel2: "Hostel F" },
@@ -61,7 +61,7 @@ function Home() {
       { id: 7, hostel1: "Hostel E", hostel2: "Hostel F" },
       { id: 8, hostel1: "Hostel E", hostel2: "Hostel F" },
     ],
-    cricket: [
+    culti: [
       { id: 2, hostel1: "Hostel G", hostel2: "Hostel H" },
       { id: 1, hostel1: "Hostel G", hostel2: "Hostel H" },
       { id: 3, hostel1: "Hostel G", hostel2: "Hostel H" },
@@ -205,93 +205,91 @@ function Home() {
               </div>
             </div>
           </div>
-
-          <div className="h-full w-full">
-            <div className="relative w-full text-sm lg:text-md h-1/2 flex flex-col justify-between items-center md:my-4 px-6 py-10 z-30 font-be-vietnam-pro bg-transparent">
-              <div className="flex w-full justify-between items-center">
-                <div className="flex flex-col items-start">
-                  <label className="block text-[#D1CCB6] mb-2" htmlFor="event">
-                    SPORTS YOU LIKE:
-                  </label>
-                  <Select
-                    id="event"
-                    options={sportOptions}
-                    value={selectedOption}
-                    onChange={handleOptionClick}
-                    styles={{
-                      control: (base) => ({
-                        ...base,
-                        backgroundColor: "transparent",
-                        border: "none",
-                        boxShadow: "none",
-                      }),
-                      singleValue: (base) => ({
-                        ...base,
-                        color: "#ffffff",
-                      }),
-                      menu: (base) => ({
-                        ...base,
-                        backgroundColor: "#000000",
-                      }),
-                      option: (base, state) => ({
-                        ...base,
-                        backgroundColor: state.isSelected
-                          ? "#333333"
-                          : "#000000",
-                        color: "#ffffff",
-                        "&:hover": {
-                          backgroundColor: "#333333",
-                        },
-                      }),
-                    }}
-                  />
-                </div>
-                <div className="w-1/2 flex flex-col justify-end items-end">
-                  <p className="text-[#f0f0f0d9] font-thin">There will be</p>
-                  <p className="text-white text-lg lg:text-xl font-bold">
-                    {currentEvents.length} Incoming Events
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="slider-container w-full mb-7">
-              <Slider {...settings}>
-                {currentEvents.map((event, index) => (
-                  <div key={index} className="p-2 mb-2">
-                    <SportCard event={event} />
-                  </div>
-                ))}
-              </Slider>
-            </div>
-          </div>
         </div>
       </div>
       <div className="w-full h-full mb-8 flex flex-col justify-center items-center">
-        <div className="bg-[#160631] mb-8">
-          <div className="w-screen relative">
+        {/* <div className="bg-[#160631] mb-8"> */}
+        <div className="relative flex items-center justify-center h-4/5 w-full p-10">
+          <div className="absolute flex w-full h-full items-center justify-center">
             <img
               src={Stripes}
               alt="Stripes background"
-              className="w-full h-auto object-cover lg:scale-y-75"
+              className="w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
             />
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-              <h2 className="text-[#D1CCB6] text-lg md:text-3xl lg:text-4xl font-semibold text-center">
-                MORE ABOUT OTHER EVENTS
-              </h2>
+          </div>
+
+          <p className="relative z-10 text-[#D1CCB6] text-center text-xl sm:text-2xl lg:text-3xl">
+            MORE ABOUT OTHER EVENTS
+          </p>
+        </div>
+        <div className="h-full w-full mb-10">
+          <div className="relative w-full text-sm lg:text-md h-1/2 flex flex-col justify-between items-center md:my-4 px-6 py-10 z-30 font-be-vietnam-pro bg-transparent">
+            <div className="flex w-full justify-between items-center">
+              <div className="flex flex-col items-start">
+                <label className="block text-[#D1CCB6] mb-2" htmlFor="event">
+                  SPORTS YOU LIKE:
+                </label>
+                <Select
+                  id="event"
+                  options={sportOptions}
+                  value={selectedOption}
+                  onChange={handleOptionClick}
+                  styles={{
+                    control: (base) => ({
+                      ...base,
+                      backgroundColor: "transparent",
+                      border: "none",
+                      boxShadow: "none",
+                    }),
+                    singleValue: (base) => ({
+                      ...base,
+                      color: "#ffffff",
+                    }),
+                    menu: (base) => ({
+                      ...base,
+                      backgroundColor: "#000000",
+                    }),
+                    option: (base, state) => ({
+                      ...base,
+                      backgroundColor: state.isSelected ? "#333333" : "#000000",
+                      color: "#ffffff",
+                      "&:hover": {
+                        backgroundColor: "#333333",
+                      },
+                    }),
+                  }}
+                />
+              </div>
+              <div className="w-1/2 flex flex-col justify-end items-end">
+                <p className="text-[#f0f0f0d9] font-thin">There will be</p>
+                <p className="text-white text-lg lg:text-xl font-bold">
+                  {currentEvents.length} Incoming Events
+                </p>
+              </div>
             </div>
           </div>
-          <div className="w-full relative flex flex-row gap-2 sm:gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6]">
-            <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
-            <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
-            <div className="bg-[#D1CCB6] text-md sm:text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
-              THE AFTERMOVIE
-            </div>
-            <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
-            <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
+
+          <div className="slider-container w-full mb-7">
+            <Slider {...settings}>
+              {currentEvents.map((event, index) => (
+                <div key={index} className="p-2 mb-2">
+                  <SportCard event={event} />
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
-        <div className="w-full flex-grow flex-wrap flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
+        <div className="w-full relative flex flex-row gap-2 sm:gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6]">
+          <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
+          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+          <div className="bg-[#D1CCB6] text-md sm:text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
+            THE AFTERMOVIE
+          </div>
+          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+          <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
+        </div>
+        {/* </div> */}
+        {/* <div className="w-full flex-grow flex-wrap flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <iframe
               className="w-full h-full"
@@ -339,7 +337,7 @@ function Home() {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="w-full max-w-7xl lg:w-3/4 h-full p-3">
           <div className="flex items-center justify-center my-5 object-contain aspect-[16/9]">
             <iframe
