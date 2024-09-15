@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
+// import React, { useEffect } from 'react';
 
-function RuleBook() {
-  useEffect(() => {
-    if (!window.hasRedirected) {
-      window.open('https://drive.google.com/file/d/19x6wXCwdY1wUR0YByT8_KhcxGI6hLIU9/view', '_blank');
-      window.hasRedirected = true;
-    }
-  }, []);
+// function RuleBook() {
+//   useEffect(() => {
+//     if (!window.hasRedirected) {
+//       window.location.href = 'https://drive.google.com/file/d/19x6wXCwdY1wUR0YByT8_KhcxGI6hLIU9/view';
+//       window.hasRedirected = true;
+//     }
+//   }, []);
 
-  return <h1>Redirecting to Rule Book...</h1>;
-}
+//   return <h1>Redirecting to Rule Book...</h1>;
+// }
 
-export default RuleBook;
+// export default RuleBook;

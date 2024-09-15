@@ -36,7 +36,7 @@ function App() {
             <Route path="/livescore" element={<LiveScore />} />
             <Route path="/login" element={<GoogleButton />} />
             <Route path="/profile" element={<Profile />} />
-            <Route path="/rulebook" element={<RuleBook />} />
+            {/* <Route path="/rulebook" element={<RuleBook />} /> */}
             <Route path="/sponsors" element={<Sponsors />} />
             <Route path="/team" element={<Team />} />
             <Route path="/loading" element={<Loading />} />

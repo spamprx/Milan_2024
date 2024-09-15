@@ -401,7 +401,7 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="mb-6">
-                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro w-full">
+                    <h3 className="text-lg font-[600] text-[#1E1E1E] mb-2 text-left font-be-vietnam-pro w-full flex justify-between">
                       Interested In:
                       <button
                         onClick={toggleEditMode}

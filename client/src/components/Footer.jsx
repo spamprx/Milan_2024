@@ -26,9 +26,27 @@ function Footer() {
         <div className="flex flex-col items-center">
           <img src={Follow} alt="Follow" className="w-1/3 h-1/3 mx-auto" />
           <div className="flex flex-row space-x-4 mt-2">
-            <img src={Instagram} alt="Instagram" className="w-6 h-6" />
-            <img src={Youtube} alt="Youtube" className="w-6 h-6" />
-            <img src={LinkedIn} alt="LinkedIn" className="w-6 h-6" />
+            <a
+              href="https://www.instagram.com/milan.iithyd/?hl=en"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={Instagram} alt="Instagram" className="w-6 h-6" />
+            </a>
+            <a
+              href="https://www.youtube.com/channel/UCLmZ3AcvOulm1-TFdgqngTw"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={Youtube} alt="Youtube" className="w-6 h-6" />
+            </a>
+            <a
+              href="https://in.linkedin.com/company/milanthegc"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img src={LinkedIn} alt="LinkedIn" className="w-6 h-6" />
+            </a>
           </div>
         </div>
 
@@ -53,7 +71,7 @@ function Footer() {
             Phone:
           </span>
           <span className="text-[#D1CCB6] font-[300] font-be-vietnam text-sm">
-            +91 8888888888
+            +91 6361 325 605
           </span>
           <span className="text-[#D1CCB6] font-[300] font-be-vietnam text-sm">
             Email us at:
