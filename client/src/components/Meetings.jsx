@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [] }) {
-  const [notificationEnabled, setNotificationEnabled] = useState(false);
+export default function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [], initialNotificationState }) {
+  const [notificationEnabled, setNotificationEnabled] = useState(initialNotificationState);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -13,19 +13,24 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
     }
 
     const isPreferredEvent =
-      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting.title)) ||
+      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting.title.toLowerCase())) ||
       (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting.teams && meeting.teams.includes(team))) ||
       (meeting.teams && meeting.teams.toLowerCase().includes("all blocks"));
 
-    setNotificationEnabled(isPreferredEvent);
-  }, [meeting, userPreferredGames, preferredTeams]);
+    // Always set notifications on for preferred events
+    if (isPreferredEvent && !notificationEnabled) {
+      setNotificationEnabled(true);
+      toggleNotification({ stopPropagation: () => {} }, true);
+    }
+  }, [meeting, userPreferredGames, preferredTeams, notificationEnabled]);
 
-  const toggleNotification = async (e) => {
-    e.stopPropagation();
+  const toggleNotification = async (e, isAutoEnable = false) => {
+    if (!isAutoEnable) {
+      e.stopPropagation();
+    }
     setIsLoading(true);
     setError(null);
 
-    let success = false;
     try {
       if (!meeting || !meeting.date) {
         throw new Error("Meeting data is incomplete");
@@ -34,31 +39,28 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
       const endpoint = notificationEnabled ? "delete_event" : "add_event";
       const payload = notificationEnabled
         ? {
-          eventName: meeting.title,
-          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-        }
+            eventName: meeting.title,
+            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+          }
         : {
-          eventName: meeting.title,
-          location: meeting.body || "",
-          teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
-          time: meeting.time || "",
-          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-        };
+            eventName: meeting.title,
+            location: meeting.body || "",
+            teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
+            time: meeting.time || "",
+            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+          };
 
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
         withCredentials: true,
       });
 
-      success = true;
+      // Update local state only after successful backend update
+      setNotificationEnabled(prevState => !prevState);
     } catch (error) {
       console.error("Error toggling notification:", error);
       setError("Failed to update notification. Please try again.");
     } finally {
       setIsLoading(false);
-    }
-
-    if (success) {
-      setNotificationEnabled(prevState => !prevState);
     }
   };
 
@@ -98,8 +100,9 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
           disabled={isLoading}
         >
           <div
-            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
-              }`}
+            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${
+              notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
+            }`}
           >
             {isLoading && (
               <div className="w-4 h-4 border-t-2 border-gray-700 rounded-full animate-spin"></div>

@@ -31,6 +31,9 @@ export default function EventList({
         meeting={meeting} 
         onSelect={onGameSelect}
         isPreferred={isPreferred || userPreferredGames.includes(meeting.title.toLowerCase()) || preferredTeams.some(team => meeting.teams.includes(team))}
+        initialNotificationState={meeting.notificationEnabled} // Add this line
+        userPreferredGames={userPreferredGames}
+        preferredTeams={preferredTeams}
       />
     ));
   };

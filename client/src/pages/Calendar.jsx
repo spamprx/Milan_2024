@@ -33,7 +33,8 @@ export default function Calendar() {
     console.log("Fetching user details...");
 
     const fetchGamesData = axios.get(
-      import.meta.env.VITE_BACKEND_URL + "eventsSchedule");
+      import.meta.env.VITE_BACKEND_URL + "eventsSchedule"
+    );
     console.log("Fetching games data...");
 
     Promise.all([fetchUserDetails, fetchGamesData])
@@ -55,6 +56,7 @@ export default function Calendar() {
               startDatetime: new Date(date + "T" + event.time),
               endDatetime: new Date(date + "T" + event.time),
               date: new Date(date),
+              notificationEnabled: event.notificationEnabled || false
             }))
           );
           console.log("Processed games data:", loadedGames);
@@ -114,7 +116,6 @@ export default function Calendar() {
   let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
   );
-
 
   console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
   console.log("Selected Day Meetings:", selectedDayMeetings);
