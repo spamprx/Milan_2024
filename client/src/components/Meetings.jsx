@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 
 function Meeting({ 
@@ -18,12 +18,7 @@ function Meeting({
     );
   }, [meeting, userPreferredGames, preferredTeams]);
 
-  const [notificationEnabled, setNotificationEnabled] = useState(() => {
-    if (initialNotificationState !== undefined) {
-      return initialNotificationState;
-    }
-    return isPreferredEvent;
-  });
+  const [notificationEnabled, setNotificationEnabled] = useState(initialNotificationState);
   
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
