@@ -114,12 +114,17 @@ export default function Calendar() {
     isSameDay(game.date, selectedDay)
   );
 
-  let preferredMeetings = selectedDayMeetings.filter(
-    (meeting) =>
-      userPreferredGames.includes(meeting.title.toLowerCase()) ||
-      preferredTeams.some((team) => meeting.teams.includes(team)) ||
-      meeting.teams.toLowerCase().includes("all blocks")
-  );
+  let preferredMeetings = selectedDayMeetings
+    .filter(
+      (meeting) =>
+        userPreferredGames.includes(meeting.title.toLowerCase()) ||
+        preferredTeams.some((team) => meeting.teams.includes(team)) ||
+        meeting.teams.toLowerCase().includes("all blocks")
+    )
+    .map((meeting) => {
+      meeting.notificationEnabled = true;
+      return meeting;
+    });
 
   let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
