@@ -1,67 +1,27 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
-export default function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [], initialNotificationState }) {
-  const [notificationEnabled, setNotificationEnabled] = useState(initialNotificationState);
+export default function Meeting({ 
+  meeting, 
+  onSelect, 
+  isPreferred, 
+  userPreferredGames = [], 
+  preferredTeams = [], 
+  toggleNotification
+}) {
+  const [notificationEnabled, setNotificationEnabled] = useState(meeting.notificationEnabled);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!meeting) {
-      console.warn("Meeting data is missing");
-      return;
-    }
+    setNotificationEnabled(meeting.notificationEnabled);
+  }, [meeting.notificationEnabled]);
 
-    const isPreferredEvent =
-      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting.title.toLowerCase())) ||
-      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting.teams && meeting.teams.includes(team))) ||
-      (meeting.teams && meeting.teams.toLowerCase().includes("all blocks"));
-
-    // Always set notifications on for preferred events
-    if (isPreferredEvent && !notificationEnabled) {
-      setNotificationEnabled(true);
-      toggleNotification({ stopPropagation: () => {} }, true);
-    }
-  }, [meeting, userPreferredGames, preferredTeams, notificationEnabled]);
-
-  const toggleNotification = async (e, isAutoEnable = false) => {
-    if (!isAutoEnable) {
-      e.stopPropagation();
-    }
+  const handleToggle = async (e) => {
+    e.stopPropagation();
     setIsLoading(true);
-    setError(null);
-
-    try {
-      if (!meeting || !meeting.date) {
-        throw new Error("Meeting data is incomplete");
-      }
-
-      const endpoint = notificationEnabled ? "delete_event" : "add_event";
-      const payload = notificationEnabled
-        ? {
-            eventName: meeting.title,
-            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-          }
-        : {
-            eventName: meeting.title,
-            location: meeting.body || "",
-            teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
-            time: meeting.time || "",
-            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-          };
-
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
-        withCredentials: true,
-      });
-
-      // Update local state only after successful backend update
-      setNotificationEnabled(prevState => !prevState);
-    } catch (error) {
-      console.error("Error toggling notification:", error);
-      setError("Failed to update notification. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
+    const newState = !notificationEnabled;
+    setNotificationEnabled(newState); // Optimistic update
+    await toggleNotification(meeting.id, newState);
+    setIsLoading(false);
   };
 
   if (!meeting) {
@@ -95,7 +55,7 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
       <div className="mt-2 flex flex-col sm:flex-row items-center justify-between">
         <p className="text-xs text-gray-300 pb-2">Notifications</p>
         <button
-          onClick={toggleNotification}
+          onClick={handleToggle}
           className="w-10 h-6 rounded-full bg-gray-700 flex items-center justify-start p-1 transition-all duration-300 ease-in-out focus:outline-none"
           disabled={isLoading}
         >
@@ -120,8 +80,6 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
           </div>
         </button>
       </div>
-
-      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 }
