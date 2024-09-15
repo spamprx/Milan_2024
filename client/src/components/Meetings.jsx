@@ -18,17 +18,27 @@ function Meeting({
     );
   }, [meeting, userPreferredGames, preferredTeams]);
 
+  const getLocalStorageKey = useCallback(() => {
+    return `notification_${meeting.title}_${meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date}`;
+  }, [meeting]);
+
   const [notificationEnabled, setNotificationEnabled] = useState(() => {
-    // If initialNotificationState is provided, use it
+    const storedState = localStorage.getItem(getLocalStorageKey());
+    if (storedState !== null) {
+      return JSON.parse(storedState);
+    }
     if (initialNotificationState !== undefined) {
       return initialNotificationState;
     }
-    // Otherwise, set to true for preferred events, false for others
     return isPreferredEvent;
   });
   
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  useEffect(() => {
+    localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
+  }, [notificationEnabled, getLocalStorageKey]);
 
   const toggleNotification = useCallback(async (e) => {
     e.stopPropagation();
@@ -60,6 +70,7 @@ function Meeting({
 
       const updatedNotificationState = !notificationEnabled;
       setNotificationEnabled(updatedNotificationState);
+      localStorage.setItem(getLocalStorageKey(), JSON.stringify(updatedNotificationState));
       onNotificationToggle({ ...meeting, notificationEnabled: updatedNotificationState });
     } catch (error) {
       console.error("Error toggling notification:", error);
@@ -67,7 +78,7 @@ function Meeting({
     } finally {
       setIsLoading(false);
     }
-  }, [meeting, notificationEnabled, onNotificationToggle]);
+  }, [meeting, notificationEnabled, onNotificationToggle, getLocalStorageKey]);
 
   if (!meeting) {
     return null;
