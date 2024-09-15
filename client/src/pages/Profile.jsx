@@ -421,7 +421,10 @@ const Profile = () => {
               )}
               
               {/* Logout Button */}
-              <div className="mt-6">
+              
+            </div>
+          </div>
+          <div className="mt-6 top-6 right-6">
                 <button
                   onClick={handleLogout}
                   className="bg-red-500 text-white font-[700] font-montserrat py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline hover:bg-red-600 transition duration-300 ease-in-out"
@@ -429,8 +432,6 @@ const Profile = () => {
                   Logout
                 </button>
               </div>
-            </div>
-          </div>
           <ToastContainer position="bottom-right" autoClose={3000} />
         </div>
       )}
