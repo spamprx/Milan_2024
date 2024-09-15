@@ -2,10 +2,6 @@ import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 
 function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [], initialNotificationState }) {
-  const [notificationEnabled, setNotificationEnabled] = useState(initialNotificationState);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
   const isPreferredEvent = useMemo(() => {
     return (
       (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) ||
@@ -14,11 +10,18 @@ function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], pref
     );
   }, [meeting, userPreferredGames, preferredTeams]);
 
-  const toggleNotification = useCallback(async (e, isAutoEnable = false) => {
-    if (!isAutoEnable) {
-      e.stopPropagation();
+  const [notificationEnabled, setNotificationEnabled] = useState(() => {
+    if (initialNotificationState !== undefined) {
+      return initialNotificationState;
     }
-    
+    return isPreferredEvent;
+  });
+  
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const toggleNotification = useCallback(async (e) => {
+    e.stopPropagation();
     setIsLoading(true);
     setError(null);
 
@@ -53,19 +56,6 @@ function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], pref
       setIsLoading(false);
     }
   }, [meeting, notificationEnabled]);
-
-  useEffect(() => {
-    if (!meeting) {
-      console.warn("Meeting data is missing");
-      return;
-    }
-
-    // Set notifications on immediately for preferred events, but only if it hasn't been manually toggled off
-    if (isPreferredEvent && !notificationEnabled && initialNotificationState !== false) {
-      setNotificationEnabled(true);
-      toggleNotification({ stopPropagation: () => {} }, true);
-    }
-  }, [meeting, isPreferredEvent, notificationEnabled, toggleNotification, initialNotificationState]);
 
   if (!meeting) {
     return null;
