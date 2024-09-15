@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import Meeting from './Meeting.jsx';
+import Meeting from "./Meetings"
 
 export default function EventList({ 
   showError, 
