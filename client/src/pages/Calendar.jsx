@@ -23,27 +23,31 @@ export default function Calendar() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    console.log("Initiating data fetch...");
     const fetchUserDetails = axios.get(
       import.meta.env.VITE_BACKEND_URL + "profile",
       {
         withCredentials: true,
       }
     );
-    console.log(fetchUserDetails);
+    console.log("Fetching user details...");
 
     const fetchGamesData = axios.get(
       import.meta.env.VITE_BACKEND_URL + "eventsSchedule");
+    console.log("Fetching games data...");
 
     Promise.all([fetchUserDetails, fetchGamesData])
       .then(([userResponse, gamesResponse]) => {
         // Handle user data
         const userData = userResponse.data.user;
+        console.log("User data received:", userData);
         setUserPreferredGames(userData.interested_in || []);
         setPreferredTeams(userData.Block ? [userData.Block] : []);
         setAuth(true);
 
         // Handle games data
         const data = gamesResponse.data;
+        console.log("Games data received:", data);
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => ({
@@ -53,6 +57,7 @@ export default function Calendar() {
               date: new Date(date),
             }))
           );
+          console.log("Processed games data:", loadedGames);
           setGames(loadedGames);
         } else {
           console.error("No data received or unexpected format:", data);
@@ -65,12 +70,20 @@ export default function Calendar() {
         setGames([]);
       })
       .finally(() => {
-        setIsLoading(false); // Set loading to false when all data is fetched
+        console.log("Data fetch complete. Setting isLoading to false.");
+        setIsLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    console.log("User preferred games updated:", userPreferredGames);
+    console.log("Preferred teams updated:", preferredTeams);
+  }, [userPreferredGames, preferredTeams]);
+
   useEffect(() => {
     if (calendarRef.current) {
       setCalendarHeight(calendarRef.current.clientHeight);
+      console.log("Calendar height set:", calendarRef.current.clientHeight);
     }
   }, [currentMonth]);
 
@@ -102,16 +115,24 @@ export default function Calendar() {
     (meeting) => !preferredMeetings.includes(meeting)
   );
 
+  console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
+  console.log("Selected Day Meetings:", selectedDayMeetings);
+  console.log("Filtered Preferred Meetings:", preferredMeetings);
+  console.log("Filtered Other Meetings:", otherMeetings);
+
   function handleGameSelect(game) {
+    console.log("Game selected:", game);
     setSelectedGame(game);
   }
 
   const handleLoginRedirect = () => {
+    console.log("Redirecting to profile page");
     navigate("/profile");
   };
 
   if (isLoading) {
-    return <Loading />; // Show loading component while data is being fetched
+    console.log("Rendering loading component");
+    return <Loading />;
   }
 
   return (
@@ -140,28 +161,23 @@ export default function Calendar() {
                 selectedDay={selectedDay}
               />
             ) : (
-              <>
-                <EventList
-                  showError={true}
-                  handleLoginRedirect={handleLoginRedirect}
-                  preferredMeetings={[]}
-                  otherMeetings={selectedDayMeetings}
-                  onGameSelect={handleGameSelect}
-                  calendarHeight={calendarHeight}
-                  selectedDay={selectedDay}
-                />
-              </>
+              <EventList
+                showError={true}
+                handleLoginRedirect={handleLoginRedirect}
+                preferredMeetings={[]}
+                otherMeetings={selectedDayMeetings}
+                onGameSelect={handleGameSelect}
+                calendarHeight={calendarHeight}
+                selectedDay={selectedDay}
+              />
             )}
           </div>
         </div>
 
         <div className="my-8 border-t-2 border-gray-300"></div>
 
-        {/* Preferred games section */}
-        {auth ? (
-          selectedGame && <GameDetails game={selectedGame} ref={detailsRef} />
-        ) : (
-          <></>
+        {auth && selectedGame && (
+          <GameDetails game={selectedGame} ref={detailsRef} />
         )}
       </div>
     </div>

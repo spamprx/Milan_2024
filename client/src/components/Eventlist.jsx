@@ -3,6 +3,9 @@ import { format } from 'date-fns';
 import Meeting from './Meetings.jsx';
 
 export default function EventList({ showError, handleLoginRedirect, preferredMeetings, otherMeetings, onGameSelect, calendarHeight, selectedDay }) {
+  console.log("EventList - Preferred Meetings:", preferredMeetings);
+  console.log("EventList - Other Meetings:", otherMeetings);
+
   const renderMeetings = (meetings, isPreferred) => {
     if (meetings.length === 0) {
       return (
