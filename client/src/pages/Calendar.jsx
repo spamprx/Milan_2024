@@ -5,6 +5,7 @@ import Dates from "../components/Dates.jsx";
 import EventList from "../components/Eventlist.jsx";
 import GameDetails from "../components/Gamedetails.jsx";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading.jsx";
 
 export default function Calendar() {
   let today = startOfToday();
@@ -19,31 +20,27 @@ export default function Calendar() {
   const [preferredTeams, setPreferredTeams] = useState([]);
   const [auth, setAuth] = useState(false);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch user details
-    axios
-      .get(import.meta.env.VITE_BACKEND_URL + "profile", {
-        withCredentials: true,
-      })
-      .then((response) => {
-        const userData = response.data.user;
+    const fetchUserDetails = axios.get(import.meta.env.VITE_BACKEND_URL + "profile", {
+      withCredentials: true,
+    });
+
+    const fetchGamesData = axios.get(
+      "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
+    );
+
+    Promise.all([fetchUserDetails, fetchGamesData])
+      .then(([userResponse, gamesResponse]) => {
+        // Handle user data
+        const userData = userResponse.data.user;
         setUserPreferredGames(userData.interested_in || []);
         setPreferredTeams(userData.Block ? [userData.Block] : []);
-        setAuth(true); // Set auth to true if the user data is fetched successfully
-      })
-      .catch((error) => {
-        console.error("Error fetching user details: ", error);
-        setAuth(false); // Set auth to false if there's an error
-      });
+        setAuth(true);
 
-    // Fetch games data
-    axios
-      .get(
-        "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
-      )
-      .then((response) => response.data)
-      .then((data) => {
+        // Handle games data
+        const data = gamesResponse.data;
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => ({
@@ -60,8 +57,12 @@ export default function Calendar() {
         }
       })
       .catch((error) => {
-        console.error("Failed to load games:", error);
+        console.error("Error fetching data:", error);
+        setAuth(false);
         setGames([]);
+      })
+      .finally(() => {
+        setIsLoading(false);  // Set loading to false when all data is fetched
       });
   }, []);
 
@@ -106,6 +107,10 @@ export default function Calendar() {
   const handleLoginRedirect = () => {
     navigate("/profile");
   };
+
+  if (isLoading) {
+    return <Loading />;  // Show loading component while data is being fetched
+  }
 
   return (
     <div className="scroll-smooth pt-16">

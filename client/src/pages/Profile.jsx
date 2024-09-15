@@ -186,6 +186,15 @@ const Profile = () => {
         borderColor: "#cbd5e0",
       },
     }),
+    valueContainer: (provided) => ({
+      ...provided,
+      maxHeight: '80px',
+      overflow: 'auto',
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      margin: '2px',
+    }),
     singleValue: (provided) => ({
       ...provided,
       color: "#4D4D4D",
@@ -371,7 +380,7 @@ const Profile = () => {
                         isMulti={true}
                       />
                     ) : (
-                      <div className="bg-gray-100 p-4 rounded-xl text-">
+                      <div className="bg-gray-100 p-4 rounded-xl text-left">
                         {selectedEvents.length > 0 ? (
                           <ul className="list-disc list-inside">
                             {selectedEvents.map((event) => (
