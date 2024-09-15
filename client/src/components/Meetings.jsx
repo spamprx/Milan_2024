@@ -1,30 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 
-export default function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [], initialNotificationState }) {
+// Named function component
+function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [], initialNotificationState }) {
   const [notificationEnabled, setNotificationEnabled] = useState(initialNotificationState);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (!meeting) {
-      console.warn("Meeting data is missing");
-      return;
-    }
-
-    const isPreferredEvent =
-      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting.title.toLowerCase())) ||
-      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting.teams && meeting.teams.includes(team))) ||
-      (meeting.teams && meeting.teams.toLowerCase().includes("all blocks"));
-
-    // Always set notifications on for preferred events
-    if (isPreferredEvent && !notificationEnabled) {
-      setNotificationEnabled(true);
-      toggleNotification({ stopPropagation: () => {} }, true);
-    }
-  }, [meeting, userPreferredGames, preferredTeams, notificationEnabled]);
-
-  const toggleNotification = async (e, isAutoEnable = false) => {
+  const toggleNotification = useCallback(async (e, isAutoEnable = false) => {
     if (!isAutoEnable) {
       e.stopPropagation();
     }
@@ -54,7 +37,6 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
         withCredentials: true,
       });
 
-      // Update local state only after successful backend update
       setNotificationEnabled(prevState => !prevState);
     } catch (error) {
       console.error("Error toggling notification:", error);
@@ -62,7 +44,27 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [meeting, notificationEnabled]);
+
+  const isPreferredEvent = useMemo(() => {
+    return (
+      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) ||
+      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.includes(team))) ||
+      (meeting?.teams && meeting.teams.toLowerCase().includes("all blocks"))
+    );
+  }, [meeting, userPreferredGames, preferredTeams]);
+
+  useEffect(() => {
+    if (!meeting) {
+      console.warn("Meeting data is missing");
+      return;
+    }
+
+    if (isPreferredEvent && !notificationEnabled) {
+      setNotificationEnabled(true);
+      toggleNotification({ stopPropagation: () => {} }, true);
+    }
+  }, [meeting, isPreferredEvent, notificationEnabled, toggleNotification]);
 
   if (!meeting) {
     return null;
@@ -125,3 +127,6 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
     </div>
   );
 }
+
+// Export the component directly
+export default Meeting;
