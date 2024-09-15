@@ -181,7 +181,7 @@ function Home() {
   return (
     <div className="relative bg-transparent h-full flex flex-col mx-auto">
       <div
-        className="relative w-full h-full bg-cover bg-center mt-6"
+        className="relative w-full h-full bg-cover bg-center my-4 lg:my-8"
         style={{ backgroundImage: `url(${HomeBg})` }}
       >
         <div className="w-full h-full">
@@ -213,8 +213,8 @@ function Home() {
           </div>
         </div>
       </div>
-      <div className="w-full h-full mb-8 flex flex-col justify-center items-center">
-        <div className="relative flex items-center justify-center h-4/5 w-full p-10">
+      <div className="w-full h-full flex flex-col justify-center items-center mb-8">
+        <div className="relative flex items-center justify-center h-4/5 w-full p-6 lg:p-10 mb-8">
           <div className="absolute flex w-full h-full items-center justify-center">
             <img
               src={Stripes}
@@ -223,15 +223,18 @@ function Home() {
             />
           </div>
 
-          <p className="relative z-10 text-[#D1CCB6] text-center text-md sm:text-2xl lg:text-3xl">
+          <p className="relative z-10 text-[#D1CCB6] text-center text-base sm:text-2xl lg:text-3xl">
             MORE ABOUT OTHER EVENTS
           </p>
         </div>
-        <div className="h-full w-full mb-10">
-          <div className="relative w-full text-sm lg:text-md h-1/2 flex flex-col justify-between items-center md:my-4 px-6 py-10 z-30 font-be-vietnam-pro bg-transparent">
-            <div className="flex w-full justify-between items-center">
+        <div className="h-full w-full">
+          <div className="relative w-full text-sm lg:text-md h-1/2 flex flex-col justify-between items-center px-4 lg:px-8 z-30 font-be-vietnam-pro bg-transparent">
+            <div className="flex w-full justify-between items-start">
               <div className="flex flex-col items-start">
-                <label className="block text-[#D1CCB6] mb-2" htmlFor="event">
+                <label
+                  className="block text-[#D1CCB6] text-sm sm:text-base lg:text-xl"
+                  htmlFor="event"
+                >
                   SPORTS YOU LIKE:
                 </label>
                 <Select
@@ -265,9 +268,11 @@ function Home() {
                   }}
                 />
               </div>
-              <div className="w-1/2 flex flex-col justify-end items-end">
-                <p className="text-[#f0f0f0d9] font-thin">There will be</p>
-                <p className="text-white text-lg lg:text-xl font-bold">
+              <div className="w-1/2 flex flex-col justify-start items-end gap-1">
+                <p className="text-[#f0f0f0d9] text-xs sm:text-sm lg:text-lg font-thin">
+                  There will be
+                </p>
+                <p className="text-white text-sm sm:text-base lg:text-xl font-bold">
                   {currentEvents.length} Incoming Events
                 </p>
               </div>
@@ -284,7 +289,10 @@ function Home() {
             </Slider>
           </div>
         </div>
-        <div className="w-full relative flex flex-row gap-2 sm:gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6]">
+      </div>
+
+      <div className="w-full h-full flex flex-col justify-center items-center mb-8">
+        <div className="w-full relative flex flex-row gap-2 sm:gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6] mb-8">
           <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
           <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
           <div className="bg-[#D1CCB6] text-md sm:text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
@@ -342,8 +350,8 @@ function Home() {
             </div>
           </div>
         </div> */}
-        <div className="w-full max-w-7xl lg:w-3/4 h-full p-3">
-          <div className="flex items-center justify-center my-5 object-contain aspect-[16/9]">
+        <div className="w-full max-w-7xl h-full px-4 lg:px-8">
+          <div className="flex items-center justify-center object-contain aspect-[16/9]">
             <iframe
               className="w-full h-full rounded-2xl object-contain"
               src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
@@ -373,7 +381,7 @@ function Home() {
             OUR THEME
           </p>
         </div>
-        <div className="w-full flex flex-col sm:flex-row justify-around items-center lg:items-start gap-8 px-4 lg:px-8">
+        <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between items-center lg:items-start gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center overflow-hidden">
             <img src={Theme} className="w-full h-full object-contain" />
           </div>
@@ -412,7 +420,7 @@ function Home() {
             OUR MASCOT
           </p>
         </div>
-        <div className="w-full flex-grow flex flex-col sm:flex-row justify-around lg:items-start items-center gap-8 px-4 lg:px-8">
+        <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between lg:items-start items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <img src={Mascot} className="w-full h-full object-contain" />
           </div>

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Image from "../assets/SponsorArrow.png";
 import TeamMember from "../components/TeamMember";
-import OCText from "/public/TEAM/OC/OCText.png";
-import OCBg from "/public/TEAM/OC/Addy_Bg.png";
 import Milan_OC from "/public/TEAM/OC/Milan Oc.png";
 import Loading from "./Loading.jsx";
 
