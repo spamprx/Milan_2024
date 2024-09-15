@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { startOfToday, format, isSameDay } from "date-fns";
 import axios from "axios";
 import Dates from "../components/Dates.jsx";
@@ -6,7 +6,6 @@ import EventList from "../components/Eventlist.jsx";
 import GameDetails from "../components/Gamedetails.jsx";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading.jsx";
-import debounce from 'lodash/debounce';
 
 export default function Calendar() {
   let today = startOfToday();
@@ -77,45 +76,6 @@ export default function Calendar() {
         setIsLoading(false);
       });
   }, []);
-
-  const toggleNotification = useCallback(debounce(async (gameId, newState) => {
-    try {
-      const endpoint = newState ? "add_event" : "delete_event";
-      const game = games.find(g => g.id === gameId);
-      if (!game) throw new Error("Game not found");
-
-      const payload = newState
-        ? {
-            eventName: game.title,
-            location: game.body || "",
-            teamsParticipating: game.teams ? game.teams.split(", ") : [],
-            time: game.time || "",
-            date: game.date instanceof Date ? game.date.toISOString().split("T")[0] : game.date,
-          }
-        : {
-            eventName: game.title,
-            date: game.date instanceof Date ? game.date.toISOString().split("T")[0] : game.date,
-          };
-
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
-        withCredentials: true,
-      });
-
-      setGames(prevGames => 
-        prevGames.map(g => 
-          g.id === gameId ? { ...g, notificationEnabled: newState } : g
-        )
-      );
-    } catch (error) {
-      console.error("Error toggling notification:", error);
-      // Revert the local state if the API call fails
-      setGames(prevGames => 
-        prevGames.map(g => 
-          g.id === gameId ? { ...g, notificationEnabled: !newState } : g
-        )
-      );
-    }
-  }, 300), [games]);
 
   useEffect(() => {
     console.log("User preferred games updated:", userPreferredGames);
@@ -203,7 +163,6 @@ export default function Calendar() {
                 selectedDay={selectedDay}
                 userPreferredGames={userPreferredGames}
                 preferredTeams={preferredTeams}
-                toggleNotification={toggleNotification}
               />
             ) : (
               <EventList
