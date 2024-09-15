@@ -8,7 +8,7 @@ import LinkedIn from "../assets/LinkedIn.svg";
 
 function Footer() {
   return (
-    <footer className="bg-gradient-to-b from-[#28134A] to-[#000000] flex flex-col justify-center items-center h-fit mt-8 pb-10">
+    <footer className="bg-gradient-to-b from-transparent to-[#12022D] via-[#12022D]/80 flex flex-col justify-center items-center h-fit mt-8 pb-10">
       <div className="flex flex-col justify-center items-center mt-4">
         <img src={Logo} alt="Logo" className="logo w-1/2 h-1/2 p-2" />
         <span className="text-[#DEB116] font-[600] font-be-vietnam text-4xl">

@@ -18,7 +18,7 @@ function Hamburger() {
     { name: "SPONSORS", path: "/sponsors" },
     { name: "TEAM", path: "/team" },
     { name: "PROFILE", path: "/profile" },
-    { name: "RULEBOOK", path: "/rulebook" },
+    { name: "RULEBOOK", path: "external" },
     { name: "LOADING", path: "/loading" },
   ];
 
@@ -76,27 +76,41 @@ function Hamburger() {
               className="w-1/6 cursor-pointer"
               onClick={() => setIsActive(false)}
             />
-            {menuItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                className={`dropdown cursor-pointer z-50 relative flex items-center justify-between transition-all duration-300 ease-in-out ${
-                  isActive
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-0 translate-x-full"
-                }`}
-                style={{ transitionDelay: `${index * 50}ms` }}
-                onClick={() => {
-                  setActiveIndex(index);
-                  setIsActive(false);
-                }}
-              >
-                <span className="py-2 px-4 text-white">{item.name}</span>
-                {activeIndex === index && (
-                  <img src={Arrow} alt="Arrow" className="w-6 h-6 mr-4" />
-                )}
-              </Link>
-            ))}
+            {menuItems.map((item, index) =>
+              item.path === "external" ? (
+                <a
+                  key={index}
+                  href="https://drive.google.com/file/d/19x6wXCwdY1wUR0YByT8_KhcxGI6hLIU9/view"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="dropdown cursor-pointer z-50 relative flex items-center justify-between transition-all duration-300 ease-in-out hover:text-yellow-400"
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                  onClick={() => setIsActive(false)}
+                >
+                  <span className="py-2 px-4 text-white">{item.name}</span>
+                </a>
+              ) : (
+                <Link
+                  key={index}
+                  to={item.path}
+                  className={`dropdown cursor-pointer z-50 relative flex items-center justify-between transition-all duration-300 ease-in-out ${
+                    isActive
+                      ? "opacity-100 translate-x-0"
+                      : "opacity-0 translate-x-full"
+                  }`}
+                  style={{ transitionDelay: `${index * 50}ms` }}
+                  onClick={() => {
+                    setActiveIndex(index);
+                    setIsActive(false);
+                  }}
+                >
+                  <span className="py-2 px-4 text-white">{item.name}</span>
+                  {activeIndex === index && (
+                    <img src={Arrow} alt="Arrow" className="w-6 h-6 mr-4" />
+                  )}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}
