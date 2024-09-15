@@ -1,13 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
-import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 import SportCard from "../components/SportCard";
 import HomeSponsorCard from "../components/HomeSponsorCard";
 import HomeLeaderboard from "../components/HomeLeaderboard";
+import Loading from "./Loading";
 import HomeBg from "../assets/Home.png";
-import MilanFont from "../assets/Milan-font1.png";
 import MilanHome from "../assets/HeroSection.png";
 import Skateboard from "../assets/Skateboard.png";
-import Basketball from "../assets/Basketball.png";
 import Theme from "../assets/Theme.png";
 import Mascot from "../assets/Mascot.jpeg";
 import Stripes from "../assets/Stripes.png";
@@ -24,6 +23,8 @@ import { startOfToday, format, isSameDay } from "date-fns";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [leaderBoard, setLeaderBoard] = useState("leaderboard");
   const cardContainerRef = useRef(null);
@@ -39,43 +40,6 @@ function Home() {
   ];
 
   const [selectedOption, setSelectedOption] = useState(sportOptions[0]);
-
-  const sportEvents = {
-    sportsBoys: [
-      { id: 1, hostel1: "Hostel A", hostel2: "Hostel B" },
-      { id: 2, hostel1: "Hostel A", hostel2: "Hostel B" },
-      { id: 3, hostel1: "Hostel A", hostel2: "Hostel B" },
-      { id: 4, hostel1: "Hostel A", hostel2: "Hostel B" },
-      { id: 5, hostel1: "Hostel A", hostel2: "Hostel B" },
-      { id: 6, hostel1: "Hostel A", hostel2: "Hostel B" },
-    ],
-    sportsGirls: [
-      { id: 1, hostel1: "Hostel C", hostel2: "Hostel D" },
-      { id: 2, hostel1: "Hostel C", hostel2: "Hostel D" },
-      { id: 3, hostel1: "Hostel C", hostel2: "Hostel D" },
-      { id: 4, hostel1: "Hostel C", hostel2: "Hostel D" },
-      { id: 5, hostel1: "Hostel C", hostel2: "Hostel D" },
-    ],
-    techy: [
-      { id: 2, hostel1: "Hostel E", hostel2: "Hostel F" },
-      { id: 1, hostel1: "Hostel E", hostel2: "Hostel F" },
-      { id: 3, hostel1: "Hostel E", hostel2: "Hostel F" },
-      { id: 4, hostel1: "Hostel E", hostel2: "Hostel F" },
-      { id: 5, hostel1: "Hostel E", hostel2: "Hostel F" },
-      { id: 6, hostel1: "Hostel E", hostel2: "Hostel F" },
-      { id: 7, hostel1: "Hostel E", hostel2: "Hostel F" },
-      { id: 8, hostel1: "Hostel E", hostel2: "Hostel F" },
-    ],
-    culti: [
-      { id: 2, hostel1: "Hostel G", hostel2: "Hostel H" },
-      { id: 1, hostel1: "Hostel G", hostel2: "Hostel H" },
-      { id: 3, hostel1: "Hostel G", hostel2: "Hostel H" },
-      { id: 4, hostel1: "Hostel G", hostel2: "Hostel H" },
-      { id: 5, hostel1: "Hostel G", hostel2: "Hostel H" },
-      { id: 6, hostel1: "Hostel G", hostel2: "Hostel H" },
-      { id: 7, hostel1: "Hostel G", hostel2: "Hostel H" },
-    ],
-  };
 
   let selectedDayMeetings = games.filter((game) =>
     isSameDay(game.date, selectedDay)
@@ -204,11 +168,15 @@ function Home() {
       .catch((error) => {
         console.error("Failed to load games:", error);
         setGames([]);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, []);
 
-  // console.log(selectedDayMeetings);
-  // console.log(formattedDate);
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="relative bg-transparent h-full flex flex-col mx-auto">
@@ -224,11 +192,6 @@ function Home() {
               className="w-full h-auto object-contain z-10"
             />
             <div className="absolute z-10 flex flex-col gap-6 gap1 sm:gap-10 items-center justify-center scale-90 sm:scale-100">
-              {/* <img
-                src={MilanFont}
-                alt="Milan Font"
-                className="w-3/4 max-w-[1000px] h-auto"
-              /> */}
               <p className="text-8xl sm:text-[150px] md:text-[175px] lg:text-[280px] font-darkgraffiti text-[#deb116] tracking-wide">
                 MILAN
               </p>
@@ -251,7 +214,6 @@ function Home() {
         </div>
       </div>
       <div className="w-full h-full mb-8 flex flex-col justify-center items-center">
-        {/* <div className="bg-[#160631] mb-8"> */}
         <div className="relative flex items-center justify-center h-4/5 w-full p-10">
           <div className="absolute flex w-full h-full items-center justify-center">
             <img
@@ -331,7 +293,6 @@ function Home() {
           <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
           <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
         </div>
-        {/* </div> */}
         {/* <div className="w-full flex-grow flex-wrap flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <iframe

@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import io from "socket.io-client";
 import CardLiveScore from "../components/CardLiveScore";
 import CardLiveScoreRev from "../components/CardLiveScoreRev";
 import Filter from "../components/CategoryFilter";
+import Loading from "./Loading.jsx";
 
 function LiveScore() {
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
   const [selectedSport, setSelectedSport] = useState("Select All");
   const [socket, setSocket] = useState(null);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   const eventOptions = [
     "CRICKET",
@@ -37,6 +41,8 @@ function LiveScore() {
       setLiveMatches(response.data);
     } catch (error) {
       console.error("Error fetching live matches:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -108,6 +114,10 @@ function LiveScore() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, [socket]);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center">

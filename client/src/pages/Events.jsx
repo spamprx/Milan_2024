@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Category from "../components/Category";
 import GraphMobile from "../components/GraphMobile";
 import Filter from "../components/CategoryFilter";
+import Loading from "./Loading.jsx";
 
 function Events() {
   const [showSportsBoys, setShowSportsBoys] = useState(true);
@@ -21,6 +23,8 @@ function Events() {
     "Sci-Tech",
   ]);
   const [blocks, setBlocks] = useState(["Select All"]);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setDataFetched(sportsBoysData && sportsGirlsData && techyData && cultiData);
@@ -61,6 +65,8 @@ function Events() {
         setCultiData(result);
       } catch (error) {
         console.error("Error fetching culti data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -81,6 +87,8 @@ function Events() {
         setSportsGirlsData(result);
       } catch (error) {
         console.error("Error fetching girls sports data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -101,6 +109,8 @@ function Events() {
         setSportsBoysData(result);
       } catch (error) {
         console.error("Error fetching sports boys data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -121,6 +131,8 @@ function Events() {
         setTechyData(result);
       } catch (error) {
         console.error("Error fetching techy data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchTechyData();
@@ -176,6 +188,10 @@ function Events() {
       </div>
     );
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>

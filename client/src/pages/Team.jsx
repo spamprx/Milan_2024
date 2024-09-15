@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Image from "../assets/SponsorArrow.png";
 import TeamMember from "../components/TeamMember";
 import OCText from "/public/TEAM/OC/OCText.png";
 import OCBg from "/public/TEAM/OC/Addy_Bg.png";
 import Milan_OC from "/public/TEAM/OC/Milan Oc.png";
+import Loading from "./Loading.jsx";
 
 function Team() {
   const [teams, setTeams] = useState([]);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetch("/TEAM/Team.json")
       .then((response) => response.json())
       .then((data) => setTeams(data))
-      .catch((error) => console.error("Error fetching JSON:", error));
+      .catch((error) => console.error("Error fetching JSON:", error))
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="w-screen min-h-screen">
