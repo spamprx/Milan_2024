@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import io from "socket.io-client";
 import CardLiveScore from "../components/CardLiveScore";
 import CardLiveScoreRev from "../components/CardLiveScoreRev";
 import Filter from "../components/CategoryFilter";
@@ -7,10 +8,10 @@ import Filter from "../components/CategoryFilter";
 function LiveScore() {
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
-  const [selectedSport, setSelectedSport] = useState("ALL");
+  const [selectedSport, setSelectedSport] = useState("Select All");
+  const [socket, setSocket] = useState(null);
 
   const eventOptions = [
-    "ALL",
     "CRICKET",
     "FOOTBALL",
     "HOCKEY",
@@ -41,12 +42,46 @@ function LiveScore() {
 
   useEffect(() => {
     fetchLiveMatches();
-    const intervalId = setInterval(fetchLiveMatches, 10000);
-    return () => clearInterval(intervalId);
+
+    const newSocket = io("http://localhost:5000", {
+      transports: ["websocket"],
+      upgrade: false,
+    });
+
+    newSocket.on("connect", () => {
+      console.log("Socket connected");
+    });
+
+    newSocket.on("newMatch", (match) => {
+      console.log("New match received:", match);
+      setLiveMatches((prevMatches) => [...prevMatches, match]);
+    });
+
+    newSocket.on("scoreUpdate", (updatedMatch) => {
+      console.log("Score update received:", updatedMatch);
+      setLiveMatches((prevMatches) =>
+        prevMatches.map((match) =>
+          match.matchId === updatedMatch.matchId ? updatedMatch : match
+        )
+      );
+    });
+
+    newSocket.on("matchEnded", (endedMatch) => {
+      console.log("Match ended:", endedMatch);
+      setLiveMatches((prevMatches) =>
+        prevMatches.filter((match) => match.matchId !== endedMatch.matchId)
+      );
+    });
+
+    setSocket(newSocket);
+
+    return () => {
+      if (newSocket) newSocket.disconnect();
+    };
   }, []);
 
   useEffect(() => {
-    if (selectedSport === "ALL") {
+    if (selectedSport === "Select All") {
       setCurrentMatches(liveMatches);
     } else {
       const matches = liveMatches.filter(
@@ -59,6 +94,20 @@ function LiveScore() {
   const handleSportChange = (sport) => {
     setSelectedSport(sport);
   };
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (!document.hidden && socket && !socket.connected) {
+        socket.connect();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [socket]);
 
   return (
     <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center">
@@ -75,13 +124,13 @@ function LiveScore() {
         {currentMatches.length >= 2
           ? currentMatches.map((match, index) =>
               index % 2 === 0 ? (
-                <CardLiveScore key={index} match={match} />
+                <CardLiveScore key={match.matchId} match={match} />
               ) : (
-                <CardLiveScoreRev key={index} match={match} />
+                <CardLiveScoreRev key={match.matchId} match={match} />
               )
             )
-          : currentMatches.map((match, index) => (
-              <CardLiveScore key={index} match={match} />
+          : currentMatches.map((match) => (
+              <CardLiveScore key={match.matchId} match={match} />
             ))}
       </div>
 
