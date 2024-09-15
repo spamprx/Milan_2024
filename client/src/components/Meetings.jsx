@@ -18,7 +18,14 @@ function Meeting({
     );
   }, [meeting, userPreferredGames, preferredTeams]);
 
-  const [notificationEnabled, setNotificationEnabled] = useState(initialNotificationState);
+  const [notificationEnabled, setNotificationEnabled] = useState(() => {
+    // If initialNotificationState is provided, use it
+    if (initialNotificationState !== undefined) {
+      return initialNotificationState;
+    }
+    // Otherwise, set to true for preferred events, false for others
+    return isPreferredEvent;
+  });
   
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
