@@ -5,14 +5,26 @@ const cors = require("cors");
 
 const app = express();
 const server = http.createServer(app);
+
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: [
+      "https://leaderboard-milan-client.vercel.app",
+      "https://leaderboard-milan-admin.vercel.app",
+    ],
     methods: ["GET", "POST"],
   },
 });
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://leaderboard-milan-client.vercel.app",
+      "https://leaderboard-milan-admin.vercel.app",
+    ],
+  })
+);
+
 app.use(express.json());
 
 let matches = [];
