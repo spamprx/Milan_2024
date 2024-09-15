@@ -11,7 +11,8 @@ export default function EventList({
   calendarHeight, 
   selectedDay,
   userPreferredGames,
-  preferredTeams
+  preferredTeams,
+  onNotificationToggle
 }) {
   console.log("EventList - Preferred Meetings:", preferredMeetings);
   console.log("EventList - Other Meetings:", otherMeetings);
@@ -30,10 +31,11 @@ export default function EventList({
         key={`${meeting.title}-${meeting.time}-${index}`} 
         meeting={meeting} 
         onSelect={onGameSelect}
-        isPreferred={isPreferred || userPreferredGames.includes(meeting.title.toLowerCase()) || preferredTeams.some(team => meeting.teams.includes(team))}
-        initialNotificationState={meeting.notificationEnabled} // Add this line
+        isPreferred={isPreferred}
         userPreferredGames={userPreferredGames}
         preferredTeams={preferredTeams}
+        initialNotificationState={meeting.notificationEnabled}
+        onNotificationToggle={onNotificationToggle}
       />
     ));
   };

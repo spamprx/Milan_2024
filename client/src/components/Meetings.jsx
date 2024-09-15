@@ -1,7 +1,15 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 
-function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [], initialNotificationState }) {
+function Meeting({ 
+  meeting, 
+  onSelect, 
+  isPreferred, 
+  userPreferredGames = [], 
+  preferredTeams = [], 
+  initialNotificationState,
+  onNotificationToggle
+}) {
   const isPreferredEvent = useMemo(() => {
     return (
       (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) ||
@@ -11,9 +19,11 @@ function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], pref
   }, [meeting, userPreferredGames, preferredTeams]);
 
   const [notificationEnabled, setNotificationEnabled] = useState(() => {
+    // If initialNotificationState is provided, use it
     if (initialNotificationState !== undefined) {
       return initialNotificationState;
     }
+    // Otherwise, set to true for preferred events, false for others
     return isPreferredEvent;
   });
   
@@ -48,14 +58,16 @@ function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], pref
         withCredentials: true,
       });
 
-      setNotificationEnabled(prevState => !prevState);
+      const updatedNotificationState = !notificationEnabled;
+      setNotificationEnabled(updatedNotificationState);
+      onNotificationToggle({ ...meeting, notificationEnabled: updatedNotificationState });
     } catch (error) {
       console.error("Error toggling notification:", error);
       setError("Failed to update notification. Please try again.");
     } finally {
       setIsLoading(false);
     }
-  }, [meeting, notificationEnabled]);
+  }, [meeting, notificationEnabled, onNotificationToggle]);
 
   if (!meeting) {
     return null;

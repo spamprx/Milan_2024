@@ -102,6 +102,14 @@ export default function Calendar() {
     };
   }, []);
 
+  const handleNotificationToggle = (updatedGame) => {
+    setGames(prevGames => prevGames.map(game =>
+      game.title === updatedGame.title && isSameDay(game.date, updatedGame.date)
+        ? { ...game, notificationEnabled: updatedGame.notificationEnabled }
+        : game
+    ));
+  };
+
   let selectedDayMeetings = games.filter((game) =>
     isSameDay(game.date, selectedDay)
   );
@@ -163,6 +171,7 @@ export default function Calendar() {
                 selectedDay={selectedDay}
                 userPreferredGames={userPreferredGames}
                 preferredTeams={preferredTeams}
+                onNotificationToggle={handleNotificationToggle}
               />
             ) : (
               <EventList
@@ -175,6 +184,7 @@ export default function Calendar() {
                 selectedDay={selectedDay}
                 userPreferredGames={[]}
                 preferredTeams={[]}
+                onNotificationToggle={handleNotificationToggle}
               />
             )}
           </div>
