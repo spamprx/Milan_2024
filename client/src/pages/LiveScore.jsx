@@ -31,7 +31,7 @@ function LiveScore() {
   const fetchLiveMatches = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/live-matches"
+        "https://backend-w6vj.onrender.com/api/live-matches"
       );
       console.log("Live matches:", response.data);
       setLiveMatches(response.data);
@@ -43,7 +43,7 @@ function LiveScore() {
   useEffect(() => {
     fetchLiveMatches();
 
-    const newSocket = io("http://localhost:5000", {
+    const newSocket = io("https://backend-w6vj.onrender.com/", {
       transports: ["websocket"],
       upgrade: false,
     });
