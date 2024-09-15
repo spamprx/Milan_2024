@@ -30,7 +30,7 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
         throw new Error("Meeting data is incomplete");
       }
 
-      const endpoint = notificationEnabled ? "/delete_event" : "/add_event";
+      const endpoint = notificationEnabled ? "delete_event" : "add_event";
       const payload = notificationEnabled
         ? {
           eventName: meeting.title,
