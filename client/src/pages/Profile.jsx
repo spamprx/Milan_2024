@@ -16,7 +16,7 @@ const Profile = () => {
     Block: null,
     interested_in: [],
   });
-  
+
   const [auth, setAuth] = useState(false);
   const [loading, setLoading] = useState(true);
   const [selectedEvents, setSelectedEvents] = useState([]);
@@ -90,9 +90,26 @@ const Profile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validateForm()) {
-      toast.success("Profile updated successfully!");
-      setSubmitted(true);
-      setIsEditing(false);
+      axios
+        .post(
+          import.meta.env.VITE_BACKEND_URL + "profile/update",
+          {
+            Block: user.Block.value,
+            interested_in: selectedEvents.map((event) => event.value),
+          },
+          {
+            withCredentials: true,
+          }
+        )
+        .then((response) => {
+          toast.success("Profile updated successfully!");
+          setSubmitted(true);
+          setIsEditing(false);
+        })
+        .catch((error) => {
+          console.error("Error updating profile: ", error);
+          toast.error("Failed to update profile. Please try again later.");
+        });
     }
   };
 
@@ -113,6 +130,7 @@ const Profile = () => {
         .post(
           import.meta.env.VITE_BACKEND_URL + "profile/update",
           {
+            Block: user.Block.value,
             interested_in: updatedEvents,
           },
           {
@@ -120,11 +138,11 @@ const Profile = () => {
           }
         )
         .then((response) => {
-          toast.success("Events updated successfully!");
+          toast.success("Profile updated successfully!");
         })
         .catch((error) => {
-          console.error("Error updating events: ", error);
-          toast.error("Failed to update events. Please try again later.");
+          console.error("Error updating profile: ", error);
+          toast.error("Failed to update profile. Please try again later.");
         });
     }
     setIsEditing(!isEditing);
@@ -177,9 +195,8 @@ const Profile = () => {
       </label>
       <div className="relative">
         <input
-          className={`shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline ${
-            readOnly ? 'cursor-not-allowed' : ''
-          }`}
+          className={`shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline ${readOnly ? 'cursor-not-allowed' : ''
+            }`}
           id={id}
           type={type}
           placeholder={placeholder}
@@ -326,7 +343,7 @@ const Profile = () => {
                     type="text"
                     placeholder="Enter your name"
                     value={user.name}
-                    onChange={() => {}}
+                    onChange={() => { }}
                     readOnly={true}
                   />
                   <InputField
@@ -335,7 +352,7 @@ const Profile = () => {
                     type="email"
                     placeholder="Enter your email"
                     value={user.email}
-                    onChange={() => {}}
+                    onChange={() => { }}
                     readOnly={true}
                   />
                   <SelectField
@@ -419,19 +436,19 @@ const Profile = () => {
                   </div>
                 </div>
               )}
-              
+
               {/* Logout Button */}
-              
+
             </div>
           </div>
           <div className="mt-6 top-6 right-6">
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 text-white font-[700] font-montserrat py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline hover:bg-red-600 transition duration-300 ease-in-out"
-                >
-                  Logout
-                </button>
-              </div>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white font-[700] font-montserrat py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline hover:bg-red-600 transition duration-300 ease-in-out"
+            >
+              Logout
+            </button>
+          </div>
           <ToastContainer position="bottom-right" autoClose={3000} />
         </div>
       )}
