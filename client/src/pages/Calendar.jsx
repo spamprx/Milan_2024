@@ -106,7 +106,7 @@ export default function Calendar() {
 
   let preferredMeetings = selectedDayMeetings.filter(
     (meeting) =>
-      userPreferredGames.includes(meeting.title) ||
+      userPreferredGames.includes(meeting.title.toLowerCase()) ||
       preferredTeams.some((team) => meeting.teams.includes(team)) ||
       meeting.teams.toLowerCase().includes("all blocks")
   );
@@ -114,6 +114,7 @@ export default function Calendar() {
   let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
   );
+
 
   console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
   console.log("Selected Day Meetings:", selectedDayMeetings);
@@ -159,6 +160,8 @@ export default function Calendar() {
                 onGameSelect={handleGameSelect}
                 calendarHeight={calendarHeight}
                 selectedDay={selectedDay}
+                userPreferredGames={userPreferredGames}
+                preferredTeams={preferredTeams}
               />
             ) : (
               <EventList
@@ -169,6 +172,8 @@ export default function Calendar() {
                 onGameSelect={handleGameSelect}
                 calendarHeight={calendarHeight}
                 selectedDay={selectedDay}
+                userPreferredGames={[]}
+                preferredTeams={[]}
               />
             )}
           </div>

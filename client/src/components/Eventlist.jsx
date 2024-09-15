@@ -1,8 +1,18 @@
 import React from 'react';
 import { format } from 'date-fns';
-import Meeting from './Meetings.jsx';
+import Meeting from './Meeting.jsx';
 
-export default function EventList({ showError, handleLoginRedirect, preferredMeetings, otherMeetings, onGameSelect, calendarHeight, selectedDay }) {
+export default function EventList({ 
+  showError, 
+  handleLoginRedirect, 
+  preferredMeetings, 
+  otherMeetings, 
+  onGameSelect, 
+  calendarHeight, 
+  selectedDay,
+  userPreferredGames,
+  preferredTeams
+}) {
   console.log("EventList - Preferred Meetings:", preferredMeetings);
   console.log("EventList - Other Meetings:", otherMeetings);
 
@@ -20,7 +30,7 @@ export default function EventList({ showError, handleLoginRedirect, preferredMee
         key={`${meeting.title}-${meeting.time}-${index}`} 
         meeting={meeting} 
         onSelect={onGameSelect}
-        isPreferred={isPreferred}
+        isPreferred={isPreferred || userPreferredGames.includes(meeting.title.toLowerCase()) || preferredTeams.some(team => meeting.teams.includes(team))}
       />
     ));
   };
