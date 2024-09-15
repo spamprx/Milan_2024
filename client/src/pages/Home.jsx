@@ -223,7 +223,7 @@ function Home() {
             />
           </div>
 
-          <p className="relative z-10 text-[#D1CCB6] text-center text-xl sm:text-2xl lg:text-3xl">
+          <p className="relative z-10 text-[#D1CCB6] text-center text-md sm:text-2xl lg:text-3xl">
             MORE ABOUT OTHER EVENTS
           </p>
         </div>
