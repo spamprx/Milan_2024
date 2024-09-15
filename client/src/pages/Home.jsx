@@ -19,18 +19,23 @@ import Select from "react-select";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import axios from "axios";
+import { startOfToday, format, isSameDay } from "date-fns";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [leaderBoard, setLeaderBoard] = useState("leaderboard");
   const cardContainerRef = useRef(null);
+  let today = startOfToday();
+  const formattedDate = format(today, "dd/MM/yyyy");
+  let [selectedDay, setSelectedDay] = useState(formattedDate);
+  const [games, setGames] = useState([]);
 
   const sportOptions = [
-    { value: "sportsBoys", label: "SportsBoys" },
-    { value: "sportsGirls", label: "SportsGirls" },
-    { value: "techy", label: "Techy" },
-    { value: "culti", label: "Culti" },
+    { value: "SportsGirls", label: "Sports" },
+    { value: "Sci-Tech", label: "Sci-Tech" },
+    { value: "Cultural", label: "Cultural" },
   ];
 
   const [selectedOption, setSelectedOption] = useState(sportOptions[0]);
@@ -71,6 +76,10 @@ function Home() {
       { id: 7, hostel1: "Hostel G", hostel2: "Hostel H" },
     ],
   };
+
+  let selectedDayMeetings = games.filter((game) =>
+    isSameDay(game.date, selectedDay)
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -127,8 +136,8 @@ function Home() {
   };
 
   const currentEvents =
-    selectedOption && sportEvents[selectedOption.value]
-      ? sportEvents[selectedOption.value]
+    selectedOption && selectedDayMeetings[selectedOption.value]
+      ? selectedDayMeetings[selectedOption.value]
       : [];
 
   const settings = {
@@ -142,6 +151,8 @@ function Home() {
     arrows: false,
     slidesToScroll: 1,
     beforeChange: (current, next) => setActiveIndex(next),
+    autoplay: true,
+    autoplaySpeed: 3000,
     customPaging: (i) => (
       <div
         className={`w-3 h-3 rounded-full mx-2 cursor-pointer ${
@@ -167,6 +178,38 @@ function Home() {
       },
     ],
   };
+
+  useEffect(() => {
+    axios
+      .get(
+        "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
+      )
+      .then((response) => response.data)
+      .then((data) => {
+        if (data && Object.keys(data).length > 0) {
+          const loadedGames = Object.entries(data).flatMap(([date, events]) =>
+            events.map((event) => ({
+              ...event,
+              startDatetime: new Date(date + "T" + event.time),
+              endDatetime: new Date(date + "T" + event.time),
+              date: new Date(date),
+            }))
+          );
+          setGames(loadedGames);
+        } else {
+          console.error("No data received or unexpected format:", data);
+          setGames([]);
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to load games:", error);
+        setGames([]);
+      });
+  }, []);
+
+  // console.log(selectedDayMeetings);
+  // console.log(formattedDate);
+
   return (
     <div className="relative bg-transparent h-full flex flex-col mx-auto">
       <div
