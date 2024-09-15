@@ -29,6 +29,7 @@ export default function Calendar() {
         withCredentials: true,
       }
     );
+    console.log(fetchUserDetails);
 
     const fetchGamesData = axios.get(
       import.meta.env.VITE_BACKEND_URL + "eventsSchedule");
@@ -67,7 +68,6 @@ export default function Calendar() {
         setIsLoading(false); // Set loading to false when all data is fetched
       });
   }, []);
-
   useEffect(() => {
     if (calendarRef.current) {
       setCalendarHeight(calendarRef.current.clientHeight);
