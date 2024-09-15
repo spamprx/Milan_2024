@@ -18,7 +18,7 @@ const Profile = () => {
   });
 
   const [auth, setAuth] = useState(false);
-  const [loading, setLoading] = useState(true);
+ // const [loading, setLoading] = useState(true);
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -54,7 +54,6 @@ const Profile = () => {
       })
       .finally(() => {
         setTimeout(() => {
-          setLoading(false);
           setIsLoading(false);
         }, 1300);
       });

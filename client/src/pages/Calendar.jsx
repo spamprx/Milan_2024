@@ -31,8 +31,7 @@ export default function Calendar() {
     );
 
     const fetchGamesData = axios.get(
-      "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
-    );
+      import.meta.env.VITE_BACKEND_URL + "eventsSchedule");
 
     Promise.all([fetchUserDetails, fetchGamesData])
       .then(([userResponse, gamesResponse]) => {

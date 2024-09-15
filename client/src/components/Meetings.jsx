@@ -25,6 +25,7 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
     setIsLoading(true);
     setError(null);
 
+    let success = false;
     try {
       if (!meeting || !meeting.date) {
         throw new Error("Meeting data is incomplete");
@@ -48,12 +49,16 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
         withCredentials: true,
       });
 
-      setNotificationEnabled(!notificationEnabled);
+      success = true;
     } catch (error) {
       console.error("Error toggling notification:", error);
       setError("Failed to update notification. Please try again.");
     } finally {
       setIsLoading(false);
+    }
+
+    if (success) {
+      setNotificationEnabled(prevState => !prevState);
     }
   };
 
