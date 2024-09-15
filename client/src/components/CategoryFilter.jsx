@@ -5,12 +5,11 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  // Set "Select All" as default when the component mounts and for single mode
   useEffect(() => {
     if (isSingle) {
       setSelectedCategories(options.length > 0 ? ["Select All"] : []);
     }
-  }, [isSingle, options]);
+  }, []);
 
   const handleCategoryChange = (category) => {
     if (isSingle) {
@@ -76,7 +75,6 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
         {isOpen && (
           <div className="py-2 px-4 text-white">
-            {/* "Select All" option visible even when `isSingle` is true */}
             <div
               className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
               onClick={handleSelectAll}

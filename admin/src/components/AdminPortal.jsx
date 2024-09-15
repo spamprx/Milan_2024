@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const BACKEND_URL = "http://localhost:5000"; // Ensure HTTP, not HTTPS
+const BACKEND_URL = "https://backend-w6vj.onrender.com";
 
 const capitalizeFirstLetter = (string) => {
   if (!string) return "";
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 };
 
-// Helper function to format time to display only hours and minutes
 const formatTimeToHHMM = (dateTimeString) => {
   if (!dateTimeString) return "";
-  return dateTimeString.slice(11, 16); // Extracts HH:MM from "YYYY-MM-DDTHH:MM"
+  return dateTimeString.slice(11, 16);
 };
 
 const AdminPortal = () => {
@@ -42,13 +41,13 @@ const AdminPortal = () => {
       }
     };
 
-    fetchMatches(); // Initial fetch
+    fetchMatches();
 
     const intervalId = setInterval(() => {
-      fetchMatches(); // Fetch matches periodically
-    }, 30000); // Refresh every 30 seconds
+      fetchMatches();
+    }, 30000);
 
-    return () => clearInterval(intervalId); // Clear interval on component unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   const handleChange = (e) => {

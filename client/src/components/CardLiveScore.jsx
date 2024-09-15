@@ -10,6 +10,11 @@ function CardLiveScore({ match }) {
   const ID = match.matchId.replace(/\D/g, "");
   const sportImage = `/CARD_ASSETS/${sport}.png`;
 
+  if (!sport || !team1 || !team2 || score1 === null || score2 === null || !match.startTime) 
+    {
+    return null;
+  }
+
   return (
     <div className="relative scale-[0.7] md:scale-75 lg:scale-90">
       <div className="relative flex w-fit max-w-screen-sm bg-gradient-to-r from-[#D9d9d9] to-gray-400 rounded-lg">

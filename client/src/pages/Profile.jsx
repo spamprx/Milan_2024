@@ -7,6 +7,7 @@ import { FaTimesCircle } from 'react-icons/fa';
 import { blockOptions, eventOptions } from "../content/Options";
 import "../styles.css";
 import GoogleButton from "./Login";
+import Loading from "./Loading";
 
 const Profile = () => {
   const [user, setUser] = useState({
@@ -21,6 +22,7 @@ const Profile = () => {
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const formContainerRef = useRef(null);
 
   useEffect(() => {
@@ -53,6 +55,7 @@ const Profile = () => {
       .finally(() => {
         setTimeout(() => {
           setLoading(false);
+          setIsLoading(false);
         }, 1300);
       });
   }, []);
@@ -96,8 +99,7 @@ const Profile = () => {
   const handleSelectOpen = () => {
     if (formContainerRef.current) {
       setTimeout(() => {
-        formContainerRef.current.scrollTop =
-          formContainerRef.current.scrollHeight;
+        formContainerRef.current.scrollTop = formContainerRef.current.scrollHeight;
       }, 0);
     }
   };
@@ -136,6 +138,27 @@ const Profile = () => {
     setSelectedEvents(uniqueOptions);
   };
 
+  const handleLogout = () => {
+    axios
+      .post(import.meta.env.VITE_BACKEND_URL + "logout", {}, { withCredentials: true })
+      .then(() => {
+        setAuth(false);
+        setUser({
+          name: "",
+          email: "",
+          Block: null,
+          interested_in: [],
+        });
+        setSelectedEvents([]);
+        setSubmitted(false);
+        toast.success("Logged out successfully!");
+      })
+      .catch((error) => {
+        console.error("Error logging out: ", error);
+        toast.error("Failed to log out. Please try again.");
+      });
+  };
+
   const InputField = ({
     label,
     id,
@@ -154,8 +177,9 @@ const Profile = () => {
       </label>
       <div className="relative">
         <input
-          className={`shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline ${readOnly ? 'cursor-not-allowed' : ''
-            }`}
+          className={`shadow appearance-none border rounded-2xl w-full p-4 text-[#4D4D4D] font-be-vietnam-pro bg-[#D8DDFF] font-[500] leading-tight focus:outline-none focus:shadow-outline ${
+            readOnly ? 'cursor-not-allowed' : ''
+          }`}
           id={id}
           type={type}
           placeholder={placeholder}
@@ -185,6 +209,15 @@ const Profile = () => {
       ":hover": {
         borderColor: "#cbd5e0",
       },
+    }),
+    valueContainer: (provided) => ({
+      ...provided,
+      maxHeight: '80px',
+      overflow: 'auto',
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      margin: '2px',
     }),
     singleValue: (provided) => ({
       ...provided,
@@ -260,8 +293,8 @@ const Profile = () => {
     </div>
   );
 
-  if (loading) {
-    return <div className="text-center py-10">Loading...</div>;
+  if (isLoading) {
+    return <Loading />;
   }
 
   return (
@@ -293,7 +326,7 @@ const Profile = () => {
                     type="text"
                     placeholder="Enter your name"
                     value={user.name}
-                    onChange={() => { }}
+                    onChange={() => {}}
                     readOnly={true}
                   />
                   <InputField
@@ -302,7 +335,7 @@ const Profile = () => {
                     type="email"
                     placeholder="Enter your email"
                     value={user.email}
-                    onChange={() => { }}
+                    onChange={() => {}}
                     readOnly={true}
                   />
                   <SelectField
@@ -371,7 +404,7 @@ const Profile = () => {
                         isMulti={true}
                       />
                     ) : (
-                      <div className="bg-gray-100 p-4 rounded-xl text-">
+                      <div className="bg-gray-100 p-4 rounded-xl text-left">
                         {selectedEvents.length > 0 ? (
                           <ul className="list-disc list-inside">
                             {selectedEvents.map((event) => (
@@ -386,8 +419,19 @@ const Profile = () => {
                   </div>
                 </div>
               )}
+              
+              {/* Logout Button */}
+              
             </div>
           </div>
+          <div className="mt-6 top-6 right-6">
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white font-[700] font-montserrat py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline hover:bg-red-600 transition duration-300 ease-in-out"
+                >
+                  Logout
+                </button>
+              </div>
           <ToastContainer position="bottom-right" autoClose={3000} />
         </div>
       )}

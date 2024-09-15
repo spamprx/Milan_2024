@@ -62,9 +62,9 @@ function App() {
         backgroundPosition: "center",
       }}
     >
-      {isLoading ? (
+      {/* {isLoading ? (
         <Loading isLoaded={isLoading} />
-      ) : (
+      ) : ( */}
         <>
           <Header />
 
@@ -90,7 +90,7 @@ function App() {
 
           <BackToTopButton />
         </>
-      )}
+      
     </div>
   );
 }
