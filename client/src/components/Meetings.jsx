@@ -30,12 +30,12 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
     }
     setIsLoading(true);
     setError(null);
-  
+
     try {
       if (!meeting || !meeting.date) {
         throw new Error("Meeting data is incomplete");
       }
-  
+
       const endpoint = notificationEnabled ? "delete_event" : "add_event";
       const payload = notificationEnabled
         ? {
@@ -49,16 +49,11 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
             time: meeting.time || "",
             date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
           };
-  
-      await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}${endpoint}`, 
-        payload, 
-        {
-          withCredentials: true,
-          timeout: 10000, // Timeout set to 10 seconds (10000 ms)
-        }
-      );
-  
+
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
+        withCredentials: true,
+      });
+
       // Update local state only after successful backend update
       setNotificationEnabled(prevState => !prevState);
     } catch (error) {
@@ -68,7 +63,7 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
       setIsLoading(false);
     }
   };
-  
+
   if (!meeting) {
     return null;
   }
