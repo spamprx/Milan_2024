@@ -10,7 +10,7 @@
 }
 
 .progress-value {
-  animation: load 3s infinite;
+  animation: load 2.5s infinite;
   box-shadow: 0 10px 40px -10px #fff;
   border-radius: 100px;
   background: #e4cf63;

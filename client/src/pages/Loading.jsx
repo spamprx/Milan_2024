@@ -17,12 +17,12 @@ const Loading = () => {
 
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center text-white bg-transparent">
-      <div className="flex flex-col items-center justify-center mb-10 scale-125">
+      <div className="flex flex-col items-center justify-center mb-10 lg:mb-20 scale-125 lg:scale-150">
         <img src={Logo} alt="Logo" className="w-1/2 mb-4" />
         <h1 className="text-[#E4CF63] text-4xl font-bold">MILAN</h1>
       </div>
 
-      <div className="progress w-1/2 mt-6">
+      <div className="progress w-3/4 sm:w-1/2 md:w-2/5 mt-6">
         <div className="progress-value" style={{ width: `${progress}%` }}></div>
       </div>
 
