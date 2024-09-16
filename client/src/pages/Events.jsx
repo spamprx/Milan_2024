@@ -17,9 +17,6 @@ function Events() {
   const [dataFetched, setDataFetched] = useState(false);
   const [categories, setCategories] = useState([
     "Sports Boys",
-    "Sports Girls",
-    "Culti",
-    "Sci-Tech",
   ]);
   const [isLoading, setIsLoading] = useState(true);
 
