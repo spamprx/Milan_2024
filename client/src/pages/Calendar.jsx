@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { startOfToday, format, isSameDay } from "date-fns";
+import { startOfToday, format, isSameDay, parseISO } from "date-fns";
 import axios from "axios";
 import Dates from "../components/Dates.jsx";
 import EventList from "../components/Eventlist.jsx";
@@ -45,16 +45,16 @@ export default function Calendar() {
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => {
-              const storageKey = `notification_${event.title}_${date}`;
+              const storageKey = `notification_${event.title}_${date}_${event.time}`;
               const storedNotificationState = localStorage.getItem(storageKey);
               return {
                 ...event,
-                startDatetime: new Date(date + "T" + event.time),
-                endDatetime: new Date(date + "T" + event.time),
-                date: new Date(date),
+                startDatetime: new Date(`${date}T${event.time}`),
+                endDatetime: new Date(`${date}T${event.time}`),
+                date: parseISO(date),
                 notificationEnabled: storedNotificationState !== null 
                   ? JSON.parse(storedNotificationState) 
-                  : false  // Default to false instead of using event.notificationEnabled
+                  : false
               };
             })
           );
@@ -95,10 +95,12 @@ export default function Calendar() {
 
   const handleNotificationToggle = (updatedGame) => {
     setGames(prevGames => prevGames.map(game => {
-      if (game.title === updatedGame.title && isSameDay(game.date, updatedGame.date)) {
+      if (game.title === updatedGame.title && 
+          isSameDay(game.date, updatedGame.date) && 
+          game.time === updatedGame.time) {
         const updatedGameState = { ...game, notificationEnabled: !game.notificationEnabled };
         // Update localStorage
-        const storageKey = `notification_${game.title}_${format(game.date, 'yyyy-MM-dd')}`;
+        const storageKey = `notification_${game.title}_${format(game.date, 'yyyy-MM-dd')}_${game.time}`;
         localStorage.setItem(storageKey, JSON.stringify(updatedGameState.notificationEnabled));
         return updatedGameState;
       }
