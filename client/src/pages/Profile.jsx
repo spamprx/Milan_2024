@@ -16,9 +16,7 @@ const Profile = () => {
     Block: null,
     interested_in: [],
   });
-
   const [auth, setAuth] = useState(false);
- // const [loading, setLoading] = useState(true);
   const [selectedEvents, setSelectedEvents] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -124,7 +122,6 @@ const Profile = () => {
     if (isEditing) {
       const updatedEvents = selectedEvents.map((event) => event.value);
       setUser((prevUser) => ({ ...prevUser, interested_in: updatedEvents }));
-
       axios
         .post(
           import.meta.env.VITE_BACKEND_URL + "profile/update",
@@ -320,7 +317,6 @@ const Profile = () => {
           <GoogleButton />
         </div>
       )}
-
       {auth && (
         <div className="container mx-auto px-4 mt-10 mb-20">
           <div className="bg-none shadow-lg rounded-lg overflow-hidden min-h-[600px] max-w-4xl mx-auto">
@@ -421,23 +417,14 @@ const Profile = () => {
                       />
                     ) : (
                       <div className="bg-gray-100 p-4 rounded-xl text-left">
-                        {selectedEvents.length > 0 ? (
-                          <ul className="list-disc list-inside">
-                            {selectedEvents.map((event) => (
-                              <li key={event.value} className="mb-1">{event.label}</li>
-                            ))}
-                          </ul>
-                        ) : (
-                          "None"
-                        )}
+                        {selectedEvents.length > 0
+                          ? selectedEvents.map(event => event.label).join(', ')
+                          : "None"}
                       </div>
                     )}
                   </div>
                 </div>
               )}
-
-              {/* Logout Button */}
-
             </div>
           </div>
           <div className="mt-6 top-6 right-6">

@@ -24,10 +24,17 @@ ChartJS.register(
 );
 
 const colorOptions = {
+<<<<<<< HEAD
   "SPORTS-BOYS": "#FF7900",
   "SPORTS-GIRLS": "#FF7900",
   "CULTURALS": "#2C88AD",
   "SCI-TECH": "#A9AB4A",
+=======
+  "Sports Boys": "#FF7900",
+  "Sports Girls": "#FF7900",
+  "Culti": "#2C88AD",
+  "Sci-Tech": "#A9AB4A",
+>>>>>>> 186228d03177aeb058745b20e1d8c6de9a613c7f
 };
 
 function GraphMobile({
@@ -170,7 +177,7 @@ function GraphMobile({
                 scales: {
                   x: {
                     stacked: true,
-                    ticks: { color: "white", font: {} },
+                    ticks: { color: "white" },
                   },
                   y: {
                     stacked: true,
@@ -184,9 +191,14 @@ function GraphMobile({
         </div>
       </div>
 
+<<<<<<< HEAD
       {/* Separate Navbar for Table */}
       <div className="tabs-container">
         <div className="tabs text-white flex flex-wrap gap-4 justify-center my-8 mx-[5%]">
+=======
+      <div className="tabs-container mt-8">
+        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center mb-8">
+>>>>>>> 186228d03177aeb058745b20e1d8c6de9a613c7f
           {categories.map((category) => (
             <button
               key={category}
