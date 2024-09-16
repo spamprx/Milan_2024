@@ -22,30 +22,30 @@ function LiveScore() {
     navigate("/profile");
   };
 
-useEffect(() => {
-  const fetchUserDetails = async () => {
-    try {
-      const response = await axios.get(
-        import.meta.env.VITE_BACKEND_URL + "profile",
-        {
-          withCredentials: true,
-        }
-      );
-      const userData = response.data.user;
-      const userPreferredGames = userData.interested_in || [];
-      //const preferredTeams = userData.Block ? [userData.Block] : [];
-      
-      setPreferredGames([...userPreferredGames]);
-      setAuth(true);
-    } catch (error) {
-      console.error("Error fetching user details:", error);
-      setAuth(false);
-    }
-  };
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          import.meta.env.VITE_BACKEND_URL + "profile",
+          {
+            withCredentials: true,
+          }
+        );
+        const userData = response.data.user;
+        const userPreferredGames = userData.interested_in || [];
+        setPreferredGames([
+          ...userPreferredGames.map((game) => game.toUpperCase()),
+        ]);
+        setAuth(true);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+        setAuth(false);
+      }
+    };
 
-  fetchUserDetails();
+    fetchUserDetails();
   }, []);
-
+  
   const fetchLiveMatches = async () => {
     try {
       const response = await axios.get(
