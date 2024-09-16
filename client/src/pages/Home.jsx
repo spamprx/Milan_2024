@@ -35,8 +35,8 @@ function Home() {
 
   const sportOptions = [
     { value: "SportsGirls", label: "Sports" },
-    { value: "SCI-TECH", label: "SCI-TECH" },
-    { value: "CULTURALS", label: "CULTURALS" },
+    { value: "Sci-Tech", label: "Sci-Tech" },
+    { value: "Cultural", label: "Cultural" },
   ];
 
   const [selectedOption, setSelectedOption] = useState(sportOptions[0]);
