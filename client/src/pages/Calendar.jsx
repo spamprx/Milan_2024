@@ -49,6 +49,7 @@ export default function Calendar() {
       ]);
 
       const userData = userResponse.data.user;
+      console.log("User Block:",userData.block);
       const userPreferredGames = userData.interested_in || [];
       const preferredTeams = userData.Block ? [userData.Block] : [];
 
