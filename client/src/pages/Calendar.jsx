@@ -7,8 +7,6 @@ import GameDetails from "../components/Gamedetails.jsx";
 import { useNavigate } from "react-router-dom";
 import Loading from "./Loading.jsx";
 
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes in milliseconds
-
 export default function Calendar() {
   let today = startOfToday();
   let [selectedDay, setSelectedDay] = useState(today);
@@ -23,66 +21,59 @@ export default function Calendar() {
   const [auth, setAuth] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const fetchData = useCallback(async () => {
     try {
-      setIsLoading(true);
-      setError(null);
-
-      const cachedData = localStorage.getItem('calendarData');
-      const cachedTimestamp = localStorage.getItem('calendarDataTimestamp');
-
-      if (cachedData && cachedTimestamp && Date.now() - parseInt(cachedTimestamp) < CACHE_DURATION) {
-        const parsedData = JSON.parse(cachedData);
-        setGames(parsedData.games);
-        setUserPreferredGames(parsedData.userPreferredGames);
-        setPreferredTeams(parsedData.preferredTeams);
-        setAuth(true);
-        setIsLoading(false);
-        return;
-      }
-
       const [userResponse, gamesResponse] = await Promise.all([
-        axios.get(`${import.meta.env.VITE_BACKEND_URL}profile`, { withCredentials: true }),
-        axios.get(`${import.meta.env.VITE_BACKEND_URL}eventsSchedule`)
+        axios.get(import.meta.env.VITE_BACKEND_URL + "profile", {
+          withCredentials: true,
+        }),
+        axios.get(import.meta.env.VITE_BACKEND_URL + "eventsSchedule"),
       ]);
 
       const userData = userResponse.data.user;
-      console.log("User Block:",userData.block);
-      const userPreferredGames = userData.interested_in || [];
-      const preferredTeams = userData.Block ? [userData.Block] : [];
+      console.log("User Block:", userData.Block);
+      setUserPreferredGames(userData.interested_in || []);
+      setPreferredTeams(userData.Block ? [userData.Block] : []);
+      setAuth(true);
 
-      const gamesData = gamesResponse.data;
-      if (gamesData && Object.keys(gamesData).length > 0) {
-        const loadedGames = Object.entries(gamesData).flatMap(([date, events]) =>
-          events.map((event, index) => ({
-            ...event,
-            id: `${event.title}_${event.time}_${event.teams}_${index}`,
-            startDatetime: new Date(`${date}T${event.time}`),
-            endDatetime: new Date(`${date}T${event.time}`),
-            date: new Date(date),
-            notificationEnabled: localStorage.getItem(`notification_${event.title}_${event.time}_${event.teams}_${index}_${date}`) === 'true'
-          }))
+      const data = gamesResponse.data;
+      if (data && Object.keys(data).length > 0) {
+        const loadedGames = Object.entries(data).flatMap(([date, events]) =>
+          events.map((event, index) => {
+            const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
+            const storageKey = `notification_${uniqueId}_${date}`;
+            const storedNotificationState = localStorage.getItem(storageKey);
+            const isPreferred =
+              userPreferredGames.includes(event.title.toLowerCase()) ||
+              preferredTeams.some((team) =>
+                event.teams.toLowerCase().includes(team.toLowerCase())
+              ) ||
+              event.teams.toLowerCase().includes("all blocks");
+
+            const notificationEnabled =
+              isPreferred ||
+              (storedNotificationState !== null
+                ? JSON.parse(storedNotificationState)
+                : false);
+
+            return {
+              ...event,
+              id: uniqueId,
+              startDatetime: new Date(date + "T" + event.time),
+              endDatetime: new Date(date + "T" + event.time),
+              date: new Date(date),
+              notificationEnabled: notificationEnabled,
+            };
+          })
         );
-
         setGames(loadedGames);
-        setUserPreferredGames(userPreferredGames);
-        setPreferredTeams(preferredTeams);
-        setAuth(true);
-
-        localStorage.setItem('calendarData', JSON.stringify({
-          games: loadedGames,
-          userPreferredGames,
-          preferredTeams
-        }));
-        localStorage.setItem('calendarDataTimestamp', Date.now().toString());
       } else {
-        throw new Error("No data received or unexpected format");
+        console.error("No data received or unexpected format:", data);
+        setGames([]);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
-      setError("Failed to fetch calendar data. Please try again later.");
       setAuth(false);
       setGames([]);
     } finally {
@@ -113,7 +104,7 @@ export default function Calendar() {
     };
   }, []);
 
-  const handleNotificationToggle = useCallback((updatedGame) => {
+  const handleNotificationToggle = (updatedGame) => {
     setGames((prevGames) =>
       prevGames.map((game) =>
         game.id === updatedGame.id
@@ -121,36 +112,35 @@ export default function Calendar() {
           : game
       )
     );
-    localStorage.setItem(`notification_${updatedGame.id}_${updatedGame.date}`, updatedGame.notificationEnabled.toString());
-  }, []);
+  };
 
-  const selectedDayMeetings = games.filter((game) => isSameDay(game.date, selectedDay));
+  let selectedDayMeetings = games.filter((game) =>
+    isSameDay(game.date, selectedDay)
+  );
 
-  const preferredMeetings = selectedDayMeetings.filter(
+  let preferredMeetings = selectedDayMeetings.filter(
     (meeting) =>
       userPreferredGames.includes(meeting.title.toLowerCase()) ||
-      preferredTeams.some((team) => meeting.teams.toLowerCase().includes(team.toLowerCase())) ||
+      preferredTeams.some((team) =>
+        meeting.teams.toLowerCase().includes(team.toLowerCase())
+      ) ||
       meeting.teams.toLowerCase().includes("all blocks")
   );
 
-  const otherMeetings = selectedDayMeetings.filter(
+  let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
   );
 
-  const handleGameSelect = useCallback((game) => {
+  function handleGameSelect(game) {
     setSelectedGame(game);
-  }, []);
+  }
 
-  const handleLoginRedirect = useCallback(() => {
+  const handleLoginRedirect = () => {
     navigate("/profile");
-  }, [navigate]);
+  };
 
   if (isLoading) {
     return <Loading />;
-  }
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
   }
 
   return (
