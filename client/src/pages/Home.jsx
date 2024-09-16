@@ -180,11 +180,11 @@ function Home() {
   console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
   console.log("Selected Day Meetings:", selectedDayMeetings);
 
-  let currentEvents = selectedDayMeetings.filter(
-    (game) => game.category === selectedOption.value
-  );
+  // let currentEvents = selectedDayMeetings.filter(
+  //   (game) => game.category === selectedOption.value
+  // );
 
-  console.log("Current Events:", currentEvents);
+  // console.log("Current Events:", currentEvents);
 
   if (isLoading) {
     return <Loading />;
@@ -285,7 +285,7 @@ function Home() {
                   There will be
                 </p>
                 <p className="text-white text-sm sm:text-base lg:text-xl font-bold">
-                  {currentEvents.length} Incoming Events
+                  {selectedDayMeetings.length} Incoming Events
                 </p>
               </div>
             </div>
@@ -293,7 +293,7 @@ function Home() {
 
           <div className="slider-container w-full mb-7">
             <Slider {...settings}>
-              {currentEvents.map((event, index) => (
+              {selectedDayMeetings.map((event, index) => (
                 <div key={index} className="p-2 mb-2">
                   <SportCard event={event} />
                 </div>
