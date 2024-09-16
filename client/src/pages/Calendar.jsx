@@ -46,22 +46,23 @@ export default function Calendar() {
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event, index) => {
-              console.log("Event Teams:", event.teams);
               const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
               const storageKey = `notification_${uniqueId}_${date}`;
               const storedNotificationState = localStorage.getItem(storageKey);
               const isPreferred = userPreferredGames.includes(event.title.toLowerCase()) ||
-                preferredTeams.some(team => event.teams.includes(team)) ||
+                preferredTeams.some(team => event.teams.toLowerCase().includes(team.toLowerCase())) ||
                 event.teams.toLowerCase().includes("all blocks");
+
+              // Set notification to true by default for preferred events
+              const notificationEnabled = isPreferred || (storedNotificationState !== null ? JSON.parse(storedNotificationState) : false);
+
               return {
                 ...event,
                 id: uniqueId,
                 startDatetime: new Date(date + "T" + event.time),
                 endDatetime: new Date(date + "T" + event.time),
                 date: new Date(date),
-                notificationEnabled: storedNotificationState !== null
-                  ? JSON.parse(storedNotificationState)
-                  : (isPreferred || event.notificationEnabled || false)
+                notificationEnabled: notificationEnabled
               };
             })
           );

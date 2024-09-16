@@ -39,7 +39,11 @@ function Meeting({
 
   useEffect(() => {
     localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
-  }, [notificationEnabled, getLocalStorageKey]);
+    // If it's a preferred event and notification is not enabled, enable it
+    if ((isPreferred || isPreferredEvent) && !notificationEnabled) {
+      setNotificationEnabled(true);
+    }
+  }, [notificationEnabled, getLocalStorageKey, isPreferred, isPreferredEvent]);
 
   const toggleNotification = useCallback(async (e) => {
     e.stopPropagation();
