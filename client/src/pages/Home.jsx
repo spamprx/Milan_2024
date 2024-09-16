@@ -23,14 +23,15 @@ import { startOfToday, format, isSameDay } from "date-fns";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [leaderBoard, setLeaderBoard] = useState("leaderboard");
   const cardContainerRef = useRef(null);
   let today = startOfToday();
-  const formattedDate = format(today, "dd/MM/yyyy");
-  let [selectedDay, setSelectedDay] = useState(formattedDate);
+  const formattedDate = format(today, "MM/dd/yyyy");
+  // let [selectedDay, setSelectedDay] = useState(formattedDate);
+  let [selectedDay, setSelectedDay] = useState("2023-09-22");
   const [games, setGames] = useState([]);
 
   const sportOptions = [
@@ -40,10 +41,6 @@ function Home() {
   ];
 
   const [selectedOption, setSelectedOption] = useState(sportOptions[0]);
-
-  let selectedDayMeetings = games.filter((game) =>
-    isSameDay(game.date, selectedDay)
-  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -99,11 +96,6 @@ function Home() {
     setActiveIndex(0);
   };
 
-  const currentEvents =
-    selectedOption && selectedDayMeetings[selectedOption.value]
-      ? selectedDayMeetings[selectedOption.value]
-      : [];
-
   const settings = {
     className: "center",
     centerMode: true,
@@ -144,12 +136,14 @@ function Home() {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
-      )
-      .then((response) => response.data)
-      .then((data) => {
+    console.log("Initiating data fetch...");
+    const fetchGamesData = axios.get(
+      import.meta.env.VITE_BACKEND_URL + "eventsSchedule"
+    );
+    Promise.all([fetchGamesData])
+      .then(([gamesResponse]) => {
+        const data = gamesResponse.data;
+        console.log("Games data received:", data);
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => ({
@@ -157,8 +151,10 @@ function Home() {
               startDatetime: new Date(date + "T" + event.time),
               endDatetime: new Date(date + "T" + event.time),
               date: new Date(date),
+              notificationEnabled: event.notificationEnabled || false,
             }))
           );
+          console.log("Processed games data:", loadedGames);
           setGames(loadedGames);
         } else {
           console.error("No data received or unexpected format:", data);
@@ -166,13 +162,28 @@ function Home() {
         }
       })
       .catch((error) => {
-        console.error("Failed to load games:", error);
+        console.error("Error fetching data:", error);
         setGames([]);
       })
       .finally(() => {
+        console.log("Data fetch complete. Setting isLoading to false.");
         setIsLoading(false);
       });
   }, []);
+  console.log("Games");
+  console.log(games);
+
+  let selectedDayMeetings = games.filter((game) =>
+    isSameDay(game.date, selectedDay)
+  );
+
+  console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
+  console.log("Selected Day Meetings:", selectedDayMeetings);
+
+  const currentEvents =
+    selectedOption && selectedDayMeetings[selectedOption.value]
+      ? selectedDayMeetings[selectedOption.value]
+      : [];
 
   if (isLoading) {
     return <Loading />;
