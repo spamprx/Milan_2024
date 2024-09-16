@@ -34,7 +34,9 @@ function LiveScore() {
         const userData = response.data.user;
         const userPreferredGames = userData.interested_in || [];
         setPreferredGames([
-          ...userPreferredGames.map((game) => game.toUpperCase()),
+          ...userPreferredGames.map(
+            (game) => game.charAt(0).toUpperCase() + game.slice(1).toLowerCase()
+          ),
         ]);
         setAuth(true);
       } catch (error) {
@@ -45,7 +47,7 @@ function LiveScore() {
 
     fetchUserDetails();
   }, []);
-  
+
   const fetchLiveMatches = async () => {
     try {
       const response = await axios.get(
