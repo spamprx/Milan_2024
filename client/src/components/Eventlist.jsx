@@ -8,14 +8,13 @@ export default function EventList({
   preferredMeetings, 
   otherMeetings, 
   onGameSelect, 
-  calendarHeight, 
+   
   selectedDay,
   userPreferredGames,
   preferredTeams,
   onNotificationToggle
 }) {
-  // console.log("EventList - Preferred Meetings:", preferredMeetings);
-  // console.log("EventList - Other Meetings:", otherMeetings);
+  
 
   const renderMeetings = (meetings, isPreferred) => {
     if (meetings.length === 0) {
