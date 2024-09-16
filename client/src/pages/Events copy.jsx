@@ -106,7 +106,7 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Sports Boys
+          SPORTS-BOYS
         </button>
         <button
           className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
@@ -117,7 +117,7 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Sports Girls
+          SPORTS-GIRLS
         </button>
         <button
           className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
@@ -128,7 +128,7 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Culti
+          CULTURALS
         </button>
         <button
           className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
@@ -139,7 +139,7 @@ function Events() {
             setShowTechy(true);
           }}
         >
-          Techy
+          SCI-TECH
         </button>
       </div>
     );
