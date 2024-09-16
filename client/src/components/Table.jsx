@@ -170,7 +170,7 @@ function Table({ games, blocknames, points, tag }) {
         />
       </div>
       <div className="flex justify-center">
-        <div className="bg-[#24104E] rounded-l-2xl ml-4 max-w-[33%] overflow-x-auto">
+        {/* <div className="bg-[#24104E] rounded-l-2xl ml-4 max-w-[33%] overflow-x-auto">
           <table
             {...getSportsTableProps()}
             className="w-full lg:w-auto table-fixed"
@@ -209,7 +209,7 @@ function Table({ games, blocknames, points, tag }) {
               })}
             </tbody>
           </table>
-        </div>
+        </div> */}
 
         <div className="bg-[#24104E] rounded-r-2xl mr-4 overflow-auto">
           <table {...getBlockTableProps()} className="w-fit table-fixed">
