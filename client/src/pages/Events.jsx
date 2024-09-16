@@ -16,10 +16,10 @@ function Events() {
   const [isMobile, setIsMobile] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   const [categories, setCategories] = useState([
-    "Sports Boys",
-    "Sports Girls",
-    "Culti",
-    "Sci-Tech",
+    "SPORTS-BOYS",
+    "SPORTS-GIRLS",
+    "CULTURALS",
+    "SCI-TECH",
   ]);
   const [isLoading, setIsLoading] = useState(true);
 

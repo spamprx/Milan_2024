@@ -27,7 +27,7 @@ const colorOptions = {
   "Sports Boys": "#FF7900",
   "Sports Girls": "#FF7900",
   "Culti": "#2C88AD",
-  "Sci-Tech": "#A9AB4A"
+  "Sci-Tech": "#A9AB4A",
 };
 
 function GraphMobile({
@@ -185,8 +185,8 @@ function GraphMobile({
       </div>
 
       {/* Separate Navbar for Table */}
-      <div className="tabs-container mt-8">
-        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center mb-8">
+      <div className="tabs-container">
+        <div className="tabs text-white flex flex-wrap gap-4 justify-center my-8 mx-[5%]">
           {categories.map((category) => (
             <button
               key={category}
