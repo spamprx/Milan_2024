@@ -23,7 +23,12 @@ ChartJS.register(
   Legend
 );
 
-const colorOptions = ["#FF7900", "#2C88AD", "#A9AB4A"];
+const colorOptions = {
+  "Sports Boys": "#FF7900",
+  "Sports Girls": "#FF7900",
+  "Culti": "#2C88AD",
+  "Sci-Tech": "#A9AB4A"
+};
 
 function GraphMobile({
   blocknames,
@@ -35,16 +40,13 @@ function GraphMobile({
 }) {
   const [selectedGraphCategories, setSelectedGraphCategories] =
     useState(categories);
-
   const [selectedTableCategory, setSelectedTableCategory] = useState(
     categories[0]
   );
+  const [chartData, setChartData] = useState(null);
 
   useEffect(() => {
     setSelectedGraphCategories(categories);
-  }, [categories]);
-
-  useEffect(() => {
     setSelectedTableCategory(categories[0]);
   }, [categories]);
 
@@ -54,150 +56,137 @@ function GraphMobile({
   const techyEvents = techyData?.eventNames || [];
 
   const getDataSet = () => {
-    let datasets = [];
+    const dataMap = new Map();
+
+    const addData = (category, blocks, data) => {
+      blocks.forEach((block, index) => {
+        if (!dataMap.has(block)) {
+          dataMap.set(block, { block, [category]: data[index] });
+        } else {
+          dataMap.get(block)[category] = data[index];
+        }
+      });
+    };
 
     if (selectedGraphCategories.includes("Sports Boys")) {
-      datasets.push({
-        label: "Sports Boys",
-        data: sportsBoysData.blocks.map((_, blockIndex) =>
-          gamesBoys.reduce(
-            (sum, _, gameIndex) =>
-              sum +
-              (sportsBoysData.scores[gameIndex] &&
-              sportsBoysData.scores[gameIndex][blockIndex]
-                ? sportsBoysData.scores[gameIndex][blockIndex]
-                : 0),
-            0
-          )
-        ),
-        backgroundColor: colorOptions[0],
-      });
+      const data = sportsBoysData.blocks.map((_, blockIndex) =>
+        gamesBoys.reduce(
+          (sum, _, gameIndex) =>
+            sum + (sportsBoysData.scores[gameIndex]?.[blockIndex] || 0),
+          0
+        )
+      );
+      addData("Sports Boys", sportsBoysData.blocks, data);
     }
 
     if (selectedGraphCategories.includes("Sports Girls")) {
-      datasets.push({
-        label: "Sports Girls",
-        data: sportsGirlsData.blocks.map((_, blockIndex) =>
-          gamesGirls.reduce(
-            (sum, _, gameIndex) =>
-              sum +
-              (sportsGirlsData.scores[gameIndex] &&
-              sportsGirlsData.scores[gameIndex][blockIndex]
-                ? sportsGirlsData.scores[gameIndex][blockIndex]
-                : 0),
-            0
-          )
-        ),
-        backgroundColor: colorOptions[0],
-      });
+      const data = sportsGirlsData.blocks.map((_, blockIndex) =>
+        gamesGirls.reduce(
+          (sum, _, gameIndex) =>
+            sum + (sportsGirlsData.scores[gameIndex]?.[blockIndex] || 0),
+          0
+        )
+      );
+      addData("Sports Girls", sportsGirlsData.blocks, data);
     }
 
     if (selectedGraphCategories.includes("Culti")) {
-      datasets.push({
-        label: "Culti",
-        data: blocknames.map((_, blockIndex) =>
-          cultiEvents.reduce(
-            (sum, _, eventIndex) =>
-              sum +
-              (cultiData.scores[eventIndex] &&
-              cultiData.scores[eventIndex][blockIndex]
-                ? cultiData.scores[eventIndex][blockIndex]
-                : 0),
-            0
-          )
-        ),
-        backgroundColor: colorOptions[1],
-      });
+      const data = blocknames.map((_, blockIndex) =>
+        cultiEvents.reduce(
+          (sum, _, eventIndex) =>
+            sum + (cultiData.scores[eventIndex]?.[blockIndex] || 0),
+          0
+        )
+      );
+      addData("Culti", blocknames, data);
     }
 
     if (selectedGraphCategories.includes("Sci-Tech")) {
-      datasets.push({
-        label: "Sci-Tech",
-        data: blocknames.map((_, blockIndex) =>
-          techyEvents.reduce(
-            (sum, _, eventIndex) =>
-              sum +
-              (techyData.scores[eventIndex] &&
-              techyData.scores[eventIndex][blockIndex]
-                ? techyData.scores[eventIndex][blockIndex]
-                : 0),
-            0
-          )
-        ),
-        backgroundColor: colorOptions[2],
-      });
+      const data = blocknames.map((_, blockIndex) =>
+        techyEvents.reduce(
+          (sum, _, eventIndex) =>
+            sum + (techyData.scores[eventIndex]?.[blockIndex] || 0),
+          0
+        )
+      );
+      addData("Sci-Tech", blocknames, data);
     }
 
-    return datasets;
+    const sortedData = Array.from(dataMap.values()).sort(
+      (a, b) => b[selectedGraphCategories[0]] - a[selectedGraphCategories[0]]
+    );
+
+    const labels = sortedData.map((item) => item.block);
+    const datasets = selectedGraphCategories.map((category) => ({
+      label: category,
+      data: sortedData.map((item) => item[category] || 0),
+      backgroundColor: colorOptions[category],
+    }));
+
+    return { labels, datasets };
   };
 
-  const barDataMobile = {
-    labels: blocknames,
-    datasets: getDataSet(),
-  };
+  useEffect(() => {
+    const { labels, datasets } = getDataSet();
+    setChartData({ labels, datasets });
+  }, [
+    selectedGraphCategories,
+    sportsBoysData,
+    sportsGirlsData,
+    cultiData,
+    techyData,
+  ]);
 
   const toggleGraphCategory = (category) => {
-    if (selectedGraphCategories.includes(category)) {
-      setSelectedGraphCategories(
-        selectedGraphCategories.filter((cat) => cat !== category)
-      );
-    } else {
-      setSelectedGraphCategories([...selectedGraphCategories, category]);
-    }
+    setSelectedGraphCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((cat) => cat !== category)
+        : [...prev, category]
+    );
   };
 
   return (
-    <div className="FirstTab w-full">
-      <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] mx-auto p-4 w-screen justify-center items-center">
-        <div className="w-full h-96 relative">
-          <Bar
-            options={{
-              responsive: true,
-              maintainAspectRatio: false,
-              animation: { easing: "easeIn" },
-              indexAxis: "y",
-              plugins: {
-                title: {
-                  display: false,
-                },
-                legend: {
-                  display: false,
-                },
-                tooltip: {
-                  callbacks: {
-                    label: function (context) {
-                      return `${context.dataset.label} : ${context.parsed.x}`;
+    <div className="w-full">
+      <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] w-full justify-center items-center">
+        <div className="w-full h-96 relative px-2 py-4">
+          {chartData && (
+            <Bar
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                animation: { easing: "easeIn" },
+                indexAxis: "y",
+                plugins: {
+                  title: { display: false },
+                  legend: { display: false },
+                  tooltip: {
+                    callbacks: {
+                      label: function (context) {
+                        return `${context.dataset.label} : ${context.parsed.x}`;
+                      },
                     },
                   },
                 },
-              },
-              scales: {
-                x: {
-                  stacked: true,
-                  ticks: {
-                    color: "white",
-                    font: {},
+                scales: {
+                  x: {
+                    stacked: true,
+                    ticks: { color: "white", font: {} },
+                  },
+                  y: {
+                    stacked: true,
+                    ticks: { color: "white", font: { size: 10 } },
                   },
                 },
-                y: {
-                  stacked: true,
-                  ticks: {
-                    color: "white",
-                    font: {
-                      size: 10,
-                    },
-                  },
-                },
-              },
-            }}
-            data={barDataMobile}
-          />
+              }}
+              data={chartData}
+            />
+          )}
         </div>
       </div>
 
       {/* Separate Navbar for Table */}
-      <div className="tabs-container mt-4">
-        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center">
+      <div className="tabs-container mt-8">
+        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center mb-8">
           {categories.map((category) => (
             <button
               key={category}

@@ -1,33 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 
-export default function Meeting({ meeting, onSelect, isPreferred, userPreferredGames = [], preferredTeams = [], initialNotificationState }) {
-  const [notificationEnabled, setNotificationEnabled] = useState(initialNotificationState);
+function Meeting({
+  meeting,
+  onSelect,
+  isPreferred,
+  userPreferredGames = [],
+  preferredTeams = [],
+  initialNotificationState,
+  onNotificationToggle
+}) {
+  const isPreferredEvent = useMemo(() => {
+    return (
+      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) ||
+      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.toLowerCase().includes(team.toLowerCase()))) ||
+      (meeting?.teams && meeting.teams.toLowerCase().includes("all blocks"))
+    );
+  }, [meeting, userPreferredGames, preferredTeams]);
+
+  const getLocalStorageKey = useCallback(() => {
+    const uniqueId = meeting.id || `${meeting.title}_${meeting.time}_${meeting.teams}`;
+    return `notification_${uniqueId}_${meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date}`;
+  }, [meeting]);
+
+  const [notificationEnabled, setNotificationEnabled] = useState(() => {
+    const storedState = localStorage.getItem(getLocalStorageKey());
+    if (storedState !== null) {
+      return JSON.parse(storedState);
+    }
+    return isPreferred || isPreferredEvent || initialNotificationState || false;
+  });
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    if (!meeting) {
-      console.warn("Meeting data is missing");
-      return;
-    }
+    localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
+  }, [notificationEnabled, getLocalStorageKey]);
 
-    const isPreferredEvent =
-      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting.title.toLowerCase())) ||
-      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting.teams && meeting.teams.includes(team))) ||
-      (meeting.teams && meeting.teams.toLowerCase().includes("all blocks"));
-
-    // Always set notifications on for preferred events
-    if (isPreferredEvent && !notificationEnabled) {
-      setNotificationEnabled(true);
-      toggleNotification({ stopPropagation: () => {} }, true);
-    }
-  }, [meeting, userPreferredGames, preferredTeams, notificationEnabled]);
-
-  const toggleNotification = async (e, isAutoEnable = false) => {
-    if (!isAutoEnable) {
-      e.stopPropagation();
-    }
+  const toggleNotification = useCallback(async (e) => {
+    e.stopPropagation();
     setIsLoading(true);
     setError(null);
 
@@ -54,15 +66,17 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
         withCredentials: true,
       });
 
-      // Update local state only after successful backend update
-      setNotificationEnabled(prevState => !prevState);
+      const updatedNotificationState = !notificationEnabled;
+      setNotificationEnabled(updatedNotificationState);
+      localStorage.setItem(getLocalStorageKey(), JSON.stringify(updatedNotificationState));
+      onNotificationToggle({ ...meeting, notificationEnabled: updatedNotificationState });
     } catch (error) {
       console.error("Error toggling notification:", error);
       setError("Failed to update notification. Please try again.");
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [meeting, notificationEnabled, onNotificationToggle, getLocalStorageKey]);
 
   if (!meeting) {
     return null;
@@ -100,9 +114,8 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
           disabled={isLoading}
         >
           <div
-            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${
-              notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
-            }`}
+            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
+              }`}
           >
             {isLoading && (
               <div className="w-4 h-4 border-t-2 border-gray-700 rounded-full animate-spin"></div>
@@ -120,8 +133,9 @@ export default function Meeting({ meeting, onSelect, isPreferred, userPreferredG
           </div>
         </button>
       </div>
-
       {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 }
+
+export default Meeting;

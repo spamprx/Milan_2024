@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Category from "../components/Category";
 import GraphMobile from "../components/GraphMobile";
 import Filter from "../components/CategoryFilter";
@@ -22,8 +21,6 @@ function Events() {
     "Culti",
     "Sci-Tech",
   ]);
-  const [blocks, setBlocks] = useState(["Select All"]);
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -32,10 +29,6 @@ function Events() {
 
   const handleCategoriesChange = (selectedCategory) => {
     setCategories(selectedCategory);
-  };
-
-  const handleBlocksChange = (selectedBlock) => {
-    setBlocks(selectedBlock);
   };
 
   useEffect(() => {
@@ -140,9 +133,9 @@ function Events() {
 
   const NavBar = () => {
     return (
-      <div className="flex justify-center mx-auto my-10">
+      <div className="max-w-7xl flex justify-between w-[44rem] mx-auto my-10">
         <button
-          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
           onClick={() => {
             setShowSportsBoys(true);
             setShowSportsGirls(false);
@@ -150,10 +143,10 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Sports Boys
+          SPORTS-BOYS
         </button>
         <button
-          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(true);
@@ -161,10 +154,10 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Sports Girls
+          SPORTS-GIRLS
         </button>
         <button
-          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(false);
@@ -172,10 +165,10 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Culti
+          CULTURALS
         </button>
         <button
-          className="bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 mx-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(false);
@@ -183,7 +176,7 @@ function Events() {
             setShowTechy(true);
           }}
         >
-          Techy
+          SCI-TECH
         </button>
       </div>
     );
@@ -196,28 +189,24 @@ function Events() {
   return (
     <>
       {isMobile && dataFetched && (
-        <div className="flex gap-8 flex-col justify-center">
-          <div className="flex flex-row justify-center">
-            <Filter
-              options={techyData.blocks}
-              onCategoryChange={handleBlocksChange}
-              title="SET BLOCK"
-              isSingle={true}
-            />
+        <div className="mt-8 relative flex flex-col justify-center items-center">
+          <div className="absolute top-0 z-30 flex flex-row items-center justify-center">
             <Filter
               options={["Sports Boys", "Sports Girls", "Culti", "Sci-Tech"]}
               onCategoryChange={handleCategoriesChange}
               title="SELECT TYPE"
             />
           </div>
-          <GraphMobile
-            blocknames={techyData.blocks}
-            categories={categories}
-            sportsBoysData={sportsBoysData}
-            sportsGirlsData={sportsGirlsData}
-            cultiData={cultiData}
-            techyData={techyData}
-          />
+          <div className="w-full mt-24">
+            <GraphMobile
+              blocknames={techyData.blocks}
+              categories={categories}
+              sportsBoysData={sportsBoysData}
+              sportsGirlsData={sportsGirlsData}
+              cultiData={cultiData}
+              techyData={techyData}
+            />
+          </div>
         </div>
       )}
       {!isMobile && (

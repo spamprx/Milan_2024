@@ -7,7 +7,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
   useEffect(() => {
     if (isSingle) {
-      setSelectedCategories(options.length > 0 ? ["Select All"] : []);
+      setSelectedCategories(options.length > 0 ? ["SELECT ALL"] : []);
     }
   }, []);
 
@@ -29,17 +29,22 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
   const handleSave = () => {
     setIsOpen(false);
-    if (onCategoryChange) {
+    if(selectedCategories.length === 0)
+    {
+      setSelectedCategories(options);
+      onCategoryChange(options);
+    }
+    else if (onCategoryChange) {
       onCategoryChange(selectedCategories);
     }
   };
 
   const handleSelectAll = () => {
     if (isSingle) {
-      setSelectedCategories(["Select All"]);
+      setSelectedCategories(["SELECT ALL"]);
       setIsOpen(false);
       if (onCategoryChange) {
-        onCategoryChange("Select All");
+        onCategoryChange("SELECT ALL");
       }
     } else {
       if (selectedCategories.length === options.length) {
@@ -51,7 +56,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   };
 
   return (
-    <div className="w-full md:w-1/3 md:mx-12 max-w-52 scale-75 md:scale-100 sm:min-w-44">
+    <div className="w-full md:w-1/3 max-w-52 sm:min-w-44">
       <div className="bg-[#270B5D] rounded-2xl overflow-hidden">
         <div
           className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer"
@@ -87,7 +92,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
                 }`}
               ></div>
               <span className="text-sm text-[#D1CCB6] truncate text-left">
-                Select All
+                SELECT ALL
               </span>
             </div>
 

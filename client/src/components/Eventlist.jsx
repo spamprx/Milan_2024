@@ -11,11 +11,9 @@ export default function EventList({
   calendarHeight, 
   selectedDay,
   userPreferredGames,
-  preferredTeams
+  preferredTeams,
+  onNotificationToggle
 }) {
-  console.log("EventList - Preferred Meetings:", preferredMeetings);
-  console.log("EventList - Other Meetings:", otherMeetings);
-
   const renderMeetings = (meetings, isPreferred) => {
     if (meetings.length === 0) {
       return (
@@ -25,15 +23,16 @@ export default function EventList({
       );
     }
 
-    return meetings.map((meeting, index) => (
+    return meetings.map((meeting) => (
       <Meeting 
-        key={`${meeting.title}-${meeting.time}-${index}`} 
+        key={meeting.id}
         meeting={meeting} 
         onSelect={onGameSelect}
-        isPreferred={isPreferred || userPreferredGames.includes(meeting.title.toLowerCase()) || preferredTeams.some(team => meeting.teams.includes(team))}
-        initialNotificationState={meeting.notificationEnabled} // Add this line
+        isPreferred={isPreferred}
         userPreferredGames={userPreferredGames}
         preferredTeams={preferredTeams}
+        initialNotificationState={meeting.notificationEnabled}
+        onNotificationToggle={onNotificationToggle}
       />
     ));
   };
