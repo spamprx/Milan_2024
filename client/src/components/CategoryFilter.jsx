@@ -7,7 +7,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
   useEffect(() => {
     if (isSingle) {
-      setSelectedCategories(options.length > 0 ? ["SELECT ALL"] : []);
+      setSelectedCategories(options.length > 0 ? ["Select All"] : []);
     }
   }, []);
 
@@ -41,10 +41,10 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
   const handleSelectAll = () => {
     if (isSingle) {
-      setSelectedCategories(["SELECT ALL"]);
+      setSelectedCategories(["Select All"]);
       setIsOpen(false);
       if (onCategoryChange) {
-        onCategoryChange("SELECT ALL");
+        onCategoryChange("Select All");
       }
     } else {
       if (selectedCategories.length === options.length) {
@@ -92,7 +92,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
                 }`}
               ></div>
               <span className="text-sm text-[#D1CCB6] truncate text-left">
-                SELECT ALL
+                Select All
               </span>
             </div>
 

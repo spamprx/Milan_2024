@@ -1,13 +1,10 @@
-import { useState, useEffect } from "react";
-import SponsorArrow from "../assets/SponsorArrow.png";
 import SponsorBg from "../assets/Sponsors.jpeg";
 import SponsorBg2 from "../assets/Sponsors2.jpeg";
-import Loading from "./Loading";
+import SponsorArrow from "../assets/SponsorArrow.png";
+import { useState, useEffect } from "react";
 
 function Sponsors() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [sponsorImages, setSponsorImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const handleResize = () => {
@@ -21,21 +18,6 @@ function Sponsors() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  useEffect(() => {
-    // fetch("/assets/sponsorImages.json");
-    fetch("/SPONSORS/Sponsors.json")
-      .then((response) => response.json())
-      .then((data) => setSponsorImages(data.sponsors))
-      .catch((error) => console.error("Error fetching JSON:", error))
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   return (
     <>
@@ -64,18 +46,48 @@ function Sponsors() {
             style={{ backgroundImage: `url(${SponsorBg})` }}
           >
             <div className="w-full h-full flex flex-wrap justify-center items-center">
-              {sponsorImages.slice(0, 6).map((image, index) => (
-                <div
-                  key={index}
-                  className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5"
-                >
-                  <img
-                    src={image}
-                    alt={`Sponsor ${index + 1}`}
-                    className="rounded-2xl w-full h-full object-contain"
-                  />
-                </div>
-              ))}
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg2}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg2}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg2}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg2}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg2}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg2}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
             </div>
           </div>
 
@@ -98,18 +110,49 @@ function Sponsors() {
             style={{ backgroundImage: `url(${SponsorBg2})` }}
           >
             <div className="w-full h-full flex flex-wrap justify-center items-center">
-              {sponsorImages.slice(6, 12).map((image, index) => (
-                <div
-                  key={index}
-                  className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5"
-                >
-                  <img
-                    src={image}
-                    alt={`Sponsor ${index + 7}`}
-                    className="rounded-2xl w-full h-full object-contain"
-                  />
-                </div>
-              ))}
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
+              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+                <img
+                  src={SponsorBg}
+                  alt="Sponsor1"
+                  className="rounded-2xl w-full h-full object-contain"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -117,5 +160,4 @@ function Sponsors() {
     </>
   );
 }
-
 export default Sponsors;
