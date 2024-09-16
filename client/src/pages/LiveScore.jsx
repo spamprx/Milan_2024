@@ -31,16 +31,15 @@ function LiveScore() {
             withCredentials: true,
           }
         );
-
-        // Assuming user.interested_in is an array of objects with type field
+        {console.log(user.interested_in)}
         const sportsOnly = user.interested_in.filter(
           (item) => item.type === "sport"
         );
-        setPreferredGames(sportsOnly.map((sport) => sport.name)); // Assuming `name` holds the sport names
-        setAuth(true); // Set authenticated if fetch is successful
+        setPreferredGames(sportsOnly.map((sport) => sport.name));
+        setAuth(true);
       } catch (error) {
         console.error("Error fetching user details:", error);
-        setAuth(false); // Not authenticated in case of error
+        setAuth(false);
       }
     };
 
