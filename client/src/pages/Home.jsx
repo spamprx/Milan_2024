@@ -35,7 +35,7 @@ function Home() {
 
   const sportOptions = [
     { value: "SportsGirls", label: "Sports" },
-    { value: "Sci-Tech", label: "Sci-Tech" },
+    { value: "SCI-TECH", label: "SCI-TECH" },
     { value: "Cultural", label: "Cultural" },
   ];
 

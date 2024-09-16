@@ -24,7 +24,7 @@ function Events() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        console.log("Fetched culti data:", result); 
+        console.log("Fetched culti data:", result);
         setCultiData(result);
       } catch (error) {
         console.error("Error fetching culti data:", error);
@@ -106,7 +106,7 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Sports Boys
+          SPORTS-BOYS
         </button>
         <button
           className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
@@ -117,7 +117,7 @@ function Events() {
             setShowTechy(false);
           }}
         >
-          Sports Girls
+          SPORTS-GIRLS
         </button>
         <button
           className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"

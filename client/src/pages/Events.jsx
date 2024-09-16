@@ -101,7 +101,7 @@ function Events() {
         console.log("Fetched boys sports data:", result);
         setSportsBoysData(result);
       } catch (error) {
-        console.error("Error fetching sports boys data:", error);
+        console.error("Error fetching SPORTS-BOYS data:", error);
       } finally {
         setIsLoading(false);
       }
@@ -192,7 +192,7 @@ function Events() {
         <div className="mt-8 relative flex flex-col justify-center items-center">
           <div className="absolute top-0 z-30 flex flex-row items-center justify-center">
             <Filter
-              options={["Sports Boys", "Sports Girls", "Culti", "Sci-Tech"]}
+              options={["SPORTS-BOYS", "SPORTS-GIRLS", "CULTURALS", "SCI-TECH"]}
               onCategoryChange={handleCategoriesChange}
               title="SELECT TYPE"
             />
