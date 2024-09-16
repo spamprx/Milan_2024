@@ -146,7 +146,7 @@ function LiveScore() {
   }
 
   return (
-    <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center">
+    <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center mt-8">
       <div className="flex flex-row gap-[20vw] justify-center">
         <Filter
           options={["PREFERRED GAMES"]}
@@ -171,7 +171,7 @@ function LiveScore() {
       </div>
       {error && (
         <>
-          <div className="text-center p-4">
+          <div className="text-center mt-8">
             <p className="text-lg text-white font-bold">
               Please log in to view your preferred games.
             </p>
@@ -185,11 +185,9 @@ function LiveScore() {
         </>
       )}
       {!error && currentMatches.length === 0 && (
-        <div className="bg-[#6539BA] flex w-fit rounded-xl mx-auto m-4">
-          <p className="text-[#D1CCB6] font-extrabold p-2">
-            No ongoing matches........
-          </p>
-        </div>
+        <p className="text-lg text-white font-bold mt-8">
+          No ongoing matches available.
+        </p>
       )}
     </div>
   );
