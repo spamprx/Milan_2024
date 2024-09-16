@@ -14,9 +14,6 @@ export default function EventList({
   preferredTeams,
   onNotificationToggle
 }) {
-  // console.log("EventList - Preferred Meetings:", preferredMeetings);
-  // console.log("EventList - Other Meetings:", otherMeetings);
-
   const renderMeetings = (meetings, isPreferred) => {
     if (meetings.length === 0) {
       return (
@@ -26,9 +23,9 @@ export default function EventList({
       );
     }
 
-    return meetings.map((meeting, index) => (
+    return meetings.map((meeting) => (
       <Meeting 
-        key={`${meeting.title}-${meeting.time}-${index}`} 
+        key={meeting.id}
         meeting={meeting} 
         onSelect={onGameSelect}
         isPreferred={isPreferred}

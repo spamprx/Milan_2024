@@ -19,7 +19,8 @@ function Meeting({
   }, [meeting, userPreferredGames, preferredTeams]);
 
   const getLocalStorageKey = useCallback(() => {
-    return `notification_${meeting.title}_${meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date}`;
+    const uniqueId = meeting.id || `${meeting.title}_${meeting.time}_${meeting.teams}`;
+    return `notification_${uniqueId}_${meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date}`;
   }, [meeting]);
 
   const [notificationEnabled, setNotificationEnabled] = useState(() => {

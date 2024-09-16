@@ -44,11 +44,13 @@ export default function Calendar() {
         const data = gamesResponse.data;
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
-            events.map((event) => {
-              const storageKey = `notification_${event.title}_${date}`;
+            events.map((event, index) => {
+              const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
+              const storageKey = `notification_${uniqueId}_${date}`;
               const storedNotificationState = localStorage.getItem(storageKey);
               return {
                 ...event,
+                id: uniqueId,
                 startDatetime: new Date(date + "T" + event.time),
                 endDatetime: new Date(date + "T" + event.time),
                 date: new Date(date),
@@ -95,7 +97,7 @@ export default function Calendar() {
 
   const handleNotificationToggle = (updatedGame) => {
     setGames(prevGames => prevGames.map(game =>
-      game.title === updatedGame.title && isSameDay(game.date, updatedGame.date)
+      game.id === updatedGame.id
         ? { ...game, notificationEnabled: updatedGame.notificationEnabled }
         : game
     ));
@@ -111,11 +113,7 @@ export default function Calendar() {
         userPreferredGames.includes(meeting.title.toLowerCase()) ||
         preferredTeams.some((team) => meeting.teams.includes(team)) ||
         meeting.teams.toLowerCase().includes("all blocks")
-    )
-    .map((meeting) => {
-      meeting.notificationEnabled = true;
-      return meeting;
-    });
+    );
 
   let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
