@@ -29,7 +29,12 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
   const handleSave = () => {
     setIsOpen(false);
-    if (onCategoryChange) {
+    if(selectedCategories.length === 0)
+    {
+      setSelectedCategories(options);
+      onCategoryChange(options);
+    }
+    else if (onCategoryChange) {
       onCategoryChange(selectedCategories);
     }
   };

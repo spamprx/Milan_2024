@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import Category from "../components/Category";
 import GraphMobile from "../components/GraphMobile";
 import Filter from "../components/CategoryFilter";
@@ -22,8 +21,6 @@ function Events() {
     "Culti",
     "Sci-Tech",
   ]);
-  const [blocks, setBlocks] = useState(["Select All"]);
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -32,10 +29,6 @@ function Events() {
 
   const handleCategoriesChange = (selectedCategory) => {
     setCategories(selectedCategory);
-  };
-
-  const handleBlocksChange = (selectedBlock) => {
-    setBlocks(selectedBlock);
   };
 
   useEffect(() => {
@@ -196,28 +189,24 @@ function Events() {
   return (
     <>
       {isMobile && dataFetched && (
-        <div className="flex gap-8 flex-col justify-center">
-          <div className="flex flex-row justify-center">
-            <Filter
-              options={techyData.blocks}
-              onCategoryChange={handleBlocksChange}
-              title="SET BLOCK"
-              isSingle={true}
-            />
+        <div className="relative flex flex-col justify-center">
+          <div className="absolute right-0 top-0 z-30 flex flex-row justify-center">
             <Filter
               options={["Sports Boys", "Sports Girls", "Culti", "Sci-Tech"]}
               onCategoryChange={handleCategoriesChange}
               title="SELECT TYPE"
             />
           </div>
-          <GraphMobile
-            blocknames={techyData.blocks}
-            categories={categories}
-            sportsBoysData={sportsBoysData}
-            sportsGirlsData={sportsGirlsData}
-            cultiData={cultiData}
-            techyData={techyData}
-          />
+          <div className="mt-16">
+            <GraphMobile
+              blocknames={techyData.blocks}
+              categories={categories}
+              sportsBoysData={sportsBoysData}
+              sportsGirlsData={sportsGirlsData}
+              cultiData={cultiData}
+              techyData={techyData}
+            />
+          </div>
         </div>
       )}
       {!isMobile && (
