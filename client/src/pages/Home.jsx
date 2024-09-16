@@ -31,7 +31,7 @@ function Home() {
   let today = startOfToday();
   const formattedDate = format(today, "MM/dd/yyyy");
   // let [selectedDay, setSelectedDay] = useState(formattedDate);
-  let [selectedDay, setSelectedDay] = useState("2023-09-22");
+  let [selectedDay, setSelectedDay] = useState(new Date("2023-09-22"));
   const [games, setGames] = useState([]);
 
   const sportOptions = [
@@ -173,17 +173,18 @@ function Home() {
   console.log("Games");
   console.log(games);
 
-  let selectedDayMeetings = games.filter((game) =>
-    isSameDay(game.date, selectedDay)
+  let selectedDayMeetings = games.filter(
+    (game) => isSameDay(game.date, new Date(selectedDay)) // Ensure this is comparing Date objects
   );
 
   console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
   console.log("Selected Day Meetings:", selectedDayMeetings);
 
-  const currentEvents =
-    selectedOption && selectedDayMeetings[selectedOption.value]
-      ? selectedDayMeetings[selectedOption.value]
-      : [];
+  let currentEvents = selectedDayMeetings.filter(
+    (game) => game.category === selectedOption.value
+  );
+
+  console.log("Current Events:", currentEvents);
 
   if (isLoading) {
     return <Loading />;
