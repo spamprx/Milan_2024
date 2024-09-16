@@ -12,9 +12,10 @@ function Meeting({
 }) {
   const isPreferredEvent = useMemo(() => {
     return (
-      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) ||
-      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.includes(team))) ||
-      (meeting?.teams && meeting.teams.toLowerCase().includes("all blocks"))
+      Array.isArray(userPreferredGames) &&
+      userPreferredGames.includes(meeting?.title?.toLowerCase()) &&
+      (meeting?.teams?.toLowerCase().includes("all blocks") ||
+       (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.includes(team))))
     );
   }, [meeting, userPreferredGames, preferredTeams]);
 
