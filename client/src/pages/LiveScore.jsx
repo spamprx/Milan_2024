@@ -10,27 +10,43 @@ import Loading from "./Loading.jsx";
 function LiveScore() {
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
-  const [selectedSport, setSelectedSport] = useState("Select All");
+  const [selectedSport, setSelectedSport] = useState("SELECT ALL");
   const [socket, setSocket] = useState(null);
+  const [auth, setAuth] = useState(false);
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [preferredGames, setPreferredGames] = useState([]);
 
-  const eventOptions = [
-    "CRICKET",
-    "FOOTBALL",
-    "HOCKEY",
-    "VOLLEYBALL",
-    "BASKETBALL",
-    "BADMINTON",
-    "TENNIS",
-    "TABLE TENNIS",
-    "CARROM",
-    "CHESS",
-    "SQUASH",
-    "WEIGHTLIFTING",
-    "POWER LIFTING",
-    "ATHLETICS",
-  ];
+  const handleLoginRedirect = () => {
+    navigate("/profile");
+  };
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await axios.get(
+          import.meta.env.VITE_BACKEND_URL + "profile",
+          {
+            withCredentials: true,
+          }
+        );
+        const userData = response.data.user;
+        const userPreferredGames = userData.interested_in || [];
+        setPreferredGames([
+          ...userPreferredGames.map(
+            (game) => game.charAt(0).toUpperCase() + game.slice(1).toLowerCase()
+          ),
+        ]);
+        setAuth(true);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+        setAuth(false);
+      }
+    };
+
+    fetchUserDetails();
+  }, []);
 
   const fetchLiveMatches = async () => {
     try {
@@ -87,18 +103,28 @@ function LiveScore() {
   }, []);
 
   useEffect(() => {
-    if (selectedSport === "Select All") {
+    if (selectedSport === "SELECT ALL") {
       setCurrentMatches(liveMatches);
-    } else {
-      const matches = liveMatches.filter(
-        (match) => match.sport.toUpperCase() === selectedSport
-      );
-      setCurrentMatches(matches);
+    } else if (selectedSport === "PREFERRED GAMES") {
+      if (!auth) {
+        setError(true);
+      } else {
+        setError(false);
+        const preferredMatches = liveMatches.filter((match) =>
+          preferredGames.includes(match.sport)
+        );
+        setCurrentMatches(preferredMatches);
+      }
     }
-  }, [liveMatches, selectedSport]);
+  }, [liveMatches, selectedSport, preferredGames, auth]);
 
-  const handleSportChange = (sport) => {
+  const handleChange = (sport) => {
     setSelectedSport(sport);
+    if (sport === "PREFERRED GAMES" && !auth) {
+      setError(true);
+    } else {
+      setError(false);
+    }
   };
 
   useEffect(() => {
@@ -123,10 +149,10 @@ function LiveScore() {
     <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center">
       <div className="flex flex-row gap-[20vw] justify-center">
         <Filter
-          options={eventOptions}
+          options={["PREFERRED GAMES"]}
           title="SELECT EVENT"
           isSingle={true}
-          onCategoryChange={handleSportChange}
+          onCategoryChange={handleChange}
         />
       </div>
 
@@ -143,8 +169,22 @@ function LiveScore() {
               <CardLiveScore key={match.matchId} match={match} />
             ))}
       </div>
-
-      {currentMatches.length === 0 && (
+      {error && (
+        <>
+          <div className="text-center p-4">
+            <p className="text-lg text-white font-bold">
+              Please log in to view your preferred games.
+            </p>
+            <button
+              onClick={handleLoginRedirect}
+              className="mt-4 px-6 py-3 bg-[#561e70] text-[#D1CCB6] rounded-lg hover:bg-[#7a2a9e] transition duration-300"
+            >
+              Go to Profile Page
+            </button>
+          </div>
+        </>
+      )}
+      {!error && currentMatches.length === 0 && (
         <div className="bg-[#6539BA] flex w-fit rounded-xl mx-auto m-4">
           <p className="text-[#D1CCB6] font-extrabold p-2">
             No ongoing matches........

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { startOfToday, format, isSameDay } from "date-fns";
 import axios from "axios";
 import Dates from "../components/Dates.jsx";
@@ -22,65 +22,68 @@ export default function Calendar() {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchUserDetails = axios.get(
-      import.meta.env.VITE_BACKEND_URL + "profile",
-      {
-        withCredentials: true,
-      }
-    );
+  const fetchData = useCallback(async () => {
+    try {
+      const [userResponse, gamesResponse] = await Promise.all([
+        axios.get(import.meta.env.VITE_BACKEND_URL + "profile", {
+          withCredentials: true,
+        }),
+        axios.get(import.meta.env.VITE_BACKEND_URL + "eventsSchedule"),
+      ]);
 
-    const fetchGamesData = axios.get(
-      import.meta.env.VITE_BACKEND_URL + "eventsSchedule"
-    );
+      const userData = userResponse.data.user;
+      console.log("User Block:", userData.Block);
+      setUserPreferredGames(userData.interested_in || []);
+      setPreferredTeams(userData.Block ? [userData.Block] : []);
+      setAuth(true);
 
-    Promise.all([fetchUserDetails, fetchGamesData])
-      .then(([userResponse, gamesResponse]) => {
-        const userData = userResponse.data.user;
-        console.log("User Block:", userData.Block);
-        setUserPreferredGames(userData.interested_in || []);
-        setPreferredTeams(userData.Block ? [userData.Block] : []);
-        setAuth(true);
+      const data = gamesResponse.data;
+      if (data && Object.keys(data).length > 0) {
+        const loadedGames = Object.entries(data).flatMap(([date, events]) =>
+          events.map((event, index) => {
+            const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
+            const storageKey = `notification_${uniqueId}_${date}`;
+            const storedNotificationState = localStorage.getItem(storageKey);
+            const isPreferred =
+              userPreferredGames.includes(event.title.toLowerCase()) ||
+              preferredTeams.some((team) =>
+                event.teams.toLowerCase().includes(team.toLowerCase())
+              ) ||
+              event.teams.toLowerCase().includes("all blocks");
 
-        const data = gamesResponse.data;
-        if (data && Object.keys(data).length > 0) {
-          const loadedGames = Object.entries(data).flatMap(([date, events]) =>
-            events.map((event, index) => {
-              const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
-              const storageKey = `notification_${uniqueId}_${date}`;
-              const storedNotificationState = localStorage.getItem(storageKey);
-              const isPreferred = userPreferredGames.includes(event.title.toLowerCase()) ||
-                preferredTeams.some(team => event.teams.toLowerCase().includes(team.toLowerCase())) ||
-                event.teams.toLowerCase().includes("all blocks");
+            const notificationEnabled =
+              isPreferred ||
+              (storedNotificationState !== null
+                ? JSON.parse(storedNotificationState)
+                : false);
 
-              // Set notification to true by default for preferred events
-              const notificationEnabled = isPreferred || (storedNotificationState !== null ? JSON.parse(storedNotificationState) : false);
-
-              return {
-                ...event,
-                id: uniqueId,
-                startDatetime: new Date(date + "T" + event.time),
-                endDatetime: new Date(date + "T" + event.time),
-                date: new Date(date),
-                notificationEnabled: notificationEnabled
-              };
-            })
-          );
-          setGames(loadedGames);
-        } else {
-          console.error("No data received or unexpected format:", data);
-          setGames([]);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setAuth(false);
+            return {
+              ...event,
+              id: uniqueId,
+              startDatetime: new Date(date + "T" + event.time),
+              endDatetime: new Date(date + "T" + event.time),
+              date: new Date(date),
+              notificationEnabled: notificationEnabled,
+            };
+          })
+        );
+        setGames(loadedGames);
+      } else {
+        console.error("No data received or unexpected format:", data);
         setGames([]);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  });
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setAuth(false);
+      setGames([]);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     if (calendarRef.current) {
@@ -102,24 +105,27 @@ export default function Calendar() {
   }, []);
 
   const handleNotificationToggle = (updatedGame) => {
-    setGames(prevGames => prevGames.map(game =>
-      game.id === updatedGame.id
-        ? { ...game, notificationEnabled: updatedGame.notificationEnabled }
-        : game
-    ));
+    setGames((prevGames) =>
+      prevGames.map((game) =>
+        game.id === updatedGame.id
+          ? { ...game, notificationEnabled: updatedGame.notificationEnabled }
+          : game
+      )
+    );
   };
 
   let selectedDayMeetings = games.filter((game) =>
     isSameDay(game.date, selectedDay)
   );
 
-  let preferredMeetings = selectedDayMeetings
-    .filter(
-      (meeting) =>
-        userPreferredGames.includes(meeting.title.toLowerCase()) ||
-        preferredTeams.some((team) => meeting.teams.toLowerCase().includes(team.toLowerCase())) ||
-        meeting.teams.toLowerCase().includes("all blocks")
-    );
+  let preferredMeetings = selectedDayMeetings.filter(
+    (meeting) =>
+      userPreferredGames.includes(meeting.title.toLowerCase()) ||
+      preferredTeams.some((team) =>
+        meeting.teams.toLowerCase().includes(team.toLowerCase())
+      ) ||
+      meeting.teams.toLowerCase().includes("all blocks")
+  );
 
   let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)

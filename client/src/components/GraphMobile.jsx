@@ -24,10 +24,10 @@ ChartJS.register(
 );
 
 const colorOptions = {
-  "SPORTS-BOYS": "#FF7900",
-  "SPORTS-GIRLS": "#FF7900",
-  CULTURALS: "#2C88AD",
-  "SCI-TECH": "#A9AB4A",
+  "Sports Boys": "#FF7900",
+  "Sports Girls": "#FF7900",
+  "Culti": "#2C88AD",
+  "Sci-Tech": "#A9AB4A",
 };
 
 function GraphMobile({
@@ -68,7 +68,7 @@ function GraphMobile({
       });
     };
 
-    if (selectedGraphCategories.includes("SPORTS-BOYS")) {
+    if (selectedGraphCategories.includes("Sports Boys")) {
       const data = sportsBoysData.blocks.map((_, blockIndex) =>
         gamesBoys.reduce(
           (sum, _, gameIndex) =>
@@ -76,10 +76,10 @@ function GraphMobile({
           0
         )
       );
-      addData("SPORTS-BOYS", sportsBoysData.blocks, data);
+      addData("Sports Boys", sportsBoysData.blocks, data);
     }
 
-    if (selectedGraphCategories.includes("SPORTS-GIRLS")) {
+    if (selectedGraphCategories.includes("Sports Girls")) {
       const data = sportsGirlsData.blocks.map((_, blockIndex) =>
         gamesGirls.reduce(
           (sum, _, gameIndex) =>
@@ -87,10 +87,10 @@ function GraphMobile({
           0
         )
       );
-      addData("SPORTS-GIRLS", sportsGirlsData.blocks, data);
+      addData("Sports Girls", sportsGirlsData.blocks, data);
     }
 
-    if (selectedGraphCategories.includes("CULTURALS")) {
+    if (selectedGraphCategories.includes("Culti")) {
       const data = blocknames.map((_, blockIndex) =>
         cultiEvents.reduce(
           (sum, _, eventIndex) =>
@@ -98,10 +98,10 @@ function GraphMobile({
           0
         )
       );
-      addData("CULTURALS", blocknames, data);
+      addData("Culti", blocknames, data);
     }
 
-    if (selectedGraphCategories.includes("SCI-TECH")) {
+    if (selectedGraphCategories.includes("Sci-Tech")) {
       const data = blocknames.map((_, blockIndex) =>
         techyEvents.reduce(
           (sum, _, eventIndex) =>
@@ -109,7 +109,7 @@ function GraphMobile({
           0
         )
       );
-      addData("SCI-TECH", blocknames, data);
+      addData("Sci-Tech", blocknames, data);
     }
 
     const sortedData = Array.from(dataMap.values()).sort(
@@ -170,7 +170,7 @@ function GraphMobile({
                 scales: {
                   x: {
                     stacked: true,
-                    ticks: { color: "white", font: {} },
+                    ticks: { color: "white" },
                   },
                   y: {
                     stacked: true,
@@ -184,52 +184,51 @@ function GraphMobile({
         </div>
       </div>
 
-      {/* Separate Navbar for Table */}
-      <div className="tabs-container">
-        <div className="tabs text-white flex flex-wrap items-center justify-center gap-4 my-8 mx-[5%]">
+      <div className="tabs-container mt-8">
+        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center mb-8">
           {categories.map((category) => (
-              <button
-                key={category}
-                className={`tab-button bg-[#6539BA] p-4 rounded-2xl w-32 text-xs ${
-                  selectedTableCategory === category ? "active" : ""
-                }`}
-                onClick={() => setSelectedTableCategory(category)}
-              >
-                {category}
-              </button>
+            <button
+              key={category}
+              className={`tab-button ${
+                selectedTableCategory === category ? "active" : ""
+              }`}
+              onClick={() => setSelectedTableCategory(category)}
+            >
+              {category}
+            </button>
           ))}
         </div>
         <div className="tab-content">
-          {selectedTableCategory === "SPORTS-BOYS" && (
+          {selectedTableCategory === "Sports Boys" && (
             <Table
               blocknames={sportsBoysData.blocks}
               games={gamesBoys}
               points={sportsBoysData.scores}
-              tag="SPORTS-BOYS"
+              tag="Sports Boys"
             />
           )}
-          {selectedTableCategory === "SPORTS-GIRLS" && (
+          {selectedTableCategory === "Sports Girls" && (
             <Table
               blocknames={sportsGirlsData.blocks}
               games={gamesGirls}
               points={sportsGirlsData.scores}
-              tag="SPORTS-GIRLS"
+              tag="Sports Girls"
             />
           )}
-          {selectedTableCategory === "CULTURALS" && (
+          {selectedTableCategory === "Culti" && (
             <Table
               blocknames={blocknames}
               games={cultiEvents}
               points={cultiData.scores}
-              tag="CULTURALS"
+              tag="Culti"
             />
           )}
-          {selectedTableCategory === "SCI-TECH" && (
+          {selectedTableCategory === "Sci-Tech" && (
             <Table
               blocknames={blocknames}
               games={techyEvents}
               points={techyData.scores}
-              tag="SCI-TECH"
+              tag="Sci-Tech"
             />
           )}
         </div>

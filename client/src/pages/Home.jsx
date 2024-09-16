@@ -23,27 +23,24 @@ import { startOfToday, format, isSameDay } from "date-fns";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [leaderBoard, setLeaderBoard] = useState("leaderboard");
   const cardContainerRef = useRef(null);
   let today = startOfToday();
-  const formattedDate = format(today, "dd/MM/yyyy");
-  let [selectedDay, setSelectedDay] = useState(formattedDate);
+  const formattedDate = format(today, "MM/dd/yyyy");
+  // let [selectedDay, setSelectedDay] = useState(formattedDate);
+  let [selectedDay, setSelectedDay] = useState(new Date("2023-09-22"));
   const [games, setGames] = useState([]);
 
   const sportOptions = [
     { value: "SportsGirls", label: "Sports" },
-    { value: "SCI-TECH", label: "SCI-TECH" },
+    { value: "Sci-Tech", label: "Sci-Tech" },
     { value: "Cultural", label: "Cultural" },
   ];
 
   const [selectedOption, setSelectedOption] = useState(sportOptions[0]);
-
-  let selectedDayMeetings = games.filter((game) =>
-    isSameDay(game.date, selectedDay)
-  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -99,11 +96,6 @@ function Home() {
     setActiveIndex(0);
   };
 
-  const currentEvents =
-    selectedOption && selectedDayMeetings[selectedOption.value]
-      ? selectedDayMeetings[selectedOption.value]
-      : [];
-
   const settings = {
     className: "center",
     centerMode: true,
@@ -111,20 +103,12 @@ function Home() {
     centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
-    dots: true,
+    dots: false,
     arrows: false,
     slidesToScroll: 1,
     beforeChange: (current, next) => setActiveIndex(next),
     autoplay: true,
     autoplaySpeed: 3000,
-    customPaging: (i) => (
-      <div
-        className={`w-3 h-3 rounded-full mx-2 cursor-pointer ${
-          i === activeIndex ? "bg-white" : "bg-gray-500"
-        }`}
-      />
-    ),
-    dotsClass: "slick-dots custom-dots",
     responsive: [
       {
         breakpoint: 475,
@@ -144,12 +128,14 @@ function Home() {
   };
 
   useEffect(() => {
-    axios
-      .get(
-        "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
-      )
-      .then((response) => response.data)
-      .then((data) => {
+    console.log("Initiating data fetch...");
+    const fetchGamesData = axios.get(
+      import.meta.env.VITE_BACKEND_URL + "eventsSchedule"
+    );
+    Promise.all([fetchGamesData])
+      .then(([gamesResponse]) => {
+        const data = gamesResponse.data;
+        console.log("Games data received:", data);
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => ({
@@ -157,8 +143,10 @@ function Home() {
               startDatetime: new Date(date + "T" + event.time),
               endDatetime: new Date(date + "T" + event.time),
               date: new Date(date),
+              notificationEnabled: event.notificationEnabled || false,
             }))
           );
+          console.log("Processed games data:", loadedGames);
           setGames(loadedGames);
         } else {
           console.error("No data received or unexpected format:", data);
@@ -166,13 +154,29 @@ function Home() {
         }
       })
       .catch((error) => {
-        console.error("Failed to load games:", error);
+        console.error("Error fetching data:", error);
         setGames([]);
       })
       .finally(() => {
+        console.log("Data fetch complete. Setting isLoading to false.");
         setIsLoading(false);
       });
   }, []);
+  console.log("Games");
+  console.log(games);
+
+  let selectedDayMeetings = games.filter((game) =>
+    isSameDay(game.date, new Date(selectedDay))
+  );
+
+  console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
+  console.log("Selected Day Meetings:", selectedDayMeetings);
+
+  let currentEvents = selectedDayMeetings.filter(
+    (game) => game.category === selectedOption.value
+  );
+
+  console.log("Current Events:", currentEvents);
 
   if (isLoading) {
     return <Loading />;
@@ -273,7 +277,7 @@ function Home() {
                   There will be
                 </p>
                 <p className="text-white text-sm sm:text-base lg:text-xl font-bold">
-                  {currentEvents.length} Incoming Events
+                  {selectedDayMeetings.length} Incoming Events
                 </p>
               </div>
             </div>
@@ -281,7 +285,7 @@ function Home() {
 
           <div className="slider-container w-full mb-7">
             <Slider {...settings}>
-              {currentEvents.map((event, index) => (
+              {selectedDayMeetings.map((event, index) => (
                 <div key={index} className="p-2 mb-2">
                   <SportCard event={event} />
                 </div>
