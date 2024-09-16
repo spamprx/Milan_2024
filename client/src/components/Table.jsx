@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import Arrow from "../assets/Page_Arrow.png";
 
-function Table({ games, blocknames, points, tag}) {
+function Table({ games, blocknames, points, tag }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [filterText, setFilterText] = useState("");
   const [visibleBlocks, setVisibleBlocks] = useState([]);
@@ -11,7 +11,7 @@ function Table({ games, blocknames, points, tag}) {
   function responsivePages() {
     const minScreenWidth = 320;
     const maxScreenWidth = 1280;
-    const minPages = 2;
+    const minPages = 1;
     const maxPages = 7;
 
     const screenWidth = window.innerWidth;
@@ -177,9 +177,10 @@ function Table({ games, blocknames, points, tag}) {
           >
             <thead>
               {sportsHeaderGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
+                <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <th
+                      key={column.id} // Key passed explicitly here
                       {...column.getHeaderProps()}
                       className="text-center p-2 bg-[#7842E2] text-white truncate"
                     >
@@ -193,9 +194,10 @@ function Table({ games, blocknames, points, tag}) {
               {sportsRows.map((row) => {
                 prepareSportsRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr key={row.id} {...row.getRowProps()}>
                     {row.cells.map((cell) => (
                       <td
+                        key={cell.id} // Key passed explicitly here
                         {...cell.getCellProps()}
                         className="text-center p-2 text-white truncate"
                       >
@@ -213,9 +215,10 @@ function Table({ games, blocknames, points, tag}) {
           <table {...getBlockTableProps()} className="w-fit table-fixed">
             <thead>
               {blockHeaderGroups.map((headerGroup) => (
-                <tr {...headerGroup.getHeaderGroupProps()}>
+                <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <th
+                      key={column.id} // Key passed explicitly here
                       {...column.getHeaderProps()}
                       className="text-center p-2 bg-[#7842E2] text-white"
                     >
@@ -229,9 +232,10 @@ function Table({ games, blocknames, points, tag}) {
               {blockRows.map((row) => {
                 prepareBlockRow(row);
                 return (
-                  <tr {...row.getRowProps()}>
+                  <tr key={row.id} {...row.getRowProps()}>
                     {row.cells.map((cell) => (
                       <td
+                        key={cell.id} // Key passed explicitly here
                         {...cell.getCellProps()}
                         className="text-center p-2 text-white"
                         style={{ width: "150px" }}
