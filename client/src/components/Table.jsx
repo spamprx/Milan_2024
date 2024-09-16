@@ -2,34 +2,29 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import Arrow from "../assets/Page_Arrow.png";
 
-function Table({ games, blocknames, points, tag }) {
+function Table({ games, blocknames, points, tag}) {
   const [currentPage, setCurrentPage] = useState(0);
   const [filterText, setFilterText] = useState("");
   const [visibleBlocks, setVisibleBlocks] = useState([]);
   const [pages, setPages] = useState(7);
 
   function responsivePages() {
-    const minScreenWidth = 320;
-    const maxScreenWidth = 1280;
-    const minPages = 1;
-    const maxPages = 7;
-
     const screenWidth = window.innerWidth;
 
-    const clampedScreenWidth = Math.max(
-      minScreenWidth,
-      Math.min(screenWidth, maxScreenWidth)
-    );
-
-    const pages = Math.round(
-      ((clampedScreenWidth - minScreenWidth) /
-        (maxScreenWidth - minScreenWidth)) *
-        (maxPages - minPages) +
-        minPages
-    );
-
-    setPages(pages);
+    if (screenWidth <= 400) {
+      setPages(1);
+    } 
+    else if( screenWidth <= 600) {
+      setPages(2);
+    }
+    else if (screenWidth <= 768) {
+      setPages(4);
+    } 
+    else {
+      setPages(7);
+    }
   }
+
 
   useEffect(() => {
     responsivePages();
@@ -169,18 +164,19 @@ function Table({ games, blocknames, points, tag }) {
           className="bg-[#7842E2] rounded-lg p-1"
         />
       </div>
-      <div className="flex justify-center">
-        {/* <div className="bg-[#24104E] rounded-l-2xl ml-4 max-w-[33%] overflow-x-auto">
+      <div className={`flex justify-center 
+        ${pages <= 2 ? "w-[80vw] mx-auto" : ""}
+        `}>
+        <div className="bg-[#24104E] rounded-l-2xl ml-4 max-w-[33%] overflow-x-auto">
           <table
             {...getSportsTableProps()}
             className="w-full lg:w-auto table-fixed"
           >
             <thead>
               {sportsHeaderGroups.map((headerGroup) => (
-                <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
+                <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <th
-                      key={column.id} // Key passed explicitly here
                       {...column.getHeaderProps()}
                       className="text-center p-2 bg-[#7842E2] text-white truncate"
                     >
@@ -194,10 +190,9 @@ function Table({ games, blocknames, points, tag }) {
               {sportsRows.map((row) => {
                 prepareSportsRow(row);
                 return (
-                  <tr key={row.id} {...row.getRowProps()}>
+                  <tr {...row.getRowProps()}>
                     {row.cells.map((cell) => (
                       <td
-                        key={cell.id} // Key passed explicitly here
                         {...cell.getCellProps()}
                         className="text-center p-2 text-white truncate"
                       >
@@ -209,16 +204,15 @@ function Table({ games, blocknames, points, tag }) {
               })}
             </tbody>
           </table>
-        </div> */}
+        </div>
 
         <div className="bg-[#24104E] rounded-r-2xl mr-4 overflow-auto">
           <table {...getBlockTableProps()} className="w-fit table-fixed">
             <thead>
               {blockHeaderGroups.map((headerGroup) => (
-                <tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
+                <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <th
-                      key={column.id} // Key passed explicitly here
                       {...column.getHeaderProps()}
                       className="text-center p-2 bg-[#7842E2] text-white"
                     >
@@ -232,10 +226,9 @@ function Table({ games, blocknames, points, tag }) {
               {blockRows.map((row) => {
                 prepareBlockRow(row);
                 return (
-                  <tr key={row.id} {...row.getRowProps()}>
+                  <tr {...row.getRowProps()}>
                     {row.cells.map((cell) => (
                       <td
-                        key={cell.id} // Key passed explicitly here
                         {...cell.getCellProps()}
                         className="text-center p-2 text-white"
                         style={{ width: "150px" }}
