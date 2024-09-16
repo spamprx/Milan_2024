@@ -103,20 +103,12 @@ function Home() {
     centerPadding: "60px",
     slidesToShow: 3,
     speed: 500,
-    dots: true,
+    dots: false,
     arrows: false,
     slidesToScroll: 1,
     beforeChange: (current, next) => setActiveIndex(next),
     autoplay: true,
     autoplaySpeed: 3000,
-    customPaging: (i) => (
-      <div
-        className={`w-3 h-3 rounded-full mx-2 cursor-pointer ${
-          i === activeIndex ? "bg-white" : "bg-gray-500"
-        }`}
-      />
-    ),
-    dotsClass: "slick-dots custom-dots",
     responsive: [
       {
         breakpoint: 475,
@@ -173,18 +165,18 @@ function Home() {
   console.log("Games");
   console.log(games);
 
-  let selectedDayMeetings = games.filter(
-    (game) => isSameDay(game.date, new Date(selectedDay)) // Ensure this is comparing Date objects
+  let selectedDayMeetings = games.filter((game) =>
+    isSameDay(game.date, new Date(selectedDay))
   );
 
   console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
   console.log("Selected Day Meetings:", selectedDayMeetings);
 
-  // let currentEvents = selectedDayMeetings.filter(
-  //   (game) => game.category === selectedOption.value
-  // );
+  let currentEvents = selectedDayMeetings.filter(
+    (game) => game.category === selectedOption.value
+  );
 
-  // console.log("Current Events:", currentEvents);
+  console.log("Current Events:", currentEvents);
 
   if (isLoading) {
     return <Loading />;

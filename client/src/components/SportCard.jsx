@@ -20,7 +20,7 @@ const SportCard = ({ event }) => {
         </div>
         <div className="flex justify-center items-center h-1/4">
           <p className="text-[#000] text-lg sm:text-xl lg:text-3xl font-extrabold">
-            BASKETBALL
+            {event.title}
           </p>
         </div>
       </div>
