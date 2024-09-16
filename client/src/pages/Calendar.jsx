@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { startOfToday, format, isSameDay, parseISO } from "date-fns";
+import { startOfToday, format, isSameDay } from "date-fns";
 import axios from "axios";
 import Dates from "../components/Dates.jsx";
 import EventList from "../components/Eventlist.jsx";
@@ -29,43 +29,35 @@ export default function Calendar() {
         withCredentials: true,
       }
     );
-  
+
     const fetchGamesData = axios.get(
-      "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
+      import.meta.env.VITE_BACKEND_URL + "eventsSchedule"
     );
-  
-    console.log("Fetching user details and games data..."); // Debug log
-  
+
     Promise.all([fetchUserDetails, fetchGamesData])
       .then(([userResponse, gamesResponse]) => {
-        console.log("User Response:", userResponse.data); // Debug log
-        console.log("Games Response:", gamesResponse.data); // Debug log
-  
         const userData = userResponse.data.user;
         setUserPreferredGames(userData.interested_in || []);
         setPreferredTeams(userData.Block ? [userData.Block] : []);
         setAuth(true);
-  
+
         const data = gamesResponse.data;
-        
         if (data && Object.keys(data).length > 0) {
-          console.log("Received games data:", data); // Debug log
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => {
-              const storageKey = `notification_${event.title}_${date}_${event.time}`;
+              const storageKey = `notification_${event.title}_${date}`;
               const storedNotificationState = localStorage.getItem(storageKey);
               return {
                 ...event,
-                startDatetime: new Date(`${date}T${event.time}`),
-                endDatetime: new Date(`${date}T${event.time}`),
-                date: parseISO(date),
+                startDatetime: new Date(date + "T" + event.time),
+                endDatetime: new Date(date + "T" + event.time),
+                date: new Date(date),
                 notificationEnabled: storedNotificationState !== null 
                   ? JSON.parse(storedNotificationState) 
-                  : false
+                  : false  // Default to false instead of using event.notificationEnabled
               };
             })
           );
-          console.log("Processed games:", loadedGames); // Debug log
           setGames(loadedGames);
         } else {
           console.error("No data received or unexpected format:", data);
@@ -74,13 +66,11 @@ export default function Calendar() {
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
-        console.error("Error details:", error.response ? error.response.data : error.message); // More detailed error logging
         setAuth(false);
         setGames([]);
       })
       .finally(() => {
         setIsLoading(false);
-        console.log("Fetch completed, loading set to false"); // Debug log
       });
   }, []);
 
@@ -105,11 +95,10 @@ export default function Calendar() {
 
   const handleNotificationToggle = (updatedGame) => {
     setGames(prevGames => prevGames.map(game => {
-      if (game.title === updatedGame.title && 
-          isSameDay(game.date, updatedGame.date) && 
-          game.time === updatedGame.time) {
+      if (game.title === updatedGame.title && isSameDay(game.date, updatedGame.date)) {
         const updatedGameState = { ...game, notificationEnabled: !game.notificationEnabled };
-        const storageKey = `notification_${game.title}_${format(game.date, 'yyyy-MM-dd')}_${game.time}`;
+        // Update localStorage
+        const storageKey = `notification_${game.title}_${format(game.date, 'yyyy-MM-dd')}`;
         localStorage.setItem(storageKey, JSON.stringify(updatedGameState.notificationEnabled));
         return updatedGameState;
       }
@@ -121,12 +110,13 @@ export default function Calendar() {
     isSameDay(game.date, selectedDay)
   );
 
-  let preferredMeetings = selectedDayMeetings.filter(
-    (meeting) =>
-      userPreferredGames.includes(meeting.title.toLowerCase()) &&
-      (meeting.teams.toLowerCase().includes("all blocks") ||
-       preferredTeams.includes(meeting.teams))
-  );
+  let preferredMeetings = selectedDayMeetings
+    .filter(
+      (meeting) =>
+        userPreferredGames.includes(meeting.title.toLowerCase()) ||
+        preferredTeams.some((team) => meeting.teams.includes(team)) ||
+        meeting.teams.toLowerCase().includes("all blocks")
+    );
 
   let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
