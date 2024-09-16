@@ -28,10 +28,7 @@ function Meeting({
     if (storedState !== null) {
       return JSON.parse(storedState);
     }
-    if (initialNotificationState !== undefined) {
-      return initialNotificationState;
-    }
-    return isPreferred || isPreferredEvent;
+    return isPreferred || isPreferredEvent || initialNotificationState || false;
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -39,11 +36,7 @@ function Meeting({
 
   useEffect(() => {
     localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
-    // If it's a preferred event and notification is not enabled, enable it
-    if ((isPreferred || isPreferredEvent) && !notificationEnabled) {
-      setNotificationEnabled(true);
-    }
-  }, [notificationEnabled, getLocalStorageKey, isPreferred, isPreferredEvent]);
+  }, [notificationEnabled, getLocalStorageKey]);
 
   const toggleNotification = useCallback(async (e) => {
     e.stopPropagation();
@@ -58,16 +51,16 @@ function Meeting({
       const endpoint = notificationEnabled ? "delete_event" : "add_event";
       const payload = notificationEnabled
         ? {
-          eventName: meeting.title,
-          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-        }
+            eventName: meeting.title,
+            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+          }
         : {
-          eventName: meeting.title,
-          location: meeting.body || "",
-          teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
-          time: meeting.time || "",
-          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-        };
+            eventName: meeting.title,
+            location: meeting.body || "",
+            teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
+            time: meeting.time || "",
+            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+          };
 
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
         withCredentials: true,
