@@ -12,16 +12,14 @@ function Meeting({
 }) {
   const isPreferredEvent = useMemo(() => {
     return (
-      Array.isArray(userPreferredGames) &&
-      userPreferredGames.includes(meeting?.title?.toLowerCase()) &&
-      (meeting?.teams?.toLowerCase().includes("all blocks") ||
-       (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.includes(team))))
+      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) ||
+      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.includes(team))) ||
+      (meeting?.teams && meeting.teams.toLowerCase().includes("all blocks"))
     );
   }, [meeting, userPreferredGames, preferredTeams]);
 
   const getLocalStorageKey = useCallback(() => {
-    const dateString = meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date;
-    return `notification_${meeting.title}_${dateString}_${meeting.time}`;
+    return `notification_${meeting.title}_${meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date}`;
   }, [meeting]);
 
   const [notificationEnabled, setNotificationEnabled] = useState(() => {

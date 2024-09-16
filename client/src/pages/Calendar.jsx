@@ -54,7 +54,7 @@ export default function Calendar() {
                 date: new Date(date),
                 notificationEnabled: storedNotificationState !== null 
                   ? JSON.parse(storedNotificationState) 
-                  : false  // Default to false instead of using event.notificationEnabled
+                  : (event.notificationEnabled || false)
               };
             })
           );
@@ -94,16 +94,11 @@ export default function Calendar() {
   }, []);
 
   const handleNotificationToggle = (updatedGame) => {
-    setGames(prevGames => prevGames.map(game => {
-      if (game.title === updatedGame.title && isSameDay(game.date, updatedGame.date)) {
-        const updatedGameState = { ...game, notificationEnabled: !game.notificationEnabled };
-        // Update localStorage
-        const storageKey = `notification_${game.title}_${format(game.date, 'yyyy-MM-dd')}`;
-        localStorage.setItem(storageKey, JSON.stringify(updatedGameState.notificationEnabled));
-        return updatedGameState;
-      }
-      return game;
-    }));
+    setGames(prevGames => prevGames.map(game =>
+      game.title === updatedGame.title && isSameDay(game.date, updatedGame.date)
+        ? { ...game, notificationEnabled: updatedGame.notificationEnabled }
+        : game
+    ));
   };
 
   let selectedDayMeetings = games.filter((game) =>
@@ -116,7 +111,11 @@ export default function Calendar() {
         userPreferredGames.includes(meeting.title.toLowerCase()) ||
         preferredTeams.some((team) => meeting.teams.includes(team)) ||
         meeting.teams.toLowerCase().includes("all blocks")
-    );
+    )
+    .map((meeting) => {
+      meeting.notificationEnabled = true;
+      return meeting;
+    });
 
   let otherMeetings = selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
