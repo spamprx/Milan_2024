@@ -37,6 +37,7 @@ export default function Calendar() {
     Promise.all([fetchUserDetails, fetchGamesData])
       .then(([userResponse, gamesResponse]) => {
         const userData = userResponse.data.user;
+        console.log("User Block:", userData.Block);
         setUserPreferredGames(userData.interested_in || []);
         setPreferredTeams(userData.Block ? [userData.Block] : []);
         setAuth(true);
@@ -45,6 +46,7 @@ export default function Calendar() {
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event, index) => {
+              console.log("Event Teams:", event.teams);
               const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
               const storageKey = `notification_${uniqueId}_${date}`;
               const storedNotificationState = localStorage.getItem(storageKey);
@@ -114,7 +116,7 @@ export default function Calendar() {
     .filter(
       (meeting) =>
         userPreferredGames.includes(meeting.title.toLowerCase()) ||
-        preferredTeams.some((team) => meeting.teams.includes(team)) ||
+        preferredTeams.some((team) => meeting.teams.toLowerCase().includes(team.toLowerCase())) ||
         meeting.teams.toLowerCase().includes("all blocks")
     );
 
