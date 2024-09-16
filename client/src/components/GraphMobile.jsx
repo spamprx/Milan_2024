@@ -147,8 +147,8 @@ function GraphMobile({
 
   return (
     <div className="w-full">
-      <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] p-4 w-full justify-center items-center">
-        <div className="w-full h-96 relative">
+      <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] w-full justify-center items-center">
+        <div className="w-full h-96 relative px-2 py-4">
           {chartData && (
             <Bar
               options={{
@@ -185,8 +185,8 @@ function GraphMobile({
       </div>
 
       {/* Separate Navbar for Table */}
-      <div className="tabs-container mt-4">
-        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center">
+      <div className="tabs-container mt-8">
+        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center mb-8">
           {categories.map((category) => (
             <button
               key={category}

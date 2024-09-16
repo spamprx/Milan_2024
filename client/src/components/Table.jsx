@@ -160,13 +160,13 @@ function Table({ games, blocknames, points, tag}) {
 
   return (
     <div>
-      <div className="flex w-1/3 min-w-52">
+      <div className="flex items-center justify-center w-1/3 mx-auto mb-10">
         <input
           type="text"
           placeholder="Search..."
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
-          className="bg-[#7842E2] rounded-lg p-1 w-1/2 m-4 "
+          className="bg-[#7842E2] rounded-lg p-1"
         />
       </div>
       <div className="flex justify-center">

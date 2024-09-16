@@ -56,7 +56,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   };
 
   return (
-    <div className="w-full md:w-1/3 md:mx-12 max-w-52 scale-75 md:scale-100 sm:min-w-44">
+    <div className="w-full md:w-1/3 max-w-52 sm:min-w-44">
       <div className="bg-[#270B5D] rounded-2xl overflow-hidden">
         <div
           className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer"

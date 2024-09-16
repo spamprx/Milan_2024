@@ -180,8 +180,8 @@ function DivBar({ blocknames, games, points, title }) {
   };
 
   return (
-    <div className="FirstTab w-full p-4">
-      <div className="canvas-container rounded-2xl bg-[#150338] mx-auto p-4 w-full flex justify-center items-center">
+    <div className="FirstTab w-full">
+      <div className="canvas-container rounded-2xl bg-[#150338] mx-auto w-full flex justify-center items-center">
         {blocknames.length !== 1 ? (
           <div style={{ position: "relative", width: "100%", height: "400px" }}>
             <Bar options={barOptions} data={barData} />
