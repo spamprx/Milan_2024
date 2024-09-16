@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import axios from "axios";
 
-function Meeting({ 
-  meeting, 
-  onSelect, 
-  isPreferred, 
-  userPreferredGames = [], 
-  preferredTeams = [], 
+function Meeting({
+  meeting,
+  onSelect,
+  isPreferred,
+  userPreferredGames = [],
+  preferredTeams = [],
   initialNotificationState,
   onNotificationToggle
 }) {
@@ -31,9 +31,9 @@ function Meeting({
     if (initialNotificationState !== undefined) {
       return initialNotificationState;
     }
-    return isPreferredEvent;
+    return isPreferred || isPreferredEvent;
   });
-  
+
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -54,16 +54,16 @@ function Meeting({
       const endpoint = notificationEnabled ? "delete_event" : "add_event";
       const payload = notificationEnabled
         ? {
-            eventName: meeting.title,
-            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-          }
+          eventName: meeting.title,
+          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+        }
         : {
-            eventName: meeting.title,
-            location: meeting.body || "",
-            teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
-            time: meeting.time || "",
-            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-          };
+          eventName: meeting.title,
+          location: meeting.body || "",
+          teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
+          time: meeting.time || "",
+          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+        };
 
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
         withCredentials: true,
@@ -117,9 +117,8 @@ function Meeting({
           disabled={isLoading}
         >
           <div
-            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${
-              notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
-            }`}
+            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
+              }`}
           >
             {isLoading && (
               <div className="w-4 h-4 border-t-2 border-gray-700 rounded-full animate-spin"></div>

@@ -48,15 +48,18 @@ export default function Calendar() {
               const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
               const storageKey = `notification_${uniqueId}_${date}`;
               const storedNotificationState = localStorage.getItem(storageKey);
+              const isPreferred = userPreferredGames.includes(event.title.toLowerCase()) ||
+                preferredTeams.some(team => event.teams.includes(team)) ||
+                event.teams.toLowerCase().includes("all blocks");
               return {
                 ...event,
                 id: uniqueId,
                 startDatetime: new Date(date + "T" + event.time),
                 endDatetime: new Date(date + "T" + event.time),
                 date: new Date(date),
-                notificationEnabled: storedNotificationState !== null 
-                  ? JSON.parse(storedNotificationState) 
-                  : (event.notificationEnabled || false)
+                notificationEnabled: storedNotificationState !== null
+                  ? JSON.parse(storedNotificationState)
+                  : (isPreferred || event.notificationEnabled || false)
               };
             })
           );
@@ -74,7 +77,7 @@ export default function Calendar() {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  });
 
   useEffect(() => {
     if (calendarRef.current) {
