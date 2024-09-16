@@ -29,20 +29,27 @@ export default function Calendar() {
         withCredentials: true,
       }
     );
-
+  
     const fetchGamesData = axios.get(
       "https://script.googleusercontent.com/macros/echo?user_content_key=_4xdCh7P9pv6AvXiGZKfOB2Z9c3oo08CRZ3LwAUnP2diKCyXiJpCfYAoNURY9CDF7nSLHyIcwQoZbbaDoUmTaKL0DudXXRn_OJmA1Yb3SEsKFZqtv3DaNYcMrmhZHmUMWojr9NvTBuBLhyHCd5hHa1h-qO209sjqAxhnw2bvEoOLvcpv4_Ppjw0enm2BONK0LSjhLavS0sIGKrfgMVbhaA_KxjS-QkEhqAGkh_bVr0KA-ATMoU-TumshBpkLMJNIgmFopg1j9UP5tafxgJcAjw&lib=M7pHxUqwLMIQPc-SKxrs7muBs5JDI9ZBM"
     );
-
+  
+    console.log("Fetching user details and games data..."); // Debug log
+  
     Promise.all([fetchUserDetails, fetchGamesData])
       .then(([userResponse, gamesResponse]) => {
+        console.log("User Response:", userResponse.data); // Debug log
+        console.log("Games Response:", gamesResponse.data); // Debug log
+  
         const userData = userResponse.data.user;
         setUserPreferredGames(userData.interested_in || []);
         setPreferredTeams(userData.Block ? [userData.Block] : []);
         setAuth(true);
-
+  
         const data = gamesResponse.data;
+        
         if (data && Object.keys(data).length > 0) {
+          console.log("Received games data:", data); // Debug log
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => {
               const storageKey = `notification_${event.title}_${date}_${event.time}`;
@@ -58,6 +65,7 @@ export default function Calendar() {
               };
             })
           );
+          console.log("Processed games:", loadedGames); // Debug log
           setGames(loadedGames);
         } else {
           console.error("No data received or unexpected format:", data);
@@ -66,11 +74,13 @@ export default function Calendar() {
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+        console.error("Error details:", error.response ? error.response.data : error.message); // More detailed error logging
         setAuth(false);
         setGames([]);
       })
       .finally(() => {
         setIsLoading(false);
+        console.log("Fetch completed, loading set to false"); // Debug log
       });
   }, []);
 
