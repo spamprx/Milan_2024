@@ -163,7 +163,7 @@ export default function Calendar() {
             {auth ? (
               <EventList
                 auth={auth}
-                showError={!auth}
+                showError={false}
                 handleLoginRedirect={handleLoginRedirect}
                 preferredMeetings={preferredMeetings}
                 otherMeetings={otherMeetings}

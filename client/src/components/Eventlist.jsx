@@ -75,7 +75,7 @@ export default function EventList({
             OTHER EVENTS
           </h3>
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
-          {renderMeetings(showError ? [...preferredMeetings,...otherMeetings] : otherMeetings, false)}
+          {renderMeetings(auth ? otherMeetings : [...preferredMeetings,...otherMeetings]  , false)}
           </div>
         </div>
       </div>
