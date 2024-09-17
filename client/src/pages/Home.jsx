@@ -185,7 +185,7 @@ function Home() {
   return (
     <div className="relative bg-transparent h-full flex flex-col mx-auto">
       <div
-        className="relative w-full h-full bg-cover bg-center my-4 lg:my-8"
+        className="relative w-full h-full bg-cover bg-center my-8"
         style={{ backgroundImage: `url(${HomeBg})` }}
       >
         <div className="w-full h-full">
@@ -232,7 +232,7 @@ function Home() {
           </p>
         </div>
         <div className="h-full w-full">
-          <div className="relative w-full text-sm lg:text-md h-1/2 flex flex-col justify-between items-center px-4 lg:px-8 z-30 font-be-vietnam-pro bg-transparent">
+          <div className="relative w-full text-sm lg:text-md h-1/2 flex flex-col justify-between items-center px-4 lg:px-8 z-30 font-be-vietnam-pro bg-transparent mb-8">
             <div className="flex w-full justify-between items-start">
               <div className="flex flex-col items-start">
                 <label
@@ -283,7 +283,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="slider-container w-full mb-7">
+          <div className="slider-container w-full">
             <Slider {...settings}>
               {selectedDayMeetings.map((event, index) => (
                 <div key={index} className="p-2 mb-2">
@@ -447,7 +447,7 @@ function Home() {
         </div>
       </div>
 
-      <div className="w-full h-full flex flex-col justify-center items-center">
+      <div className="w-full h-full flex flex-col justify-center items-center mb-8">
         <div className="relative flex items-center justify-center h-1/7 lg:h-2/5 w-full p-6 lg:p-10 mb-8">
           <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img

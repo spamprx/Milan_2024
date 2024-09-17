@@ -184,12 +184,12 @@ function GraphMobile({
         </div>
       </div>
 
-      <div className="tabs-container mt-8">
-        <div className="tabs bg-[#150338] text-white gap-4 flex flex-row justify-center mb-8">
+      <div className="tabs-container">
+        <div className="tabs bg text-white gap-4 flex flex-wrap items-center justify-center my-8 mx-[5%]">
           {categories.map((category) => (
             <button
               key={category}
-              className={`tab-button ${
+              className={`tab-button bg-[#6539BA] w-32 py-4 rounded-xl text-xs font-bold ${
                 selectedTableCategory === category ? "active" : ""
               }`}
               onClick={() => setSelectedTableCategory(category)}

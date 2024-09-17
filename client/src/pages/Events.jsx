@@ -132,7 +132,7 @@ function Events() {
     return (
       <div className="max-w-7xl flex justify-between w-[44rem] mx-auto my-10">
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(true);
             setShowSportsGirls(false);
@@ -143,7 +143,7 @@ function Events() {
           SPORTS-BOYS
         </button>
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(true);
@@ -154,7 +154,7 @@ function Events() {
           SPORTS-GIRLS
         </button>
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(false);
@@ -165,7 +165,7 @@ function Events() {
           CULTURALS
         </button>
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold py-2 px-4 rounded-lg"
+          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(false);
