@@ -332,10 +332,10 @@ function LiveScore() {
           No ongoing matches available.
         </p>
       )}
-      {/* // <div className="text-3xl text-white font-bold mt-8">
-      //   --- PAST SCORES ---
-      // </div>
-      // <GameDetailsCarousel pastData={pastData} /> */}
+      <div className="text-3xl text-white font-bold mt-8">
+        --- PAST SCORES ---
+      </div>
+      <GameDetailsCarousel pastData={pastData} />
     </div>
   );
 }
