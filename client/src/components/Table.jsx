@@ -172,10 +172,9 @@ function Table({ games, blocknames, points, tag}) {
       <div className={`flex justify-center 
         ${pages <= 2 ? "w-[80vw] mx-auto" : ""}
         `}>
-        <div className="bg-[#24104E] rounded-l-2xl ml-4 w-fit overflow-x-auto">
+        <div className="bg-[#24104E] rounded-l-2xl ml-4">
           <table
             {...getSportsTableProps()}
-            className="w-fit lg:w-auto table-fixed"
           >
             <thead>
               {sportsHeaderGroups.map((headerGroup) => (
@@ -211,8 +210,8 @@ function Table({ games, blocknames, points, tag}) {
           </table>
         </div>
 
-        <div className="bg-[#24104E] rounded-r-2xl mr-4 overflow-auto">
-          <table {...getBlockTableProps()} className="w-fit min-w-[40%] table-fixed">
+        <div className="bg-[#24104E] rounded-r-2xl mr-4">
+          <table {...getBlockTableProps()} >
             <thead>
               {blockHeaderGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
