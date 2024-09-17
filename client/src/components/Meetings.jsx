@@ -8,7 +8,8 @@ function Meeting({
   userPreferredGames = [],
   preferredTeams = [],
   initialNotificationState,
-  onNotificationToggle
+  onNotificationToggle,
+  isLoggedIn // New prop to indicate user's authentication status
 }) {
   const isPreferredEvent = useMemo(() => {
     return (
@@ -24,6 +25,7 @@ function Meeting({
   }, [meeting]);
 
   const [notificationEnabled, setNotificationEnabled] = useState(() => {
+    if (!isLoggedIn) return false; // Notifications are always off for non-logged in users
     const storedState = localStorage.getItem(getLocalStorageKey());
     if (storedState !== null) {
       return JSON.parse(storedState);
@@ -35,11 +37,19 @@ function Meeting({
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
-  }, [notificationEnabled, getLocalStorageKey]);
+    if (isLoggedIn) {
+      localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
+    }
+  }, [notificationEnabled, getLocalStorageKey, isLoggedIn]);
 
   const toggleNotification = useCallback(async (e) => {
     e.stopPropagation();
+    if (!isLoggedIn) {
+      // Optionally, you can add a message or redirect to login here
+      console.log("Please log in to enable notifications");
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
 
@@ -76,7 +86,7 @@ function Meeting({
     } finally {
       setIsLoading(false);
     }
-  }, [meeting, notificationEnabled, onNotificationToggle, getLocalStorageKey]);
+  }, [meeting, notificationEnabled, onNotificationToggle, getLocalStorageKey, isLoggedIn]);
 
   if (!meeting) {
     return null;
@@ -110,22 +120,23 @@ function Meeting({
         <p className="text-xs text-gray-300 pb-2">Notifications</p>
         <button
           onClick={toggleNotification}
-          className="w-10 h-6 rounded-full bg-gray-700 flex items-center justify-start p-1 transition-all duration-300 ease-in-out focus:outline-none"
-          disabled={isLoading}
+          className={`w-10 h-6 rounded-full ${isLoggedIn ? 'bg-gray-700' : 'bg-gray-500'} flex items-center justify-start p-1 transition-all duration-300 ease-in-out focus:outline-none`}
+          disabled={isLoading || !isLoggedIn}
         >
           <div
-            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
-              }`}
+            className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${
+              notificationEnabled && isLoggedIn ? 'bg-green-500 transform translate-x-4' : 'bg-white'
+            }`}
           >
             {isLoading && (
               <div className="w-4 h-4 border-t-2 border-gray-700 rounded-full animate-spin"></div>
             )}
-            {!isLoading && notificationEnabled && (
+            {!isLoading && notificationEnabled && isLoggedIn && (
               <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
             )}
-            {!isLoading && !notificationEnabled && (
+            {!isLoading && (!notificationEnabled || !isLoggedIn) && (
               <svg className="w-4 h-4 text-gray-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>

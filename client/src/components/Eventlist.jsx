@@ -2,13 +2,13 @@ import React from 'react';
 import { format } from 'date-fns';
 import Meeting from "./Meetings"
 
-export default function EventList({ 
-  showError, 
-  handleLoginRedirect, 
-  preferredMeetings, 
-  otherMeetings, 
-  onGameSelect, 
-  calendarHeight, 
+export default function EventList({
+  showError,
+  handleLoginRedirect,
+  preferredMeetings,
+  otherMeetings,
+  onGameSelect,
+  calendarHeight,
   selectedDay,
   userPreferredGames,
   preferredTeams,
@@ -24,9 +24,9 @@ export default function EventList({
     }
 
     return meetings.map((meeting) => (
-      <Meeting 
+      <Meeting
         key={meeting.id}
-        meeting={meeting} 
+        meeting={meeting}
         onSelect={onGameSelect}
         isPreferred={isPreferred}
         userPreferredGames={userPreferredGames}
@@ -36,6 +36,9 @@ export default function EventList({
       />
     ));
   };
+
+  // Combine all meetings when user is not logged in
+  const allMeetings = showError ? [...preferredMeetings, ...otherMeetings] : otherMeetings;
 
   return (
     <div className="w-full md:max-w-md mx-auto lg:max-w-none">
@@ -48,19 +51,17 @@ export default function EventList({
             PREFERRED GAMES
           </h3>
           {showError ? (
-            <>
-              <div className="text-center p-4">
-                <p className="text-lg text-white font-bold">
-                  Please log in to view your preferred games.
-                </p>
-                <button
-                  onClick={handleLoginRedirect}
-                  className="mt-4 px-6 py-3 bg-[#561e70] text-[#D1CCB6] rounded-lg hover:bg-[#7a2a9e] transition duration-300"
-                >
-                  Go to Profile Page
-                </button>
-              </div>
-            </>
+            <div className="text-center p-4">
+              <p className="text-lg text-white font-bold">
+                Please log in to view your preferred games.
+              </p>
+              <button
+                onClick={handleLoginRedirect}
+                className="mt-4 px-6 py-3 bg-[#561e70] text-[#D1CCB6] rounded-lg hover:bg-[#7a2a9e] transition duration-300"
+              >
+                Go to Profile Page
+              </button>
+            </div>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
               {renderMeetings(preferredMeetings, true)}
@@ -73,7 +74,7 @@ export default function EventList({
             OTHER GAMES
           </h3>
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
-            {renderMeetings(otherMeetings, false)}
+            {renderMeetings(allMeetings, false)}
           </div>
         </div>
       </div>
