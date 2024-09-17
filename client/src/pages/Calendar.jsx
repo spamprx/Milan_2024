@@ -162,6 +162,9 @@ export default function Calendar() {
           <div className="lg:w-2/3">
             {auth ? (
               <EventList
+                auth={auth}
+                showError={!auth}
+                handleLoginRedirect={handleLoginRedirect}
                 preferredMeetings={preferredMeetings}
                 otherMeetings={otherMeetings}
                 onGameSelect={handleGameSelect}
@@ -173,6 +176,7 @@ export default function Calendar() {
               />
             ) : (
               <EventList
+                auth={auth}
                 showError={true}
                 handleLoginRedirect={handleLoginRedirect}
                 preferredMeetings={[]}

@@ -4,10 +4,12 @@ import Meeting from "./Meetings"
 
 export default function EventList({ 
   auth,
+  showError, 
   handleLoginRedirect, 
   preferredMeetings, 
   otherMeetings, 
   onGameSelect, 
+  calendarHeight, 
   selectedDay,
   userPreferredGames,
   preferredTeams,
@@ -37,8 +39,6 @@ export default function EventList({
     ));
   };
 
-  const allEvents = [...preferredMeetings, ...otherMeetings];
-
   return (
     <div className="w-full md:max-w-md mx-auto lg:max-w-none">
       <h2 className="text-lg font-semibold text-white mb-4">
@@ -49,18 +49,20 @@ export default function EventList({
           <h3 className="bg-[#4B16B2] text-white h-10 font-extrabold flex items-center justify-center">
             PREFERRED EVENTS
           </h3>
-          {!auth ? (
-            <div className="text-center p-4">
-              <p className="text-lg text-white font-bold">
-                Please log in to view your preferred games.
-              </p>
-              <button
-                onClick={handleLoginRedirect}
-                className="mt-4 px-6 py-3 bg-[#561e70] text-[#D1CCB6] rounded-lg hover:bg-[#7a2a9e] transition duration-300"
-              >
-                Go to Profile Page
-              </button>
-            </div>
+          {showError ? (
+            <>
+              <div className="text-center p-4">
+                <p className="text-lg text-white font-bold">
+                  Please log in to view your preferred games.
+                </p>
+                <button
+                  onClick={handleLoginRedirect}
+                  className="mt-4 px-6 py-3 bg-[#561e70] text-[#D1CCB6] rounded-lg hover:bg-[#7a2a9e] transition duration-300"
+                >
+                  Go to Profile Page
+                </button>
+              </div>
+            </>
           ) : (
             <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
               {renderMeetings(preferredMeetings, true)}
@@ -73,7 +75,7 @@ export default function EventList({
             OTHER EVENTS
           </h3>
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
-            {renderMeetings(auth ? otherMeetings : allEvents, false)}
+          {renderMeetings(showError ? [...preferredMeetings,...otherMeetings] : otherMeetings, false)}
           </div>
         </div>
       </div>
