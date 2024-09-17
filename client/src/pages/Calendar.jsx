@@ -201,7 +201,7 @@ export default function Calendar() {
 
         <div className="my-8 border-t-2 border-gray-300"></div>
 
-        {auth && selectedGame && (
+        {selectedGame && (
           <GameDetails game={selectedGame} ref={detailsRef} />
         )}
       </div>

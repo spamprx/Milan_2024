@@ -1,6 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import Meeting from "./Meetings"
+import IOSStyleScrollbar from './IOSStyleScrollbar';  // Import the scrollbar component
 
 export default function EventList({ 
   auth,
@@ -64,9 +65,11 @@ export default function EventList({
               </div>
             </>
           ) : (
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
-              {renderMeetings(preferredMeetings, true)}
-            </div>
+            <IOSStyleScrollbar>
+              <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4">
+                {renderMeetings(preferredMeetings, true)}
+              </div>
+            </IOSStyleScrollbar>
           )}
         </div>
 
@@ -74,9 +77,11 @@ export default function EventList({
           <h3 className="bg-[#D1CCB6] text-black h-10 font-extrabold flex items-center justify-center">
             OTHER EVENTS
           </h3>
-          <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
-          {renderMeetings(auth ? otherMeetings : [...preferredMeetings,...otherMeetings]  , false)}
-          </div>
+          <IOSStyleScrollbar>
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4">
+              {renderMeetings(auth ? otherMeetings : [...preferredMeetings,...otherMeetings], false)}
+            </div>
+          </IOSStyleScrollbar>
         </div>
       </div>
     </div>
