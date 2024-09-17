@@ -498,10 +498,10 @@ function Home() {
               {leaderBoard === "leaderboard" ? (
                 <HomeLeaderboard />
               ) : (
-                <div className="flex justify-center items-center w-full min-h-[600px]">
-                  {/* <p className="text-white text-2xl">Block Race Component</p> */}
-                  <BlockRace />
-                </div>
+                // <div className="flex justify-center items-center w-full min-h-[600px]">
+                // {/* <p className="text-white text-2xl">Block Race Component</p> */}
+                <BlockRace />
+                // </div>
               )}
             </div>
           </div>

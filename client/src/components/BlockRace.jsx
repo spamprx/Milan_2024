@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import ChartRace from "react-chart-race";
 
 const BlockRace = () => {
+  const isMobile1 = window.innerWidth < 400;
+  const isMobile2 = window.innerWidth < 500;
+  const isMedium = window.innerWidth < 700;
+  const isTablet = window.innerWidth < 850;
   const dayData = [
     [
       { id: 0, title: "Raman", value: 50, color: "#A0522D" },
@@ -102,19 +106,34 @@ const BlockRace = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const chartHeight = data.length * 50;
+
   return (
-    <div className="flex flex-col items-center justify-center w-full h-full bg-transparent">
-      <h1 className="text-2xl font-bold mb-4 text-[#ffffff]">
+    <div className="flex flex-col items-center justify-center w-full h-full max-h-full bg-transparent">
+      <h1 className="text-2xl font-bold m-4 text-[#ffffff]">
         Block Race - Day {day}
       </h1>
-      <div className="w-full max-w-4xl">
+      <div className="w-full h-full max-w-screen max-h-full">
         <ChartRace
           data={data}
-          width={800}
-          height={600}
-          itemHeight={40}
-          gap={8}
-          titleStyle={{ fontSize: 16, color: "#000000" }}
+          width={
+            isMobile1
+              ? 310
+              : isMobile2
+              ? 390
+              : isMedium
+              ? 490
+              : isTablet
+              ? 690
+              : 840
+          }
+          height={chartHeight}
+          itemHeight={isTablet ? 30 : 40}
+          gap={12}
+          titleStyle={{ fontSize: 16, color: "#ffffff" }}
+          valueStyle={{ fontSize: 11, color: "#faf5f5" }}
+          backgroundColor="transparent"
+          opacity={31}
         />
       </div>
     </div>
