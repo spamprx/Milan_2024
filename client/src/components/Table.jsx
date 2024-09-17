@@ -11,7 +11,7 @@ function Table({ games, blocknames, points, tag}) {
   function responsivePages() {
     const minScreenWidth = 320;
     const maxScreenWidth = 1440;
-    const minPages = 2;
+    const minPages = 1;
     const maxPages = 7;
 
     const screenWidth = window.innerWidth;
@@ -172,10 +172,10 @@ function Table({ games, blocknames, points, tag}) {
       <div className={`flex justify-center 
         ${pages <= 2 ? "w-[80vw] mx-auto" : ""}
         `}>
-        <div className="bg-[#24104E] rounded-l-2xl ml-4 max-w-[33%] overflow-x-auto">
+        <div className="bg-[#24104E] rounded-l-2xl ml-4 min-w-[100px] max-w-[40%] overflow-x-auto">
           <table
             {...getSportsTableProps()}
-            className="w-full lg:w-auto table-fixed"
+            className="w-fit lg:w-auto table-fixed"
           >
             <thead>
               {sportsHeaderGroups.map((headerGroup) => (

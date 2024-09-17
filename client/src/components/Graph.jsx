@@ -68,7 +68,7 @@ function DivBar({ blocknames, games, points, title }) {
     },
     scales: {
       x: { stacked: true, ticks: { color: "white" } },
-      y: { stacked: true, ticks: { color: "white", size: 10 } },
+      y: { stacked: true, ticks: { color: "white", size: 14 } },
     },
   });
 
@@ -80,7 +80,7 @@ function DivBar({ blocknames, games, points, title }) {
         display: true,
         text: title,
         color: "white",
-        font: { size: 24, family: "sans-serif" },
+        font: { size: 28, family: "sans-serif" },
         padding: { top: 10, bottom: 10 },
       },
       legend: {
@@ -102,13 +102,13 @@ function DivBar({ blocknames, games, points, title }) {
             ...prevOptions.plugins,
             title: {
               ...prevOptions.plugins.title,
-              font: { ...prevOptions.plugins.title.font, size: 14 },
+              font: { ...prevOptions.plugins.title.font, size: 18 },
             },
             legend: {
               ...prevOptions.plugins.legend,
               labels: {
                 ...prevOptions.plugins.legend.labels,
-                font: { size: 10 },
+                font: { size: 16 },
               },
             },
           },
@@ -120,13 +120,13 @@ function DivBar({ blocknames, games, points, title }) {
             ...prevOptions.plugins,
             title: {
               ...prevOptions.plugins.title,
-              font: { ...prevOptions.plugins.title.font, size: 16 },
+              font: { ...prevOptions.plugins.title.font, size: 20 },
             },
             legend: {
               ...prevOptions.plugins.legend,
               labels: {
                 ...prevOptions.plugins.legend.labels,
-                font: { size: 11 },
+                font: { size: 18 },
               },
             },
           },
@@ -138,13 +138,13 @@ function DivBar({ blocknames, games, points, title }) {
             ...prevOptions.plugins,
             title: {
               ...prevOptions.plugins.title,
-              font: { ...prevOptions.plugins.title.font, size: 18 },
+              font: { ...prevOptions.plugins.title.font, size: 24 },
             },
             legend: {
               ...prevOptions.plugins.legend,
               labels: {
                 ...prevOptions.plugins.legend.labels,
-                font: { size: 12 },
+                font: { size: 20 },
               },
             },
           },
@@ -183,11 +183,15 @@ function DivBar({ blocknames, games, points, title }) {
     <div className="FirstTab w-full">
       <div className="canvas-container rounded-2xl bg-[#150338] mx-auto w-full flex justify-center items-center">
         {blocknames.length !== 1 ? (
-          <div style={{ position: "relative", width: "100%", height: "400px" }}>
+          <div
+            className="relative w-full h-[70vh]"
+          >
             <Bar options={barOptions} data={barData} />
           </div>
         ) : (
-          <div style={{ position: "relative", width: "100%", height: "400px" }}>
+          <div
+            className="relative w-full h-[50vh]"
+          >
             <Doughnut options={doughnutOptions} data={doughnutData} />
           </div>
         )}
