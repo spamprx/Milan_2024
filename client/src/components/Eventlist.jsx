@@ -18,7 +18,7 @@ export default function EventList({
   const renderMeetings = (meetings, isPreferred) => {
     if (meetings.length === 0) {
       return (
-        <p className="text-sm text-white">
+        <p className="text-lg text-white font-bold">
           No games scheduled for today.
         </p>
       );
@@ -44,7 +44,7 @@ export default function EventList({
       <h2 className="text-lg font-semibold text-white mb-4">
         Schedule for {format(selectedDay, "MMM dd, yyyy")}
       </h2>
-      <div className="lg:flex lg:space-x-4 space-y-4 lg:space-y-0">
+      <div className="lg:flex lg:space-x-4 space-y-4 lg:space-y-0 min-h-[30vh]">
         <div className="bg-[#6B5794]/[0.84] rounded-2xl overflow-hidden lg:flex-1">
           <h3 className="bg-[#4B16B2] text-white h-10 font-extrabold flex items-center justify-center">
             PREFERRED EVENTS
@@ -70,8 +70,8 @@ export default function EventList({
           )}
         </div>
 
-        <div className="bg-[#6B5794]/[0.84] rounded-2xl overflow-hidden lg:flex-1">
-          <h3 className="bg-[#D1CCB6] text-black h-10 font-extrabold flex items-center justify-center">
+        <div className="bg-[#6B5794]/[0.84] rounded-2xl overflow-hidden lg:flex-1 min-h-[30vh]">
+          <h3 className="bg-[#D1CCB6] text-black h-10 font-extrabold flex items-center justify-center ">
             OTHER EVENTS
           </h3>
           <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 p-4 max-h-[400px] overflow-y-auto">
