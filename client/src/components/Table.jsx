@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect } from "react";
 import { useTable, usePagination } from "react-table";
 import Arrow from "../assets/Page_Arrow.png";
 
-function Table({ games, blocknames, points, tag}) {
+function Table({ games, blocknames, points, tag }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [filterText, setFilterText] = useState("");
   const [visibleBlocks, setVisibleBlocks] = useState([]);
@@ -53,13 +53,13 @@ function Table({ games, blocknames, points, tag}) {
     () => [
       {
         Header: (
-          <div className="bg-[#24104E] p-2 rounded-md w-[15vw] min-w-24 scale-90 text-white">
+          <div className="bg-[#24104E] w-full px-4 py-2 rounded-lg text-white">
             {tag.split(" ")[0].toUpperCase()}
           </div>
         ),
         accessor: "sport",
         Cell: ({ value }) => (
-          <div className="bg-[#7842E2] w-[12vw] min-w-24 mx-auto rounded-lg m-2 p-2 text-[#D1CCB6] font-semibold truncate">
+          <div className="bg-[#7842E2] w-full px-4 py-2 rounded-lg text-[#D1CCB6] font-semibold truncate">
             {value}
           </div>
         ),
@@ -72,13 +72,13 @@ function Table({ games, blocknames, points, tag}) {
     () =>
       visibleBlocks.map((block) => ({
         Header: (
-          <div className="bg-[#24104E] p-2 rounded-md w-[10vw] min-w-24 scale-90 truncate text-white">
+          <div className="bg-[#24104E] w-full px-4 py-2 rounded-lg truncate text-white">
             {block}
           </div>
         ),
         accessor: block,
         Cell: ({ value }) => (
-          <div className="bg-[#7842E2] w-[10vw] min-w-24 scale-90 mx-auto rounded-lg m-2 p-2 text-[#D1CCB6] font-bold break-words overflow-hidden text-ellipsis">
+          <div className="bg-[#7842E2] w-full px-4 py-2 rounded-lg text-[#D1CCB6] font-bold break-words overflow-hidden text-ellipsis">
             {value}
           </div>
         ),
@@ -169,20 +169,20 @@ function Table({ games, blocknames, points, tag}) {
           className="bg-[#7842E2] rounded-lg p-1"
         />
       </div>
-      <div className={`flex justify-center 
-        ${pages <= 2 ? "w-[80vw] mx-auto" : ""}
-        `}>
-        <div className="bg-[#24104E] rounded-l-2xl ml-4">
-          <table
-            {...getSportsTableProps()}
-          >
+      <div
+        className={`flex justify-center items-center 
+        ${pages <= 2 ? "mx-auto" : ""}
+        `}
+      >
+        <div className="bg-[#24104E] rounded-l-2xl">
+          <table {...getSportsTableProps()}>
             <thead>
               {sportsHeaderGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center p-2 bg-[#7842E2] text-white"
+                      className="text-center px-4 py-2 bg-[#7842E2] rounded-tl-2xl text-white"
                     >
                       {column.render("Header")}
                     </th>
@@ -198,7 +198,7 @@ function Table({ games, blocknames, points, tag}) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center p-2 text-white"
+                        className="text-center px-4 py-2 text-white"
                       >
                         {cell.render("Cell")}
                       </td>
@@ -210,15 +210,15 @@ function Table({ games, blocknames, points, tag}) {
           </table>
         </div>
 
-        <div className="bg-[#24104E] rounded-r-2xl mr-4">
-          <table {...getBlockTableProps()} >
+        <div className="bg-[#24104E] rounded-r-2xl">
+          <table {...getBlockTableProps()}>
             <thead>
               {blockHeaderGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center p-2 bg-[#7842E2] text-white"
+                      className="text-center px-4 py-2 bg-[#7842E2] last:rounded-tr-2xl text-white"
                     >
                       {column.render("Header")}
                     </th>
@@ -234,8 +234,7 @@ function Table({ games, blocknames, points, tag}) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center p-2 text-white"
-                        style={{ width: "150px" }}
+                        className="text-center px-4 py-2 text-white"
                       >
                         {cell.render("Cell")}
                       </td>
@@ -247,20 +246,20 @@ function Table({ games, blocknames, points, tag}) {
           </table>
         </div>
       </div>
-      <div className="flex justify-end mt-4">
+      <div className="flex justify-center items-center mt-4">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 0}
-          className="py-2 rounded"
+          className="p-2 rounded"
         >
-          <img src={Arrow} alt="ArrowLeft" className="w-1/2" />
+          <img src={Arrow} alt="ArrowLeft" className="w-3/4"/>
         </button>
         <button
           onClick={handleNext}
           disabled={(currentPage + 1) * hostelsPerPage >= blocknames.length}
-          className="py-2 rounded"
+          className="p-2 rounded"
         >
-          <img src={Arrow} alt="ArrowRight" className="w-1/2 scale-x-[-1]" />
+          <img src={Arrow} alt="ArrowRight" className="scale-x-[-1] w-3/4"/>
         </button>
       </div>
     </div>

@@ -181,16 +181,16 @@ function DivBar({ blocknames, games, points, title }) {
 
   return (
     <div className="FirstTab w-full">
-      <div className="canvas-container rounded-2xl bg-[#150338] mx-auto w-full flex justify-center items-center">
+      <div className="canvas-container rounded-2xl p-6 bg-[#150338] mx-auto w-full flex justify-center items-center">
         {blocknames.length !== 1 ? (
           <div
-            className="relative w-full h-[70vh]"
+            className="relative w-full h-[60vh]"
           >
             <Bar options={barOptions} data={barData} />
           </div>
         ) : (
           <div
-            className="relative w-full h-[50vh]"
+            className="relative w-full h-[60vh]"
           >
             <Doughnut options={doughnutOptions} data={doughnutData} />
           </div>

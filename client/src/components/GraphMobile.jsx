@@ -147,8 +147,8 @@ function GraphMobile({
 
   return (
     <div className="w-full">
-      <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] w-full justify-center items-center">
-        <div className="w-full h-fit min-h-[50vh] relative px-2 py-4">
+      <div className="canvas-container flex flex-col rounded-2xl bg-[#150338] w-[85%] mx-auto justify-center items-center">
+        <div className="w-full h-fit min-h-[30rem] relative px-2 py-4">
           {chartData && (
             <Bar
               options={{

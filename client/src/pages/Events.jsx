@@ -130,9 +130,9 @@ function Events() {
 
   const NavBar = () => {
     return (
-      <div className="max-w-7xl flex justify-between w-[44rem] mx-auto my-10">
+      <div className="max-w-6xl flex justify-between mx-8 my-10">
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
+          className="w-40 lg:w-44 text-sm lg:text-base bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(true);
             setShowSportsGirls(false);
@@ -143,7 +143,7 @@ function Events() {
           SPORTS-BOYS
         </button>
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
+          className="w-40 lg:w-44 text-sm lg:text-base bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(true);
@@ -154,7 +154,7 @@ function Events() {
           SPORTS-GIRLS
         </button>
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
+          className="w-40 lg:w-44 text-sm lg:text-base bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(false);
@@ -165,7 +165,7 @@ function Events() {
           CULTURALS
         </button>
         <button
-          className="w-36 text-xs lg:text-sm bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
+          className="w-40 lg:w-44 text-sm lg:text-base bg-[#6539BA] text-[#D1CCB6] font-extrabold p-4 rounded-xl"
           onClick={() => {
             setShowSportsBoys(false);
             setShowSportsGirls(false);
@@ -207,7 +207,7 @@ function Events() {
         </div>
       )}
       {!isMobile && (
-        <>
+        <div className="max-w-6xl mx-auto">
           <NavBar />
           {showSportsBoys && sportsBoysData && (
             <Category
@@ -241,7 +241,7 @@ function Events() {
               points={techyData.scores}
             />
           )}
-        </>
+        </div>
       )}
     </>
   );

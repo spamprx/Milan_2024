@@ -48,19 +48,11 @@
 }
 
 .canvas-container {
-  width: 90%;
-  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #150338;
   border-radius: 16px;
-}
-
-@media (min-width: 768px) {
-  .canvas-container {
-    width: 44rem;
-  }
 }
 
 @media (min-width: 750px) {
