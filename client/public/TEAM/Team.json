@@ -1,6 +1,6 @@
 [
   {
-    "name": "Spons",
+    "name": "Sponsorship",
     "heads": [
       { "name": "Parvez", "image": "/TEAM/Heads/Parvez.png" },
       { "name": "Abhay", "image": "/TEAM/Heads/Abhay.png" },
@@ -13,8 +13,7 @@
         "image": "/TEAM/Coords/H Ananth Krishna.png"
       },
       { "name": "Prudhvi Raj", "image": "/TEAM/Coords/Prudhvi Raj.png" },
-      { "name": "Sameer Mirza", "image": "/TEAM/Coords/Sameer Mirza.png" },
-      { "name": "Aashna Sahu", "image": "/TEAM/Coords/Aashna Sahu.png" },
+      { "name": "Aashna Sahu", "image": "/TEAM/Coords New/Aashna Sahu.png" },
       { "name": "Uday Kumar", "image": "/TEAM/Coords/Uday Kumar.png" },
       {
         "name": "Ajith Reddy",
@@ -38,7 +37,7 @@
       },
       {
         "name": "Pritam",
-        "image": "/TEAM/Coords/Pritam Kumar Mandal.png"
+        "image": "/TEAM/Coords New/Pritam Kumar.png"
       },
       {
         "name": "Harshit",
@@ -90,16 +89,20 @@
         "name": "Roja Hasini",
         "image": "/TEAM/Coords/Roja Hasini Vadapalli.png"
       },
-      { "name": "Sai Midhun", "image": "/TEAM/Coords/B Sai Midhun.png" },
+      { "name": "Sai Midhun", "image": "/TEAM/Coords New/Sai Midhun.png" },
       {
         "name": "Karthikeya",
         "image": "/TEAM/Coords/Karthikeya Kanithi.png"
       },
       { "name": "Madhukar", "image": "/TEAM/Coords/G Madhukar.png" },
-      { "name": "Manisha", "image": "/TEAM/Coords/K Manisha.png" },
+      { "name": "Manisha", "image": "/TEAM/Coords New/Manisha.png" },
       { "name": "Karthik", "image": "/TEAM/Coords/Y A Karthik.png" },
       { "name": "Akhil Nistala", "image": "/TEAM/Coords/Akhil Nistala.png" },
-      { "name": "Jaswanth", "image": "/TEAM/Coords/Jaswanth.png" }
+      { "name": "Jaswanth", "image": "/TEAM/Coords/Jaswanth.png" },
+      {
+        "name": "Karthikeya",
+        "image": "/TEAM/Coords New/Karthikeya Hanu Prakash.png"
+      }
     ]
   },
   {
@@ -111,7 +114,7 @@
     ],
     "coords": [
       { "name": "Ira Khare", "image": "/TEAM/Coords/Ira Khare.png" },
-      { "name": "Harini", "image": "/TEAM/Coords/Harini.png" },
+      { "name": "Harani", "image": "/TEAM/Coords New/Harani.png" },
       { "name": "Ashok", "image": "/TEAM/Coords/Ashok.png" },
       { "name": "Ramu", "image": "/TEAM/Coords/Ramu.png" },
       { "name": "Srikanth", "image": "/TEAM/Coords/Srikanth.png" },
@@ -131,7 +134,8 @@
     "heads": [{ "name": "Punith", "image": "/TEAM/Heads/Punith.png" }],
     "coords": [
       { "name": "Tanish", "image": "/TEAM/Coords/Tanish Reddy.png" },
-      { "name": "Mirudulla", "image": "/TEAM/Coords/Mirudulla.png" }
+      { "name": "Mirudulla", "image": "/TEAM/Coords/Mirudulla.png" },
+      { "name": "Manoj", "image": "/TEAM/Coords New/Manoj Thurupalli.png" }
     ]
   },
   {
@@ -141,11 +145,11 @@
       { "name": "Surya", "image": "/TEAM/Heads/Surya.png" }
     ],
     "coords": [
-      { "name": "Abhinav", "image": "/TEAM/Coords/Abhinav Karan.png" },
+      { "name": "Abhinav", "image": "/TEAM/Coords New/Abhinav Karan.png" },
       { "name": "Srivastav", "image": "/TEAM/Coords/Srivastav.png" },
       { "name": "Mohana", "image": "/TEAM/Coords/Mohana.png" },
       { "name": "Monish", "image": "/TEAM/Coords/Monish.png" },
-      { "name": "Vinod", "image": "/TEAM/Coords/Vinod Kumar.png" }
+      { "name": "Vinod", "image": "/TEAM/Coords New/Vinod Kumar.png" }
     ]
   },
   {
@@ -159,7 +163,7 @@
     "coords": [
       {
         "name": "Varshith",
-        "image": "/TEAM/Coords/Abhinay Varshith.png"
+        "image": "/TEAM/Coords New/Abhinay Varshith.png"
       },
       {
         "name": "Preetham",
@@ -167,7 +171,6 @@
       },
       { "name": "Gnaneshwarii", "image": "/TEAM/Coords/Gnaneshwarii.png" },
       { "name": "Akshith", "image": "/TEAM/Coords/Akshith Mantha.png" },
-      { "name": "Hanokk", "image": "/TEAM/Coords/Hanokk.png" },
       { "name": "Mahani", "image": "/TEAM/Coords/Mahani Kunche.png" },
       {
         "name": "Chandraneel",
@@ -187,17 +190,20 @@
         "name": "Srinidhi",
         "image": "/TEAM/Coords/Srinidhi Chandrabotla.png"
       },
-      { "name": "Dhyana Teja", "image": "/TEAM/Coords/M. Dhyana Teja.png" },
+      { "name": "Dhyana Teja", "image": "/TEAM/Coords New/Dhyana Teja.png" },
       {
         "name": "Dheeraj",
         "image": "/TEAM/Coords/Venkata Dheeraj Kurapati.png"
       },
       { "name": "Sravanthi", "image": "/TEAM/Coords/Sravanthi.png" },
-      { "name": "Vinod", "image": "/TEAM/Coords/Vinod Kumar.png" },
-      { "name": "Sujan", "image": "/TEAM/Coords/Sujan Rada.png" },
+      { "name": "Vinod", "image": "/TEAM/Coords New/Vinod Kumar.png" },
       {
         "name": "Abhinay",
         "image": "/TEAM/Coords/D. Abhinay Shashanth.png"
+      },
+      {
+        "name": "Chandra Vamsi",
+        "image": "/TEAM/Coords New/Chandra Vamsi.png"
       }
     ]
   },
@@ -214,7 +220,7 @@
       },
       {
         "name": "Praneeth",
-        "image": "/TEAM/Coords/Praneeth Chamarthy.png"
+        "image": "/TEAM/Coords New/Praneeth.png"
       },
       {
         "name": "Tejasri",

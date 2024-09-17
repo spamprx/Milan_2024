@@ -7,13 +7,20 @@ import Loading from "./Loading.jsx";
 
 function Team() {
   const [teams, setTeams] = useState([]);
+  const [hrCouncilMembers, setHRCouncilMembers] = useState([]);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/TEAM/Team.json")
-      .then((response) => response.json())
-      .then((data) => setTeams(data))
+    // Fetch both Team.json and HRCouncil.json data
+    Promise.all([
+      fetch("/TEAM/Team.json").then((response) => response.json()),
+      fetch("/TEAM/HRCouncil.json").then((response) => response.json()),
+    ])
+      .then(([teamData, hrCouncilData]) => {
+        setTeams(teamData);
+        setHRCouncilMembers(hrCouncilData[0].member); // Access the HR Council members array
+      })
       .catch((error) => console.error("Error fetching JSON:", error))
       .finally(() => {
         setIsLoading(false);
@@ -35,6 +42,8 @@ function Team() {
           />
         </div>
       </div>
+
+      {/* Display team data */}
       {teams.map((team) => (
         <div
           key={team.name}
@@ -68,6 +77,7 @@ function Team() {
                   name={head.name}
                   personImage={head.image || "/TEAM/Heads/Missing.png"}
                   isHead={true}
+                  isHr={false}
                 />
               ))}
             </div>
@@ -87,12 +97,51 @@ function Team() {
                   name={coord.name}
                   personImage={coord.image || "/TEAM/Coords/Missing.png"}
                   isHead={false}
+                  isHr={false}
                 />
               ))}
             </div>
           </div>
         </div>
       ))}
+
+      {/* Display HR Council data */}
+      <div className="flex flex-col items-center justify-center">
+        <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
+          <div className="absolute flex w-full h-full items-center justify-center">
+            <img
+              src={Image}
+              alt="SponsorArrow"
+              className="w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
+            />
+          </div>
+
+          <p className="relative z-10 text-white text-center text-xl sm:text-3xl lg:text-3xl">
+            HR Council
+          </p>
+        </div>
+
+        <div className="flex items-center justify-center my-6 md:my-10">
+          <div className="w-full grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            {hrCouncilMembers.map((member) => (
+              <div
+                key={member.name}
+                className="flex flex-col items-center justify-center"
+              >
+                <TeamMember
+                  name={member.name}
+                  personImage={member.image || "/TEAM/Coords/Missing.png"}
+                  isHead={false}
+                  isHr={true}
+                />
+                <p className="text-white text-center text-lg mt-2">
+                  {member.hostel}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
