@@ -23,7 +23,6 @@ function Sponsors() {
   }, []);
 
   useEffect(() => {
-    // fetch("/assets/sponsorImages.json");
     fetch("/SPONSORS/Sponsors.json")
       .then((response) => response.json())
       .then((data) => setSponsorImages(data.sponsors))

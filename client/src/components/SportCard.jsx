@@ -8,7 +8,7 @@ const SportCard = ({ event }) => {
           <div className="flex flex-col items-center w-1/3">
             <div className="bg-[#755400]/[0.50] opacity-50 w-full h-3/4 rounded-b-xl mb-2"></div>
             <p className="text-[#080808] text-xs sm:text-sm lg:text-lg font-semibold">
-              {event.hostel1}
+              {event.teams}
             </p>
           </div>
           <div className="flex flex-col items-center w-1/3">

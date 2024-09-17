@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import SportCard from "../components/SportCard";
 import HomeSponsorCard from "../components/HomeSponsorCard";
 import HomeLeaderboard from "../components/HomeLeaderboard";
+import BlockRace from "../components/BlockRace";
 import Loading from "./Loading";
 import HomeBg from "../assets/Home.png";
 import MilanHome from "../assets/HeroSection.png";
@@ -498,7 +499,8 @@ function Home() {
                 <HomeLeaderboard />
               ) : (
                 <div className="flex justify-center items-center w-full min-h-[600px]">
-                  <p className="text-white text-2xl">Block Race Component</p>
+                  {/* <p className="text-white text-2xl">Block Race Component</p> */}
+                  <BlockRace />
                 </div>
               )}
             </div>
