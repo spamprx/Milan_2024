@@ -9,22 +9,27 @@ function Table({ games, blocknames, points, tag}) {
   const [pages, setPages] = useState(7);
 
   function responsivePages() {
+    const minScreenWidth = 320;
+    const maxScreenWidth = 1440;
+    const minPages = 2;
+    const maxPages = 7;
+
     const screenWidth = window.innerWidth;
 
-    if (screenWidth <= 400) {
-      setPages(1);
-    } 
-    else if( screenWidth <= 600) {
-      setPages(2);
-    }
-    else if (screenWidth <= 768) {
-      setPages(4);
-    } 
-    else {
-      setPages(7);
-    }
-  }
+    const clampedScreenWidth = Math.max(
+      minScreenWidth,
+      Math.min(screenWidth, maxScreenWidth)
+    );
 
+    const pages = Math.round(
+      ((clampedScreenWidth - minScreenWidth) /
+        (maxScreenWidth - minScreenWidth)) *
+        (maxPages - minPages) +
+        minPages
+    );
+
+    setPages(pages);
+  }
 
   useEffect(() => {
     responsivePages();

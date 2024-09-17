@@ -132,32 +132,76 @@ const AdminPortal = () => {
           onChange={handleNewMatchChange}
           required
         >
-          <option value="football">Football</option>
-          <option value="cricket">Cricket</option>
-          <option value="basketball">Basketball</option>
-          <option value="tennis">Tennis</option>
           <option value="badminton">Badminton</option>
+          <option value="basketball">Basketball</option>
+          <option value="cricket">Cricket</option>
+          <option value="dodgeball">Dodgeball</option>
+          <option value="football">Football</option>
           <option value="hockey">Hockey</option>
           <option value="table-tennis">Table Tennis</option>
-          <option value="volleyball">Volleyball</option>
+          <option value="tennis">Tennis</option>
           <option value="squash">Squash</option>
+          <option value="volleyball">Volleyball</option>
         </select>
-        <input
-          type="text"
+        <select
           name="team1"
           value={newMatchData.team1}
           onChange={handleNewMatchChange}
-          placeholder="Team 1"
           required
-        />
-        <input
-          type="text"
+        >
+          <option value="" disabled>
+            Select Team 1
+          </option>
+          <option value="ANANDI">ANANDI</option>
+          <option value="ARYABHATTA">ARYABHATTA</option>
+          <option value="BHABHA">BHABHA</option>
+          <option value="BHASKARA">BHASKARA</option>
+          <option value="BR/VY">BR/VY</option>
+          <option value="CH/KAU">CH/KAU</option>
+          <option value="GARGI">GARGI</option>
+          <option value="KALAM">KALAM</option>
+          <option value="KAPILA">KAPILA</option>
+          <option value="MAITREYI">MAITREYI</option>
+          <option value="RAMAN">RAMAN</option>
+          <option value="RAMANUJA">RAMANUJA</option>
+          <option value="RAMANUJAN">RAMANUJAN</option>
+          <option value="SARABHAI">SARABHAI</option>
+          <option value="SAROJINI NAIDU">SAROJINI NAIDU</option>
+          <option value="SN BOSE">SN BOSE</option>
+          <option value="SUS/VAR">SUS/VAR</option>
+          <option value="VISWESWARAYA">VISWESWARAYA</option>
+          <option value="VIVEKANANDA">VIVEKANANDA</option>
+        </select>
+
+        <select
           name="team2"
           value={newMatchData.team2}
           onChange={handleNewMatchChange}
-          placeholder="Team 2"
           required
-        />
+        >
+          <option value="" disabled>
+            Select Team 2
+          </option>
+          <option value="ANANDI">ANANDI</option>
+          <option value="ARYABHATTA">ARYABHATTA</option>
+          <option value="BHABHA">BHABHA</option>
+          <option value="BHASKARA">BHASKARA</option>
+          <option value="BR/VY">BR/VY</option>
+          <option value="CH/KAU">CH/KAU</option>
+          <option value="GARGI">GARGI</option>
+          <option value="KALAM">KALAM</option>
+          <option value="KAPILA">KAPILA</option>
+          <option value="MAITREYI">MAITREYI</option>
+          <option value="RAMAN">RAMAN</option>
+          <option value="RAMANUJA">RAMANUJA</option>
+          <option value="RAMANUJAN">RAMANUJAN</option>
+          <option value="SARABHAI">SARABHAI</option>
+          <option value="SAROJINI NAIDU">SAROJINI NAIDU</option>
+          <option value="SN BOSE">SN BOSE</option>
+          <option value="SUS/VAR">SUS/VAR</option>
+          <option value="VISWESWARAYA">VISWESWARAYA</option>
+          <option value="VIVEKANANDA">VIVEKANANDA</option>
+        </select>
         <input
           type="datetime-local"
           name="startTime"
