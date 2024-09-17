@@ -12,7 +12,7 @@ function Meeting({
 }) {
   const isPreferredEvent = useMemo(() => {
     return (
-      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) ||
+      (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) &&
       (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.toLowerCase().includes(team.toLowerCase()))) ||
       (meeting?.teams && meeting.teams.toLowerCase().includes("all blocks"))
     );
@@ -51,16 +51,19 @@ function Meeting({
       const endpoint = notificationEnabled ? "delete_event" : "add_event";
       const payload = notificationEnabled
         ? {
-            eventName: meeting.title,
-            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-          }
+          eventName: meeting.title,
+          location: meeting.body || "",
+          teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
+          time: meeting.time || "",
+          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+        }
         : {
-            eventName: meeting.title,
-            location: meeting.body || "",
-            teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
-            time: meeting.time || "",
-            date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
-          };
+          eventName: meeting.title,
+          location: meeting.body || "",
+          teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
+          time: meeting.time || "",
+          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+        };
 
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
         withCredentials: true,
