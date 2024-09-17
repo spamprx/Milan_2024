@@ -28,6 +28,7 @@ function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [leaderBoard, setLeaderBoard] = useState("leaderboard");
+  const [blockData, setBlockData] = useState({ blocks: [], total: [] });
   const cardContainerRef = useRef(null);
   let today = startOfToday();
   const formattedDate = format(today, "MM/dd/yyyy");
@@ -127,6 +128,45 @@ function Home() {
       },
     ],
   };
+
+  useEffect(() => {
+    const fetchLeaderBoardData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.googleusercontent.com/macros/echo?user_content_key=O08trdz1U5ws83xBdrFnKLsz7ObTHPEFWA3ADH2IAsPizy-6VZcXCVLEqWA3esblh-zYb1k4Ucv1Sic26qHYqAbAsJqDYWp4m5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnPCrdbmKQi_tWqCUeVNFGk0Fo2tHDpYLx1Wc9lsjqheQDFsjAmXLca4E592funOBKRoAFRyfHXzf-VQTu4ZErrgv_m_BXVyzGQ&lib=MTMXGC7W_WIFeYXWgpC08zOwdQIJKHz_I"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched leaderboard data:", result);
+
+        const leaderboard = result.blocks.map((hostel, index) => ({
+          hostel: hostel,
+          points: result.total[index],
+        }));
+
+        const sortedLeaderboard = leaderboard.sort(
+          (a, b) => b.points - a.points
+        );
+
+        const rankedLeaderboard = sortedLeaderboard.map((item, index) => ({
+          rank: index + 1,
+          hostel: item.hostel,
+          points: item.points,
+        }));
+
+        setBlockData(rankedLeaderboard);
+      } catch (error) {
+        console.error("Error fetching leaderboard data:", error);
+      } finally {
+        console.log("Data fetch complete. Setting isLoading to false.");
+        setIsLoading(false);
+      }
+    };
+
+    fetchLeaderBoardData();
+  }, []);
 
   useEffect(() => {
     console.log("Initiating data fetch...");
@@ -496,7 +536,7 @@ function Home() {
           >
             <div className="relative w-full h-full bg-[#0000004F] opacity-31 rounded-lg">
               {leaderBoard === "leaderboard" ? (
-                <HomeLeaderboard />
+                <HomeLeaderboard blockData={blockData} />
               ) : (
                 // <div className="flex justify-center items-center w-full min-h-[600px]">
                 // {/* <p className="text-white text-2xl">Block Race Component</p> */}
