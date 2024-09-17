@@ -194,7 +194,7 @@ function GraphMobile({
               }`}
               onClick={() => setSelectedTableCategory(category)}
             >
-              {category}
+              {category.toUpperCase()}
             </button>
           ))}
         </div>

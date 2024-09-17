@@ -53,13 +53,13 @@ function Table({ games, blocknames, points, tag}) {
     () => [
       {
         Header: (
-          <div className="bg-[#24104E] p-2 rounded-md w-full scale-90 text-white">
+          <div className="bg-[#24104E] p-2 rounded-md w-[15vw] min-w-24 scale-90 text-white">
             {tag.split(" ")[0].toUpperCase()}
           </div>
         ),
         accessor: "sport",
         Cell: ({ value }) => (
-          <div className="bg-[#7842E2] rounded-lg m-2 p-2 text-[#D1CCB6] font-semibold truncate">
+          <div className="bg-[#7842E2] w-[12vw] min-w-24 mx-auto rounded-lg m-2 p-2 text-[#D1CCB6] font-semibold truncate">
             {value}
           </div>
         ),
@@ -72,13 +72,13 @@ function Table({ games, blocknames, points, tag}) {
     () =>
       visibleBlocks.map((block) => ({
         Header: (
-          <div className="bg-[#24104E] p-2 rounded-md truncate text-white">
+          <div className="bg-[#24104E] p-2 rounded-md w-[10vw] min-w-24 scale-90 truncate text-white">
             {block}
           </div>
         ),
         accessor: block,
         Cell: ({ value }) => (
-          <div className="bg-[#7842E2] rounded-lg m-2 p-2 text-[#D1CCB6] font-bold break-words overflow-hidden text-ellipsis">
+          <div className="bg-[#7842E2] w-[10vw] min-w-24 scale-90 mx-auto rounded-lg m-2 p-2 text-[#D1CCB6] font-bold break-words overflow-hidden text-ellipsis">
             {value}
           </div>
         ),
@@ -172,7 +172,7 @@ function Table({ games, blocknames, points, tag}) {
       <div className={`flex justify-center 
         ${pages <= 2 ? "w-[80vw] mx-auto" : ""}
         `}>
-        <div className="bg-[#24104E] rounded-l-2xl ml-4 min-w-[100px] max-w-[40%] overflow-x-auto">
+        <div className="bg-[#24104E] rounded-l-2xl ml-4 w-fit overflow-x-auto">
           <table
             {...getSportsTableProps()}
             className="w-fit lg:w-auto table-fixed"
@@ -183,7 +183,7 @@ function Table({ games, blocknames, points, tag}) {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center p-2 bg-[#7842E2] text-white truncate"
+                      className="text-center p-2 bg-[#7842E2] text-white"
                     >
                       {column.render("Header")}
                     </th>
@@ -199,7 +199,7 @@ function Table({ games, blocknames, points, tag}) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center p-2 text-white truncate"
+                        className="text-center p-2 text-white"
                       >
                         {cell.render("Cell")}
                       </td>
@@ -212,7 +212,7 @@ function Table({ games, blocknames, points, tag}) {
         </div>
 
         <div className="bg-[#24104E] rounded-r-2xl mr-4 overflow-auto">
-          <table {...getBlockTableProps()} className="w-fit table-fixed">
+          <table {...getBlockTableProps()} className="w-fit min-w-[40%] table-fixed">
             <thead>
               {blockHeaderGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>
