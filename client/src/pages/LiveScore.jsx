@@ -328,9 +328,11 @@ function LiveScore() {
         </>
       )}
       {!error && currentMatches.length === 0 && (
-        <p className="text-lg text-white font-bold mt-8">
-          No ongoing matches available.
-        </p>
+        <div className="flex items-center justify-center h-[40vh] mt-8">
+          <p className="text-lg text-white font-bold">
+            No ongoing matches available.
+          </p>
+        </div>
       )}
       <div className="text-3xl text-white font-bold mt-8">
         --- PAST SCORES ---

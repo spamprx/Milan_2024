@@ -5,7 +5,7 @@ const GameDetails = React.forwardRef(({ game }, ref) => {
     if (!game) return null;
 
     return (
-        <div ref={ref} className="max-w-xl mx-auto bg-[#2D1B69] rounded-3xl shadow-lg overflow-hidden">
+        <div ref={ref} className="max-w-xl mx-auto bg-[#2D1B69] rounded-3xl scale-90 md:scale-100 shadow-lg overflow-hidden">
         <div className="bg-[#6B5794]/[0.84] text-white p-4">
             <h2 className="text-2xl font-bold text-center text-white">{game.sport}</h2>
         </div>
