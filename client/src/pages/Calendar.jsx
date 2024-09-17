@@ -23,39 +23,18 @@ export default function Calendar() {
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
+    setIsLoading(true);
     try {
-      const [userResponse, gamesResponse] = await Promise.all([
-        axios.get(import.meta.env.VITE_BACKEND_URL + "profile", {
-          withCredentials: true,
-        }),
-        axios.get(import.meta.env.VITE_BACKEND_URL + "eventsSchedule"),
-      ]);
+      // First, fetch the games
+      const gamesResponse = await axios.get(import.meta.env.VITE_BACKEND_URL + "eventsSchedule");
+      const gamesData = gamesResponse.data;
 
-      const userData = userResponse.data.user;
-      console.log("User Block:", userData.Block);
-      setUserPreferredGames(userData.interested_in || []);
-      setPreferredTeams(userData.Block ? [userData.Block] : []);
-      setAuth(true);
-
-      const data = gamesResponse.data;
-      if (data && Object.keys(data).length > 0) {
-        const loadedGames = Object.entries(data).flatMap(([date, events]) =>
+      if (gamesData && Object.keys(gamesData).length > 0) {
+        const loadedGames = Object.entries(gamesData).flatMap(([date, events]) =>
           events.map((event, index) => {
             const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
             const storageKey = `notification_${uniqueId}_${date}`;
             const storedNotificationState = localStorage.getItem(storageKey);
-            const isPreferred =
-              userPreferredGames.includes(event.title.toLowerCase()) ||
-              preferredTeams.some((team) =>
-                event.teams.toLowerCase().includes(team.toLowerCase())
-              ) ||
-              event.teams.toLowerCase().includes("all blocks");
-
-            const notificationEnabled =
-              isPreferred ||
-              (storedNotificationState !== null
-                ? JSON.parse(storedNotificationState)
-                : false);
 
             return {
               ...event,
@@ -63,23 +42,51 @@ export default function Calendar() {
               startDatetime: new Date(date + "T" + event.time),
               endDatetime: new Date(date + "T" + event.time),
               date: new Date(date),
-              notificationEnabled: notificationEnabled,
+              notificationEnabled: storedNotificationState !== null ? JSON.parse(storedNotificationState) : false,
             };
           })
         );
         setGames(loadedGames);
       } else {
-        console.error("No data received or unexpected format:", data);
+        console.error("No game data received or unexpected format:", gamesData);
         setGames([]);
       }
+
+      // Then, try to fetch the user profile
+      try {
+        const userResponse = await axios.get(import.meta.env.VITE_BACKEND_URL + "profile", {
+          withCredentials: true,
+        });
+        const userData = userResponse.data.user;
+        setUserPreferredGames(userData.interested_in || []);
+        setPreferredTeams(userData.Block ? [userData.Block] : []);
+        setAuth(true);
+
+        // Update games with preferred status
+        setGames(prevGames => prevGames.map(game => ({
+          ...game,
+          isPreferred: 
+            userPreferredGames.includes(game.title.toLowerCase()) ||
+            preferredTeams.some(team => game.teams.toLowerCase().includes(team.toLowerCase())) ||
+            game.teams.toLowerCase().includes("all blocks")
+        })));
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+        setAuth(false);
+        // Keep the games as they are, without preferred status
+      }
     } catch (error) {
-      console.error("Error fetching data:", error);
-      setAuth(false);
+      console.error("Error fetching games:", error);
       setGames([]);
+      setAuth(false);
     } finally {
       setIsLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   useEffect(() => {
     fetchData();
@@ -118,18 +125,18 @@ export default function Calendar() {
     isSameDay(game.date, selectedDay)
   );
 
-  let preferredMeetings = selectedDayMeetings.filter(
+  let preferredMeetings = auth ? selectedDayMeetings.filter(
     (meeting) =>
       userPreferredGames.includes(meeting.title.toLowerCase()) ||
       preferredTeams.some((team) =>
         meeting.teams.toLowerCase().includes(team.toLowerCase())
       ) ||
-      meeting.teams.toLowerCase().includes("all blocks")
-  );
+      meeting.teams.toLowerCase().includes("all blocks") 
+  ) : [];
 
-  let otherMeetings = selectedDayMeetings.filter(
+  let otherMeetings = auth ? selectedDayMeetings.filter(
     (meeting) => !preferredMeetings.includes(meeting)
-  );
+  ) : selectedDayMeetings;
 
   function handleGameSelect(game) {
     setSelectedGame(game);
