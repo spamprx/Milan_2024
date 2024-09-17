@@ -2,6 +2,7 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+const { GoogleSpreadsheet } = require("google-spreadsheet");
 
 const app = express();
 const server = http.createServer(app);
@@ -11,6 +12,7 @@ const io = new Server(server, {
     origin: [
       "https://leaderboard-milan-client.vercel.app",
       "https://leaderboard-milan-admin.vercel.app",
+      "http://localhost:5173",
     ],
     methods: ["GET", "POST"],
   },
@@ -21,6 +23,7 @@ app.use(
     origin: [
       "https://leaderboard-milan-client.vercel.app",
       "https://leaderboard-milan-admin.vercel.app",
+      "http://localhost:5173",
     ],
   })
 );
@@ -30,6 +33,34 @@ app.use(express.json());
 let matches = [];
 let sportCounters = {};
 let endedMatches = [];
+
+const creds = require("./milan-test.json");
+const SHEET_ID = "1RW_mJdhLg1JeKzNnlcgrML-gHiSeCd91VLoZVush1ME";
+
+const addMatchToGoogleSheet = async (match) => {
+  try {
+    const doc = new GoogleSpreadsheet(SHEET_ID);
+    await doc.useServiceAccountAuth(creds);
+    await doc.loadInfo();
+
+    const sheet = doc.sheetsByTitle['HISTORY'];
+
+    await sheet.addRow({
+      MatchID: match.matchId,
+      Sport: match.sport,
+      Team1: match.team1,
+      Team2: match.team2,
+      Score1: match.score1 || "0",
+      Score2: match.score2 || "0",
+      StartTime: match.startTime,
+    });
+
+    console.log("Match data added to Google Sheets successfully");
+  } catch (error) {
+    console.error("Error adding match to Google Sheets:", error);
+  }
+};
+
 
 const getLiveMatches = () => {
   return matches.map((match) => ({
@@ -115,13 +146,17 @@ app.post("/api/update-score", (req, res) => {
 });
 
 // API to end a match
-app.post("/api/end-match/:matchId", (req, res) => {
+app.post("/api/end-match/:matchId", async (req, res) => {
   const { matchId } = req.params;
   const index = matches.findIndex((match) => match.matchId === matchId);
   if (index !== -1) {
     const endedMatch = matches.splice(index, 1)[0];
     endedMatches.push(endedMatch);
     io.emit("matchEnded", endedMatch);
+
+    // Add the ended match data to Google Sheets
+    await addMatchToGoogleSheet(endedMatch);
+
     res.json({ success: true, match: endedMatch });
   } else {
     res.status(404).json({ success: false, message: "Match not found" });
