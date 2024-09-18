@@ -10,8 +10,9 @@ import GameDetails from "../components/PastScore.jsx";
 
 const GameDetailsCarousel = ({ pastData }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [selectedDate, setSelectedDate] = useState(20);
+  const [selectedDate, setSelectedDate] = useState(25);
   const [filteredData, setFilteredData] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("SPORTS");
   const scrollRef = useRef(null);
   const dateScrollRef = useRef(null);
 
@@ -19,12 +20,19 @@ const GameDetailsCarousel = ({ pastData }) => {
 
   useEffect(() => {
     const filtered = pastData.filter((game) => {
-      return game.date === selectedDate;
+      return (
+        game.date === selectedDate &&
+        (!selectedCategory || game.category === selectedCategory)
+      );
     });
 
     setFilteredData(filtered);
     setActiveIndex(0);
-  }, [selectedDate, pastData]);
+  }, [selectedDate, selectedCategory, pastData]);
+
+  const handleCategoryChange = (category) => {
+    setSelectedCategory(category);
+  };
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -59,23 +67,34 @@ const GameDetailsCarousel = ({ pastData }) => {
       <div className="relative w-full max-w-5xl overflow-hidden mb-4">
         <div
           ref={dateScrollRef}
-          className="flex items-center space-x-4 overflow-x-auto scrollbar-hide justify-center py-4"
+          className="flex flex-col gap-4 items-center space-x-4 overflow-x-auto scrollbar-hide justify-center py-4"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
-          {dates.map((date) => (
-            <button
-              key={date}
-              className={`w-8 md:w-10 h-8 md:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300
+          <div className="flex gap-4">
+            {dates.map((date) => (
+              <button
+                key={date}
+                className={`w-8 md:w-10 h-8 md:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300
                 ${
                   date === selectedDate
                     ? "bg-amber-500 text-black scale-110"
                     : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                 }`}
-              onClick={() => setSelectedDate(date)}
-            >
-              {date}
-            </button>
-          ))}
+                onClick={() => setSelectedDate(date)}
+              >
+                {date}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="w-full scale-90 md:scale-100 md:p-4 mx-auto">
+          <Filter
+            options={["SPORTS", "CULTURALS", "SCI-TECH"]}
+            needAll={false}
+            title={"Category"}
+            isSingle={true}
+            onCategoryChange={handleCategoryChange}
+          />
         </div>
       </div>
 
@@ -83,7 +102,7 @@ const GameDetailsCarousel = ({ pastData }) => {
         <div className="relative w-full max-w-5xl overflow-hidden">
           <div
             ref={scrollRef}
-            className="flex items-center space-x-8 overflow-x-auto scrollbar-hide p-8"
+            className="flex items-center space-x-8 overflow-x-auto scrollbar-hide p-4 md:p-10"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {filteredData.map((game, index) => (
@@ -97,14 +116,15 @@ const GameDetailsCarousel = ({ pastData }) => {
                   }`}
                 onClick={() => setActiveIndex(index)}
               >
-                <GameDetails game={game} />
+                <GameDetails game={game} category={selectedCategory} />
               </div>
             ))}
           </div>
         </div>
       ) : (
         <p className="text-lg text-white font-bold mt-8">
-          No games available for the selected date ({selectedDate}).
+          No games available for the selected date ({selectedDate}) and
+          category.
         </p>
       )}
 
@@ -125,6 +145,7 @@ const GameDetailsCarousel = ({ pastData }) => {
   );
 };
 
+
 function LiveScore() {
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
@@ -142,7 +163,7 @@ function LiveScore() {
     const fetchPastData = async () => {
       try {
         const response = await fetch(
-          "https://script.googleusercontent.com/macros/echo?user_content_key=JTJ4LwbwSCR-o40RCZmpfne5uVrsXYgXYCYQ6AL7zbnFTVswINe-nrIIc41b1OYHBlcMbn5fNN9w9dRZqs044MDf6EIiK7eIm5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnHXM8UK8MLQPH086wB9rYSFS64HKSPWSNSjmOwqyula0l8_PzbiQihbZ__gGnui-iXZ7434h5jJtysdJqtxHDH6pzhEt0zM_aQ&lib=MsEWv3u50V40rNs-NhmOoyewdQIJKHz_I"
+          "https://script.google.com/macros/s/AKfycbxcBzPmKL3U_YztfhfOPxBD2fwaulpgNlyPyxUgfCx8duvyHAnrVv5qWYnNmJgECaEY/exec"
         );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -300,7 +321,7 @@ function LiveScore() {
       </div>
 
       <div className="grid grid-cols-1 card-col scale-90 w-full gap-8 justify-items-center">
-        {currentMatches.length >= 2
+        {!error && currentMatches.length >= 2
           ? currentMatches.map((match, index) =>
               index % 2 === 0 ? (
                 <CardLiveScore key={match.matchId} match={match} />
@@ -314,7 +335,7 @@ function LiveScore() {
       </div>
       {error && (
         <>
-          <div className="text-center mt-8">
+          <div className="flex flex-col text-center items-center scale-90 justify-center mt-8 h-[50vh]">
             <p className="text-lg text-white font-bold">
               Please log in to view your preferred games.
             </p>
