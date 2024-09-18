@@ -64,7 +64,7 @@ export default function Calendar() {
         const removedGames = await axios.get(import.meta.env.VITE_BACKEND_URL + "removed_events", {
           withCredentials: true,
         });
-
+        
         const userData = userResponse.data.user;
         setUserPreferredGames(userData.interested_in || []);
         setPreferredTeams(userData.Block ? [userData.Block] : []);
@@ -79,11 +79,16 @@ export default function Calendar() {
             addedGame.description.toLowerCase().includes(gameTeamsArray.join(' vs '))
           }
           );
+          
 
-          const isGameRemoved = removedGames.data.some(removedGame =>
-            removedGame.summary.includes(game.title) &&
+          const isGameRemoved = removedGames.data.some(removedGame =>{
+            // console.log(removedGame.summary, game.title,removedGame.summary.includes(game.title), removedGame.description, gameTeamsArray.join(' vs '),removedGame.description.toLowerCase().includes(gameTeamsArray.join(' vs ')));
+            return removedGame.summary.includes(game.title) &&
             removedGame.description.toLowerCase().includes(gameTeamsArray.join(' vs '))
+          }
           );
+          
+
           return {
             ...game,
             isPreferred:

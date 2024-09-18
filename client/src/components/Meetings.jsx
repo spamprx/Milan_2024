@@ -111,13 +111,13 @@ function Meeting({
         {meeting.teams || "ALL BLOCKS"}
       </p>
 
-      {showNotifications && (
+      
         <div className="mt-2 flex flex-col sm:flex-row items-center justify-between">
           <p className="text-xs text-gray-300 pb-2">Notifications</p>
           <button
             onClick={toggleNotification}
             className="w-10 h-6 rounded-full bg-gray-700 flex items-center justify-start p-1 transition-all duration-300 ease-in-out focus:outline-none"
-            disabled={isLoading}
+            disabled={isLoading || !showNotifications}
           >
             <div
               className={`w-4 h-4 rounded-full transition-all duration-300 ease-in-out ${notificationEnabled ? 'bg-green-500 transform translate-x-4' : 'bg-white'
@@ -139,7 +139,7 @@ function Meeting({
             </div>
           </button>
         </div>
-      )}
+      
       {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
