@@ -1,6 +1,6 @@
 [
   {
-    "name": "Sponsorship",
+    "name": "SPONSORSHIP",
     "heads": [
       { "name": "Parvez", "image": "/TEAM/Heads/Parvez.png" },
       { "name": "Abhay", "image": "/TEAM/Heads/Abhay.png" },
@@ -23,7 +23,7 @@
     ]
   },
   {
-    "name": "Pronites",
+    "name": "PRONITES",
     "heads": [
       { "name": "Ram Charan", "image": "/TEAM/Heads/Ram Charan.png" },
       { "name": "Yash", "image": "/TEAM/Heads/Yash.png" },
@@ -58,7 +58,7 @@
     ]
   },
   {
-    "name": "Hospi",
+    "name": "HOSPITALITY",
 
     "heads": [
       { "name": "Jayathi", "image": "/TEAM/Heads/Jayathi.png" },
@@ -106,7 +106,7 @@
     ]
   },
   {
-    "name": "Multimedia",
+    "name": "MULTIMEDIA",
     "heads": [
       { "name": "Venu", "image": "/TEAM/Heads/Venu.png" },
       { "name": "Kiran", "image": "/TEAM/Heads/Kiran.png" },
@@ -130,7 +130,7 @@
     ]
   },
   {
-    "name": "Finance",
+    "name": "FINANCE",
     "heads": [{ "name": "Punith", "image": "/TEAM/Heads/Punith.png" }],
     "coords": [
       { "name": "Tanish", "image": "/TEAM/Coords/Tanish Reddy.png" },
@@ -153,7 +153,7 @@
     ]
   },
   {
-    "name": "Events",
+    "name": "EVENTS",
     "heads": [
       { "name": "Simhadri", "image": "/TEAM/Heads/Simhadri.png" },
       { "name": "Karthik", "image": "/TEAM/Heads/Karthik.png" },
@@ -208,7 +208,7 @@
     ]
   },
   {
-    "name": "Web",
+    "name": "WEB",
     "heads": [
       { "name": "Nihar", "image": "/TEAM/Heads/Nihar.png" },
       { "name": "Manohar", "image": "/TEAM/Heads/Manohar.png" }
@@ -231,7 +231,7 @@
     ]
   },
   {
-    "name": "Design",
+    "name": "DESIGN",
     "heads": [
       { "name": "Shripadh", "image": "/TEAM/Heads/Shripadh.png" },
       { "name": "Swarnima", "image": "/TEAM/Heads/Swarnima.png" }

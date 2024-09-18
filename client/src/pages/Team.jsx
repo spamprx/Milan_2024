@@ -12,14 +12,13 @@ function Team() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch both Team.json and HRCouncil.json data
     Promise.all([
       fetch("/TEAM/Team.json").then((response) => response.json()),
       fetch("/TEAM/HRCouncil.json").then((response) => response.json()),
     ])
       .then(([teamData, hrCouncilData]) => {
         setTeams(teamData);
-        setHRCouncilMembers(hrCouncilData[0].member); // Access the HR Council members array
+        setHRCouncilMembers(hrCouncilData[0].member);
       })
       .catch((error) => console.error("Error fetching JSON:", error))
       .finally(() => {
@@ -43,14 +42,13 @@ function Team() {
         </div>
       </div>
 
-      {/* Display team data */}
       {teams.map((team) => (
         <div
           key={team.name}
           className="flex flex-col items-center justify-center"
         >
           <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
-            <div className="absolute flex w-full h-full items-center justify-center">
+            <div className="absolute flex w-screen h-full items-center justify-center">
               <img
                 src={Image}
                 alt="SponsorArrow"
@@ -105,10 +103,9 @@ function Team() {
         </div>
       ))}
 
-      {/* Display HR Council data */}
       <div className="flex flex-col items-center justify-center">
         <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
-          <div className="absolute flex w-full h-full items-center justify-center">
+          <div className="absolute flex w-screen h-full items-center justify-center">
             <img
               src={Image}
               alt="SponsorArrow"
