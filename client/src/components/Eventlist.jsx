@@ -9,7 +9,7 @@ export default function EventList({
   preferredMeetings, 
   otherMeetings, 
   onGameSelect, 
-  calendarHeight, 
+  // calendarHeight, 
   selectedDay,
   userPreferredGames,
   preferredTeams,
@@ -23,6 +23,7 @@ export default function EventList({
         </p>
       );
     }
+    // console.log(meetings)
 
     return meetings.map((meeting) => (
       <Meeting 

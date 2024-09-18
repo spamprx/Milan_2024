@@ -33,8 +33,8 @@ export default function Calendar() {
         const loadedGames = Object.entries(gamesData).flatMap(([date, events]) =>
           events.map((event, index) => {
             const uniqueId = `${event.title}_${event.time}_${event.teams}_${index}`;
-            const storageKey = `notification_${uniqueId}_${date}`;
-            const storedNotificationState = localStorage.getItem(storageKey);
+            // const storageKey = `notification_${uniqueId}_${date}`;
+            // const storedNotificationState = localStorage.getItem(storageKey);
 
             return {
               ...event,
@@ -42,7 +42,7 @@ export default function Calendar() {
               startDatetime: new Date(date + "T" + event.time),
               endDatetime: new Date(date + "T" + event.time),
               date: new Date(date),
-              notificationEnabled: storedNotificationState !== null ? JSON.parse(storedNotificationState) : false,
+              // notificationEnabled: storedNotificationState !== null ? JSON.parse(storedNotificationState) : false,
             };
           })
         );
@@ -57,19 +57,42 @@ export default function Calendar() {
         const userResponse = await axios.get(import.meta.env.VITE_BACKEND_URL + "profile", {
           withCredentials: true,
         });
+        const userAddedGames = await axios.get(import.meta.env.VITE_BACKEND_URL + "added_events", {
+          withCredentials: true,
+        }
+        );
+        const removedGames = await axios.get(import.meta.env.VITE_BACKEND_URL + "removed_events", {
+          withCredentials: true,
+        });
+
         const userData = userResponse.data.user;
         setUserPreferredGames(userData.interested_in || []);
         setPreferredTeams(userData.Block ? [userData.Block] : []);
         setAuth(true);
 
         // Update games with preferred status
-        setGames(prevGames => prevGames.map(game => ({
-          ...game,
-          isPreferred: 
-            userPreferredGames.includes(game.title.toLowerCase()) ||
-            preferredTeams.some(team => game.teams.toLowerCase().includes(team.toLowerCase())) ||
-            game.teams.toLowerCase().includes("all blocks")
-        })));
+        setGames(prevGames => prevGames.map(game => {
+          const gameTeamsArray = game.teams.toLowerCase().split(',').map(team => team.trim());
+          
+          const isGameAdded = userAddedGames.data.some(addedGame =>{
+            return addedGame.summary.includes(game.title) &&
+            addedGame.description.toLowerCase().includes(gameTeamsArray.join(' vs '))
+          }
+          );
+
+          const isGameRemoved = removedGames.data.some(removedGame =>
+            removedGame.summary.includes(game.title) &&
+            removedGame.description.toLowerCase().includes(gameTeamsArray.join(' vs '))
+          );
+          return {
+            ...game,
+            isPreferred:
+              userPreferredGames.includes(game.title.toLowerCase()) && (
+                preferredTeams.some(team => gameTeamsArray.includes(team.toLowerCase())) ||
+                game.teams.toLowerCase().includes("all blocks")),
+            notificationEnabled: isGameAdded || (game.isPreferred && !isGameRemoved),
+          };
+        }));
       } catch (error) {
         console.error("Error fetching user profile:", error);
         setAuth(false);
@@ -82,11 +105,7 @@ export default function Calendar() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  },[]);
 
   useEffect(() => {
     fetchData();
@@ -126,12 +145,14 @@ export default function Calendar() {
   );
 
   let preferredMeetings = auth ? selectedDayMeetings.filter(
-    (meeting) =>
-      userPreferredGames.includes(meeting.title.toLowerCase()) ||
-      preferredTeams.some((team) =>
-        meeting.teams.toLowerCase().includes(team.toLowerCase())
-      ) ||
-      meeting.teams.toLowerCase().includes("all blocks") 
+    (meeting) => {
+      const teams = meeting.teams ? meeting.teams.toLowerCase().split(", ") : [];
+      return userPreferredGames.includes(meeting.title.toLowerCase()) &&
+        (preferredTeams.some((team) =>
+          teams.includes(team.toLowerCase())
+        ) ||
+          meeting.teams.toLowerCase().includes("all blocks"))
+    }
   ) : [];
 
   let otherMeetings = auth ? selectedDayMeetings.filter(

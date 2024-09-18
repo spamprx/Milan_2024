@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import axios from "axios";
 
 function Meeting({
@@ -12,32 +12,33 @@ function Meeting({
   showNotifications
 }) {
   const isPreferredEvent = useMemo(() => {
+    const teams = meeting.teams ? meeting.teams.toLowerCase().split(", ") : [];
     return (
       (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) &&
-      (Array.isArray(preferredTeams) && preferredTeams.some((team) => meeting?.teams && meeting.teams.toLowerCase().includes(team.toLowerCase()))) ||
-      (meeting?.teams && meeting.teams.toLowerCase().includes("all blocks"))
+      ((Array.isArray(preferredTeams) && preferredTeams.some((team) => teams && teams.includes(team.toLowerCase()))) ||
+      (meeting?.teams && meeting.teams.toLowerCase().includes("all blocks")))
     );
   }, [meeting, userPreferredGames, preferredTeams]);
 
-  const getLocalStorageKey = useCallback(() => {
-    const uniqueId = meeting.id || `${meeting.title}_${meeting.time}_${meeting.teams}`;
-    return `notification_${uniqueId}_${meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date}`;
-  }, [meeting]);
+  // const getLocalStorageKey = useCallback(() => {
+  //   const uniqueId = meeting.id || `${meeting.title}_${meeting.time}_${meeting.teams}`;
+  //   return `notification_${uniqueId}_${meeting.date instanceof Date ? meeting.date.toISOString().split('T')[0] : meeting.date}`;
+  // }, [meeting]);
 
   const [notificationEnabled, setNotificationEnabled] = useState(() => {
-    const storedState = localStorage.getItem(getLocalStorageKey());
-    if (storedState !== null) {
-      return JSON.parse(storedState);
-    }
-    return isPreferred || isPreferredEvent || initialNotificationState || false;
+    // const storedState = localStorage.getItem(getLocalStorageKey());
+    // if (storedState !== null) {
+    //   return JSON.parse(storedState);
+    // }
+    return isPreferredEvent || initialNotificationState || false;
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
-  }, [notificationEnabled, getLocalStorageKey]);
+  // useEffect(() => {
+  //   localStorage.setItem(getLocalStorageKey(), JSON.stringify(notificationEnabled));
+  // }, [notificationEnabled, getLocalStorageKey]);
 
   const toggleNotification = useCallback(async (e) => {
     e.stopPropagation();
@@ -72,7 +73,7 @@ function Meeting({
 
       const updatedNotificationState = !notificationEnabled;
       setNotificationEnabled(updatedNotificationState);
-      localStorage.setItem(getLocalStorageKey(), JSON.stringify(updatedNotificationState));
+      // localStorage.setItem(getLocalStorageKey(), JSON.stringify(updatedNotificationState));
       onNotificationToggle({ ...meeting, notificationEnabled: updatedNotificationState });
     } catch (error) {
       console.error("Error toggling notification:", error);
@@ -80,7 +81,7 @@ function Meeting({
     } finally {
       setIsLoading(false);
     }
-  }, [meeting, notificationEnabled, onNotificationToggle, getLocalStorageKey]);
+  }, [meeting, notificationEnabled, onNotificationToggle]);
 
   if (!meeting) {
     return null;
