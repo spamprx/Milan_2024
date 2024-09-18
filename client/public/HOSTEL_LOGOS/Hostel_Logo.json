@@ -1,0 +1,67 @@
+[
+  {
+    "name": "HOSTEL_LOGOS",
+    "logo": [
+      {
+        "name": "Anandi",
+        "image": "/HOSTEL_LOGOS/Anandi.png"
+      },
+      {
+        "name": "Kautilya",
+        "image": "/HOSTEL_LOGOS/Kautilya.png"
+      },
+      {
+        "name": "Raman",
+        "image": "/HOSTEL_LOGOS/Raman.png"
+      },
+      {
+        "name": "Ramanujan",
+        "image": "/HOSTEL_LOGOS/Ramanujan.png"
+      },
+      {
+        "name": "SN Bose",
+        "image": "/HOSTEL_LOGOS/SN_Bose.png"
+      },
+      {
+        "name": "Sarojini Naidu",
+        "image": "/HOSTEL_LOGOS/Sarojini_Naidu.png"
+      },
+      {
+        "name": "Kalam",
+        "image": "/HOSTEL_LOGOS/Kalam.png"
+      },
+      {
+        "name": "Charaka",
+        "image": "/HOSTEL_LOGOS/Charaka.png"
+      },
+      {
+        "name": "Gargi",
+        "image": "/HOSTEL_LOGOS/Gargi.png"
+      },
+      {
+        "name": "Maitreyi",
+        "image": "/HOSTEL_LOGOS/Maitreyi.png"
+      },
+      {
+        "name": "Ramanuja",
+        "image": "/HOSTEL_LOGOS/Ramanuja.png"
+      },
+      {
+        "name": "Sarabhai",
+        "image": "/HOSTEL_LOGOS/Sarabhai.png"
+      },
+      {
+        "name": "Varahamihira",
+        "image": "/HOSTEL_LOGOS/Varahmihira_Susruta.png"
+      },
+      {
+        "name": "Susruta",
+        "image": "/HOSTEL_LOGOS/Varahmihira_Susruta.png"
+      },
+      {
+        "name": "Vivekananda",
+        "image": "/HOSTEL_LOGOS/Vivekananda.png"
+      }
+    ]
+  }
+]

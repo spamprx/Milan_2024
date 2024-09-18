@@ -98,37 +98,6 @@ function Home() {
     setActiveIndex(0);
   };
 
-  const settings = {
-    className: "center",
-    centerMode: true,
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    speed: 500,
-    dots: false,
-    arrows: false,
-    slidesToScroll: 1,
-    beforeChange: (current, next) => setActiveIndex(next),
-    autoplay: true,
-    autoplaySpeed: 3000,
-    responsive: [
-      {
-        breakpoint: 475,
-        settings: {
-          slidesToShow: 1, // Show 1 slide on smaller screens
-          centerPadding: "20px",
-        },
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2, // Show 2 slides on medium screens
-          centerPadding: "40px",
-        },
-      },
-    ],
-  };
-
   useEffect(() => {
     const fetchLeaderBoardData = async () => {
       try {
@@ -139,7 +108,8 @@ function Home() {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        console.log("Fetched leaderboard data:", result);
+        // console.log("Fetched leaderboard data:", result);
+        console.log("Fetched leaderboard data");
 
         const leaderboard = result.blocks.map((hostel, index) => ({
           hostel: hostel,
@@ -168,7 +138,6 @@ function Home() {
     fetchLeaderBoardData();
   }, []);
 
-
   useEffect(() => {
     console.log("Initiating data fetch...");
     const fetchGamesData = async () => {
@@ -177,7 +146,8 @@ function Home() {
           import.meta.env.VITE_BACKEND_URL + "eventsSchedule"
         );
         const data = response.data;
-        console.log("Games data received:", data);
+        // console.log("Games data received:", data);
+        console.log("Games data received");
         if (data && Object.keys(data).length > 0) {
           const loadedGames = Object.entries(data).flatMap(([date, events]) =>
             events.map((event) => ({
@@ -188,7 +158,8 @@ function Home() {
               notificationEnabled: event.notificationEnabled || false,
             }))
           );
-          console.log("Processed games data:", loadedGames);
+          // console.log("Processed games data:", loadedGames);
+          console.log("Processed games data");
           setGames(loadedGames);
         } else {
           console.error("No data received or unexpected format:", data);
@@ -204,22 +175,54 @@ function Home() {
     };
 
     fetchGamesData();
-  }, [])
-  console.log("Games");
-  console.log(games);
+  }, []);
+  // console.log("Games");
+  // console.log(games);
 
   let selectedDayMeetings = games.filter((game) =>
     isSameDay(game.date, new Date(selectedDay))
   );
 
-  console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
-  console.log("Selected Day Meetings:", selectedDayMeetings);
+  // console.log("Selected Day:", format(selectedDay, "yyyy-MM-dd"));
+  // console.log("Selected Day Meetings:", selectedDayMeetings);
 
   let currentEvents = selectedDayMeetings.filter(
     (game) => game.category === selectedOption.value
   );
 
-  console.log("Current Events:", currentEvents);
+  // console.log("Current Events:", currentEvents);
+
+  const settings = {
+    className: "center",
+    centerMode: true,
+    infinite: true,
+    centerPadding: "60px",
+    slidesToShow:
+      currentEvents.length < 3 ? (currentEvents.length < 2 ? 1 : 2) : 3, // Show 2 cards if less than 3 cards
+    speed: 500,
+    dots: false,
+    arrows: false,
+    slidesToScroll: 1,
+    beforeChange: (current, next) => setActiveIndex(next),
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 475,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "20px",
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: currentEvents.length < 3 ? 2 : 3, // Adapt to 2 or 3 cards based on the number of events
+          centerPadding: "40px",
+        },
+      },
+    ],
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -435,15 +438,20 @@ function Home() {
               <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
                 <img
                   src={Pattern2}
-                  className="w-full h-full object-cover opacity-15 z-20"
+                  className="w-full h-full object-cover opacity-10 z-20"
                 />
               </div>
               <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
                 <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aspernatur nobis, autem, aliquid repellendus totam veritatis
-                  quis quae facilis itaque eos maxime perspiciatis accusamus
-                  dolores, culpa ab modi! Ratione, commodi optio!
+                  "Milan," the general championship of IIT, consisting of
+                  sports, cultural, and sci-tech events, is going to take place
+                  from 22nd September to 1st October. It consists of 24
+                  cultural, 13 sports, 12 sci-tech and 4 collaborative club
+                  events, making a total of 53 events. There will be 5 trophies,
+                  out of which one is the grand Overall Championship crowned to
+                  the all-round performers. A high voltage competition between
+                  18 hostels will be witnessed this time. This is the 4th
+                  edition of Milan, presented by PureEV.
                 </p>
               </div>
             </div>
@@ -474,7 +482,7 @@ function Home() {
               <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
                 <img
                   src={Pattern2}
-                  className="w-full h-full object-cover opacity-15 z-20"
+                  className="w-full h-full object-cover opacity-10 z-20"
                 />
               </div>
               <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
@@ -503,10 +511,11 @@ function Home() {
           </div>
           <div className="flex flex-row gap-4 max-w-7xl justify-between items-center w-full font-bold px-4 lg:px-8 mb-8">
             <div
-              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${leaderBoard === "leaderboard"
-                ? "bg-[#4B16B2] text-white"
-                : "bg-[#D1CCB6]"
-                }`}
+              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
+                leaderBoard === "leaderboard"
+                  ? "bg-[#4B16B2] text-white"
+                  : "bg-[#D1CCB6]"
+              }`}
             >
               <button
                 className="md:text-xl lg:text-xl w-full"
@@ -516,10 +525,11 @@ function Home() {
               </button>
             </div>
             <div
-              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${leaderBoard === "blockrace"
-                ? "bg-[#4B16B2] text-white"
-                : "bg-[#D1CCB6]"
-                }`}
+              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
+                leaderBoard === "blockrace"
+                  ? "bg-[#4B16B2] text-white"
+                  : "bg-[#D1CCB6]"
+              }`}
             >
               <button
                 className="md:text-xl lg:text-xl w-full"
@@ -562,7 +572,7 @@ function Home() {
         </div>
       </div>
     </div>
-      );
+  );
 }
 
-      export default Home;
+export default Home;
