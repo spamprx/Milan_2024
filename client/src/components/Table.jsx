@@ -53,13 +53,13 @@ function Table({ games, blocknames, points, tag }) {
     () => [
       {
         Header: (
-          <div className="bg-[#24104E] p-2 md:p-4 rounded-lg text-white">
+          <div className="bg-[#24104E] text-sm py-2 px-4 rounded-lg text-white">
             {tag.split(" ")[0].toUpperCase()}
           </div>
         ),
         accessor: "sport",
         Cell: ({ value }) => (
-          <div className="bg-[#7842E2] p-2 md:p-4 rounded-lg text-[#D1CCB6] font-semibold truncate">
+          <div className="bg-[#7842E2] text-sm py-2 px-4 rounded-lg text-[#D1CCB6] font-semibold truncate">
             {value}
           </div>
         ),
@@ -72,13 +72,13 @@ function Table({ games, blocknames, points, tag }) {
     () =>
       visibleBlocks.map((block) => ({
         Header: (
-          <div className="bg-[#24104E] p-2 md:p-4 rounded-lg truncate text-white">
+          <div className="bg-[#24104E] text-sm py-2 px-4 rounded-lg truncate text-white">
             {block}
           </div>
         ),
         accessor: block,
         Cell: ({ value }) => (
-          <div className="bg-[#7842E2] p-2 md:p-4 rounded-lg text-[#D1CCB6] font-bold break-words overflow-hidden text-ellipsis">
+          <div className="bg-[#7842E2] text-sm py-2 px-4 rounded-lg text-[#D1CCB6] font-bold break-words overflow-hidden text-ellipsis">
             {value}
           </div>
         ),
@@ -182,7 +182,7 @@ function Table({ games, blocknames, points, tag }) {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center max-w-44 p-2 md:p-4 bg-[#7842E2] rounded-tl-2xl text-white"
+                      className="text-center max-w-44 py-2 px-4 bg-[#7842E2] rounded-tl-2xl text-white"
                     >
                       {column.render("Header")}
                     </th>
@@ -198,7 +198,7 @@ function Table({ games, blocknames, points, tag }) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center max-w-44 p-2 md:p-4 text-white"
+                        className="text-center max-w-44 py-2 px-4 text-white"
                       >
                         {cell.render("Cell")}
                       </td>
@@ -218,7 +218,7 @@ function Table({ games, blocknames, points, tag }) {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center max-w-32 md:max-w-40 p-2 md:p-4 bg-[#7842E2] last:rounded-tr-2xl text-white"
+                      className="text-center max-w-32 md:max-w-40 py-2 px-4 bg-[#7842E2] last:rounded-tr-2xl text-white"
                     >
                       {column.render("Header")}
                     </th>
@@ -234,7 +234,7 @@ function Table({ games, blocknames, points, tag }) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center max-w-32 md:max-w-40 p-2 md:p-4 text-white"
+                        className="text-center max-w-32 md:max-w-40 py-2 px-4 text-white"
                       >
                         {cell.render("Cell")}
                       </td>
@@ -246,20 +246,24 @@ function Table({ games, blocknames, points, tag }) {
           </table>
         </div>
       </div>
-      <div className="flex justify-center items-center mt-4">
+      <div className="flex justify-center items-center mt-6">
         <button
           onClick={handlePrevious}
           disabled={currentPage === 0}
-          className="p-2 rounded"
+          className="rounded"
         >
-          <img src={Arrow} alt="ArrowLeft" className="w-3/4"/>
+          <div className="flex items-center justify-center">
+            <img src={Arrow} alt="ArrowLeft" className="w-3/4" />
+          </div>
         </button>
         <button
           onClick={handleNext}
           disabled={(currentPage + 1) * hostelsPerPage >= blocknames.length}
-          className="p-2 rounded"
+          className="rounded"
         >
-          <img src={Arrow} alt="ArrowRight" className="scale-x-[-1] w-3/4"/>
+          <div className="flex items-center justify-center">
+            <img src={Arrow} alt="ArrowRight" className="scale-x-[-1] w-3/4" />
+          </div>
         </button>
       </div>
     </div>
