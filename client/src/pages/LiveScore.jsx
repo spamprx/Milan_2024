@@ -129,9 +129,9 @@ const GameDetailsCarousel = ({ pastData }) => {
         <div className="w-full flex items-center justify-center scale-90 md:scale-100 md:p-4 mx-auto">
           <Filter
             options={["SPORTS", "CULTURALS", "SCI-TECH"]}
-            needAll={false}
             title={"Category"}
             isSingle={true}
+            needAll={false}
             onCategoryChange={handleCategoryChange}
           />
         </div>
@@ -364,6 +364,9 @@ function LiveScore() {
 
   return (
     <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center my-8">
+      <div className="text-3xl text-white font-bold mb-8">
+        --- LIVE MATCHES ---
+      </div>
       <div className="flex flex-row gap-[20vw] justify-center">
         <Filter
           options={["PREFERRED GAMES"]}
@@ -373,19 +376,21 @@ function LiveScore() {
         />
       </div>
 
-      <div className="grid grid-cols-1 card-col scale-90 w-full gap-8 justify-items-center">
-        {!error && currentMatches.length >= 2
-          ? currentMatches.map((match, index) =>
-              index % 2 === 0 ? (
-                <CardLiveScore key={match.matchId} match={match} />
-              ) : (
-                <CardLiveScoreRev key={match.matchId} match={match} />
+      {!error && (
+        <div className="grid grid-cols-1 card-col scale-90 w-full gap-8 justify-items-center">
+          {currentMatches.length >= 2
+            ? currentMatches.map((match, index) =>
+                index % 2 === 0 ? (
+                  <CardLiveScore key={match.matchId} match={match} />
+                ) : (
+                  <CardLiveScoreRev key={match.matchId} match={match} />
+                )
               )
-            )
-          : currentMatches.map((match) => (
-              <CardLiveScore key={match.matchId} match={match} />
-            ))}
-      </div>
+            : currentMatches.map((match) => (
+                <CardLiveScore key={match.matchId} match={match} />
+              ))}
+        </div>
+      )}
       {error && (
         <>
           <div className="flex flex-col text-center items-center scale-90 justify-center mt-8 h-[50vh]">
@@ -409,7 +414,7 @@ function LiveScore() {
         </div>
       )}
       <div className="text-3xl text-white font-bold mt-8">
-        --- PAST SCORES ---
+        --- PAST MATCHES ---
       </div>
       <GameDetailsCarousel pastData={pastData} />
     </div>

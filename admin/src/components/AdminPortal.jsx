@@ -7,9 +7,9 @@ const capitalizeFirstLetter = (string) => {
   if (!string) return "";
 
   return string
-    .split(" ") // Split the string into words
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
-    .join("_"); // Join the words with underscores
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) 
+    .join("_");
 };
 
 const formatTimeToHHMM = (dateTimeString) => {

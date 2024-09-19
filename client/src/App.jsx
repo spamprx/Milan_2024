@@ -16,7 +16,7 @@ import BackToTopButton from "./components/BackToTopButton";
 function App() {
   return (
     <div
-      className="flex flex-col min-h-screen"
+      className="flex flex-col min-h-screen select-none"
       style={{
         backgroundImage: `url(${Background})`,
         backgroundSize: "cover",

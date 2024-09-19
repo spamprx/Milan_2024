@@ -16,7 +16,7 @@ function Events() {
   const [isMobile, setIsMobile] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   const [categories, setCategories] = useState([
-    "Sports Boys",
+    "SPORTS-BOYS","SPORTS-GIRLS","CULTURALS","SCI-TECH",
   ]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -189,7 +189,7 @@ function Events() {
         <div className="mt-8 relative flex flex-col justify-center items-center">
           <div className="absolute top-0 z-30 flex flex-row items-center justify-center">
             <Filter
-              options={["Sports Boys", "Sports Girls", "Culti", "Sci-Tech"]}
+              options={["SPORTS-BOYS", "SPORTS-GIRLS", "CULTURALS", "SCI-TECH"]}
               onCategoryChange={handleCategoriesChange}
               title="SELECT TYPE"
             />

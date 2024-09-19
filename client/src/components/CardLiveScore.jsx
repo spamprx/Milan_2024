@@ -19,7 +19,7 @@ function CardLiveScore({ match }) {
   }
 
   return (
-    <div className="relative scale-[0.8] md:scale-75 lg:scale-90">
+    <div className="relative scale-[0.7] md:scale-75 lg:scale-90">
       <div className="relative flex w-fit max-w-screen-sm bg-gradient-to-r from-[#D9d9d9] to-gray-400 rounded-lg">
         <img
           src={Subtract}
