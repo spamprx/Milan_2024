@@ -5,12 +5,29 @@ const BACKEND_URL = "https://backend-w6vj.onrender.com";
 
 const capitalizeFirstLetter = (string) => {
   if (!string) return "";
-  return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+
+  return string
+    .split(" ") // Split the string into words
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalize each word
+    .join("_"); // Join the words with underscores
 };
 
 const formatTimeToHHMM = (dateTimeString) => {
   if (!dateTimeString) return "";
   return dateTimeString.slice(11, 16);
+};
+
+const sportExtras = {
+  Badminton: "Sets",
+  Basketball: "Fouls",
+  Cricket: "Wickets",
+  Dodgeball: "Fouls",
+  Football: "Fouls",
+  Hockey: "Quarters",
+  Table_tennis: "Sets",
+  Tennis: "Sets",
+  Squash: "",
+  Volleyball: "Sets",
 };
 
 const blocks = [
@@ -41,18 +58,19 @@ const AdminPortal = () => {
   const [selectedMatch, setSelectedMatch] = useState(null);
   const [newMatchData, setNewMatchData] = useState({
     sport: "football",
+    score1: "00",
+    score2: "00",
     team1: "",
     team2: "",
     startTime: "",
     winner: "",
   });
   const [matchData, setMatchData] = useState({
-    score1: "",
-    score2: "",
-    wicket1: "",
-    wicket2: "",
-    over1: "",
-    over2: "",
+    score1: "00",
+    score2: "00",
+    extra1: "00",
+    extra2: "00",
+    extra: "",
     winner: "",
   });
   const [eventData, setEventData] = useState({
@@ -224,7 +242,7 @@ const AdminPortal = () => {
         <option value="dodgeball">Dodgeball</option>
         <option value="football">Football</option>
         <option value="hockey">Hockey</option>
-        <option value="table-tennis">Table Tennis</option>
+        <option value="table_tennis">Table Tennis</option>
         <option value="tennis">Tennis</option>
         <option value="squash">Squash</option>
         <option value="volleyball">Volleyball</option>
@@ -508,38 +526,20 @@ const AdminPortal = () => {
               placeholder="Score 2"
               required
             />
-            {selectedMatch.sport === "Cricket" && (
-              <>
-                <input
-                  type="text"
-                  name="wicket1"
-                  value={matchData.wicket1}
-                  onChange={handleChange}
-                  placeholder="Wickets 1"
-                />
-                <input
-                  type="text"
-                  name="wicket2"
-                  value={matchData.wicket2}
-                  onChange={handleChange}
-                  placeholder="Wickets 2"
-                />
-                <input
-                  type="text"
-                  name="over1"
-                  value={matchData.over1}
-                  onChange={handleChange}
-                  placeholder="Overs 1"
-                />
-                <input
-                  type="text"
-                  name="over2"
-                  value={matchData.over2}
-                  onChange={handleChange}
-                  placeholder="Overs 2"
-                />
-              </>
-            )}
+            <input
+              type="text"
+              name="extra1"
+              value={matchData.extra1}
+              onChange={handleChange}
+              placeholder={matchData.extra}
+            />
+            <input
+              type="text"
+              name="extra2"
+              value={matchData.extra2}
+              onChange={handleChange}
+              placeholder={matchData.extra}
+            />
             <button type="submit">Update Score</button>
           </form>
           <button onClick={() => handleEndMatch(selectedMatch.matchId)}>
