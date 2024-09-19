@@ -31,8 +31,8 @@ function Team() {
   }
 
   return (
-    <div className="w-screen min-h-screen">
-      <div className="w-screen h-auto flex justify-center items-center my-8 md:my-12">
+    <div className="w-full min-h-screen">
+      <div className="w-full h-auto flex justify-center items-center my-8 md:my-12">
         <div className="relative w-full sm:w-3/4 md:w-2/3 lg:w-1/2 h-auto flex justify-center items-center m-2 sm:m-0">
           <img
             src={Milan_OC}
@@ -47,19 +47,6 @@ function Team() {
           key={team.name}
           className="flex flex-col items-center justify-center"
         >
-          {/* <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
-            <div className="absolute flex w-full h-full items-center justify-center">
-              <img
-                src={Image}
-                alt="SponsorArrow"
-                className="w-full max-w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
-              />
-            </div>
-
-            <p className="relative z-10 text-white text-center text-xl sm:text-3xl lg:text-3xl">
-              {team.name}
-            </p>
-          </div> */}
           <div className="relative flex items-center justify-center h-4/5 w-full p-10 mt-5 mb-10">
             <div className="absolute flex w-full h-full items-center justify-center">
               <img
@@ -117,8 +104,8 @@ function Team() {
       ))}
 
       <div className="flex flex-col items-center justify-center">
-        <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
-          <div className="absolute flex w-screen h-full items-center justify-center">
+        <div className="relative flex items-center justify-center h-4/5 w-full my-10 md:my-16">
+          <div className="absolute flex w-full h-full items-center justify-center">
             <img
               src={Image}
               alt="SponsorArrow"
