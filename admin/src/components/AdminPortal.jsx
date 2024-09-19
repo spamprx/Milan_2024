@@ -24,7 +24,7 @@ const sportExtras = {
   Dodgeball: "Fouls",
   Football: "Fouls",
   Hockey: "Quarters",
-  Table_tennis: "Sets",
+  Table_Tennis: "Sets",
   Tennis: "Sets",
   Squash: "Sets",
   Volleyball: "Sets",
@@ -62,6 +62,7 @@ const AdminPortal = () => {
     score2: "00",
     team1: "",
     team2: "",
+    extra: "",
     startTime: "",
     winner: "",
   });
@@ -70,7 +71,6 @@ const AdminPortal = () => {
     score2: "00",
     extra1: "00",
     extra2: "00",
-    extra: "",
     winner: "",
   });
   const [eventData, setEventData] = useState({
@@ -95,7 +95,7 @@ const AdminPortal = () => {
 
     const intervalId = setInterval(() => {
       fetchMatches();
-    }, 30000);
+    }, 60000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -130,6 +130,7 @@ const AdminPortal = () => {
       const updatedMatchData = {
         ...matchData,
         matchId: selectedMatch.matchId,
+        extra: sportExtras[capitalizeFirstLetter(selectedMatch.sport)],
       };
       const response = await axios.post(
         `${BACKEND_URL}/api/update-score`,
@@ -150,6 +151,7 @@ const AdminPortal = () => {
       const formattedNewMatchData = {
         ...newMatchData,
         sport: capitalizeFirstLetter(newMatchData.sport),
+        extra: sportExtras[capitalizeFirstLetter(newMatchData.sport)],
       };
       const response = await axios.post(
         `${BACKEND_URL}/api/add-match`,
