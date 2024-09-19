@@ -9,7 +9,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
     if (isSingle) {
       setSelectedCategories(options.length > 0 ? ["SELECT ALL"] : []);
     }
-  }, [options, isSingle]);
+  }, []);
 
   const handleCategoryChange = (category) => {
     if (isSingle) {
@@ -29,10 +29,12 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
   const handleSave = () => {
     setIsOpen(false);
-    if (selectedCategories.length === 0) {
+    if(selectedCategories.length === 0)
+    {
       setSelectedCategories(options);
       onCategoryChange(options);
-    } else if (onCategoryChange) {
+    }
+    else if (onCategoryChange) {
       onCategoryChange(selectedCategories);
     }
   };
@@ -54,12 +56,12 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   };
 
   return (
-    <div
-      className="w-[11rem] sm:w-48"
-      onClick={() => setIsOpen(!isOpen)}
-    >
+    <div className="w-full md:w-1/3 max-w-52 sm:min-w-44">
       <div className="bg-[#270B5D] rounded-2xl overflow-hidden">
-        <div className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer">
+        <div
+          className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <div className="flex justify-between items-center w-full text-[#D1CCB6] font-extralight">
             {title}
             <ChevronDown
@@ -93,6 +95,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
                 SELECT ALL
               </span>
             </div>
+
             {options.map((category, index) => (
               <div
                 key={index}

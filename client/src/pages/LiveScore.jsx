@@ -15,7 +15,7 @@ const GameDetailsCarousel = ({ pastData }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedDate, setSelectedDate] = useState(25);
   const [filteredData, setFilteredData] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("SPORTS");
+  const [selectedCategory, setSelectedCategory] = useState("SELECT ALL");
   const scrollRef = useRef(null);
   const dateScrollRef = useRef(null);
 
@@ -61,7 +61,8 @@ const GameDetailsCarousel = ({ pastData }) => {
     const filtered = pastData.filter((game) => {
       return (
         game.date === selectedDate &&
-        (!selectedCategory || game.category === selectedCategory)
+        (selectedCategory === "SELECT ALL" ||
+          game.category === selectedCategory)
       );
     });
 
@@ -131,46 +132,17 @@ const GameDetailsCarousel = ({ pastData }) => {
             options={["SPORTS", "CULTURALS", "SCI-TECH"]}
             title={"Category"}
             isSingle={true}
-            needAll={false}
             onCategoryChange={handleCategoryChange}
           />
         </div>
       </div>
-
-      {/* {filteredData.length > 0 ? (
-        <div className="relative w-full max-w-5xl overflow-hidden">
-          <div className="space-x-8">
-            <Slider {...settings}>
-              {filteredData.map((game, index) => (
-                <div
-                  key={game.matchId}
-                  className={`relative flex items-center justify-center m-2 p-2
-                    ${
-                      index === activeIndex
-                        ? "scale-110 z-10"
-                        : "opacity-70 scale-90"
-                    }`}
-                  onClick={() => setActiveIndex(index)}
-                >
-                  <GameDetails game={game} category={selectedCategory} />
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-      ) : (
-        <p className="text-lg text-white font-bold mt-8">
-          No games available for the selected date ({selectedDate}) and
-          category.
-        </p>
-      )} */}
 
       {filteredData.length > 0 ? (
         <div className="slider-container w-full">
           <Slider {...settings}>
             {filteredData.map((game, index) => (
               <div key={index} className="p-2 mb-2">
-                <GameDetails game={game} category={selectedCategory} />
+                <GameDetails game={game} category={game.category} />
               </div>
             ))}
           </Slider>
@@ -180,20 +152,6 @@ const GameDetailsCarousel = ({ pastData }) => {
           No games available for the selected date ({selectedDate}) and
           category.
         </p>
-      )}
-
-      {filteredData.length > 0 && (
-        <div className="flex mt-4 space-x-2">
-          {filteredData.map((_, index) => (
-            <button
-              key={index}
-              className={`w-3 h-3 rounded-full ${
-                index === activeIndex ? "bg-blue-500" : "bg-gray-300"
-              }`}
-              onClick={() => setActiveIndex(index)}
-            />
-          ))}
-        </div>
       )}
     </div>
   );
