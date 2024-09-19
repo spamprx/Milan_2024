@@ -1,0 +1,189 @@
+import React, { useState, useEffect } from "react";
+import Category from "../components/Category";
+// import data1 from "../content/sports_boys_data.json";
+// import data2 from "../content/sports_girls_data.json";
+// import data4 from "../content/techy_data.json";
+
+function Events() {
+  const [showSportsBoys, setShowSportsBoys] = useState(false);
+  const [showSportsGirls, setShowSportsGirls] = useState(false);
+  const [showCulti, setShowCulti] = useState(false);
+  const [showTechy, setShowTechy] = useState(false);
+  const [cultiData, setCultiData] = useState(null);
+  const [sportsGirlsData, setSportsGirlsData] = useState(null);
+  const [sportsBoysData, setSportsBoysData] = useState(null);
+  const [techyData, setTechyData] = useState(null);
+
+  useEffect(() => {
+    const fetchCultiData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbzv0WclMXfbGduO4HDJN2fvQtGLehXLBNY3DSzj01eTV39AP7abqVqxPHHrUy3jTACl/exec"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched culti data:", result); 
+        setCultiData(result);
+      } catch (error) {
+        console.error("Error fetching culti data:", error);
+      }
+    };
+
+    fetchCultiData();
+  }, []);
+
+  useEffect(() => {
+    const fetchSportsGirlsData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbzVrI_JnIFYZdgO3MCG1oY966K4x56DyLCMiZj3zpc1Ry7Lv0sZdRV9JiLUnZPi4MUz/exec"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched girls sports data:", result);
+        setSportsGirlsData(result);
+      } catch (error) {
+        console.error("Error fetching girls sports data:", error);
+      }
+    };
+
+    fetchSportsGirlsData();
+  }, []);
+
+  useEffect(() => {
+    const fetchSportsBoysData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbwAkBZpkZAA3RR7yhglhaY0MynyTb7x6RB8aRtDyG0C8rLZxHLlvy1qx838hl3Ys96M/exec"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched boys sports data:", result);
+        setSportsBoysData(result);
+      } catch (error) {
+        console.error("Error fetching sports boys data:", error);
+      }
+    };
+
+    fetchSportsBoysData();
+  }, []);
+
+  useEffect(() => {
+    const fetchTechyData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbx6Rbwmvzxh79ZK1BUqd_0nllGRg_k827VhcHH1YorEjMIXgrQ4Sar_L27UskZT478Q/exec"
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const result = await response.json();
+        console.log("Fetched techy data:", result);
+        setTechyData(result);
+      } catch (error) {
+        console.error("Error fetching techy data:", error);
+      }
+    };
+
+    fetchTechyData();
+  }, []);
+
+  const NavBar = () => {
+    return (
+      <div className="flex justify-center mx-auto my-10">
+        <button
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+          onClick={() => {
+            setShowSportsBoys(true);
+            setShowSportsGirls(false);
+            setShowCulti(false);
+            setShowTechy(false);
+          }}
+        >
+          Sports Boys
+        </button>
+        <button
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+          onClick={() => {
+            setShowSportsBoys(false);
+            setShowSportsGirls(true);
+            setShowCulti(false);
+            setShowTechy(false);
+          }}
+        >
+          Sports Girls
+        </button>
+        <button
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+          onClick={() => {
+            setShowSportsBoys(false);
+            setShowSportsGirls(false);
+            setShowCulti(true);
+            setShowTechy(false);
+          }}
+        >
+          Culti
+        </button>
+        <button
+          className="bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold py-2 px-4 mx-4 rounded"
+          onClick={() => {
+            setShowSportsBoys(false);
+            setShowSportsGirls(false);
+            setShowCulti(false);
+            setShowTechy(true);
+          }}
+        >
+          Techy
+        </button>
+      </div>
+    );
+  };
+
+  return (
+    <>
+      <div className="flex">
+        <NavBar />
+      </div>
+      {showSportsBoys && sportsBoysData && (
+        <Category
+          title={sportsBoysData.title}
+          blocknames={sportsBoysData.blocks}
+          games={sportsBoysData.eventNames}
+          points={sportsBoysData.scores}
+        />
+      )}
+      {showSportsGirls && sportsGirlsData && (
+        <Category
+          title={sportsGirlsData.title}
+          blocknames={sportsGirlsData.blocks}
+          games={sportsGirlsData.eventNames}
+          points={sportsGirlsData.scores}
+        />
+      )}
+      {showCulti && cultiData && (
+        <Category
+          title={cultiData.title}
+          blocknames={cultiData.blocks}
+          games={cultiData.eventNames}
+          points={cultiData.scores}
+        />
+      )}
+      {showTechy && techyData && (
+        <Category
+          title={techyData.title}
+          blocknames={techyData.blocks}
+          games={techyData.eventNames}
+          points={techyData.scores}
+        />
+      )}
+    </>
+  );
+}
+
+export default Events;

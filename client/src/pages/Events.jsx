@@ -14,24 +14,15 @@ function Events() {
   const [sportsBoysData, setSportsBoysData] = useState(null);
   const [techyData, setTechyData] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
+  const [categories, setCategories] = useState([
+    "SPORTS-BOYS","SPORTS-GIRLS","CULTURALS","SCI-TECH",
+  ]);
   const [isLoading, setIsLoading] = useState(true);
-  const [firstTwoFetched, setFirstTwoFetched] = useState(false);
 
   useEffect(() => {
-    const checkFirstTwoFetched = () => {
-      return sportsBoysData && sportsGirlsData;
-    };
-
-    if (checkFirstTwoFetched()) {
-      setFirstTwoFetched(true);
-    }
-  }, [sportsBoysData, sportsGirlsData]);
-
-  useEffect(() => {
-    if (firstTwoFetched && techyData && cultiData) {
-      setIsLoading(false);
-    }
-  }, [firstTwoFetched, techyData, cultiData]);
+    setDataFetched(sportsBoysData && sportsGirlsData && techyData && cultiData);
+  }, [sportsBoysData, sportsGirlsData, techyData, cultiData]);
 
   const handleCategoriesChange = (selectedCategory) => {
     setCategories(selectedCategory);
@@ -48,40 +39,93 @@ function Events() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
-    const fetchData = async (url, setter) => {
+    const fetchCultiData = async () => {
       try {
-        const response = await fetch(url);
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbzv0WclMXfbGduO4HDJN2fvQtGLehXLBNY3DSzj01eTV39AP7abqVqxPHHrUy3jTACl/exec"
+        );
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+          throw new Error("HTTP error! status: ${response.status}");
         }
         const result = await response.json();
-        setter(result);
+        console.log("Fetched culti data:", result);
+        setCultiData(result);
       } catch (error) {
-        console.error(`Error fetching data:`, error);
+        console.error("Error fetching culti data:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchData(
-      "https://script.google.com/macros/s/AKfycbzv0WclMXfbGduO4HDJN2fvQtGLehXLBNY3DSzj01eTV39AP7abqVqxPHHrUy3jTACl/exec",
-      setCultiData
-    );
-    fetchData(
-      "https://script.google.com/macros/s/AKfycbzVrI_JnIFYZdgO3MCG1oY966K4x56DyLCMiZj3zpc1Ry7Lv0sZdRV9JiLUnZPi4MUz/exec",
-      setSportsGirlsData
-    );
-    fetchData(
-      "https://script.google.com/macros/s/AKfycby3D4yrP5M2xRoadR7oSVauTj01hNRDHAhR-eZURWzeHSFlj9cT8B2x_G65w99y_wcCgw/exec",
-      setSportsBoysData
-    );
-    fetchData(
-      "https://script.google.com/macros/s/AKfycbx6Rbwmvzxh79ZK1BUqd_0nllGRg_k827VhcHH1YorEjMIXgrQ4Sar_L27UskZT478Q/exec",
-      setTechyData
-    );
+    fetchCultiData();
+  }, []);
 
-    setIsLoading(true);
+  useEffect(() => {
+    const fetchSportsGirlsData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbzVrI_JnIFYZdgO3MCG1oY966K4x56DyLCMiZj3zpc1Ry7Lv0sZdRV9JiLUnZPi4MUz/exec"
+        );
+        if (!response.ok) {
+          throw new Error("HTTP error! status: ${response.status}");
+        }
+        const result = await response.json();
+        console.log("Fetched girls sports data:", result);
+        setSportsGirlsData(result);
+      } catch (error) {
+        console.error("Error fetching girls sports data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSportsGirlsData();
+  }, []);
+
+  useEffect(() => {
+    const fetchSportsBoysData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycby3D4yrP5M2xRoadR7oSVauTj01hNRDHAhR-eZURWzeHSFlj9cT8B2x_G65w99y_wcCgw/exec"
+        );
+        if (!response.ok) {
+          throw new Error("HTTP error! status: ${response.status}");
+        }
+        const result = await response.json();
+        console.log("Fetched boys sports data:", result);
+        setSportsBoysData(result);
+      } catch (error) {
+        console.error("Error fetching sports boys data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSportsBoysData();
+  }, []);
+
+  useEffect(() => {
+    const fetchTechyData = async () => {
+      try {
+        const response = await fetch(
+          "https://script.google.com/macros/s/AKfycbx6Rbwmvzxh79ZK1BUqd_0nllGRg_k827VhcHH1YorEjMIXgrQ4Sar_L27UskZT478Q/exec"
+        );
+        if (!response.ok) {
+          throw new Error("HTTP error! status: ${response.status}");
+        }
+        const result = await response.json();
+        console.log("Fetched techy data:", result);
+        setTechyData(result);
+      } catch (error) {
+        console.error("Error fetching techy data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchTechyData();
   }, []);
 
   const NavBar = () => {
@@ -141,7 +185,7 @@ function Events() {
 
   return (
     <>
-      {isMobile && (
+      {isMobile && dataFetched && (
         <div className="mt-8 relative flex flex-col justify-center items-center">
           <div className="absolute top-0 z-30 flex flex-row items-center justify-center">
             <Filter
@@ -152,7 +196,7 @@ function Events() {
           </div>
           <div className="w-full mt-24">
             <GraphMobile
-              blocknames={techyData?.blocks}
+              blocknames={techyData.blocks}
               categories={categories}
               sportsBoysData={sportsBoysData}
               sportsGirlsData={sportsGirlsData}
