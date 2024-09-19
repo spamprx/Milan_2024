@@ -29,7 +29,7 @@ const HomeSponsorCard = () => {
         options={{
           type: "loop",
           perPage: 3,
-          gap: "1rem",
+          gap: "3rem",
           pagination: false,
           autoScroll: {
             pauseOnHover: false,
@@ -43,12 +43,12 @@ const HomeSponsorCard = () => {
       >
         {sponsorImages.map((sponsor, index) => (
           <SplideSlide key={index}>
-            <div className="w-full h-full bg-[#220A4F] items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center">
               <img
                 src={sponsor.image}
                 alt={sponsor.name}
-                className="object-contain w-full h-full rounded-md"
-                style={{ maxHeight: "100%", maxWidth: "100%" }}
+                className="object-contain w-full h-full rounded-xl"
+                style={{ maxHeight: "90%", maxWidth: "90%" }}
               />
             </div>
           </SplideSlide>

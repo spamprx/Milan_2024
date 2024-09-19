@@ -1,23 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
-const Filter = ({ options, onCategoryChange, title, isSingle , needAll }) => {
+const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [present,setPresent] = useState(needAll ? needAll : true);
 
   useEffect(() => {
     if (isSingle) {
-      if(present)
-      {
-        setSelectedCategories(options.length > 0 ? ["SELECT ALL"] : []);
-      }
-      else
-      {
-        setSelectedCategories([]);
-      }
+      setSelectedCategories(options.length > 0 ? ["SELECT ALL"] : []);
     }
-  }, []);
+  }, [options, isSingle]);
 
   const handleCategoryChange = (category) => {
     if (isSingle) {
@@ -37,12 +29,10 @@ const Filter = ({ options, onCategoryChange, title, isSingle , needAll }) => {
 
   const handleSave = () => {
     setIsOpen(false);
-    if(selectedCategories.length === 0)
-    {
+    if (selectedCategories.length === 0) {
       setSelectedCategories(options);
       onCategoryChange(options);
-    }
-    else if (onCategoryChange) {
+    } else if (onCategoryChange) {
       onCategoryChange(selectedCategories);
     }
   };
@@ -64,12 +54,12 @@ const Filter = ({ options, onCategoryChange, title, isSingle , needAll }) => {
   };
 
   return (
-    <div className="w-[11rem] sm:w-48">
+    <div
+      className="w-[11rem] sm:w-48"
+      onClick={() => setIsOpen(!isOpen)}
+    >
       <div className="bg-[#270B5D] rounded-2xl overflow-hidden">
-        <div
-          className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer"
-          onClick={() => setIsOpen(!isOpen)}
-        >
+        <div className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer">
           <div className="flex justify-between items-center w-full text-[#D1CCB6] font-extralight">
             {title}
             <ChevronDown
@@ -88,24 +78,21 @@ const Filter = ({ options, onCategoryChange, title, isSingle , needAll }) => {
 
         {isOpen && (
           <div className="py-2 px-4 text-white">
-            {present && (
+            <div
+              className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
+              onClick={handleSelectAll}
+            >
               <div
-                className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
-                onClick={handleSelectAll}
-              >
-                <div
-                  className={`w-4 h-4 border-2 rounded-full ${
-                    selectedCategories.includes("Select All")
-                      ? "bg-white border-white"
-                      : "border-white"
-                  }`}
-                ></div>
-                <span className="text-sm text-[#D1CCB6] truncate text-left">
-                  SELECT ALL
-                </span>
-              </div>
-            )}
-
+                className={`w-4 h-4 border-2 rounded-full ${
+                  selectedCategories.includes("Select All")
+                    ? "bg-white border-white"
+                    : "border-white"
+                }`}
+              ></div>
+              <span className="text-sm text-[#D1CCB6] truncate text-left">
+                SELECT ALL
+              </span>
+            </div>
             {options.map((category, index) => (
               <div
                 key={index}
