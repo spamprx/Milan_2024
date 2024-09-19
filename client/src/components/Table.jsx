@@ -182,7 +182,7 @@ function Table({ games, blocknames, points, tag }) {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center max-w-44 py-2 px-4 bg-[#7842E2] rounded-tl-2xl text-white"
+                      className="text-center max-w-40 md:max-w-44 p-2 bg-[#7842E2] rounded-tl-2xl text-white"
                     >
                       {column.render("Header")}
                     </th>
@@ -198,7 +198,7 @@ function Table({ games, blocknames, points, tag }) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center max-w-44 py-2 px-4 text-white"
+                        className="text-center max-w-40 md:max-w-44 p-2 text-white"
                       >
                         {cell.render("Cell")}
                       </td>
@@ -218,7 +218,7 @@ function Table({ games, blocknames, points, tag }) {
                   {headerGroup.headers.map((column) => (
                     <th
                       {...column.getHeaderProps()}
-                      className="text-center max-w-32 md:max-w-40 py-2 px-4 bg-[#7842E2] last:rounded-tr-2xl text-white"
+                      className="text-center max-w-32 md:max-w-40 p-2 bg-[#7842E2] last:rounded-tr-2xl text-white"
                     >
                       {column.render("Header")}
                     </th>
@@ -234,7 +234,7 @@ function Table({ games, blocknames, points, tag }) {
                     {row.cells.map((cell) => (
                       <td
                         {...cell.getCellProps()}
-                        className="text-center max-w-32 md:max-w-40 py-2 px-4 text-white"
+                        className="text-center max-w-32 md:max-w-40 p-2 text-white"
                       >
                         {cell.render("Cell")}
                       </td>

@@ -87,7 +87,7 @@ const GameDetailsCarousel = ({ pastData }) => {
             ))}
           </div>
         </div>
-        <div className="w-full scale-90 md:scale-100 md:p-4 mx-auto">
+        <div className="w-full flex items-center justify-center scale-90 md:scale-100 md:p-4 mx-auto">
           <Filter
             options={["SPORTS", "CULTURALS", "SCI-TECH"]}
             needAll={false}

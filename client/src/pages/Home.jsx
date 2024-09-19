@@ -339,18 +339,19 @@ function Home() {
             </Slider>
           </div>
         </div>
+      </div>
 
-        <div className="w-full h-full flex flex-col justify-center items-center mb-8">
-          <div className="w-full relative flex flex-row gap-2 sm:gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6] mb-8">
-            <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
-            <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
-            <div className="bg-[#D1CCB6] text-md sm:text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
-              THE AFTERMOVIE
-            </div>
-            <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
-            <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
+      <div className="w-full h-full flex flex-col justify-center items-center mb-8">
+        <div className="w-full relative flex flex-row gap-2 sm:gap-4 py-2 bg-[#160631] border-y-2 border-[#D1CCB6] mb-8">
+          <div className="bg-[#D1CCB6] flex-grow rounded-r-xl"></div>
+          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+          <div className="bg-[#D1CCB6] text-md sm:text-lg md:text-3xl lg:text-4xl p-2 px-8 rounded-xl text-[#160631] font-bold">
+            THE AFTERMOVIE
           </div>
-          {/* <div className="w-full flex-grow flex-wrap flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
+          <div className="bg-[#D1CCB6] w-1/4 rounded-xl"></div>
+          <div className="bg-[#D1CCB6] flex-grow rounded-l-xl"></div>
+        </div>
+        {/* <div className="w-full flex-grow flex-wrap flex flex-col sm:flex-row justify-around items-center gap-8 px-4 lg:px-8">
           <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
             <iframe
               className="w-full h-full"
@@ -399,176 +400,175 @@ function Home() {
             </div>
           </div>
         </div> */}
-          <div className="w-full max-w-7xl h-full px-4 lg:px-8">
-            <div className="flex items-center justify-center object-contain aspect-[16/9]">
-              <iframe
-                className="w-full h-full rounded-2xl object-contain"
-                src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              ></iframe>
-            </div>
+        <div className="w-full max-w-7xl h-full px-4 lg:px-8">
+          <div className="flex items-center justify-center object-contain aspect-[16/9]">
+            <iframe
+              className="w-full h-full rounded-2xl object-contain"
+              src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            ></iframe>
           </div>
         </div>
+      </div>
 
-        <div className="w-full h-full flex flex-col justify-center items-center mb-8">
-          <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
-            <div className="absolute flex w-full h-3/4 items-center justify-center">
-              <img
-                src={HomeArrow}
-                className="w-full h-full opacity-85 object-cover"
-              />
-            </div>
+      <div className="w-full h-full flex flex-col justify-center items-center mb-8">
+        <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
+          <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
-              src={Skateboard}
-              className="absolute w-3/4 sm:w-1/2 lg:w-1/3 h-auto z-10 opacity-90"
+              src={HomeArrow}
+              className="w-full h-full opacity-85 object-cover"
             />
-            <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
-              OUR THEME
-            </p>
           </div>
-          <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between items-center lg:items-start gap-8 px-4 lg:px-8">
-            <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center overflow-hidden">
-              <img src={Theme} className="w-full h-full object-contain" />
+          <img
+            src={Skateboard}
+            className="absolute w-3/4 sm:w-1/2 lg:w-1/3 h-auto z-10 opacity-90"
+          />
+          <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
+            OUR THEME
+          </p>
+        </div>
+        <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between items-center lg:items-start gap-8 px-4 lg:px-8">
+          <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center overflow-hidden">
+            <img src={Theme} className="w-full h-full object-contain" />
+          </div>
+          <div className="relative w-full lg:w-1/2 aspect-square max-w-[500px] flex items-center justify-center">
+            <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
+              <img
+                src={Pattern2}
+                className="w-full h-full object-cover opacity-10 z-20"
+              />
             </div>
-            <div className="relative w-full lg:w-1/2 aspect-square max-w-[500px] flex items-center justify-center">
-              <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
-                <img
-                  src={Pattern2}
-                  className="w-full h-full object-cover opacity-10 z-20"
-                />
-              </div>
-              <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
-                <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
-                  "Milan," the general championship of IIT, consisting of
-                  sports, cultural, and sci-tech events, is going to take place
-                  from 22nd September to 1st October. It consists of 24
-                  cultural, 13 sports, 12 sci-tech and 4 collaborative club
-                  events, making a total of 53 events. There will be 5 trophies,
-                  out of which one is the grand Overall Championship crowned to
-                  the all-round performers. A high voltage competition between
-                  18 hostels will be witnessed this time. This is the 4th
-                  edition of Milan, presented by PureEV.
-                </p>
-              </div>
+            <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
+              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
+                "Milan," the general championship of IIT, consisting of sports,
+                cultural, and sci-tech events, is going to take place from 22nd
+                September to 1st October. It consists of 24 cultural, 13 sports,
+                12 sci-tech and 4 collaborative club events, making a total of
+                53 events. There will be 5 trophies, out of which one is the
+                grand Overall Championship crowned to the all-round performers.
+                A high voltage competition between 18 hostels will be witnessed
+                this time. This is the 4th edition of Milan, presented by
+                PureEV.
+              </p>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="w-full h-full flex flex-col justify-center items-center mb-8">
-          <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
-            <div className="absolute flex w-full h-3/4 items-center justify-center">
-              <img
-                src={HomeArrow}
-                className="w-full h-full opacity-85 object-cover"
-              />
-            </div>
+      <div className="w-full h-full flex flex-col justify-center items-center mb-8">
+        <div className="relative flex items-center justify-center h-1/5 w-full p-6 lg:p-10 mb-8">
+          <div className="absolute flex w-full h-3/4 items-center justify-center">
             <img
-              src={Skateboard}
-              className="absolute w-3/4 sm:w-1/2 lg:w-1/3 h-auto z-10 opacity-90"
+              src={HomeArrow}
+              className="w-full h-full opacity-85 object-cover"
             />
-            <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
-              OUR MASCOT
-            </p>
           </div>
-          <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between lg:items-start items-center gap-8 px-4 lg:px-8">
-            <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
-              <img src={Mascot} className="w-full h-full object-contain" />
-            </div>
-            <div className="relative w-full lg:w-1/2 aspect-square max-w-[500px] flex items-center justify-center order-2 sm:order-1">
-              <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
-                <img
-                  src={Pattern2}
-                  className="w-full h-full object-cover opacity-10 z-20"
-                />
-              </div>
-              <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
-                <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Aspernatur nobis, autem, aliquid repellendus totam veritatis
-                  quis quae facilis itaque eos maxime perspiciatis accusamus
-                  dolores, culpa ab modi! Ratione, commodi optio!
-                </p>
-              </div>
-            </div>
-          </div>
+          <img
+            src={Skateboard}
+            className="absolute w-3/4 sm:w-1/2 lg:w-1/3 h-auto z-10 opacity-90"
+          />
+          <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
+            OUR MASCOT
+          </p>
         </div>
-
-        <div className="w-full h-full flex flex-col justify-center items-center mb-8">
-          <div className="relative flex items-center justify-center h-1/7 lg:h-2/5 w-full p-6 lg:p-10 mb-8">
-            <div className="absolute flex w-full h-3/4 items-center justify-center">
+        <div className="w-full max-w-7xl flex flex-col sm:flex-row justify-between lg:items-start items-center gap-8 px-4 lg:px-8">
+          <div className="w-full lg:w-1/2 aspect-square max-w-[500px] rounded-xl flex items-center justify-center order-1 sm:order-2 overflow-hidden">
+            <img src={Mascot} className="w-full h-full object-contain" />
+          </div>
+          <div className="relative w-full lg:w-1/2 aspect-square max-w-[500px] flex items-center justify-center order-2 sm:order-1">
+            <div className="absolute w-full h-full rounded-xl flex items-center justify-center z-10 bg-transparent overflow-hidden">
               <img
-                src={HomeArrow}
-                className="w-full h-full opacity-85 object-cover"
+                src={Pattern2}
+                className="w-full h-full object-cover opacity-10 z-20"
               />
             </div>
-            <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
-              OVERALL LEADERBOARD
-            </p>
-          </div>
-          <div className="flex flex-row gap-4 max-w-7xl justify-between items-center w-full font-bold px-4 lg:px-8 mb-8">
-            <div
-              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
-                leaderBoard === "leaderboard"
-                  ? "bg-[#4B16B2] text-white"
-                  : "bg-[#D1CCB6]"
-              }`}
-            >
-              <button
-                className="md:text-xl lg:text-xl w-full"
-                onClick={() => setLeaderBoard("leaderboard")}
-              >
-                Leaderboard
-              </button>
-            </div>
-            <div
-              className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
-                leaderBoard === "blockrace"
-                  ? "bg-[#4B16B2] text-white"
-                  : "bg-[#D1CCB6]"
-              }`}
-            >
-              <button
-                className="md:text-xl lg:text-xl w-full"
-                onClick={() => setLeaderBoard("blockrace")}
-              >
-                Block Race
-              </button>
-            </div>
-          </div>
-          <div className="w-full max-w-7xl lg:w-full flex flex-col lg:flex-row justify-center items-center lg:items-start px-4 lg:px-8">
-            <div
-              className={`relative w-full lg:w-full lg:h-1/2 bg-[#8F33BA] flex items-center justify-center p-3 rounded-xl`}
-            >
-              <div className="relative w-full h-full bg-[#0000004F] opacity-31 rounded-lg">
-                {leaderBoard === "leaderboard" ? (
-                  <HomeLeaderboard blockData={blockData} />
-                ) : (
-                  // <div className="flex justify-center items-center w-full min-h-[600px]">
-                  // {/* <p className="text-white text-2xl">Block Race Component</p> */}
-                  <BlockRace />
-                  // </div>
-                )}
-              </div>
+            <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
+              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Aspernatur nobis, autem, aliquid repellendus totam veritatis
+                quis quae facilis itaque eos maxime perspiciatis accusamus
+                dolores, culpa ab modi! Ratione, commodi optio!
+              </p>
             </div>
           </div>
         </div>
+      </div>
 
-        <div
-          className="w-full h-full"
-          style={{ backgroundImage: `url(${HomeArrow2})` }}
-        >
-          <div className="flex justify-start">
-            <div className="relative flex items-center h-1/5 w-1/2 p-5">
-              <img src={Sponsor} alt="Sponsor" className="sm:w-1/2 lg:w-1/3" />
+      <div className="w-full h-full flex flex-col justify-center items-center mb-8">
+        <div className="relative flex items-center justify-center h-1/7 lg:h-2/5 w-full p-6 lg:p-10 mb-8">
+          <div className="absolute flex w-full h-3/4 items-center justify-center">
+            <img
+              src={HomeArrow}
+              className="w-full h-full opacity-85 object-cover"
+            />
+          </div>
+          <p className="relative z-20 text-white text-center text-sm sm:text-xl lg:text-2xl font-semibold">
+            OVERALL LEADERBOARD
+          </p>
+        </div>
+        <div className="flex flex-row gap-4 max-w-7xl justify-between items-center w-full font-bold px-4 lg:px-8 mb-8">
+          <div
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
+              leaderBoard === "leaderboard"
+                ? "bg-[#4B16B2] text-white"
+                : "bg-[#D1CCB6]"
+            }`}
+          >
+            <button
+              className="md:text-xl lg:text-xl w-full"
+              onClick={() => setLeaderBoard("leaderboard")}
+            >
+              Leaderboard
+            </button>
+          </div>
+          <div
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
+              leaderBoard === "blockrace"
+                ? "bg-[#4B16B2] text-white"
+                : "bg-[#D1CCB6]"
+            }`}
+          >
+            <button
+              className="md:text-xl lg:text-xl w-full"
+              onClick={() => setLeaderBoard("blockrace")}
+            >
+              Block Race
+            </button>
+          </div>
+        </div>
+        <div className="w-full max-w-7xl lg:w-full flex flex-col lg:flex-row justify-center items-center lg:items-start px-4 lg:px-8">
+          <div
+            className={`relative w-full lg:w-full lg:h-1/2 bg-[#8F33BA] flex items-center justify-center p-3 rounded-xl`}
+          >
+            <div className="relative w-full h-full bg-[#0000004F] opacity-31 rounded-lg">
+              {leaderBoard === "leaderboard" ? (
+                <HomeLeaderboard blockData={blockData} />
+              ) : (
+                // <div className="flex justify-center items-center w-full min-h-[600px]">
+                // {/* <p className="text-white text-2xl">Block Race Component</p> */}
+                <BlockRace />
+                // </div>
+              )}
             </div>
           </div>
-          <div className="flex justify-center w-full h-1/2">
-            <HomeSponsorCard />
+        </div>
+      </div>
+
+      <div
+        className="w-full h-full"
+        style={{ backgroundImage: `url(${HomeArrow2})` }}
+      >
+        <div className="flex justify-start">
+          <div className="relative flex items-center h-1/5 w-1/2 p-5">
+            <img src={Sponsor} alt="Sponsor" className="sm:w-1/2 lg:w-1/3" />
           </div>
+        </div>
+        <div className="flex justify-center w-full h-1/2">
+          <HomeSponsorCard />
         </div>
       </div>
     </div>
