@@ -131,9 +131,11 @@
   },
   {
     "name": "FINANCE",
-    "heads": [{ "name": "Punith", "image": "/TEAM/Heads/Punith.png" }],
+    "heads": [
+      { "name": "Punith", "image": "/TEAM/Heads/Punith.png" },
+      { "name": "Tanish", "image": "/TEAM/Heads/Tanish Reddy.png" }
+    ],
     "coords": [
-      { "name": "Tanish", "image": "/TEAM/Coords/Tanish Reddy.png" },
       { "name": "Mirudulla", "image": "/TEAM/Coords/Mirudulla.png" },
       { "name": "Manoj", "image": "/TEAM/Coords New/Manoj Thurupalli.png" }
     ]
@@ -177,7 +179,7 @@
         "image": "/TEAM/Coords/K.Sai Chandraneel.png"
       },
       { "name": "Ajay", "image": "/TEAM/Coords/Jatavathi Ajay.png" },
-      { "name": "Surgavi Peela", "image": "/TEAM/Coords/Surgavi Peela.png" },
+      { "name": "Bhargavi Peela", "image": "/TEAM/Coords/Surgavi Peela.png" },
       {
         "name": "Suniras Ram",
         "image": "/TEAM/Coords/Suniras Ram Rapelli.png"
