@@ -23,7 +23,20 @@ const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   const formContainerRef = useRef(null);
 
+  const validateUserData = (userData) => {
+    return userData.displayName && 
+           userData.email && 
+           userData.Block && 
+           Array.isArray(userData.interested_in) && 
+           userData.interested_in.length > 0;
+  };
+
   useEffect(() => {
+    const storedSubmission = localStorage.getItem('profileSubmitted');
+    if (storedSubmission === 'true') {
+      setSubmitted(true);
+    }
+
     axios
       .get(import.meta.env.VITE_BACKEND_URL + "profile", {
         withCredentials: true,
@@ -45,10 +58,22 @@ const Profile = () => {
           }))
         );
         setAuth(true);
+        
+        // If the user has data and we've stored that they've submitted before, set submitted to true
+        if (storedSubmission === 'true') {
+          setSubmitted(true);
+        }
+        else{
+          setSubmitted(false);
+          localStorage.removeItem('profileSubmitted');
+          toast.warn("Your profile seems incomplete. Please fill in all required information.");
+        }
       })
       .catch((error) => {
         console.error("Error fetching user details: ", error);
         toast.error("Failed to load profile data. Please try again later.");
+        setSubmitted(false);
+        localStorage.removeItem('profileSubmitted');
       })
       .finally(() => {
         setTimeout(() => {
@@ -99,16 +124,26 @@ const Profile = () => {
           }
         )
         .then((response) => {
-          toast.success("Profile updated successfully!");
-          setSubmitted(true);
-          setIsEditing(false);
+          if (validateUserData(response.data.user)) {
+            toast.success("Profile updated successfully!");
+            setSubmitted(true);
+            setIsEditing(false);
+            localStorage.setItem('profileSubmitted', 'true');
+          } else {
+            toast.warn("Profile update was incomplete. Please try again.");
+            setSubmitted(false);
+            localStorage.removeItem('profileSubmitted');
+          }
         })
         .catch((error) => {
           console.error("Error updating profile: ", error);
           toast.error("Failed to update profile. Please try again later.");
+          setSubmitted(false);
+          localStorage.removeItem('profileSubmitted');
         });
     }
   };
+
 
   const handleSelectOpen = () => {
     if (formContainerRef.current) {
@@ -165,6 +200,7 @@ const Profile = () => {
         });
         setSelectedEvents([]);
         setSubmitted(false);
+        localStorage.removeItem('profileSubmitted');
         toast.success("Logged out successfully!");
       })
       .catch((error) => {

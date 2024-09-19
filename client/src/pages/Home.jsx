@@ -20,10 +20,12 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
+import GooEffectLoader from "../components/SmallLoader";
 import { startOfToday, format, isSameDay } from "date-fns";
 
 function Home() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isBlockRaceLoading, setIsBlockRaceLoading] = useState(true);
   // const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -132,6 +134,7 @@ function Home() {
       } finally {
         console.log("Data fetch complete. Setting isLoading to false.");
         setIsLoading(false);
+        setIsBlockRaceLoading(false);
       }
     };
 
@@ -519,11 +522,10 @@ function Home() {
         </div>
         <div className="flex flex-row gap-4 max-w-7xl justify-between items-center w-full font-bold px-4 lg:px-8 mb-8">
           <div
-            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
-              leaderBoard === "leaderboard"
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${leaderBoard === "leaderboard"
                 ? "bg-[#4B16B2] text-white"
                 : "bg-[#D1CCB6]"
-            }`}
+              }`}
           >
             <button
               className="md:text-xl lg:text-xl w-full"
@@ -533,11 +535,10 @@ function Home() {
             </button>
           </div>
           <div
-            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
-              leaderBoard === "blockrace"
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${leaderBoard === "blockrace"
                 ? "bg-[#4B16B2] text-white"
                 : "bg-[#D1CCB6]"
-            }`}
+              }`}
           >
             <button
               className="md:text-xl lg:text-xl w-full"
@@ -554,11 +555,12 @@ function Home() {
             <div className="relative w-full h-full bg-[#0000004F] opacity-31 rounded-lg">
               {leaderBoard === "leaderboard" ? (
                 <HomeLeaderboard blockData={blockData} />
+              ) : isBlockRaceLoading ? (
+                <div className="flex justify-center items-center w-full min-h-[600px]">
+                  <GooEffectLoader />
+                </div>
               ) : (
-                // <div className="flex justify-center items-center w-full min-h-[600px]">
-                // {/* <p className="text-white text-2xl">Block Race Component</p> */}
                 <BlockRace />
-                // </div>
               )}
             </div>
           </div>

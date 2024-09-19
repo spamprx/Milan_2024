@@ -27,6 +27,23 @@ export default {
         funkrocker: ["Funkrocker", "sans-serif"],
         darkgraffiti : ["Dark Graffiti", "sans-serif"],
       },
+      width: {
+        '88': '22rem',
+      },
+      animation: {
+        'wee1': 'wee1 2s linear infinite',
+        'wee2': 'wee2 2s linear infinite 0.75s',
+      },
+      keyframes: {
+        wee1: {
+          '0%': { transform: 'translateX(-10em) rotate(0deg)' },
+          '100%': { transform: 'translateX(7em) rotate(180deg)' },
+        },
+        wee2: {
+          '0%': { transform: 'translateX(-8em) rotate(0deg)' },
+          '100%': { transform: 'translateX(8em) rotate(180deg)' },
+        },
+      },
     },
   },
   plugins: [
