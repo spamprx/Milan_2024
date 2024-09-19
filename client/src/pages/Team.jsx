@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Image from "../assets/SponsorArrow.png";
 import TeamMember from "../components/TeamMember";
-import Milan_OC from "../../public/TEAM/OC/Milan OC.png";
+import Milan_OC from "/TEAM/OC/Milan OC.png";
 import Loading from "./Loading.jsx";
 
 function Team() {
