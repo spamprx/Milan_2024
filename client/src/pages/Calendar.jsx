@@ -151,7 +151,7 @@ export default function Calendar() {
 
   let preferredMeetings = auth ? selectedDayMeetings.filter(
     (meeting) => {
-      const teams = meeting.teams ? meeting.teams.toLowerCase().split(", ") : [];
+      const teams = meeting.teams ? meeting.teams.toLowerCase().split(",") : [];
       return userPreferredGames.includes(meeting.title.toLowerCase()) &&
         (preferredTeams.some((team) =>
           teams.includes(team.toLowerCase())
