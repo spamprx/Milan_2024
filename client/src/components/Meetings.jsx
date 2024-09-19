@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
+import { format } from "date-fns";
 import axios from "axios";
 
 function Meeting({
@@ -50,6 +51,8 @@ function Meeting({
         throw new Error("Meeting data is incomplete");
       }
 
+      console.log("meeting", meeting);
+
       const endpoint = notificationEnabled ? "delete_event" : "add_event";
       const payload = notificationEnabled
         ? {
@@ -57,14 +60,14 @@ function Meeting({
           location: meeting.body || "",
           teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
           time: meeting.time || "",
-          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+          date: meeting.date instanceof Date ? format(meeting.date, 'yyyy-MM-dd') : meeting.date,
         }
         : {
           eventName: meeting.title,
           location: meeting.body || "",
           teamsParticipating: meeting.teams ? meeting.teams.split(", ") : [],
           time: meeting.time || "",
-          date: meeting.date instanceof Date ? meeting.date.toISOString().split("T")[0] : meeting.date,
+          date: meeting.date instanceof Date ? format(meeting.date, 'yyyy-MM-dd') : meeting.date,
         };
 
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}${endpoint}`, payload, {
