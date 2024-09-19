@@ -26,7 +26,7 @@ const sportExtras = {
   Hockey: "Quarters",
   Table_tennis: "Sets",
   Tennis: "Sets",
-  Squash: "",
+  Squash: "Sets",
   Volleyball: "Sets",
 };
 
