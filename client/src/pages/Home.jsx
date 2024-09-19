@@ -442,17 +442,21 @@ function Home() {
                 className="w-full h-full object-cover opacity-10 z-20"
               />
             </div>
-            <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
-              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
-                "Milan," the general championship of IIT, consisting of sports,
-                cultural, and sci-tech events, is going to take place from 22nd
-                September to 1st October. It consists of 24 cultural, 13 sports,
-                12 sci-tech and 4 collaborative club events, making a total of
-                53 events. There will be 5 trophies, out of which one is the
-                grand Overall Championship crowned to the all-round performers.
-                A high voltage competition between 18 hostels will be witnessed
-                this time. This is the 4th edition of Milan, presented by
-                PureEV.
+            <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex flex-col items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
+              <h1 className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-xl leading-relaxed overflow-auto max-h-full">
+                URBAN RHYTHM: Spray, Skate, Create🔥🛹
+              </h1>
+              <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-xs lg:text-lg leading-relaxed overflow-auto max-h-full mt-5">
+                Urban Rhythm captures the essence of street culture, harnessing
+                people's best abilities in a raw, engaging fashion. It brings
+                together hip-hop dance-offs🕺🏻, skateboard tricks on rugged
+                railings, and bags of spray paints🎨 for the latest graffiti
+                creations. Massive radio 📻heads and hoopers🤸🏻 display their
+                funky tricks, creating a vibrant atmosphere. These streets offer
+                people from various backgrounds and communities a third space to
+                relax with friends and just be themselves. Urban Rhythm embodies
+                a mixed culture of hip-hop and punk, where rebellious kids hang
+                around corners, living their childhood to the fullest.
               </p>
             </div>
           </div>
@@ -488,10 +492,13 @@ function Home() {
             </div>
             <div className="absolute w-full h-full bg-[#8F33BA] rounded-xl flex items-center justify-center text-[#D1CCB6] text-center p-4 lg:p-6">
               <p className="font-be-vietnam-pro font-bold text-[#D1CCB6] text-sm lg:text-lg leading-relaxed overflow-auto max-h-full">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Aspernatur nobis, autem, aliquid repellendus totam veritatis
-                quis quae facilis itaque eos maxime perspiciatis accusamus
-                dolores, culpa ab modi! Ratione, commodi optio!
+                Guess who's back and better than ever! 🔥 Meet the upgraded
+                Pablo, the lively mascot of Milan, ready to explore the rhythm
+                of our urban landscape! With a new look and endless energy 🤸,
+                Pablo brings a dynamic flair to every corner of our college,
+                connecting with the beat of urban life 🛹. "Join us as we
+                explore the vibrant pulse of the city alongside our spirited
+                companion!🕺🌟
               </p>
             </div>
           </div>

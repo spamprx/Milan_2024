@@ -7,6 +7,9 @@ import CardLiveScoreRev from "../components/CardLiveScoreRev";
 import Filter from "../components/CategoryFilter";
 import Loading from "./Loading.jsx";
 import GameDetails from "../components/PastScore.jsx";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const GameDetailsCarousel = ({ pastData }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -17,6 +20,41 @@ const GameDetailsCarousel = ({ pastData }) => {
   const dateScrollRef = useRef(null);
 
   const dates = Array.from({ length: 10 }, (_, i) => i + 20);
+
+  const settings = {
+    className: "center",
+    centerMode: true,
+    centerPadding: "30px",
+    dots: true,
+    arrows: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    beforeChange: (current, next) => setActiveIndex(next),
+    autoplay: true,
+    autoplaySpeed: 3000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 1,
+          dots: true,
+        },
+      },
+    ],
+  };
 
   useEffect(() => {
     const filtered = pastData.filter((game) => {
@@ -100,25 +138,23 @@ const GameDetailsCarousel = ({ pastData }) => {
 
       {filteredData.length > 0 ? (
         <div className="relative w-full max-w-5xl overflow-hidden">
-          <div
-            ref={scrollRef}
-            className="flex items-center space-x-8 overflow-x-auto scrollbar-hide p-4 md:p-10"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {filteredData.map((game, index) => (
-              <div
-                key={game.matchId}
-                className={`cursor-pointer transition-all duration-300 ease-in-out flex-shrink-0
-                  ${
-                    index === activeIndex
-                      ? "scale-110 z-10"
-                      : "opacity-70 scale-100"
-                  }`}
-                onClick={() => setActiveIndex(index)}
-              >
-                <GameDetails game={game} category={selectedCategory} />
-              </div>
-            ))}
+          <div className="space-x-8">
+            <Slider {...settings}>
+              {filteredData.map((game, index) => (
+                <div
+                  key={game.matchId}
+                  className={`flex items-center justify-center m-2 p-2
+                    ${
+                      index === activeIndex
+                        ? "scale-110 z-10"
+                        : "opacity-70 scale-90"
+                    }`}
+                  onClick={() => setActiveIndex(index)}
+                >
+                  <GameDetails game={game} category={selectedCategory} />
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       ) : (
@@ -145,7 +181,6 @@ const GameDetailsCarousel = ({ pastData }) => {
   );
 };
 
-
 function LiveScore() {
   const [currentMatches, setCurrentMatches] = useState([]);
   const [liveMatches, setLiveMatches] = useState([]);
@@ -153,7 +188,7 @@ function LiveScore() {
   const [socket, setSocket] = useState(null);
   const [auth, setAuth] = useState(false);
   const [error, setError] = useState(false);
-  const [matchEndedToggle,setToggle] = useState(false);
+  const [matchEndedToggle, setToggle] = useState(false);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [preferredGames, setPreferredGames] = useState([]);

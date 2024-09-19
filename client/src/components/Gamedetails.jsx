@@ -1,25 +1,42 @@
-import React from 'react';
-import { Clock, MapPin, Users, Trophy } from 'lucide-react';
+import React from "react";
+import { Clock, MapPin, Users, Trophy } from "lucide-react";
 
 const GameDetails = React.forwardRef(({ game }, ref) => {
   if (!game) return null;
 
   return (
-    <div ref={ref} className="max-w-xl mx-auto bg-[#2D1B69] rounded-3xl shadow-lg overflow-hidden">
+    <div
+      // ref={ref}
+      className="max-w-xl mx-auto bg-[#2D1B69] rounded-3xl shadow-lg overflow-hidden"
+    >
       <div className="bg-[#6B5794]/[0.84] text-white p-4">
-        <h2 className="text-2xl font-bold text-center text-white">{game.title}</h2>
+        <h2 className="text-2xl font-bold text-center text-white">
+          {game.title}
+        </h2>
         <p className="text-center mt-1 text-white">{game.category}</p>
       </div>
-      
+
       <div className="lg:p-8 p-4">
         <div className="grid grid-cols-2 items-center justify-between gap-4 lg:mx-4">
-          <InfoItem icon={<Users className="w-5 h-5" />} label="Teams" value={game.teams} />
+          <InfoItem
+            icon={<Users className="w-5 h-5" />}
+            label="Teams"
+            value={game.teams}
+          />
           <div className="row-span-2 flex items-center">
-            <InfoItem icon={<MapPin className="w-5 h-5" />} label="Venue" value={game.body} />
+            <InfoItem
+              icon={<MapPin className="w-5 h-5" />}
+              label="Venue"
+              value={game.body}
+            />
           </div>
-          <InfoItem icon={<Clock className="w-5 h-5" />} label="Time" value={game.time} />
+          <InfoItem
+            icon={<Clock className="w-5 h-5" />}
+            label="Time"
+            value={game.time}
+          />
         </div>
-        
+
         <WinnerSection winner={game.winner} />
       </div>
     </div>
@@ -48,6 +65,6 @@ const WinnerSection = ({ winner }) => (
   </div>
 );
 
-GameDetails.displayName = 'GameDetails';
+GameDetails.displayName = "GameDetails";
 
 export default GameDetails;
