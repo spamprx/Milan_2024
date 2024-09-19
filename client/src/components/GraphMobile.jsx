@@ -24,10 +24,10 @@ ChartJS.register(
 );
 
 const colorOptions = {
-  "Sports Boys": "#FF7900",
-  "Sports Girls": "#FF7900",
-  "Culti": "#2C88AD",
-  "Sci-Tech": "#A9AB4A",
+  "SPORTS-BOYS": "#FF7900",
+  "SPORTS-GIRLS": "#FF7900",
+  "CULTURALS": "#2C88AD",
+  "SCI-TECH": "#A9AB4A",
 };
 
 function GraphMobile({
@@ -68,7 +68,7 @@ function GraphMobile({
       });
     };
 
-    if (selectedGraphCategories.includes("Sports Boys")) {
+    if (selectedGraphCategories.includes("SPORTS-BOYS")) {
       const data = sportsBoysData.blocks.map((_, blockIndex) =>
         gamesBoys.reduce(
           (sum, _, gameIndex) =>
@@ -76,10 +76,10 @@ function GraphMobile({
           0
         )
       );
-      addData("Sports Boys", sportsBoysData.blocks, data);
+      addData("SPORTS-BOYS", sportsBoysData.blocks, data);
     }
 
-    if (selectedGraphCategories.includes("Sports Girls")) {
+    if (selectedGraphCategories.includes("SPORTS-GIRLS")) {
       const data = sportsGirlsData.blocks.map((_, blockIndex) =>
         gamesGirls.reduce(
           (sum, _, gameIndex) =>
@@ -87,10 +87,10 @@ function GraphMobile({
           0
         )
       );
-      addData("Sports Girls", sportsGirlsData.blocks, data);
+      addData("SPORTS-GIRLS", sportsGirlsData.blocks, data);
     }
 
-    if (selectedGraphCategories.includes("Culti")) {
+    if (selectedGraphCategories.includes("CULTURALS")) {
       const data = blocknames.map((_, blockIndex) =>
         cultiEvents.reduce(
           (sum, _, eventIndex) =>
@@ -98,10 +98,10 @@ function GraphMobile({
           0
         )
       );
-      addData("Culti", blocknames, data);
+      addData("CULTURALS", blocknames, data);
     }
 
-    if (selectedGraphCategories.includes("Sci-Tech")) {
+    if (selectedGraphCategories.includes("SCI-TECH")) {
       const data = blocknames.map((_, blockIndex) =>
         techyEvents.reduce(
           (sum, _, eventIndex) =>
@@ -109,7 +109,7 @@ function GraphMobile({
           0
         )
       );
-      addData("Sci-Tech", blocknames, data);
+      addData("SCI-TECH", blocknames, data);
     }
 
     const sortedData = Array.from(dataMap.values()).sort(
@@ -199,36 +199,36 @@ function GraphMobile({
           ))}
         </div>
         <div className="tab-content">
-          {selectedTableCategory === "Sports Boys" && (
+          {selectedTableCategory === "SPORTS-BOYS" && (
             <Table
               blocknames={sportsBoysData.blocks}
               games={gamesBoys}
               points={sportsBoysData.scores}
-              tag="Sports Boys"
+              tag="SPORTS-BOYS"
             />
           )}
-          {selectedTableCategory === "Sports Girls" && (
+          {selectedTableCategory === "SPORTS-GIRLS" && (
             <Table
               blocknames={sportsGirlsData.blocks}
               games={gamesGirls}
               points={sportsGirlsData.scores}
-              tag="Sports Girls"
+              tag="SPORTS-GIRLS"
             />
           )}
-          {selectedTableCategory === "Culti" && (
+          {selectedTableCategory === "CULTURALS" && (
             <Table
               blocknames={blocknames}
               games={cultiEvents}
               points={cultiData.scores}
-              tag="Culti"
+              tag="CULTURALS"
             />
           )}
-          {selectedTableCategory === "Sci-Tech" && (
+          {selectedTableCategory === "SCI-TECH" && (
             <Table
               blocknames={blocknames}
               games={techyEvents}
               points={techyData.scores}
-              tag="Sci-Tech"
+              tag="SCI-TECH"
             />
           )}
         </div>

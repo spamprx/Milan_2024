@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 
-const Filter = ({ options, onCategoryChange, title, isSingle }) => {
+const Filter = ({ options, onCategoryChange, title, isSingle , needAll }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [present,setPresent] = useState(needAll ? needAll : true);
 
   useEffect(() => {
     if (isSingle) {
-      setSelectedCategories(options.length > 0 ? ["SELECT ALL"] : []);
+      if(present)
+      {
+        setSelectedCategories(options.length > 0 ? ["SELECT ALL"] : []);
+      }
+      else
+      {
+        setSelectedCategories([]);
+      }
     }
   }, []);
 
@@ -56,7 +64,7 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
   };
 
   return (
-    <div className="w-full md:w-1/3 max-w-52 sm:min-w-44">
+    <div className="w-full md:w-1/3 max-w-52 sm:min-w-44 mx-auto">
       <div className="bg-[#270B5D] rounded-2xl overflow-hidden">
         <div
           className="px-4 py-2 bg-[#6539BA] text-white flex flex-col rounded-2xl justify-between items-center cursor-pointer"
@@ -80,21 +88,23 @@ const Filter = ({ options, onCategoryChange, title, isSingle }) => {
 
         {isOpen && (
           <div className="py-2 px-4 text-white">
-            <div
-              className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
-              onClick={handleSelectAll}
-            >
+            {present && (
               <div
-                className={`w-4 h-4 border-2 rounded-full ${
-                  selectedCategories.includes("Select All")
-                    ? "bg-white border-white"
-                    : "border-white"
-                }`}
-              ></div>
-              <span className="text-sm text-[#D1CCB6] truncate text-left">
-                SELECT ALL
-              </span>
-            </div>
+                className="flex items-center cursor-pointer space-x-2 py-2 hover:bg-[#6539BA] rounded-lg"
+                onClick={handleSelectAll}
+              >
+                <div
+                  className={`w-4 h-4 border-2 rounded-full ${
+                    selectedCategories.includes("Select All")
+                      ? "bg-white border-white"
+                      : "border-white"
+                  }`}
+                ></div>
+                <span className="text-sm text-[#D1CCB6] truncate text-left">
+                  SELECT ALL
+                </span>
+              </div>
+            )}
 
             {options.map((category, index) => (
               <div

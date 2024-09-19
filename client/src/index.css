@@ -81,3 +81,9 @@
 .table-container {
   overflow-x: auto;
 }
+
+@layer utilities {
+    .filter-goo {
+      filter: url(#goo);
+    }
+  }
