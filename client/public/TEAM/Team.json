@@ -26,8 +26,8 @@
     "name": "PRONITES",
     "heads": [
       { "name": "Ram Charan", "image": "/TEAM/Heads/Ram Charan.png" },
-      { "name": "Yash", "image": "/TEAM/Heads/Yash.png" },
-      { "name": "Mishal", "image": "/TEAM/Heads/Mishal.png" }
+      { "name": "Yash", "image": "/TEAM/Heads/Yash Sonawane.png" },
+      { "name": "Mishaal", "image": "/TEAM/Heads/Syed Mishaal.png" }
     ],
 
     "coords": [
@@ -78,7 +78,7 @@
       { "name": "Saanvi Amrutha", "image": "/TEAM/Coords/Saanvi Amrutha.png" },
       {
         "name": "Kowsith",
-        "image": "/TEAM/Coords/Kowsith Gurubilli.png"
+        "image": "/TEAM/Coords/Kowsith.png"
       },
       { "name": "Manoj", "image": "/TEAM/Coords/Manoj Kumar.png" },
       {
@@ -179,7 +179,7 @@
         "image": "/TEAM/Coords/K.Sai Chandraneel.png"
       },
       { "name": "Ajay", "image": "/TEAM/Coords/Jatavathi Ajay.png" },
-      { "name": "Bhargavi Peela", "image": "/TEAM/Coords/Surgavi Peela.png" },
+      { "name": "Bhargavi", "image": "/TEAM/Coords/Bhargavi.png" },
       {
         "name": "Suniras Ram",
         "image": "/TEAM/Coords/Suniras Ram Rapelli.png"

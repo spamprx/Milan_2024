@@ -47,8 +47,21 @@ function Team() {
           key={team.name}
           className="flex flex-col items-center justify-center"
         >
-          <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
-            <div className="absolute flex w-screen h-full items-center justify-center">
+          {/* <div className="relative flex items-center justify-center h-4/5 w-screen my-10 md:my-16">
+            <div className="absolute flex w-full h-full items-center justify-center">
+              <img
+                src={Image}
+                alt="SponsorArrow"
+                className="w-full max-w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
+              />
+            </div>
+
+            <p className="relative z-10 text-white text-center text-xl sm:text-3xl lg:text-3xl">
+              {team.name}
+            </p>
+          </div> */}
+          <div className="relative flex items-center justify-center h-4/5 w-full p-10 mt-5 mb-10">
+            <div className="absolute flex w-full h-full items-center justify-center">
               <img
                 src={Image}
                 alt="SponsorArrow"
@@ -56,7 +69,7 @@ function Team() {
               />
             </div>
 
-            <p className="relative z-10 text-white text-center text-xl sm:text-3xl lg:text-3xl">
+            <p className="relative z-10 text-white text-center text-xl sm:text-2xl lg:text-3xl">
               {team.name}
             </p>
           </div>
