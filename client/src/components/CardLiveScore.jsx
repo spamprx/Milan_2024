@@ -7,6 +7,9 @@ function CardLiveScore({ match }) {
   const team2 = match.team2;
   const score1 = match.score1;
   const score2 = match.score2;
+  const extra1 = match.extra1;
+  const extra2 = match.extra2;
+  const extra = match.extra || "More..";
   const ID = match.matchId.replace(/\D/g, "");
   const sportImage = `/CARD_ASSETS/${sport}.png`;
 
@@ -60,7 +63,7 @@ function CardLiveScore({ match }) {
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />
             <span className="text-ld font-bold font-be-vietnam text-[#F3F1F6]">
-              12/12
+              {extra1}
             </span>
           </div>
           <div className="flex w-16 flex-col -translate-x-1 gap-2">
@@ -69,7 +72,7 @@ function CardLiveScore({ match }) {
             </span>
             <hr className="w-16 border-2" />
             <span className="text-xs w-fit px-1 mx-auto font-semibold font-be-vietnam bg-[#F3F1F6] text-[#4B16B2] rounded-2xl my-1">
-              Sets
+              {extra}
             </span>
           </div>
           <div className="flex w-16 flex-col -translate-x-4 gap-2">
@@ -81,7 +84,7 @@ function CardLiveScore({ match }) {
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />
             <span className="text-ld font-bold font-be-vietnam text-[#F3F1F6]">
-              12/12
+              {extra2}
             </span>
           </div>
         </div>
