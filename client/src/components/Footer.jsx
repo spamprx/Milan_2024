@@ -20,6 +20,15 @@ function Footer() {
         <span className="text-white font-[400] font-be-vietnam text-sm">
           IIT Hyderabad
         </span>
+        <span className="text-[#DEB116] mt-1 font-[400] font-be-vietnam text-sm">
+          <a
+            href="https://drive.google.com/file/d/1fXwfTgIP3KL7kIdo-NUbT8sytwePumEb/view"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Privacy Policy
+          </a>
+        </span>
       </div>
       <div className="flex flex-col md:flex-row lg:flex-row min-w-[300px] relative h-fit justify-center items-center">
         {/* Follow Section */}
