@@ -24,7 +24,7 @@ export const blockOptions = [
 ];
 
 export const eventOptions = [
-[
+
   { value: "solo-dance", label: "Solo Dance" },
   { value: "duo-trio-dance", label: "Duo Trio Dance" },
   { value: "group-dance", label: "Group Dance" },
@@ -89,6 +89,5 @@ export const eventOptions = [
   { value: "mad-over-marketing", label: "Mad Over Marketing" },
   { value: "battle-of-debts", label: "Battle of Debts" },
   { value: "solve-the-case", label: "Solve the Case" }
-]
 
 ];
