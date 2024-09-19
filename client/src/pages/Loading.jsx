@@ -16,7 +16,7 @@ const Loading = () => {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center text-white bg-transparent">
+    <div className="w-full h-screen flex flex-col items-center justify-center text-white bg-transparent">
       <div className="flex flex-col items-center justify-center mb-10 lg:mb-20 scale-125 lg:scale-150">
         <img src={Logo} alt="Logo" className="w-1/2 mb-4" />
         <h1 className="text-[#E4CF63] text-4xl font-bold">MILAN</h1>
