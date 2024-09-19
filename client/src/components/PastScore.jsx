@@ -32,14 +32,14 @@ const GameDetails = React.forwardRef(({ game , category }, ref) => {
                 <div className='flex flex-row justify-center items-center mt-6'>
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <Trophy className="w-8 h-8 text-zinc-400" />
-                        <div className="bg-[#DEB116] px-4 mx-4 w-fit rounded-xl">
-                            <p className="text-[#2D1B69] font-bold">{game.team1 || "Not decided"}</p>
+                        <div className="bg-[#DEB116] px-4 mx-4 max-w-32 rounded-xl">
+                            <p className="text-[#2D1B69] font-bold truncate">{game.team1 || "Not decided"}</p>
                         </div>
                     </div>
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <Trophy className="w-8 h-8 text-amber-700" />
-                        <div className="bg-[#DEB116] px-4 mx-4 w-fit rounded-xl">
-                            <p className="text-[#2D1B69] font-bold">{game.team1 || "Not decided"}</p>
+                        <div className="bg-[#DEB116] px-4 mx-4 max-w-32 rounded-xl">
+                            <p className="text-[#2D1B69] font-bold truncate">{game.team1 || "Not decided"}</p>
                         </div>
                     </div>
                 </div>
@@ -52,9 +52,9 @@ const GameDetails = React.forwardRef(({ game , category }, ref) => {
 const InfoItem = ({ icon, label, value }) => (
     <div className="flex items-center space-x-2">
         <div className="text-[#DEB116]">{icon}</div>
-        <div>
-            <p className="text-sm text-purple-300">{label}</p>
-            <p className="font-semibold text-white">{value}</p>
+        <div className='max-w-20'>
+            <p className="text-sm text-purple-300 text-left">{label}</p>
+            <p className="font-semibold text-white truncate">{value}</p>
         </div>
     </div>
 );
