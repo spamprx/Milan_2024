@@ -7,6 +7,7 @@ import Loading from "./Loading";
 function Sponsors() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [sponsorImages, setSponsorImages] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -24,7 +25,7 @@ function Sponsors() {
   useEffect(() => {
     fetch("/SPONSORS/Sponsors.json")
       .then((response) => response.json())
-      .then((data) => setSponsorImages(data.sponsors))
+      .then((data) => setSponsorImages(data[0].logo))
       .catch((error) => console.error("Error fetching JSON:", error))
       .finally(() => {
         setIsLoading(false);
@@ -62,7 +63,7 @@ function Sponsors() {
             style={{ backgroundImage: `url(${SponsorBg})` }}
           >
             <div className="w-full h-full flex flex-wrap justify-center items-center">
-              <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
+              {/* <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
                 <img
                   src={SponsorBg2}
                   alt="Sponsor1"
@@ -103,11 +104,23 @@ function Sponsors() {
                   alt="Sponsor1"
                   className="rounded-2xl w-full h-full object-contain"
                 />
-              </div>
+              </div> */}
+              {sponsorImages.map((sponsor, index) => (
+                <div
+                  key={index}
+                  className="w-full sm:w-1/2 lg:w-1/2 rounded-2xl p-5 flex items-center justify-center"
+                >
+                  <img
+                    src={sponsor.image}
+                    alt={sponsor.name}
+                    className="rounded-2xl w-1/2 h-full object-contain"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
-          <div className="relative flex items-center justify-center h-4/5 w-full p-10 mt-10 mb-10">
+          {/* <div className="relative flex items-center justify-center h-4/5 w-full p-10 mt-10 mb-10">
             <div className="absolute flex w-full h-full items-center justify-center">
               <img
                 src={SponsorArrow}
@@ -170,7 +183,7 @@ function Sponsors() {
                 />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

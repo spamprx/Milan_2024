@@ -1,0 +1,35 @@
+[
+  {
+    "name": "SPONSORS",
+    "logo": [
+      {
+        "name": "BharatVersity",
+        "image": "/SPONSORS/BharatVersity.png"
+      },
+      {
+        "name": "FoodSutra",
+        "image": "/SPONSORS/FoodSutra.png"
+      },
+      {
+        "name": "Canara",
+        "image": "/SPONSORS/Canara.jpg"
+      },
+      {
+        "name": "Ajasra",
+        "image": "/SPONSORS/Ajasra.png"
+      },
+      {
+        "name": "SBI",
+        "image": "/SPONSORS/SBI.png"
+      },
+      {
+        "name": "Tihan",
+        "image": "/SPONSORS/Tihan.png"
+      },
+      {
+        "name": "Safexpress",
+        "image": "/SPONSORS/Safexpress.png"
+      }
+    ]
+  }
+]

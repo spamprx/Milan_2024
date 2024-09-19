@@ -1,15 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Basketball from "../assets/Basketball.png";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { AutoScroll } from "@splidejs/splide-extension-auto-scroll";
 import "@splidejs/splide/dist/css/splide.min.css";
+import Loading from "../pages/Loading";
 
 const HomeSponsorCard = () => {
-  const sponsors = [
-    { src: Basketball, alt: "Image 1" },
-    { src: Basketball, alt: "Image 2" },
-    { src: Basketball, alt: "Image 3" },
-  ];
+  const [isLoading, setIsLoading] = useState(true);
+  const [sponsorImages, setSponsorImages] = useState([]);
+
+  useEffect(() => {
+    fetch("/SPONSORS/Sponsors.json")
+      .then((response) => response.json())
+      .then((data) => setSponsorImages(data[0].logo))
+      .catch((error) => console.error("Error fetching JSON:", error))
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="w-screen my-4 flex items-center justify-center">
@@ -17,24 +29,24 @@ const HomeSponsorCard = () => {
         options={{
           type: "loop",
           perPage: 3,
-          gap: 8,
+          gap: "1rem",
+          pagination: false,
           autoScroll: {
             pauseOnHover: false,
             pauseOnFocus: false,
-            rewind: false,
-            speed: 1,
+            speed: 2,
           },
-          height: "250px",
           arrows: false,
+          drag: true,
         }}
         extensions={{ AutoScroll }}
       >
-        {sponsors.map((sponsor, index) => (
+        {sponsorImages.map((sponsor, index) => (
           <SplideSlide key={index}>
             <div className="w-full h-full bg-[#220A4F] items-center justify-center">
               <img
-                src={sponsor.src}
-                alt={sponsor.alt}
+                src={sponsor.image}
+                alt={sponsor.name}
                 className="object-contain w-full h-full rounded-md"
                 style={{ maxHeight: "100%", maxWidth: "100%" }}
               />

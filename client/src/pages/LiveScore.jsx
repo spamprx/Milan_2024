@@ -143,7 +143,7 @@ const GameDetailsCarousel = ({ pastData }) => {
               {filteredData.map((game, index) => (
                 <div
                   key={game.matchId}
-                  className={`flex items-center justify-center m-2 p-2
+                  className={`relative flex items-center justify-center m-2 p-2
                     ${
                       index === activeIndex
                         ? "scale-110 z-10"
