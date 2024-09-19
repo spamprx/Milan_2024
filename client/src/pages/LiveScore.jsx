@@ -25,9 +25,10 @@ const GameDetailsCarousel = ({ pastData }) => {
     className: "center",
     centerMode: true,
     centerPadding: "30px",
-    dots: true,
+    dots: false,
     arrows: false,
     infinite: true,
+    pauseOnHover: true,
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -36,21 +37,21 @@ const GameDetailsCarousel = ({ pastData }) => {
     autoplaySpeed: 3000,
     responsive: [
       {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
         breakpoint: 600,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
           initialSlide: 1,
-          dots: true,
+          dots: false,
+        },
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
         },
       },
     ],
@@ -136,7 +137,7 @@ const GameDetailsCarousel = ({ pastData }) => {
         </div>
       </div>
 
-      {filteredData.length > 0 ? (
+      {/* {filteredData.length > 0 ? (
         <div className="relative w-full max-w-5xl overflow-hidden">
           <div className="space-x-8">
             <Slider {...settings}>
@@ -156,6 +157,23 @@ const GameDetailsCarousel = ({ pastData }) => {
               ))}
             </Slider>
           </div>
+        </div>
+      ) : (
+        <p className="text-lg text-white font-bold mt-8">
+          No games available for the selected date ({selectedDate}) and
+          category.
+        </p>
+      )} */}
+
+      {filteredData.length > 0 ? (
+        <div className="slider-container w-full">
+          <Slider {...settings}>
+            {filteredData.map((game, index) => (
+              <div key={index} className="p-2 mb-2">
+                <GameDetails game={game} category={selectedCategory} />
+              </div>
+            ))}
+          </Slider>
         </div>
       ) : (
         <p className="text-lg text-white font-bold mt-8">
@@ -345,7 +363,7 @@ function LiveScore() {
   }
 
   return (
-    <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center mt-8">
+    <div className="flex flex-col min-w-[320px] w-full mx-auto justify-center my-8">
       <div className="flex flex-row gap-[20vw] justify-center">
         <Filter
           options={["PREFERRED GAMES"]}
