@@ -407,7 +407,7 @@ function Home() {
           <div className="flex items-center justify-center object-contain aspect-[16/9]">
             <iframe
               className="w-full h-full rounded-2xl object-contain"
-              src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44"
+              src="https://www.youtube.com/embed/1QIo68XSVKk?si=pBaMi6PLQAJIxj44&vq=hd1080p"
               title="YouTube video player"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -522,10 +522,11 @@ function Home() {
         </div>
         <div className="flex flex-row gap-4 max-w-7xl justify-between items-center w-full font-bold px-4 lg:px-8 mb-8">
           <div
-            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${leaderBoard === "leaderboard"
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
+              leaderBoard === "leaderboard"
                 ? "bg-[#4B16B2] text-white"
                 : "bg-[#D1CCB6]"
-              }`}
+            }`}
           >
             <button
               className="md:text-xl lg:text-xl w-full"
@@ -535,10 +536,11 @@ function Home() {
             </button>
           </div>
           <div
-            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${leaderBoard === "blockrace"
+            className={`flex items-center justify-center font-vietnam-regular rounded-2xl w-1/2 p-3 ${
+              leaderBoard === "blockrace"
                 ? "bg-[#4B16B2] text-white"
                 : "bg-[#D1CCB6]"
-              }`}
+            }`}
           >
             <button
               className="md:text-xl lg:text-xl w-full"
