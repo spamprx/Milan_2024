@@ -16,7 +16,7 @@ function CardLiveScore({ match }) {
   }
 
   return (
-    <div className="relative scale-[0.7] md:scale-75 lg:scale-90">
+    <div className="relative scale-[0.8] md:scale-75 lg:scale-90">
       <div className="relative flex w-fit max-w-screen-sm bg-gradient-to-r from-[#D9d9d9] to-gray-400 rounded-lg">
         <img
           src={Subtract}
@@ -51,37 +51,37 @@ function CardLiveScore({ match }) {
           />
         </div>
         <div className="flex flex-row absolute inset-0 items-center justify-center z-30 -translate-x-16 -translate-y-12">
-          <div className="flex flex-col translate-x-1 gap-2 z-10">
+          <div className="flex w-16 flex-col translate-x-1 gap-2 z-10">
             <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] text-center -translate-y-2">
               {score1}
             </span>
-            <span className="text-xs font-be-vietnam w-full text-[#F3F1F6]">
+            <span className="text-xs font-be-vietnam w-full text-[#F3F1F6] truncate">
               {team1}
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />
             <span className="text-ld font-bold font-be-vietnam text-[#F3F1F6]">
-              00
+              12/12
             </span>
           </div>
-          <div className="flex flex-col -translate-x-1 gap-2">
+          <div className="flex w-16 flex-col -translate-x-1 gap-2">
             <span className="text-4xl font-bold font-be-vietnam text-white mb-6 -translate-y-2">
               :
             </span>
             <hr className="w-16 border-2" />
-            <span className="text-xs font-semibold font-be-vietnam bg-[#F3F1F6] text-[#4B16B2] rounded-2xl my-1">
-              Fouls
+            <span className="text-xs w-fit px-1 mx-auto font-semibold font-be-vietnam bg-[#F3F1F6] text-[#4B16B2] rounded-2xl my-1">
+              Sets
             </span>
           </div>
-          <div className="flex flex-col -translate-x-4 gap-2">
+          <div className="flex w-16 flex-col -translate-x-4 gap-2">
             <span className="text-4xl font-bold font-be-vietnam text-[#4B16B2] text-center -translate-y-2">
               {score2}
             </span>
-            <span className="text-xs font-be-vietnam w-full text-[#F3F1F6]">
+            <span className="text-xs font-be-vietnam w-full text-center truncate text-[#F3F1F6]">
               {team2}
             </span>
             <hr className="w-16 border-1 border-[#F3F1F6]" />
             <span className="text-ld font-bold font-be-vietnam text-[#F3F1F6]">
-              00
+              12/12
             </span>
           </div>
         </div>
