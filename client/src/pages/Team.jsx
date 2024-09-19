@@ -12,18 +12,33 @@ function Team() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      fetch("/TEAM/Team.json").then((response) => response.json()),
-      fetch("/TEAM/HRCouncil.json").then((response) => response.json()),
-    ])
-      .then(([teamData, hrCouncilData]) => {
+    const fetchData = async () => {
+      const startTime = Date.now();
+      try {
+        const [teamResponse, hrCouncilResponse] = await Promise.all([
+          fetch("/TEAM/Team.json"),
+          fetch("/TEAM/HRCouncil.json"),
+        ]);
+
+        const teamData = await teamResponse.json();
+        const hrCouncilData = await hrCouncilResponse.json();
+
         setTeams(teamData);
         setHRCouncilMembers(hrCouncilData[0].member);
-      })
-      .catch((error) => console.error("Error fetching JSON:", error))
-      .finally(() => {
+
+        const elapsedTime = Date.now() - startTime;
+        const remainingTime = Math.max(2000 - elapsedTime, 0);
+
+        setTimeout(() => {
+          setIsLoading(false);
+        }, remainingTime);
+      } catch (error) {
+        console.error("Error fetching data:", error);
         setIsLoading(false);
-      });
+      }
+    };
+
+    fetchData();
   }, []);
 
   if (isLoading) {
@@ -38,6 +53,7 @@ function Team() {
             src={Milan_OC}
             className="w-full h-auto object-contain"
             alt="OC Text"
+            loading="lazy"
           />
         </div>
       </div>
@@ -53,6 +69,7 @@ function Team() {
                 src={Image}
                 alt="SponsorArrow"
                 className="w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
+                loading="lazy"
               />
             </div>
 
@@ -76,6 +93,7 @@ function Team() {
                   personImage={head.image || "/TEAM/Heads/Missing.png"}
                   isHead={true}
                   isHr={false}
+                  lazy={true}
                 />
               ))}
             </div>
@@ -96,6 +114,7 @@ function Team() {
                   personImage={coord.image || "/TEAM/Coords/Missing.png"}
                   isHead={false}
                   isHr={false}
+                  lazy={true}
                 />
               ))}
             </div>
@@ -110,6 +129,7 @@ function Team() {
               src={Image}
               alt="SponsorArrow"
               className="w-full scale-y-125 sm:scale-y-75 lg:scale-y-[65%]"
+              loading="lazy"
             />
           </div>
 
@@ -130,6 +150,7 @@ function Team() {
                   personImage={member.image || "/TEAM/Coords/Missing.png"}
                   isHead={false}
                   isHr={true}
+                  lazy={true}
                 />
                 <p className="text-white text-center text-lg mt-2">
                   {member.hostel}

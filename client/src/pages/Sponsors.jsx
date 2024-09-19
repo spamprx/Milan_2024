@@ -1,8 +1,50 @@
-import SponsorBg from "../assets/Sponsors.jpeg";
-import SponsorBg2 from "../assets/Sponsors2.jpeg";
 import SponsorArrow from "../assets/SponsorArrow.png";
 import { useState, useEffect } from "react";
 import Loading from "./Loading";
+
+const SponsorLayout = ({ sponsorImages }) => {
+  const totalSponsors = sponsorImages.length;
+  const number = window.innerWidth < 1024 ? 2 : 4;
+  const sponsorsPerRow = Math.ceil(totalSponsors / number);
+  const excessSponsors = totalSponsors % 3;
+
+  const firstRowSponsors = sponsorImages.slice(0, sponsorsPerRow);
+  const middleRowSponsors = sponsorImages.slice(
+    sponsorsPerRow,
+    sponsorsPerRow + sponsorsPerRow + (excessSponsors > 0 ? excessSponsors : 0)
+  );
+  const lastRowSponsors = sponsorImages.slice(
+    sponsorsPerRow + middleRowSponsors.length
+  );
+
+  const renderSponsorRow = (sponsors, rowIndex) => (
+    <div key={rowIndex} className={`flex flex-wrap justify-center w-full ${number === 4 ? 'mb-8' : ''}`}>
+      {sponsors.map((sponsor, index) => (
+        <div
+          key={index}
+          className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5 flex items-center justify-center"
+        >
+          <img
+            src={sponsor.image}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            alt={sponsor.name}
+            className="rounded-2xl w-2/3 h-auto object-contain"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  );
+
+
+  return (
+    <div className="w-full">
+      {renderSponsorRow(firstRowSponsors, 0)}
+      {renderSponsorRow(middleRowSponsors, 1)}
+      {renderSponsorRow(lastRowSponsors, 2)}
+    </div>
+  );
+};
 
 function Sponsors() {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
@@ -60,7 +102,6 @@ function Sponsors() {
 
           <div
             className="flex flex-col w-full h-full bg-cover bg-center"
-            style={{ backgroundImage: `url(${SponsorBg})` }}
           >
             <div className="w-full h-full flex flex-wrap justify-center items-center">
               {/* <div className="w-full sm:w-1/2 lg:w-1/3 rounded-2xl p-5">
@@ -105,18 +146,7 @@ function Sponsors() {
                   className="rounded-2xl w-full h-full object-contain"
                 />
               </div> */}
-              {sponsorImages.map((sponsor, index) => (
-                <div
-                  key={index}
-                  className="w-full sm:w-1/2 lg:w-1/2 rounded-2xl p-5 flex items-center justify-center"
-                >
-                  <img
-                    src={sponsor.image}
-                    alt={sponsor.name}
-                    className="rounded-2xl w-1/2 h-full object-contain"
-                  />
-                </div>
-              ))}
+              <SponsorLayout sponsorImages={sponsorImages} />
             </div>
           </div>
 
