@@ -568,7 +568,7 @@ function Home() {
                       <GooEffectLoader />
                     </div>
                   ) : (
-                    <div className="pt-10">
+                    <div className="py-10">
                       <BlockRace />
                     </div>
                   )}
