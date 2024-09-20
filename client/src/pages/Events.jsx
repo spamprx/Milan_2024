@@ -70,7 +70,7 @@ function Events() {
     };
 
     fetchData(
-      "https://script.google.com/macros/s/AKfycbzv0WclMXfbGduO4HDJN2fvQtGLehXLBNY3DSzj01eTV39AP7abqVqxPHHrUy3jTACl/exec",
+      "https://script.google.com/macros/s/AKfycbyVkURVuY96lhlEqCvLYGuBTedqnnxwY7q4BWV42hph6dLR2dDjCmeRE4qfxFdhAVf0/exec",
       setCultiData
     );
     fetchData(
@@ -82,7 +82,7 @@ function Events() {
       setSportsBoysData
     );
     fetchData(
-      "https://script.google.com/macros/s/AKfycbx6Rbwmvzxh79ZK1BUqd_0nllGRg_k827VhcHH1YorEjMIXgrQ4Sar_L27UskZT478Q/exec",
+      "https://script.google.com/macros/s/AKfycbzmTy_44-oPG2N7aIoogQN5VihtxE0HHBiqGSV1-j3hAGbDTOwc2BH68U46lrQFt-uP/exec",
       setTechyData
     );
 
