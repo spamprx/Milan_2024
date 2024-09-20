@@ -1,13 +1,26 @@
+import React, { useState } from "react";
 import AdminPortal from "./components/AdminPortal";
 import Google from "./components/Auth";
-import { Routes, Route } from "react-router-dom";
-import "./index.css"
+import { Routes, Route, Navigate } from "react-router-dom";
+import "./index.css";
 
 const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
   return (
     <Routes>
-      <Route path="/" element={<Google />} />
-      <Route path="/admin" element={<AdminPortal />} />
+      {!isAuthenticated ? (
+        <Route path="*" element={<Google onLogin={handleLogin} />} />
+      ) : (
+        <>
+          <Route path="/" element={<AdminPortal />} />
+          <Route path="/login" element={<Navigate to="/" replace />} />
+        </>
+      )}
     </Routes>
   );
 };
