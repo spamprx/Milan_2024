@@ -103,14 +103,14 @@
     }, [selectedDate]);
 
     return (
-      <div className="flex flex-col items-center mt-4">
-        <div className="relative w-full max-w-5xl overflow-hidden mb-4">
+      <div className="flex flex-col items-center mt-8">
+        <div className="relative w-full max-w-5xl overflow-hidden mb-8">
           <div
             ref={dateScrollRef}
-            className="flex flex-col gap-4 items-center space-x-4 overflow-x-auto scrollbar-hide justify-center py-4"
+            className="flex flex-col gap-4 items-center space-x-4 overflow-x-auto scrollbar-hide justify-center mb-8"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
-            <div className="grid grid-cols-5 gap-2 sm:flex sm:gap-4">
+            <div className="grid grid-cols-5 gap-4 sm:flex sm:gap-4">
               {dates.map((date) => (
                 <button
                   key={date}
@@ -127,7 +127,7 @@
               ))}
             </div>
           </div>
-          <div className="w-full flex items-center justify-center scale-90 md:scale-100 md:p-4 mx-auto">
+          <div className="w-full flex items-center justify-center scale-90 md:scale-100 mx-auto">
             <Filter
               options={["SPORTS", "CULTURALS", "SCI-TECH"]}
               title={"Category"}
