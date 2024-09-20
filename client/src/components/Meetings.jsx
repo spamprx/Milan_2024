@@ -13,7 +13,7 @@ function Meeting({
   showNotifications
 }) {
   const isPreferredEvent = useMemo(() => {
-    const teams = meeting.teams ? meeting.teams.toLowerCase().split(",") : [];
+    const teams = meeting.teams ? meeting.teams.toLowerCase().split(", ").map(team => team.trim()) : [];
     return (
       (Array.isArray(userPreferredGames) && userPreferredGames.includes(meeting?.title?.toLowerCase())) &&
       ((Array.isArray(preferredTeams) && preferredTeams.some((team) => teams && teams.includes(team.toLowerCase()))) ||

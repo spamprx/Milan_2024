@@ -72,7 +72,7 @@ export default function Calendar() {
 
         // Update games with preferred status
         setGames(prevGames => prevGames.map(game => {
-          const gameTeamsArray = game.teams.toLowerCase().split(',').map(team => team.trim());
+          const gameTeamsArray = game.teams.toLowerCase().split(', ').map(team => team.trim());
           
           const isGameAdded = userAddedGames.data.some(addedGame =>{
             return addedGame.summary.includes(game.title) &&
@@ -151,7 +151,7 @@ export default function Calendar() {
 
   let preferredMeetings = auth ? selectedDayMeetings.filter(
     (meeting) => {
-      const teams = meeting.teams ? meeting.teams.toLowerCase().split(",") : [];
+      const teams = meeting.teams ? meeting.teams.toLowerCase().split(", ").map(team=>team.trim()) : [];
       return userPreferredGames.includes(meeting.title.toLowerCase()) &&
         (preferredTeams.some((team) =>
           teams.includes(team.toLowerCase())
