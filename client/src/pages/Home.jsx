@@ -589,7 +589,7 @@ function Home() {
                 />
               </div>
             </div>
-            <div className="flex justify-center w-full h-1/2">
+            <div className="flex justify-center w-full h-1/2 overflow-x-hidden">
               <HomeSponsorCard />
             </div>
           </div>
