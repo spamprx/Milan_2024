@@ -16,7 +16,7 @@ const Google = () => {
 
   return (
     <div className="button-container">
-      <button className="google-sign-in-button">
+      <button className="google-sign-in-button" onClick={handleLogin}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="xMidYMid"
