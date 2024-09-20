@@ -176,8 +176,7 @@
     useEffect(() => {
       const fetchPastData = async () => {
         try {
-          const response = await fetch(
-            "https://script.google.com/macros/s/AKfycbxcBzPmKL3U_YztfhfOPxBD2fwaulpgNlyPyxUgfCx8duvyHAnrVv5qWYnNmJgECaEY/exec"
+          const response = await fetch(import.meta.env.VITE_MACRO_PAST_DATA
           );
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -240,7 +239,7 @@
     const fetchLiveMatches = async () => {
       try {
         const response = await axios.get(
-          "https://backend-w6vj.onrender.com/api/live-matches"
+          import.meta.env.VITE_BACKEND_URL+"api/live-matches"
         );
         console.log("Live matches:", response.data);
         setLiveMatches(response.data);
@@ -254,7 +253,7 @@
     useEffect(() => {
       fetchLiveMatches();
 
-      const newSocket = io("https://backend-w6vj.onrender.com/", {
+      const newSocket = io(import.meta.env.VITE_BACKEND_URL, {
         transports: ["websocket"],
         upgrade: false,
       });

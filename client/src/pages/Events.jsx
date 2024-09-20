@@ -69,20 +69,21 @@ function Events() {
       }
     };
 
+
     fetchData(
-      "https://script.google.com/macros/s/AKfycbyVkURVuY96lhlEqCvLYGuBTedqnnxwY7q4BWV42hph6dLR2dDjCmeRE4qfxFdhAVf0/exec",
+      import.meta.env.VITE_MACRO_CULTI,
       setCultiData
     );
     fetchData(
-      "https://script.google.com/macros/s/AKfycbzVrI_JnIFYZdgO3MCG1oY966K4x56DyLCMiZj3zpc1Ry7Lv0sZdRV9JiLUnZPi4MUz/exec",
+      import.meta.env.VITE_MACRO_SPORTS_GIRLS,
       setSportsGirlsData
     );
     fetchData(
-      "https://script.google.com/macros/s/AKfycby3D4yrP5M2xRoadR7oSVauTj01hNRDHAhR-eZURWzeHSFlj9cT8B2x_G65w99y_wcCgw/exec",
+      import.meta.env.VITE_MACRO_SPORTS_BOYS,
       setSportsBoysData
     );
     fetchData(
-      "https://script.google.com/macros/s/AKfycbzmTy_44-oPG2N7aIoogQN5VihtxE0HHBiqGSV1-j3hAGbDTOwc2BH68U46lrQFt-uP/exec",
+      import.meta.env.VITE_MACRO_TECHY,
       setTechyData
     );
 
