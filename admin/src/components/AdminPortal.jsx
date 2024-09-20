@@ -32,9 +32,8 @@ const sportExtras = {
 
 const blocks = [
   "ANANDI",
-  "ARYABHATTA",
+  "ARY/BHA",
   "BHABHA",
-  "BHASKARA",
   "BR/VY",
   "CH/KAU",
   "GARGI",
@@ -71,6 +70,7 @@ const AdminPortal = () => {
     score2: "00",
     extra1: "00",
     extra2: "00",
+    extra: "Additional",
     winner: "",
   });
   const [eventData, setEventData] = useState({
@@ -139,6 +139,7 @@ const AdminPortal = () => {
       console.log("Server response:", response.data);
       alert("Score updated successfully");
       setSelectedMatch(null);
+      window.location.reload()
     } catch (error) {
       console.error("Error updating score:", error);
       alert("Error updating score");
@@ -168,6 +169,7 @@ const AdminPortal = () => {
         startTime: "",
         winner: "",
       });
+      window.location.reload()
     } catch (error) {
       console.error("Error adding match/event:", error);
       alert("Error adding match/event");
@@ -175,17 +177,38 @@ const AdminPortal = () => {
   };
 
   const handleEndMatch = async (matchId) => {
-    const winner = prompt("Enter the winner of the match:");
-    if (!winner) return;
+    const match = matches.find((m) => m.matchId === matchId);
+
+    if (!match) return;
+
+    const winnerPrompt = `
+    Match ID: ${matchId}
+    ${match.team1} vs ${match.team2}
+    
+    Please select the winner (1 or 2):
+    1. ${match.team1}
+    2. ${match.team2}
+  `;
+
+    const winnerSelection = prompt(winnerPrompt);
+
+    if (winnerSelection !== "1" && winnerSelection !== "2") return;
+
+    const selectedBlock = winnerSelection === "1" ? match.team1 : match.team2;
+
     try {
-      await axios.post(`${BACKEND_URL}/api/end-match/${matchId}`, { winner });
+      await axios.post(`${BACKEND_URL}/api/end-match/${matchId}`, {
+        winner: selectedBlock,
+      });
       alert("Match ended successfully");
       setSelectedMatch(null);
+      window.location.reload();
     } catch (error) {
       console.error("Error ending match:", error);
       alert("Error ending match");
     }
   };
+
 
   const handleAddCulti = async (e) => {
     e.preventDefault();
@@ -203,6 +226,7 @@ const AdminPortal = () => {
         third: "",
         startTime: "",
       });
+      window.location.reload()
     } catch (error) {
       console.error("Error adding culti event:", error);
       alert("Error adding culti event");
@@ -225,6 +249,7 @@ const AdminPortal = () => {
         third: "",
         startTime: "",
       });
+      window.location.reload()
     } catch (error) {
       console.error("Error adding techy event:", error);
       alert("Error adding techy event");
@@ -484,7 +509,7 @@ const AdminPortal = () => {
   };
 
   return (
-    <div>
+    <div className="bg-black">
       <h1>Admin Portal</h1>
 
       <button onClick={() => setCategory("SPORTS")}>SPORTS</button>
