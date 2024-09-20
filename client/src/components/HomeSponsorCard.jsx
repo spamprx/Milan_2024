@@ -24,7 +24,7 @@ const HomeSponsorCard = () => {
   }
 
   return (
-    <div className="w-screen my-4 flex items-center justify-center">
+    <div className="w-screen my-4 flex items-center justify-center overflow-hidden">
       <Splide
         options={{
           type: "loop",
