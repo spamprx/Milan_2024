@@ -38,6 +38,11 @@
         "hostel": "BHABHA"
       },
       {
+        "name": "Tanish",
+        "image": "/TEAM/HR Council/Tanish.png",
+        "hostel": "BHABHA"
+      },
+      {
         "name": "Ajay",
         "image": "/TEAM/HR Council/Mangam Ajay.png",
         "hostel": "BRAHMAGUPTA"
@@ -76,6 +81,11 @@
         "name": "Saloni",
         "image": "/TEAM/HR Council/Saloni.png",
         "hostel": "MAITREYI"
+      },
+      {
+        "name": "Parvez",
+        "image": "/TEAM/HR Council/Parvez.png",
+        "hostel": "RAMAN"
       },
       {
         "name": "Akshith",

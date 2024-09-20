@@ -10,10 +10,12 @@
   import Slider from "react-slick";
   import "slick-carousel/slick/slick.css";
   import "slick-carousel/slick/slick-theme.css";
+  import { startOfToday } from "date-fns";
 
   const GameDetailsCarousel = ({ pastData }) => {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [selectedDate, setSelectedDate] = useState(25);
+    let today = startOfToday();
+    const [selectedDate, setSelectedDate] = useState(today.getDate());
     const [filteredData, setFilteredData] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("SELECT ALL");
     const scrollRef = useRef(null);
@@ -69,6 +71,7 @@
       setFilteredData(filtered);
       setActiveIndex(0);
     }, [selectedDate, selectedCategory, pastData]);
+    console.log("Filtered data:", filteredData);
 
     const handleCategoryChange = (category) => {
       setSelectedCategory(category);

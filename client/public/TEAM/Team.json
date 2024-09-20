@@ -108,9 +108,9 @@
   {
     "name": "MULTIMEDIA",
     "heads": [
+      { "name": "Naveen", "image": "/TEAM/Heads/Naveen.png" },
       { "name": "Venu", "image": "/TEAM/Heads/Venu.png" },
-      { "name": "Kiran", "image": "/TEAM/Heads/Kiran.png" },
-      { "name": "Naveen", "image": "/TEAM/Heads/Naveen.png" }
+      { "name": "Kiran", "image": "/TEAM/Heads/Kiran.png" }
     ],
     "coords": [
       { "name": "Ira Khare", "image": "/TEAM/Coords/Ira Khare.png" },
