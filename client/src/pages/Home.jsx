@@ -36,7 +36,7 @@ function Home() {
   let today = startOfToday();
   const formattedDate = format(today, "MM/dd/yyyy");
   // let [selectedDay, setSelectedDay] = useState(formattedDate);
-  let [selectedDay, setSelectedDay] = useState(new Date("2023-09-22"));
+  let [selectedDay, setSelectedDay] = useState(new Date(today));
   const [games, setGames] = useState([]);
 
   const sportOptions = [
@@ -589,7 +589,7 @@ function Home() {
                 />
               </div>
             </div>
-            <div className="flex justify-center w-full h-1/2">
+            <div className="flex justify-center w-full h-1/2 overflow-x-hidden">
               <HomeSponsorCard />
             </div>
           </div>

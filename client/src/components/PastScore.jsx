@@ -1,13 +1,23 @@
 import React from 'react';
 import { ChartBar, Users, Trophy } from 'lucide-react';
 
+const capitalizeFirstLetter = (string) => {
+  if (!string) return "";
+
+  return string
+    .split(/[\s-]+/) 
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+};
+
+
 const GameDetails = React.forwardRef(({ game , category }, ref) => {
     if (!game) return null;
 
     return (
         <div ref={ref} className="w-80 mx-auto bg-[#2D1B69] rounded-3xl scale-75 md:scale-100 shadow-lg overflow-hidden">
         <div className="bg-[#6B5794]/[0.84] text-white p-4">
-            <h2 className="text-2xl font-bold text-center text-white truncate">{game.sport}</h2>
+            <h2 className="text-2xl font-bold text-center text-white truncate">{capitalizeFirstLetter(game.sport)}</h2>
         </div>
         
         {category === "SPORTS" && (
@@ -26,7 +36,7 @@ const GameDetails = React.forwardRef(({ game , category }, ref) => {
                 <div className='flex flex-col justify-center items-center gap-2'>
                     <Trophy className="w-10 h-10 text-yellow-500" />
                     <div className="bg-[#DEB116] px-4 mx-4 w-fit rounded-xl">
-                        <p className="text-[#2D1B69] font-bold">{game.team1 || "Not decided"}</p>
+                        <p className="text-[#2D1B69] font-bold">{game.winner || "Not decided"}</p>
                     </div>
                 </div>
                 <div className='flex flex-row justify-center items-center mt-6'>
@@ -39,7 +49,7 @@ const GameDetails = React.forwardRef(({ game , category }, ref) => {
                     <div className='flex flex-col justify-center items-center gap-2'>
                         <Trophy className="w-8 h-8 text-amber-700" />
                         <div className="bg-[#DEB116] px-4 mx-4 max-w-32 rounded-xl">
-                            <p className="text-[#2D1B69] font-bold truncate">{game.team1 || "Not decided"}</p>
+                            <p className="text-[#2D1B69] font-bold truncate">{game.team2 || "Not decided"}</p>
                         </div>
                     </div>
                 </div>

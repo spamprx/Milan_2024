@@ -22,7 +22,7 @@ function Footer() {
         </span>
         <span className="text-[#DEB116] mt-1 font-[400] font-be-vietnam text-sm">
           <a
-            href="https://drive.google.com/file/d/1fXwfTgIP3KL7kIdo-NUbT8sytwePumEb/view"
+            href="/privacy_policy.html"
             target="_blank"
             rel="noopener noreferrer"
           >
