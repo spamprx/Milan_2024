@@ -1,9 +1,14 @@
 import AdminPortal from "./components/AdminPortal";
+import Google from "./components/Auth";
+import { Routes, Route } from "react-router-dom";
 import "./index.css"
 
 const App = () => {
   return (
-    <AdminPortal />
+    <Routes>
+      <Route path="/" element={<Google />} />
+      <Route path="/admin" element={<AdminPortal />} />
+    </Routes>
   );
 };
 

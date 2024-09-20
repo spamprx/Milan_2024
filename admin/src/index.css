@@ -1,10 +1,48 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind variants;
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw; 
+}
 
-@layer base {
-    html {
-        @apply font-sans;
-    }
+.google-sign-in-button {
+  max-width: 320px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+  cursor: pointer;
+}
+
+.google-sign-in-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.google-sign-in-button svg {
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.google-sign-in-button span {
+  color: black;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
