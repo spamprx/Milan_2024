@@ -16,7 +16,12 @@ function Events() {
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [firstTwoFetched, setFirstTwoFetched] = useState(false);
-
+  const [categories, setCategories] = useState([
+    "SPORTS-BOYS",
+    "SPORTS-GIRLS",
+    "CULTURALS",
+    "SCI-TECH",
+  ]);
   useEffect(() => {
     const checkFirstTwoFetched = () => {
       return sportsBoysData && sportsGirlsData;
