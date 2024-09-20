@@ -29,31 +29,30 @@
       centerPadding: "30px",
       dots: false,
       arrows: false,
-      infinite: true,
+      infinite: filteredData.length > 1,
       pauseOnHover: true,
       speed: 500,
-      slidesToShow: 3,
+      slidesToShow: Math.min(filteredData.length, 3),
       slidesToScroll: 1,
       beforeChange: (current, next) => setActiveIndex(next),
       autoplay: true,
       autoplaySpeed: 3000,
+      cssEase: "ease-in-out",
       responsive: [
         {
           breakpoint: 600,
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
-            initialSlide: 1,
-            dots: false,
+            initialSlide: 0,
           },
         },
         {
           breakpoint: 1280,
           settings: {
-            slidesToShow: 2,
+            slidesToShow: Math.min(filteredData.length, 2),
             slidesToScroll: 1,
-            infinite: true,
-            dots: false,
+            infinite: filteredData.length > 2,
           },
         },
       ],
@@ -71,7 +70,6 @@
       setFilteredData(filtered);
       setActiveIndex(0);
     }, [selectedDate, selectedCategory, pastData]);
-    console.log("Filtered data:", filteredData);
 
     const handleCategoryChange = (category) => {
       setSelectedCategory(category);
@@ -141,7 +139,7 @@
         </div>
 
         {filteredData.length > 0 ? (
-          <div className="slider-container w-full">
+          <div className="slider-container w-full scale-90 md:scale-100">
             <Slider {...settings}>
               {filteredData.map((game, index) => (
                 <div key={index} className="p-2 mb-2">
