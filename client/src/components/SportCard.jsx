@@ -5,8 +5,10 @@ import Sponsors2 from "../assets/Sponsors2.jpeg";
 const SportCard = ({ event }) => {
   const isAllBlocks = event.teams.toLowerCase() === "all blocks";
   const hostels = event.teams.split(",").map((hostel) => hostel.trim());
+  console.log("hostels", hostels);
 
   const getHostelLogo = (hostelName) => {
+    if(!hostelName)return null;
     const hostel = HOSTEL_LOGOS[0].logo.find(
       (h) => h.name.toLowerCase() === hostelName.toLowerCase()
     );
