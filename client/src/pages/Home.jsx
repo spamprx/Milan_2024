@@ -203,7 +203,7 @@ function Home() {
   const settings = {
     className: "center",
     centerMode: true,
-    infinite: true,
+    infinite: currentEvents.length > 1,
     centerPadding: "60px",
     slidesToShow:
       currentEvents.length < 3 ? (currentEvents.length < 2 ? 1 : 2) : 3, // Show 2 cards if less than 3 cards
