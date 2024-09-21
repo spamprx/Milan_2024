@@ -10,7 +10,7 @@ const Google = () => {
     window.location.href = import.meta.env.VITE_BACKEND_URL + "/auth/google/admin";
     setTimeout(() => {
       setIsLoggedIn(true);
-      navigate("/");
+      navigate("/admin");
     }, 2000);
   };
 
