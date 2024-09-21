@@ -7,7 +7,7 @@ const GoogleButton = () => {
 
   const handleLogin = () => {
    setIsLoggedIn(true);
-   window.location.href = "https://backend-w6vj.onrender.com/auth/google";
+   window.location.href = import.meta.env.VITE_BACKEND_URL + "/auth/google";
     setTimeout(() => {
       setIsLoggedIn(true);
       navigate('/profile');
