@@ -12,6 +12,21 @@ const BlockRace = () => {
   //   };
   // }, []);
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsSmallScreen(window.innerWidth < 880);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center w-full h-full max-h-full bg-transparent">
       {/* {isLoading && (
@@ -26,7 +41,7 @@ const BlockRace = () => {
         className="flourish-embed-iframe"
         style={{
           width: "100%",
-          height: "600px",
+          height: isSmallScreen ? "300px" : "500px",
           // display: isLoading ? "none" : "block",
           display: "block",
         }}
